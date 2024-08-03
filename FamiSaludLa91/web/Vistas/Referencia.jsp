@@ -4,6 +4,7 @@
     Author     : Maiyer
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -85,12 +86,29 @@
                 </div>
             </div>
         </div>
-        <div class="card mt-2 " style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body fn-gris">
-                <h5 class="card-title">Nombre</h5>
-                <p class="card-text">descripcion</p>
-                <a href="#" class="btn btn-outline-primary">Comprar</a>
+        <div class="Container-fluid">
+            <div class="row">
+                <c:forEach var="c" items="${Productos}">
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <label>${c.getNombre()}</label>
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="${c.getFoto()}" width="200" height="180"><br>
+                            <i>$.${c.getPrecio()}</i>
+                        </div>
+                        <div class="card-footer text-center">
+                             <label>${c.getDescripcion()}</label>   
+                        
+                        <div>
+                            <a href="#" class="btn btn-outline-info"><i class="bi bi-cart4"></i> Agregar Carrito</a>
+                            <a href="#" class="btn btn-danger">Comprar</a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                </c:forEach>
             </div>
         </div>
 

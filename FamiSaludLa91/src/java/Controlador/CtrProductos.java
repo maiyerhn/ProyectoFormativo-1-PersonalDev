@@ -43,7 +43,7 @@ public class CtrProductos extends HttpServlet {
         System.out.println("accion= "+accion);
         try {
             List<Productos> productos = pdao.obtenerProductos();
-            System.out.println("producto " + productos.get(0).getNombre());
+            System.out.println("productos " + productos.get(0).getNombre());
 
             switch (accion) {
                 case "home":
