@@ -11,46 +11,93 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <link href="../CSS/EstilosReferencia.css" rel="stylesheet" type="text/css"/>
+        <link href="/FamiSaludLa91/CSS/EstilosReferencia.css" rel="stylesheet" type="text/css"/>
         <title>JSP Page</title>
     </head>
     <body>
-       <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-    <div class="container-fluid d-flex align-items-center">
-        <ul class="nav nav-pills nav-fill">
-            <li class="nav-item dropdown">
-                <a class="nav-link active dropdown-toggle navbar-brand" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#" data-bs-target="#item"><i></i>categoria1</a></li>
-                    <li><a class="dropdown-item" href="#" data-bs-target="#item"><i></i> 2</a></li>
-                    <li><a class="dropdown-item" href="#" data-bs-target="#item"><i></i> 3</a></li>
-                    <li><a class="dropdown-item" href="#" data-bs-target="#item"><i></i> 4</a></li>
-                </ul>
-            </li>
-        </ul>
-        <div class="d-flex align-items-center mx-auto">
-            <img src="../Imagenes/Logo.png" alt="" height="50px" width="50px" />
-            <p class="titt ms-3 mb-0">FamiSaludLa91</p>
-        </div>
-        <div class="d-flex align-items-center ms-auto">
-            <form class="form-inline d-flex" action="/AppWeb/CtrUsuario?accion=buscar">
-                <div class="form-group mx-sm-3 mb-2">
-                    <input type="text" class="form-control" name="txtbuscar" placeholder="digite nombre">
+        <div class="container-fluid encabezado">
+            <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
+                <div class="container-fluid">
+
+                    <a class="navbar-brand" href="#">
+                        <img src="/FamiSaludLa91/Imagenes/logo9.png" alt="Logo" id="logo">
+                    </a>
+
+
+                    <p class="navbar-text fs-3 fw-bold text-white">Famisalud la 91</p>
+
+                    <form class="form-control ms-auto d-flex busqueda">
+                        <input class="me-1" type="search" placeholder="Buscar" aria-label="Buscar">
+                        <button class="btn btn-outline-light bg-success icono fs-9" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+
+                    <a class="nav-link nav-link-icon" href="#">
+                        <i class="bi bi-cart3 fs-4"></i>
+                    </a>
+                    <a class="nav-link nav-link-icon" href="#">
+                        <i class="bi bi-person-circle fs-4"></i>
+                    </a>
                 </div>
-                <button type="submit" class="btn btn-success mb-2" name="accion" value="buscar"><i class="bi bi-search"></i> Buscar</button>
-            </form>
-            <button type="button" class="btn btn-outline-light mb-2 ms-2">
-                <i class="bi bi-cart"></i>
-            </button>
-            <button type="button" class="btn btn-outline-light mb-2 ms-2">
-                <i class="bi bi-person"></i>
-            </button>
+            </header>
+
+            <div class="menu">
+
+                <div class="Lista">
+                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=home"  id="navbarDropdown">
+                        Inicio
+                    </a>
+                    <a class="nav-link opciones" href="#" id="navbarDropdown">
+                        Medicamentos
+                        <ul class="dropdown-menu">
+                            <li>Alivio del Dolor</li>
+                            <li>Salud Digestiva</li>
+                            <li>Salud y Medicamentos</li>
+                            <li>Tratamiento de la Gripe</li>
+                        </ul>
+                    </a>
+                    <a class="nav-link opciones" href="#" id="navbarDropdown">
+                        Belleza
+                        <ul class="dropdown-menu">
+                            <li>Belleza 1</li>
+                            <li>Belleza 2</li>
+                            <li>Belleza 3</li>
+                        </ul>
+                    </a>
+                    <a class="nav-link opciones" href="#" id="navbarDropdown">
+                        Cuidado al Bebé
+                        <ul class="dropdown-menu">
+                            <li>Cuidado al Bebé 1</li>
+                            <li>Cuidado al Bebé 2</li>
+                            <li>Cuidado al Bebé 3</li>
+                        </ul>
+                    </a>
+                    <a class="nav-link opciones" href="#" id="navbarDropdown">
+                        Alimentos y Bebidas
+                        <ul class="dropdown-menu">
+                            <li>Alimentos y Bebidas 1</li>
+                            <li>Alimentos y Bebidas 2</li>
+                            <li>Alimentos y Bebidas 3</li>
+                        </ul>
+                    </a>
+                    <a class="nav-link opciones" href="#" id="navbarDropdown">
+                        Otros
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
-</nav>
+        <div class="card mt-2 " style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body fn-gris">
+                <h5 class="card-title">Nombre</h5>
+                <p class="card-text">descripcion</p>
+                <a href="#" class="btn btn-outline-primary">Comprar</a>
+            </div>
+        </div>
 
 
-                           
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>                         
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/FamiSaludLa91/JSc/ReferenceScript.js" type="text/javascript"></script>
+
     </body>
 </html>
