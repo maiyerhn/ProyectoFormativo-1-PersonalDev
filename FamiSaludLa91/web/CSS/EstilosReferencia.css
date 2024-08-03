@@ -1,14 +1,145 @@
-.titt{
-    font-size: 30px;
+
+.encabezado{
+    padding: 0;
+    margin: 0;
+
 }
-.imagem{
-    height: 100px;
-    width: 100px;
+.navbar-custom {
+    background-color: #007bff;
+    padding: 10px 0; 
 }
-
-
-/* 
-    Created on : 2/07/2024, 08:52:52 AM
-    Author     : Maiyer
-*/
-
+.navbar-custom .navbar-brand {
+    color: #ffffff; 
+    font-weight: bold; 
+    padding: 0;
+}
+.navbar-custom .navbar-nav .nav-link {
+    color: #ffffff;
+}
+.navbar-custom .form-control {
+    background-color: #ffffff;
+    border-radius: 50px;
+    padding-left: 20px;
+    padding: 0;
+    margin: 0;
+    height: 45px;
+    width: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navbar-custom .form-control button {
+    background-color: #28a745;
+    border: none;
+    color: #ffffff; 
+    border-radius: 50px;
+    width: 70px; 
+    height: 35px; 
+    margin: 10px;
+    margin-left: 0;
+}
+.navbar-custom .form-control button:hover {
+    background-color: #218838; 
+}
+.navbar-custom .nav-link .bi {
+    color: #ffffff;
+    font-size: 1.5rem; 
+}
+#logo {
+    border-radius: 20%;
+}
+.navbar-brand img {
+    max-height: 70px; 
+}
+.container {
+    border: solid 1px;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+.navbar-nav .dropdown-toggle {
+    border-radius: 20px; 
+    font-size: 1rem; 
+    width: 120px; 
+    text-align: center; 
+}
+.navbar-text {
+    margin: 0; 
+    padding: 0;
+    width: 40%; 
+    text-align: left;
+    display: flex; 
+    justify-content: flex-start; 
+}
+.nav-link-icon {
+    background-color: rgba(50, 150, 100, 0.5); 
+    border-radius: 50%; 
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    padding: 8px; 
+    margin-left: 10px;
+    height: 50px;
+    width: 50px;
+}
+.me-1 {
+    border-radius: 50px;
+    width: 97%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    padding-right: 20px;
+}
+.menu {
+    background-color: #e9ecef; 
+    padding: 5px 0; 
+    width: 100%;
+    text-align: center;
+    height: auto; 
+}
+.menu .Lista {
+    list-style-type: none; 
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; 
+}
+.menu .Lista a {
+    margin: 0 15px; 
+    padding: 10px 25px; 
+    text-decoration: none; 
+    color: #000; 
+    font-size: 16px; 
+    font-weight: bold; 
+    position: relative; 
+    white-space: nowrap; 
+}
+.menu .Lista a:hover {
+    color: #007bff; 
+}
+.dropdown-menu {
+    display: none;
+    top: 100%;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px; 
+    z-index: 1000;
+    background: #f5f5f5; 
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2); 
+    padding: 10px; 
+    position: absolute; 
+    text-align: center; 
+    border-radius: 15px;
+}
+.menu .Lista a:hover + .dropdown-menu,
+.dropdown-menu:hover {
+    display: block; 
+}
+.dropdown-menu li {
+    list-style-type: none; 
+    margin-bottom: 8px; 
+}
+.fn-gris{
+    background-color: #e9ecef;
+}
