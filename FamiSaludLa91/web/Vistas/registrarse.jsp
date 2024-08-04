@@ -72,12 +72,19 @@
                         </div>
                         <div class="login-btn">
                             <button type="submit" class="btn btn-success ingresar">Registrarse</button>
-                            <button type="button" class="btn btn-danger botones">Cancelar</button>
+                            <button type="button" id="btnCancelar" class="btn btn-danger botones"  id="cancelar">Cancelar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+ 
+document.getElementById('btnCancelar').addEventListener('click', function () {
+    window.location.href = '/FamiSaludLa91/Vistas/Referencia.jsp';
+});
+
+    </script>
 </body>
 </html>
