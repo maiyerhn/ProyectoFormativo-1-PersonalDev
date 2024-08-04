@@ -1,0 +1,51 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2/08/2024, 11:41:43 PM
+    Author     : jjuan
+*/
+
+body{
+    font-family: 'Lora', serif;
+    overflow: hidden; 
+}
+/* Encabezado de la página login - regitrarse */
+.encabezado {
+    padding: 0;
+    margin: 0;
+}
+.navbar-custom {
+    background-color: #007bff;
+    padding: 10px 0;
+    margin: 0;
+    height: 90px;
+}
+.navbar-custom .navbar-brand {
+    color: #ffffff; 
+    font-weight: bold;
+    padding: 0;
+}
+#logo {
+    border-radius: 20%;
+}
+.navbar-brand img {
+    max-height: 70px; 
+}
+.navbar-text {
+    margin: 0; 
+    padding: 0;
+    width: 40%; 
+    text-align: left;
+    display: flex; 
+    justify-content: flex-start; 
+}
+.container-fluid .contenedor {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; 
+    height: 100%; 
+}
+
