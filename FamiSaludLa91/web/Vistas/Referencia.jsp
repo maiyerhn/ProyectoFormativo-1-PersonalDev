@@ -28,15 +28,15 @@
                     <p class="navbar-text fs-3 fw-bold text-white">Famisalud la 91</p>
 
                     <form class="form-control ms-auto d-flex busqueda">
-                        <input class="me-1" type="search" placeholder="Buscar" aria-label="Buscar">
+                        <input class="me-1" type="search" placeholder="Buscar productos..." aria-label="Buscar">
                         <button class="btn btn-outline-light bg-success icono fs-9" type="submit"><i class="bi bi-search"></i></button>
                     </form>
 
-                    <a class="nav-link nav-link-icon" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <a class="nav-link nav-link-icon carrito" href="#" data-bs-toggle="modal" data-bs-target="#ModalError">
                         <i class="bi bi-cart3 fs-4"></i>
                     </a>
-                    <a class="nav-link nav-link-icon" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class="bi bi-person-circle fs-4"></i>
+                    <a class="nav-link nav-link-icon iniciar" href="/FamiSaludLa91/Vistas/Login.jsp">
+                        <p>Iniciar Sesión</p>
                     </a>
                 </div>
             </header>
@@ -45,7 +45,7 @@
             <div class="menu">
 
                 <div class="Lista">
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">
+                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=home" id="navbarDropdown">
                         Inicio
                     </a>
                     <a class="nav-link opciones" href="#" id="navbarDropdown">
@@ -96,8 +96,8 @@
                             <h2 class="product-name"> <label>${c.getNombre()}</label></h2>
                             <img src="${c.getFoto()}" alt="Producto">
                             <p class="product-description"><label>${c.getDescripcion()}</label>  </p>
-                            <button class="btn btn-primary">Agregar al Carrito</button>
-                            <button class="btn btn-success">Comprar </button>
+                            <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#ModalError">Agregar al Carrito</button>
+                            <button class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#ModalError">Comprar </button>
                         </div>
                     </div>
                 </c:forEach>
@@ -105,7 +105,7 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="ModalError" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -113,24 +113,18 @@
                     </div>
                     <div class="modal-body" style=" text-align: center;">
                         <p class="modal-contenido" style="width: 100%;">Para Realizar esta accion debes logearte.</p>
-                        <button type="button" id="iniciarSesion" class="btn btn-success" style=" border-radius: 30px;">Iniciar Sesion</button>
-                        <button type="button" id="registrarse" class="btn btn-secondary" style=" border-radius: 30px;" >Registrarse</button>
+                        <button type="button" id="btnLogin" class="btn btn-success" style=" border-radius: 30px;">Iniciar Sesion</button>
+                        <button type="button" id="btnRegistrarse" class="btn btn-secondary" style=" border-radius: 30px;" >Registrarse</button>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style=" border-radius: 30px;">Cerrar</button>
                     </div>
                 </div>
+                
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="/FamiSaludLa91/JSc/ReferenceScript.js" type="text/javascript"></script>
-        <script>
-            document.getElementById('iniciarSesion').addEventListener('click', function () {
-                window.location.href = '/FamiSaludLa91/Vistas/Login.jsp';
-            });
-            document.getElementById('registrarse').addEventListener('click', function () {
-                window.location.href = '/FamiSaludLa91/Vistas/registrarse.jsp';
-            });
-        </script>
+        <script src="/FamiSaludLa91/JSc/redireciones.js" type="text/javascript"></script>
     </body>
 </html>
