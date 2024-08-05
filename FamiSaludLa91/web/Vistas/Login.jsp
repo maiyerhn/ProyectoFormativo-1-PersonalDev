@@ -41,7 +41,7 @@
                             <input type="password" class="form-control" id="password" placeholder="Ingresa Contraseña">
                             <label class="form-check-label" for="rememberMe">Olvidaste tu contraseña</label>
                         </div>
-                        <button type="submit" class="btn btn-success ingresar">Ingresar</button>
+                        <button type="submit" name="accion" value="ingresar" class="btn btn-success ingresar">Ingresar</button>
                     </form>
                 </div>
                 <div class="texto-stile">
