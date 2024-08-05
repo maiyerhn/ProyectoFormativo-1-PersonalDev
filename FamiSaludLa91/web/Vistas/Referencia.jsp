@@ -21,7 +21,7 @@
                 <div class="container-fluid">
 
                     <a class="navbar-brand" href="#">
-                        <img src="../imagenes/logo9.png" alt=""/>
+                        <img src="/FamiSaludLa91/imagenes/logo9.png" alt=""/>
                     </a>
 
 
