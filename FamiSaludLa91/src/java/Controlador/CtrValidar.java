@@ -97,7 +97,7 @@ public class CtrValidar extends HttpServlet {
                 sesion.setAttribute("apellido", user.getApellido());
                 if (user.getRol().equals("ADMINISTRADOR")) {
                     System.out.println("redirect");
-                    response.sendRedirect("/FamiSaludLa91/Vistas/Referencia.jsp");
+                    response.sendRedirect("/FamiSaludLa91/CtrProductos?accion=home");
                 }else{
                     response.sendRedirect("/FamiSaludLa91/Vistas/registrarse.jsp");
                 }

@@ -23,14 +23,18 @@ public class UsuarioDAO {
     Usuario usua;
     public Usuario Validar(String correo, String pass){
         try {
-            Connection con = conexion.crearconexion();
+            conexion = new conectar();
+            con = conexion.crearconexion(); 
             if (con != null) {
+                System.out.println("se conecto");
                 pstm = con.prepareStatement("select * from usuarios where correo = ? and contrasena = ? ");
                 pstm.setString(1, correo);
                 pstm.setString(2, pass);
                 rs = pstm.executeQuery();
-                while (rs.next()) {                    
+                while (rs.next()) {
+                        System.out.println("el rs tiene algo");
                     if (!rs.getString("correo").equals("")) {
+                        usua = new Usuario();
                         System.out.println("Entro A la Validacion");
                         usua.setCorreo(rs.getString("correo"));
                         usua.setId(rs.getInt("id"));
