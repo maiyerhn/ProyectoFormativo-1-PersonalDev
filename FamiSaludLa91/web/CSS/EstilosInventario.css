@@ -1,0 +1,208 @@
+body{
+    font-family: 'Lora', serif;
+    background-color: #f4f4f9; 
+
+}
+.encabezado{
+    padding: 0;
+    margin: 0;
+
+}
+.navbar-custom {
+    background-color: #007bff;
+    padding: 10px 0; 
+    height: 90px;
+}
+.navbar-custom .navbar-brand {
+    color: #ffffff; 
+    font-weight: bold; 
+    padding: 0;
+}
+.navbar-custom .navbar-nav .nav-link {
+    color: #ffffff;
+}
+.navbar-custom .form-control {
+    background-color: #ffffff;
+    
+    padding-left: 20px;
+    padding: 0;
+    margin: 0;
+    height: 45px;
+    width: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*icono de busqueda*/
+.navbar-custom .form-control button {
+    background-color: #28a745;
+    border: none;
+    color: #ffffff; 
+    border-radius: 50px;
+    width: 70px; 
+    height: 35px; 
+    margin: 10px;
+    margin-left: 0;
+}
+.navbar-custom .form-control button:hover {
+    background-color: #218838; 
+}
+.navbar-custom .nav-link .bi {
+    color: #ffffff;
+    font-size: 1.5rem; 
+}
+#logo {
+    border-radius: 20%;
+    margin-right: 5px;
+}
+.navbar-brand img {
+    max-height: 70px; 
+}
+.container {
+    border: solid 1px;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+.navbar-nav .dropdown-toggle {
+    border-radius: 20px; 
+    font-size: 1rem; 
+    width: 120px; 
+    text-align: center; 
+}
+.navbar-text {
+    margin: 0; 
+    padding: 0;
+    width: 40%; 
+    text-align: left;
+    display: flex; 
+    justify-content: flex-start; 
+    font-size: 28px;
+    font-weight: bold;
+}
+.iniciar {
+    background-color: rgba(50, 150, 100, 0.5); 
+   color:#ffffff;
+   border:solid 1px;
+   border-radius: 15px;
+    text-align: center;
+    margin-left: 10px;
+    height: 40px;
+    width: 150px;
+}
+
+.me-1 {
+   outline: none; 
+    width: 97%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    padding-right: 20px;
+}
+.me-1::placeholder {
+    padding-left: 1rem; 
+}
+
+.menu {
+    background-color: white; 
+    padding: 5px 0; 
+    width: 100%;
+    text-align: center;
+    height: auto; 
+}
+.menu .Lista {
+    list-style-type: none; 
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; 
+}
+.menu .Lista a {
+    margin: 0 15px; 
+    padding: 10px 25px; 
+    text-decoration: none; 
+    color: #000; 
+    font-size: 16px; 
+    font-weight: bold; 
+    position: relative; 
+    white-space: nowrap; 
+}
+.menu .Lista a:hover {
+    color: #007bff; 
+}
+.dropdown-menu {
+    display: none;
+    top: 100%;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px; 
+    z-index: 1000;
+    background: #f5f5f5; 
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2); 
+    padding: 10px; 
+    position: absolute; 
+    text-align: center; 
+    border-radius: 15px;
+}
+.menu .Lista a:hover + .dropdown-menu,
+.dropdown-menu:hover {
+    display: block; 
+}
+.dropdown-menu li {
+    list-style-type: none; 
+    margin-bottom: 8px; 
+}
+/* Estilos para la caja de producto */
+        .container{
+            border:none;
+        }
+        .product-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            width: 350px; /* Ancho fijo para las cajas de producto */
+            height: 400px;
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: 200px;
+            width: auto;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            margin-top: 10px;
+        }
+
+        .product-card .product-name {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-card .product-description {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 1rem;
+            width: auto;
+            height: 50px;
+        }
+
+        .product-card .btn {
+            margin: 0.25rem;
+        }
+        
+        
+
+        /* Para mantener el diseño responsivo */
+        @media (max-width: 768px) {
+            .product-card {
+                width: 100%; /* Ajusta el ancho al 100% en pantallas más pequeñas */
+            }
+        }
+
+
+
