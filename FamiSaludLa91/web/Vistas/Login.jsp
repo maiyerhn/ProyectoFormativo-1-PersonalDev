@@ -31,17 +31,17 @@
             </div>
             <div class="login-registro">
                 <div class="login-form">
-                    <form>
+                    <form method="POST" action="/FamiSaludLa91/CtrValidar?accion=ingresar">
                         <div class="form-group">
                             <label for="email">Usuario (E-mail)</label>
-                            <input type="email" class="form-control" id="email" placeholder="Ingresa Usuario">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa Usuario">
                         </div>
                         <div class="form-group">
                             <label for="password">Contraseña</label>
-                            <input type="password" class="form-control" id="password" placeholder="Ingresa Contraseña">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa Contraseña">
                             <label class="form-check-label" for="rememberMe">Olvidaste tu contraseña</label>
                         </div>
-                        <button type="submit" class="btn btn-success ingresar">Ingresar</button>
+                        <button type="submit" name="accion" value="ingresar" class="btn btn-success ingresar">Ingresar</button>
                     </form>
                 </div>
                 <div class="texto-stile">
