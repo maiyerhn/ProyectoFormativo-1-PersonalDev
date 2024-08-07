@@ -77,7 +77,8 @@ public class CtrValidar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String accion = request.getParameter("accion");
+        try {
+            String accion = request.getParameter("accion");
         if (accion.equalsIgnoreCase("ingresar")) {
             System.out.println("2");
             HttpSession sesion = request.getSession();
@@ -102,6 +103,11 @@ public class CtrValidar extends HttpServlet {
                     response.sendRedirect("/FamiSaludLa91/Vistas/registrarse.jsp");
                 }
             }
+        }
+        } catch (Exception e) {
+            String errormensage = "Usuario O Contraseña Incorrecto";
+            request.setAttribute("error", errormensage);
+            request.getRequestDispatcher("/Vistas/Login.jsp").forward(request, response);
         }
     }
 
