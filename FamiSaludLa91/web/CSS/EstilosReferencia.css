@@ -163,6 +163,23 @@ body{
     margin-bottom: 8px; 
 }
 
+.pedido-card{
+    background: white;
+    border-radius: 10px;
+    /* border: 1px solid #000;*/
+    box-shadow: 5px 5px 15px rgb(0, 0, 0,.3);
+    padding: 10px;
+}
+/*.pedido-fb{
+    height: 135px;
+    width: 100px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgb(0, 0, 0,.3);
+    padding: 10px;
+}
+*/
+
 /* Estilos para la caja de producto */
         .container{
             border:none;
