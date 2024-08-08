@@ -112,6 +112,13 @@ body{
 .me-1::placeholder {
     padding-left: 1rem; 
 }
+.pedido-card{
+    background: white;
+    border-radius: 10px;
+    /* border: 1px solid #000;*/
+    box-shadow: 5px 5px 15px rgb(0, 0, 0,.3);
+    padding: 10px;
+}
 
 .menu {
     background-color: white; 
