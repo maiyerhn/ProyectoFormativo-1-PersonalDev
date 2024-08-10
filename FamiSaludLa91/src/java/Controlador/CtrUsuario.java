@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -14,15 +14,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author SENA
  */
-@WebServlet(name = "CtrValidar", urlPatterns = {"/CtrValidar"})
-public class CtrValidar extends HttpServlet {
-
+@WebServlet(name = "CtrUsuario", urlPatterns = {"/CtrUsuario"})
+public class CtrUsuario extends HttpServlet {
+        
+    UsuarioDAO dao = new UsuarioDAO();
+    Usuario us = new Usuario();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,8 +33,6 @@ public class CtrValidar extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-        UsuarioDAO usudao = new UsuarioDAO();
-        Usuario user = new Usuario();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -42,10 +41,10 @@ public class CtrValidar extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CtrValidar</title>");            
+            out.println("<title>Servlet CtrUsuario</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CtrValidar at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CtrUsuario at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,7 +62,38 @@ public class CtrValidar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         String id,nombre,apellido,correo,telefono,contrasena,direccion,rol;
+         String accion = request.getParameter("accion");
+         switch(accion){
+             case "crear":
+                        id = request.getParameter("id");
+                        nombre = request.getParameter("nombre");
+                        apellido = request.getParameter("apellido");
+                        correo = request.getParameter("user");
+                        telefono = request.getParameter("telefono");
+                        contrasena = request.getParameter("contrasena");
+                        direccion = request.getParameter("direccion");
+                        rol = request.getParameter("rol");
+                        us.setId(Integer.parseInt(id));
+                        us.setNombre(nombre);
+                        us.setApellido(apellido);
+                        us.setCorreo(correo);
+                        us.setTelefono(telefono);
+                        us.setRol(rol);
+                        us.setDireccion(direccion);
+                        us.setContrasena(contrasena);
+                        dao.crear(us);
+                        if (dao.crear(us) == true) {
+                            response.sendRedirect("/FamiSaludLa91/Vistas/Login.jsp");
+                            request.getRequestDispatcher("Vistas/ListarUsuario.jsp").forward(request, response);
+                     
+                        }else{
+                                        System.out.println("Error al insertar el usuarios");
+
+                        }
+                        
+                 break;
+         }
     }
 
     /**
@@ -77,38 +107,7 @@ public class CtrValidar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String accion = request.getParameter("accion");
-        if (accion.equalsIgnoreCase("ingresar")) {
-            System.out.println("2");
-            HttpSession sesion = request.getSession();
-            String usu = request.getParameter("email");
-            String pass = request.getParameter("password");
-            user = usudao.Validar(usu, pass);
-            if (user.getCorreo() != null) {
-                System.out.println("3");
-                sesion.setAttribute("log", '1');
-                sesion.setAttribute("correo", user.getCorreo());
-                sesion.setAttribute("nombre", user.getNombre());
-                sesion.setAttribute("contrasena", user.getContrasena());
-                sesion.setAttribute("id", user.getId());
-                sesion.setAttribute("direccion", user.getDireccion());
-                sesion.setAttribute("telefono", user.getTelefono());
-                sesion.setAttribute("rol", user.getRol());
-                sesion.setAttribute("apellido", user.getApellido());
-                if (user.getRol().equals("ADMINISTRADOR")) {
-                    System.out.println("redirect");
-                    response.sendRedirect("/FamiSaludLa91/CtrProductos?accion=home");
-                }else{
-                    response.sendRedirect("/FamiSaludLa91/Vistas/registrarse.jsp");
-                }
-            }
-        }
-        } catch (Exception e) {
-            String errormensage = "Usuario O Contraseña Incorrecto";
-            request.setAttribute("error", errormensage);
-            request.getRequestDispatcher("/Vistas/Login.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**

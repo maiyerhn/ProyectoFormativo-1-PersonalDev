@@ -57,4 +57,28 @@ public class UsuarioDAO {
     }
     
     
+    
+    public boolean crear(Usuario us){
+        try {
+            conexion = new conectar();
+           Connection con = conexion.crearconexion();
+           if (con != null){
+               System.out.println("Se ha establecido una conexcion con la base de datos");
+           }
+           pstm = con.prepareStatement("insert into usuarios values(?,?,?,?,?,?,?,?)");
+           pstm.setInt(1, us.getId());
+           pstm.setString(2, us.getNombre());
+           pstm.setString(3, us.getApellido());
+           pstm.setString(4, us.getCorreo());
+           pstm.setString(5, us.getTelefono());
+           pstm.setString(6, us.getContrasena());
+           pstm.setString(7, us.getDireccion());
+           pstm.setString(8, us.getRol());
+           pstm.executeUpdate();
+           return true;
+        } catch (Exception e) {
+            System.out.println("Error Al Crear El Usuario");
+            return false;
+        }
+    }
 }

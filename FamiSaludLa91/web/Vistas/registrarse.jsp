@@ -37,23 +37,23 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="Nombre">Nombre</label>
-                                <input type="text" class="form-control" id="Nombre" placeholder="Ingresa Nombre">
+                                <input type="text" class="form-control" id="nombre" placeholder="Ingresa Nombre">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="Apellidos">Apellidos</label>
-                                <input type="text" class="form-control" id="Apellidos" placeholder="Ingresa Apellidos">
+                                <input type="text" class="form-control" id="apellidos" placeholder="Ingresa Apellidos">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="Telefono">Telefono</label>
-                                <input type="text" class="form-control" id="Telefono" placeholder="Ingresa Telefono">
+                                <input type="text" class="form-control" id="telefono" placeholder="Ingresa Telefono">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="Direccion">Direccion</label>
-                                <input type="text" class="form-control" id="Direccion" placeholder="Ingresa Direccion">
+                                <input type="text" class="form-control" id="direccion" placeholder="Ingresa Direccion">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="User">Usuario (E-mail)</label>
-                                <input type="text" class="form-control" id="User" placeholder="Ingresa Usuario">
+                                <input type="text" class="form-control" id="user" placeholder="Ingresa Usuario">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="password">Contraseña</label>
