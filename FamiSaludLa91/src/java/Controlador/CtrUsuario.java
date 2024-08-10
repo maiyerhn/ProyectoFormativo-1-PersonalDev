@@ -65,30 +65,25 @@ public class CtrUsuario extends HttpServlet {
          String id,nombre,apellido,correo,telefono,contrasena,direccion,rol;
          String accion = request.getParameter("accion");
          switch(accion){
-             case "crear":
-                        id = request.getParameter("id");
+             case "registrarse":
                         nombre = request.getParameter("nombre");
                         apellido = request.getParameter("apellido");
                         correo = request.getParameter("user");
                         telefono = request.getParameter("telefono");
-                        contrasena = request.getParameter("contrasena");
+                        contrasena = request.getParameter("password");
                         direccion = request.getParameter("direccion");
-                        rol = request.getParameter("rol");
-                        us.setId(Integer.parseInt(id));
                         us.setNombre(nombre);
                         us.setApellido(apellido);
                         us.setCorreo(correo);
                         us.setTelefono(telefono);
-                        us.setRol(rol);
+                        us.setRol("CLIENTE");
                         us.setDireccion(direccion);
                         us.setContrasena(contrasena);
-                        dao.crear(us);
                         if (dao.crear(us) == true) {
-                            response.sendRedirect("/FamiSaludLa91/Vistas/Login.jsp");
-                            request.getRequestDispatcher("Vistas/ListarUsuario.jsp").forward(request, response);
+                            request.getRequestDispatcher("/Vistas/Login.jsp").forward(request, response);
                      
                         }else{
-                                        System.out.println("Error al insertar el usuarios");
+                            System.out.println("Error al insertar el usuarios");
 
                         }
                         

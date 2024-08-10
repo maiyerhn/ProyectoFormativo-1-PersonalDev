@@ -33,35 +33,35 @@
             </div>
             <div class="login-registro">
                 <div class="login-form">
-                    <form>
+                    <form action="/FamiSaludLa91/CtrUsuario?accion=registrarse" method="GET">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="Nombre">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" placeholder="Ingresa Nombre">
+                                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingresa Nombre">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="Apellidos">Apellidos</label>
-                                <input type="text" class="form-control" id="apellidos" placeholder="Ingresa Apellidos">
+                                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingresa Apellidos">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="Telefono">Telefono</label>
-                                <input type="text" class="form-control" id="telefono" placeholder="Ingresa Telefono">
+                                <input type="text" class="form-control"  name="telefono" id="telefono" placeholder="Ingresa Telefono">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="Direccion">Direccion</label>
-                                <input type="text" class="form-control" id="direccion" placeholder="Ingresa Direccion">
+                                <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Ingresa Direccion">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="User">Usuario (E-mail)</label>
-                                <input type="text" class="form-control" id="user" placeholder="Ingresa Usuario">
+                                <input type="text" class="form-control" id="user" name="user" placeholder="Ingresa Usuario">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="password">Contraseña</label>
-                                <input type="password" class="form-control" id="password" placeholder="Ingresa Contraseña">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa Contraseña">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="password1">Confirmar Contraseña</label>
-                                <input type="password" class="form-control" id="password1" placeholder="Confirma Contraseña">
+                                <input type="password" class="form-control" id="password1" name="password1" placeholder="Confirma Contraseña">
                             </div>
                             <div class="col-md-12 mb-3">
                                 <div class="form-check">
@@ -71,7 +71,7 @@
                             </div>
                         </div>
                         <div class="login-btn">
-                            <button type="submit" class="btn btn-success ingresar">Registrarse</button>
+                            <button type="submit" name="accion" value="registrarse" class="btn btn-success ingresar">Registrarse</button>
                             <button type="button" id="btnCancelar" class="btn btn-danger botones"  id="cancelar">Cancelar</button>
                         </div>
                     </form>
