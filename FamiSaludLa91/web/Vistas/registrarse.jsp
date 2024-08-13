@@ -86,5 +86,6 @@ document.getElementById('btnCancelar').addEventListener('click', function () {
 });
 
     </script>
+    <script src="../JSc/ScriptRegistro.js" type="text/javascript"></script>
 </body>
 </html>
