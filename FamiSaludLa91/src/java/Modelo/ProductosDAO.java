@@ -15,6 +15,8 @@ import java.util.List;
  * @author Maiyer
  */
 public class ProductosDAO {
+    PreparedStatement pstm;
+    ResultSet rs;
     
     public List<Productos> obtenerProductos(){
         List<Productos> productos = new ArrayList<>();
@@ -45,4 +47,27 @@ public class ProductosDAO {
         
         return productos;
     }
+    
+    public void crear(Productos pro){
+        try{
+            conectar conection = new conectar();
+            Connection con = conection.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+
+            }
+            pstm = con.prepareStatement("insert into productos (id, nombre, descripcion, precio, foto, idCategoria, stock) Value(?,?,?,?,?,?,?)");
+            pstm.setInt(1, pro.getId());
+            pstm.setString(2, pro.getNombre());
+            pstm.setString(3, pro.getDescripcion());
+            pstm.setInt(4, pro.getPrecio());
+            pstm.setString(5, pro.getFoto());
+            pstm.setInt(6, pro.getIdCategoria());
+            pstm.setInt(7, pro.getStock());
+            pstm.executeUpdate();
+        }catch (Exception e) {
+            System.out.println("Error al crear los productos "+ e);
+        }
+    }
+ 
 }
