@@ -34,13 +34,15 @@ public class CtrProductos extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     ProductosDAO pdao = new ProductosDAO();
-    
-    
-    
+
+    String nom, des, foto;
+    int id, pre, stoc, cat;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String accion = request.getParameter("accion");
-        System.out.println("accion= "+accion);
+        System.out.println("accion= " + accion);
+        Productos p = new Productos();
         try {
             List<Productos> productos = pdao.obtenerProductos();
             System.out.println("productos " + productos.get(0).getNombre());
@@ -51,7 +53,28 @@ public class CtrProductos extends HttpServlet {
                     System.out.println("Entro A enviar los Productos");
                     request.getRequestDispatcher("/Vistas/Referencia.jsp").forward(request, response);
                     break;
-                
+                case "Agregar":
+                    System.out.println("Agregar AppWeb");
+                    id = Integer.parseInt(request.getParameter("txtid"));
+                    nom = request.getParameter("txtnombre");
+                    System.out.println("nombre producto: " + nom);
+                    des = request.getParameter("txtdescripcion");
+                    pre = Integer.parseInt(request.getParameter("txtprecio"));
+                    stoc = Integer.parseInt(request.getParameter("txtstock"));
+                    cat = Integer.parseInt(request.getParameter("categoria"));
+                    System.out.println("categoria producto: " + cat);
+                    foto = "/" + request.getParameter("foto");
+                    p.setId(id);
+                    p.setNombre(nom);
+                    p.setDescripcion(des);
+                    p.setPrecio(pre);
+                    p.setStock(stoc);
+                    p.setIdCategoria(cat);
+                    p.setFoto(foto);
+                    pdao.crear(p);
+                    request.getRequestDispatcher("CtrProducto?accion=Listar").forward(request, response);
+                    break;
+
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Accion no reconocida");
                     break;
@@ -75,7 +98,7 @@ public class CtrProductos extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
+
     }
 
     /**
