@@ -4,6 +4,7 @@
     Author     : USUARIO
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,7 +14,7 @@
         <title>Inventario - Famisalud la 91</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.3/font/bootstrap-icons.min.css" rel="stylesheet">
-        <link href="../CSS/EstilosReferencia.css" rel="stylesheet" type="text/css"/>
+        <link href="/FamiSaludLa91/CSS/EstilosReferencia.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
 
@@ -36,7 +37,7 @@
                     <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=home" id="navbarDropdown">
                         Inicio
                     </a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">
+                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=listar" id="navbarDropdown">
                         inventario
                     </a>
                     <a class="nav-link opciones" href="#" id="navbarDropdown">
@@ -66,42 +67,54 @@
 
                 </div>
             </div>
-
-            <table class="table table-bordered" style="box-shadow: 5px 5px 15px rgb(0, 0, 0,.3); border-radius: 10px;">
+ <!-- Utilizamos una clase en lugar de ID -->
+            <table class="table table-bordered" style="box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); border-radius: 10px;">
                 <thead class="thead-light">
-                    <tr style="background-color: white">
-                        <th scope="col" class="text-center border">Id</th>
-                        <th scope="col" class="text-center border">Nombre</th>
-                        <th scope="col" class="text-center border">Descripcion</th>
-                        <th scope="col" class="text-center border">Precio</th>
-                        <th scope="col" class="text-center border">Foto</th>
-                        <th scope="col" class="text-center border">Categoria</th>
-                        <th scope="col" class="text-center border">Stock</th>
-                        <th scope="col" class="text-center border">Acciones</th>
+                    <tr style="background-color: white;">
+                        <th class="text-center border">Nombre</th>
+                        <th class="text-center border">Descripción</th>
+                        <th class="text-center border">Precio</th>
+                        <th class="text-center border">Foto</th>
+                        <th class="text-center border">Categoría</th>
+                        <th class="text-center border">Stock</th>
+                        <th class="text-center border">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="pro" items="">  
-                    <tr style="background-color: white">
-                        <th scope="row" class="border"></th>
-                        <td class="border text-center"></td>
-                        <td class="border text-center" ></td>
-                        <td class="border text-center"></td>
-                        <td class="border d-flex justify-content-center"><img src="" width="100" height="80"></td>
-                        <td class="border text-center"></td>
-                        <td class="border text-center"></td>
-                        <td scope="col" class ="border text-center">
-                            <input type="hidden" name="id" id="id" value="">
-                            <a class="btn btn-warning" href="#" data-bs-toggle="modal" data-bs-target="#editarproducto"><i class="bi bi-pencil-fill"></i></a>
-                            <a class="btn btn-danger" id="btneliminar" href="#"><i class="bi bi-trash-fill"></i></a>
-                        </td>
-                    </tr>
-                </c:forEach>
+                    <c:forEach items="${listar}" var="p" >
+                        <tr>
+                            <td class="border text-center"><label>${p.getNombre()}</label></td>
+                            <td class="border text-center">${p.getDescripcion()}</td>
+                            <td class="border text-center precio">${p.getPrecio()}</td>
+                            <td class="border d-flex justify-content-center">
+                                <img src="${p.getFoto()}" width="100" height="80" alt="Foto del producto">
+                            </td>
+                            <td class="border text-center">${p.getIdCategoria()}</td>
+                            <td class="border text-center">${p.getStock()}</td>
+                            <td class="border text-center">
+                                <input type="hidden" name="id" id="id" value="${p.getId()}">
+                                <a class="btn btn-warning" href="#" data-bs-toggle="modal" data-bs-target="#editarproducto">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </a>
+                                <a class="btn btn-danger" id="btneliminar" href="#">
+                                    <i class="bi bi-trash-fill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                <script>
+                    var precios = document.querySelectorAll('.precio');
+                    precios.forEach(function (precio) {
+                        var valor = parseFloat(precio.textContent);
+                        var valorFormateado = valor.toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0, style: 'currency', currency:'COP'});
+                        precio.textContent = valorFormateado;
+                    });
+                </script>
                 </tbody>
             </table>
         </div>
 
-                        <%-- modal de agregar productos --%>
+        <%-- modal de agregar productos --%>
         <div class="modal fade" id="agregarproducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content"> 
@@ -151,7 +164,7 @@
             </div>
         </div>
 
-                           <%-- modal de editar productos --%>
+        <%-- modal de editar productos --%>
         <div class="modal fade" id="editarproducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
