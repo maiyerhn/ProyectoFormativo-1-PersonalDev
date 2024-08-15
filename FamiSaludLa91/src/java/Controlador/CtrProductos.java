@@ -43,6 +43,7 @@ public class CtrProductos extends HttpServlet {
         System.out.println("accion= "+accion);
         try {
             List<Productos> productos = pdao.obtenerProductos();
+            List<Productos> lpro = pdao.obtenerProductos();
             System.out.println("productos " + productos.get(0).getNombre());
 
             switch (accion) {
@@ -51,6 +52,11 @@ public class CtrProductos extends HttpServlet {
                     System.out.println("Entro A enviar los Productos");
                     request.getRequestDispatcher("/Vistas/Referencia.jsp").forward(request, response);
                     break;
+                case "listar":
+                    request.setAttribute("listar", lpro);
+                    System.out.println("Entro A Listar los Productos");
+                    request.getRequestDispatcher("/Vistas/Inventario.jsp").forward(request, response);
+                    break;    
                 
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Accion no reconocida");
