@@ -10,11 +10,11 @@
     <link href="../CSS/EstilosReferencia.css" rel="stylesheet" type="text/css" />
     <style>
         .table-wrapper {
-            max-height: 400px; /* Ajusta este valor según tus necesidades */
+            max-height: 400px;
             overflow-y: auto;
         }
         #imagencarrito {
-            margin-top: 50px; /* Ajusta el espacio arriba de la imagen según tus necesidades */
+            margin-top: 50px; 
         }
     </style>
 </head>
