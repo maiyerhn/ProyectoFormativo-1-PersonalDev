@@ -3,7 +3,7 @@
     Created on : 7/08/2024, 01:23:46 PM
     Author     : USUARIO
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,7 +13,7 @@
         <title>Proveedores - Famisalud la 91</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.3/font/bootstrap-icons.min.css" rel="stylesheet">
-        <link href="../CSS/EstilosReferencia.css" rel="stylesheet" type="text/css"/>
+        <link href="/FamiSaludLa91/CSS/EstilosReferencia.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div class="container-fluid encabezado ">
@@ -40,7 +40,7 @@
                     <a class="nav-link opciones" href="#" id="navbarDropdown">
                         Pedidos
                     </a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">
+                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrPro?accion=listarp" id="navbarDropdown">
                         Proveedores
                     </a>
                     <a class="nav-link opciones" href="#" id="navbarDropdown">
@@ -57,7 +57,7 @@
             <div class="input-group mb-3 d-flex justify-content-end " >
                 <div class="input-group-append">
                     <form class="d-flex ">
-                        <input class="ms-0" type="search" placeholder="Buscar productos..." aria-label="Buscar">
+                        <input class="ms-0" type="search" placeholder="Buscar proveedor..." aria-label="Buscar">
                         <button class="btn btn-outline-light bg-success me-2 fs-9" type="submit"><i class="bi bi-search"> Buscar </i></button>
                         <button class="btn btn-outline-light bg-success  fs-9" id="agg" type="button" data-bs-toggle="modal" data-bs-target="#agregarproveedor">Agregar</button>      
                     </form>
@@ -77,13 +77,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="pro" items="">  
+                <c:forEach var="p" items="${proveedor}">  
                     <tr style="background-color: white">
-                        <th scope="row" class="border"></th>
-                        <td class="border"></td>
-                        <td class="border"></td>
-                        <td class="border"></td>
-                        <td class="border"></td>
+                        <th scope="row" class="border">${p.getId()}</th>
+                        <td class="border">${p.getNombre()}</td>
+                        <td class="border">${p.getCorreo()}</td>
+                        <td class="border">${p.getTelefono()}</td>
+                        <td class="border">${p.getDireccion()}</td>
                         <td scope="col" class ="text-center border">
                             <input type="hidden" name="id" id="id" value="">
                             <a class="btn btn-warning" href="/AxppWeb/CtrProducto?accion=EditarPro&idpro=" data-bs-toggle="modal" data-bs-target="#editarproveedor"><i class="bi bi-pencil-fill"></i></a>
