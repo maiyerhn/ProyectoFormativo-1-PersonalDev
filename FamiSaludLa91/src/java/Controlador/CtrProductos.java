@@ -34,12 +34,15 @@ public class CtrProductos extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     ProductosDAO pdao = new ProductosDAO();
+    Productos pro = new Productos();
     
     
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String accion = request.getParameter("accion");
+        String nombre, descripcion, fotos;
+        int id, precio, stock, categ;
         System.out.println("accion= "+accion);
         try {
             List<Productos> productos = pdao.obtenerProductos();
@@ -55,8 +58,30 @@ public class CtrProductos extends HttpServlet {
                 case "listar":
                     request.setAttribute("listar", lpro);
                     System.out.println("Entro A Listar los Productos");
-                    request.getRequestDispatcher("/Vistas/Inventario.jsp").forward(request, response);
-                    break;    
+                    request.getRequestDispatcher("/Vistas/Productos.jsp").forward(request, response);
+                    break; 
+                
+                case "Agregar":
+                    id = Integer.parseInt(request.getParameter("txtid"));
+                    nombre = request.getParameter("txtnombre");
+                    descripcion = request.getParameter("txtdescripcion");
+                    precio = Integer.parseInt(request.getParameter("txtprecio"));
+                    fotos = request.getParameter("foto");                   
+                    //categ = Integer.parseInt(request.getParameter("categoria"));
+                    categ = 1;
+                    stock = Integer.parseInt(request.getParameter("txtstock"));
+                    pro.setId(id);
+                    pro.setNombre(nombre);
+                    pro.setDescripcion(descripcion);
+                    pro.setPrecio(precio);
+                    pro.setFoto(fotos);
+                    pro.setIdCategoria(categ);
+                    pro.setStock(stock); 
+                    if (pdao.crear(pro) == true) {
+                        System.out.println("Se creo El producto");
+                        request.getRequestDispatcher("CtrProductos?accion=listar").forward(request, response);
+                    }
+                    break;
                 
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Accion no reconocida");
