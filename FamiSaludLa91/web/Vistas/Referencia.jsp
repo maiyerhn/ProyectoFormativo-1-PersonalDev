@@ -42,50 +42,73 @@
             </header>
 
 
-            <div class="menu">
-
-                <div class="Lista">
-                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=home" id="navbarDropdown">
-                        Inicio
-                    </a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">
-                        Medicamentos
-                        <ul class="dropdown-menu">
-                            <li>Alivio del Dolor</li>
-                            <li>Salud Digestiva</li>
-                            <li>Salud y Medicamentos</li>
-                            <li>Tratamiento de la Gripe</li>
-                        </ul>
-                    </a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">
-                        Belleza
-                        <ul class="dropdown-menu">
-                            <li>Belleza 1</li>
-                            <li>Belleza 2</li>
-                            <li>Belleza 3</li>
-                        </ul>
-                    </a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">
-                        Cuidado al Bebé
-                        <ul class="dropdown-menu">
-                            <li>Cuidado al Bebé 1</li>
-                            <li>Cuidado al Bebé 2</li>
-                            <li>Cuidado al Bebé 3</li>
-                        </ul>
-                    </a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">
-                        Alimentos y Bebidas
-                        <ul class="dropdown-menu">
-                            <li>Alimentos y Bebidas 1</li>
-                            <li>Alimentos y Bebidas 2</li>
-                            <li>Alimentos y Bebidas 3</li>
-                        </ul>
-                    </a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">
-                        Otros
-                    </a>
+            <section class="container-categoria py-3">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-2">
+                        <h2 class="fs-4 fw-bold text-white mb-2">Categorías</h2>
+                    </div>
+                    <div class="col-md-10">
+                        <div id="carouselCategories" class="carousel slide">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="row row-cols-3 g-3"> <!-- Show 3 categories per slide -->
+                                        <div class="col">
+                                            <a  href="/FamiSaludLa91/CtrProductos?accion=home" class="category-item d-flex align-items-center justify-content-center">
+                                                <i class="bi bi-house me-4"></i>
+                                                Inicio
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="#" class="category-item d-flex align-items-center justify-content-center">
+                                                <i class="bi bi-capsule me-4"></i>
+                                                <span>Medicamentos</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="#" class="category-item d-flex align-items-center justify-content-center">
+                                                <i class="bi bi-brush me-4"></i>
+                                                <span>Belleza</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row row-cols-3 g-3"> <!-- Show 3 categories per slide -->
+                                        <div class="col">
+                                            <a href="#" class="category-item d-flex align-items-center justify-content-center">
+                                                <i class="bi bi-heart-pulse-fill"></i>
+                                                <span>Cuidado al Bebé</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="#" class="category-item d-flex align-items-center justify-content-center">
+                                                <i class="bi bi-basket me-4"></i>
+                                                <span>Alimentos y Bebidas</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="#" class="category-item d-flex align-items-center justify-content-center">
+                                                <i class="bi bi-box me-4"></i>
+                                                <span>Otros</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselCategories" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselCategories" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
         </div>
 
         <div class="container mt-5">

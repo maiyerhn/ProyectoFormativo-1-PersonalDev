@@ -7,8 +7,16 @@
     <title>Carrito - Famisalud la 91</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link href="../CSS/EstilosReferencia.css" rel="stylesheet" type="text/css"/>
-   
+    <link href="../CSS/EstilosReferencia.css" rel="stylesheet" type="text/css" />
+    <style>
+        .table-wrapper {
+            max-height: 400px; /* Ajusta este valor según tus necesidades */
+            overflow-y: auto;
+        }
+        #imagencarrito {
+            margin-top: 50px; /* Ajusta el espacio arriba de la imagen según tus necesidades */
+        }
+    </style>
 </head>
 
 <body>
@@ -16,7 +24,7 @@
         <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Famisalud la 91 Logo" style="max-width: 100px;"/>
+                    <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Famisalud la 91 Logo">
                 </a>
                 <p class="navbar-text fs-3 fw-bold text-white">Famisalud la 91</p>
                 <form class="form-control ms-auto d-flex busqueda">
@@ -55,13 +63,13 @@
                                     <div class="col">
                                         <a href="#" class="category-item d-flex align-items-center justify-content-center">
                                             <i class="bi bi-capsule me-4"></i>
-                                            Medicamentos
+                                            <span>Medicamentos</span>
                                         </a>
                                     </div>
                                     <div class="col">
                                         <a href="#" class="category-item d-flex align-items-center justify-content-center">
                                             <i class="bi bi-brush me-4"></i>
-                                            Belleza
+                                            <span>Belleza</span>
                                         </a>
                                     </div>
                                 </div>
@@ -70,20 +78,20 @@
                                 <div class="row row-cols-3 g-3">
                                     <div class="col">
                                         <a href="#" class="category-item d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-heart-pulse-fill me-4"></i>
-                                            Cuidado al Bebé
+                                            <i class="bi bi-heart-pulse-fill"></i>
+                                            <span>Cuidado al Bebé</span>
                                         </a>
                                     </div>
                                     <div class="col">
                                         <a href="#" class="category-item d-flex align-items-center justify-content-center">
                                             <i class="bi bi-basket me-4"></i>
-                                            Alimentos y Bebidas
+                                            <span>Alimentos y Bebidas</span>
                                         </a>
                                     </div>
                                     <div class="col">
                                         <a href="#" class="category-item d-flex align-items-center justify-content-center">
                                             <i class="bi bi-box me-4"></i>
-                                            Otros
+                                            <span>Otros</span>
                                         </a>
                                     </div>
                                 </div>
@@ -103,65 +111,102 @@
         </div>
     </section>
 
-    <div class="container my-5">
-        <h1 class="mb-4">Carrito de compras</h1>
+    <div class="container py-6">
         <div class="row">
-            <div class="col-md-8">
-                <ul class="list-group mb-4">
-                    <li class="list-group-item d-flex align-items-center">
-                        <img src="/images/aspirin.jpg" alt="Aspirina" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
-                        <div class="flex-grow-1">
-                            <h5 class="mb-1">Aspirina</h5>
-                            <div class="d-flex align-items-center">
-                                <input type="number" class="form-control me-3" value="1" min="1" style="width: 80px;">
-                                <span>Total: $5.99</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex align-items-center">
-                        <img src="/images/antibiotic.jpg" alt="Antibiótico" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
-                        <div class="flex-grow-1">
-                            <h5 class="mb-1">Antibiótico</h5>
-                            <div class="d-flex align-items-center">
-                                <input type="number" class="form-control me-3" value="1" min="1" style="width: 80px;">
-                                <span>Total: $12.99</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex align-items-center">
-                        <img src="/images/vitamin.jpg" alt="Vitaminas" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
-                        <div class="flex-grow-1">
-                            <h5 class="mb-1">Vitaminas</h5>
-                            <div class="d-flex align-items-center">
-                                <input type="number" class="form-control me-3" value="2" min="1" style="width: 80px;">
-                                <span>Total: $19.98</span>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div>
-                    <button class="btn btn-outline-primary">Continuar comprando</button>
-                </div>
+            <div class="col-md-6">
+                <img src="../imagenes/Amoxicilina.jpg" alt="Amoxicilina" width="400" height="400" id="imagencarrito" class="img-fluid rounded-lg" />
             </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Subtotal</span>
-                            <span>$38.96</span>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Impuestos</span>
-                            <span>$7.79</span>
-                        </div>
-                        <hr>
-                        <div class="d-flex justify-content-between fw-bold">
-                            <span>Total</span>
-                            <span>$46.75</span>
-                        </div>
-                        <button class="btn btn-success w-100 mt-3">Comprar</button>
-                    </div>
+            <div class="col-md-6">
+                <div class="mb-4">
+                    <h1 class="fw-bold fs-1">Carrito de Compra</h1>
                 </div>
+                <div class="table-wrapper mb-4">
+                    <table class="table table-bordered table-striped bg-white">
+                        <thead>
+                            <tr class="bg-light">
+                                <th scope="col">Imagen</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="align-middle">
+                                <td class="text-center">
+                                    <img src="../imagenes/Paracetamol.jpg" alt="Paracetamol" width="64" height="64" class="img-fluid rounded" />
+                                </td>
+                                <td>Paracetamol</td>
+                                <td>
+                                    <input type="number" class="form-control form-control-sm" value="2" min="1" />
+                                </td>
+                                <td>$4.99</td>
+                                <td>$9.98</td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td class="text-center">
+                                    <img src="../imagenes/Ibuprofeno.jpg" alt="Ibuprofeno" width="64" height="64" class="img-fluid rounded" />
+                                </td>
+                                <td>Ibuprofeno</td>
+                                <td>
+                                    <input type="number" class="form-control form-control-sm" value="1" min="1" />
+                                </td>
+                                <td>$7.99</td>
+                                <td>$7.99</td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td class="text-center">
+                                    <img src="../imagenes/GelAntibacterial.jpg" alt="Gel Antibacterial" width="64" height="64" class="img-fluid rounded" />
+                                </td>
+                                <td>Gel Antibacterial</td>
+                                <td>
+                                    <input type="number" class="form-control form-control-sm" value="3" min="1" />
+                                </td>
+                                <td>$3.49</td>
+                                <td>$10.47</td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td class="text-center">
+                                    <img src="../imagenes/Vitaminas.jpg" alt="Multivitaminas" width="64" height="64" class="img-fluid rounded" />
+                                </td>
+                                <td>Multivitaminas</td>
+                                <td>
+                                    <input type="number" class="form-control form-control-sm" value="1" min="1" />
+                                </td>
+                                <td>$12.99</td>
+                                <td>$12.99</td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td class="text-center">
+                                    <img src="../imagenes/Tensiometro.jpg" alt="Tensiómetro" width="64" height="64" class="img-fluid rounded" />
+                                </td>
+                                <td>Tensiómetro</td>
+                                <td>
+                                    <input type="number" class="form-control form-control-sm" value="1" min="1" />
+                                </td>
+                                <td>$24.99</td>
+                                <td>$24.99</td>
+                            </tr>
+                            <tr class="align-middle">
+                                <td class="text-center">
+                                    <img src="../imagenes/Oxigeno.jpg" alt="Oxímetro" width="64" height="64" class="img-fluid rounded" />
+                                </td>
+                                <td>Oxímetro</td>
+                                <td>
+                                    <input type="number" class="form-control form-control-sm" value="1" min="1" />
+                                </td>
+                                <td>$19.99</td>
+                                <td>$19.99</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr />
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="fs-4 fw-medium">Total</div>
+                    <div class="fs-1 fw-bold">$86.41</div>
+                </div>
+                <button type="button" class="btn btn-lg btn-primary">Proceder al Pago</button>
             </div>
         </div>
     </div>
@@ -169,4 +214,5 @@
     <script src="../JSc/carruselCategoria.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
+
 </html>
