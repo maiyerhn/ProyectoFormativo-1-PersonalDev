@@ -146,8 +146,9 @@
                 
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="/FamiSaludLa91/JSc/ReferenceScript.js" type="text/javascript"></script>
+        <script src="/FamiSaludLa91/JSc/carruselCategoria.js" type="text/javascript"></script>
         <script src="/FamiSaludLa91/JSc/redireciones.js" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  
     </body>
 </html>

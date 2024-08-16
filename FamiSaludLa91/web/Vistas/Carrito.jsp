@@ -9,12 +9,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="../CSS/EstilosReferencia.css" rel="stylesheet" type="text/css" />
     <style>
+        #imagencarrito {
+            margin-top: 50px; 
+        }
         .table-wrapper {
             max-height: 400px;
             overflow-y: auto;
         }
-        #imagencarrito {
-            margin-top: 50px; 
+        .summary-table {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -120,7 +123,7 @@
                 <div class="mb-4">
                     <h1 class="fw-bold fs-1">Carrito de Compra</h1>
                 </div>
-                <div class="table-wrapper mb-4">
+                <div class="table-responsive mb-4">
                     <table class="table table-bordered table-striped bg-white">
                         <thead>
                             <tr class="bg-light">
@@ -201,12 +204,29 @@
                         </tbody>
                     </table>
                 </div>
-                <hr />
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div class="fs-4 fw-medium">Total</div>
-                    <div class="fs-1 fw-bold">$86.41</div>
+                <!-- Resumen de la compra -->
+                <div class="table-responsive summary-table">
+                    <table class="table table-bordered bg-light">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Subtotal</th>
+                                <td>$86.41</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Envío</th>
+                                <td>$5.00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Total</th>
+                                <td class="fs-4 fw-bold">$91.41</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <button type="button" class="btn btn-lg btn-primary">Proceder al Pago</button>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <button type="button" class="btn btn-lg btn-primary">Proceder al Pago</button>
+                    <a href="/FamiSaludLa91/Productos" class="btn btn-lg btn-secondary">Seguir Comprando</a>
+                </div>
             </div>
         </div>
     </div>
