@@ -1,4 +1,5 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,7 +27,7 @@
                     <a class="nav-link opciones" href="" id="navbarDropdown">
                         Inicio
                     </a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">
+                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=listar" id="navbarDropdown">
                         Inventario
                     </a>
                     <a class="nav-link opciones" href="#" id="navbarDropdown">
@@ -35,7 +36,7 @@
                     <a class="nav-link opciones" href="#" id="navbarDropdown">
                         Proveedores
                     </a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">
+                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrCategorias?accion=listarCategorias" id="navbarDropdown">
                         Categorías
                     </a>
                     <a class="nav-link opciones" href="#" id="navbarDropdown">
@@ -51,7 +52,7 @@
                     <form class="d-flex ">
                         <input class="ms-0" type="search" placeholder="Buscar productos..." aria-label="Buscar">
                         <button class="btn btn-outline-light bg-success me-2 fs-9" type="submit"><i class="bi bi-search"> Buscar </i></button>
-                        <button class="btn btn-outline-light bg-secondary  fs-9" id="agg" type="button" data-bs-toggle="modal" data-bs-target="#agregarproveedor">Agregar</button>      
+                        <button class="btn btn-outline-light bg-success fs-9" id="agg" type="button" data-bs-toggle="modal" data-bs-target="#agregarproducto">Agregar</button>     
                     </form>
 
                 </div>
@@ -68,22 +69,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="categoria" items="">
-                    <tr style="background-color: white;">
-                        <th scope="row" class="border">${categoria.id}</th>
-                        <td class="border">${categoria.nombre}</td>
-                        <td class="border">${categoria.descripcion}</td>
-                        <td class="border">${categoria.ofertas}</td>
-                        <td class="text-center border">
-                            <a class="btn btn-primary" href="">
-                                <i class="bi bi-pencil-fill"></i>
-                            </a>
-                            <a class="btn btn-danger" href="" >
-                                <i class="bi bi-trash-fill"></i>
-                            </a>
-                        </td>
-                    </tr>
-                </c:forEach>
+                    <c:forEach items="${categoria}" var="categoria">
+                        <tr style="background-color: white;">
+                            <td class="border text-center">${categoria.getId()}</td>
+                            <td class="border text-center">${categoria.getNombre()}</td>
+                            <td class="border text-center">${categoria.getDescripcion()}</td>
+                            <td class="border text-center">${categoria.getOfertas()}</td>
+                            <td class="text-center border">
+                                <a class="btn btn-primary" href="#">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </a>
+                                <a class="btn btn-danger" href="#">
+                                    <i class="bi bi-trash-fill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
