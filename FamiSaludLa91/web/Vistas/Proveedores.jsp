@@ -16,17 +16,15 @@
         <link href="../CSS/EstilosReferencia.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-
-
         <div class="container-fluid encabezado ">
             <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
-                        <img src="/FamiSaludLa91/imagenes/logo9.png" alt="" class="me-2" style="max-width: 100px;"/>
+                        <img src="/FamiSaludLa91/imagenes/logo9.png" alt="" class="me-2"/>
                     </a>
-                    <p class="navbar-text fs-3 fw-bold text-white mb-0">Famisalud la 91</p>
+                   <p class="navbar-text fs-3 fw-bold text-white text-start ms-3">Famisalud la 91</p>
 
-                    <a class="ms-auto" href="#">
+                   <a class="nav-link nav-link-icon carrito ms-auto" href="#" data-bs-toggle="modal" data-bs-target="#ModalError">
                         <i class="bi bi-person-fill text-white fs-3"></i>
                     </a>                   
                 </div>        
