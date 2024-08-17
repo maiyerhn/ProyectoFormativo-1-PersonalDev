@@ -9,6 +9,8 @@ import Configuracion.conectar;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -56,7 +58,36 @@ public class UsuarioDAO {
 
         return usua;
     }
+    public List<Usuario> obtenerUsuarios(){
+         List<Usuario> users = new ArrayList<>();
+        try {
+            conectar conection = new conectar();
+            Connection conexion = conection.crearconexion();
+            if (conexion != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
 
+            }
+            String consulta = "Select * from usuarios";
+            PreparedStatement stm = conexion.prepareStatement(consulta);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                int id = rs.getInt("id");
+                String nombre = rs.getString("nombre");
+                String apellidos = rs.getString("apellidos");
+                String correo = rs.getString("correo");
+                String telefono = rs.getString("telefono");
+                String contrasena = rs.getString("contrasena");
+                String direccion = rs.getString("direccion");
+                String rol = rs.getString("rol");
+                Usuario user = new Usuario(id,telefono,nombre,apellidos,correo,contrasena,rol,direccion);
+                users.add(user);
+            }
+        } catch (Exception ex) {
+            System.out.println("Hubo un Error Al Cargar Los Usuarios "+ ex);
+        }
+        
+            return users;
+}
     public boolean crear(Usuario us) {
         try {
             conexion = new conectar();
