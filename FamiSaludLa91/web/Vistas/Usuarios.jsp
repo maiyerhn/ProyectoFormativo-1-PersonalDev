@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -38,7 +40,7 @@
                     <a class="nav-link opciones" href="#" id="navbarDropdown">
                         Categorías
                     </a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">
+                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrUsuario?accion=listarU" id="navbarDropdown">
                         Usuarios
                     </a>
                 </div>
@@ -72,27 +74,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="usuario" items="">
-                    <tr style="background-color: white;">
-                        <th scope="row" class="border">${usuario.id}</th>
-                        <td class="border">${usuario.nombre}</td>
-                        <td class="border">${usuario.apellidos}</td>
-                        <td class="border">${usuario.correo}</td>
-                        <td class="border">${usuario.telefono}</td>
-                        <td class="border">${usuario.contrasena}</td>
-                        <td class="border">${usuario.direccion}</td>
-                        <td class="border">${usuario.rol}</td>
-                        <td class="text-center border">
-                            <a class="btn btn-primary" href="">
-                                <i class="bi bi-pencil-fill"></i>
-                            </a>
-                            <a class="btn btn-danger" href="#" >
-                                <i class="bi bi-trash-fill"></i>
-                            </a>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
+                    <c:forEach var="u" items="${listarUs}">
+                        <tr style="background-color: white;">
+                            <th scope="row" class="border">${u.getId()}</th>
+                            <td class="border"><label>${u.getNombre()}</label></td>
+                            <td class="border">${u.getApellido()}</td>
+                            <td class="border">${u.getCorreo()}</td>
+                            <td class="border">${u.getTelefono()}</td>
+                            <td class="border">${u.getContrasena()}</td>
+                            <td class="border">${u.getDireccion()}</td>
+                            <td class="border">${u.getRol()}</td>
+                            <td class="text-center border">
+                                <a class="btn btn-primary" href="">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </a>
+                                <a class="btn btn-danger" href="#" >
+                                    <i class="bi bi-trash-fill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
             </table>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

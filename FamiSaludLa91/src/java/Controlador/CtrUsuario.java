@@ -9,6 +9,7 @@ import Modelo.Usuario;
 import Modelo.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -62,33 +63,39 @@ public class CtrUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String id,nombre,apellido,correo,telefono,contrasena,direccion,rol;
-         String accion = request.getParameter("accion");
-         switch(accion){
-             case "registrarse":
-                        nombre = request.getParameter("nombre");
-                        apellido = request.getParameter("apellido");
-                        correo = request.getParameter("user");
-                        telefono = request.getParameter("telefono");
-                        contrasena = request.getParameter("password");
-                        direccion = request.getParameter("direccion");
-                        us.setNombre(nombre);
-                        us.setApellido(apellido);
-                        us.setCorreo(correo);
-                        us.setTelefono(telefono);
-                        us.setRol("CLIENTE");
-                        us.setDireccion(direccion);
-                        us.setContrasena(contrasena);
-                        if (dao.crear(us) == true) {
-                            request.getRequestDispatcher("/Vistas/Login.jsp").forward(request, response);
-                     
-                        }else{
-                            System.out.println("Error al insertar el usuarios");
+        List<Usuario> user = dao.obtenerUsuarios();
+        String id, nombre, apellido, correo, telefono, contrasena, direccion, rol;
+        String accion = request.getParameter("accion");
+        switch (accion) {
+            case "registrarse":
+                nombre = request.getParameter("nombre");
+                apellido = request.getParameter("apellido");
+                correo = request.getParameter("user");
+                telefono = request.getParameter("telefono");
+                contrasena = request.getParameter("password");
+                direccion = request.getParameter("direccion");
+                us.setNombre(nombre);
+                us.setApellido(apellido);
+                us.setCorreo(correo);
+                us.setTelefono(telefono);
+                us.setRol("CLIENTE");
+                us.setDireccion(direccion); 
+                us.setContrasena(contrasena);
+                if (dao.crear(us) == true) {
+                    request.getRequestDispatcher("/Vistas/Login.jsp").forward(request, response);
 
-                        }
-                        
-                 break;
-         }
+                } else {
+                    System.out.println("Error al insertar el usuarios");
+
+                }
+
+                break;
+            case "listarU":
+                request.setAttribute("listarUs", user);
+                System.out.println("Entro A Listar los Productos");
+                request.getRequestDispatcher("/Vistas/Usuarios.jsp").forward(request, response);
+                break;
+           }
     }
 
     /**
