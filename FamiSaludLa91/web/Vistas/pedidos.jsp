@@ -4,6 +4,7 @@
     Author     : HP
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>pedidos - Famisalud la 91</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link href="../CSS/EstilosReferencia.css" rel="stylesheet" type="text/css"/>
+        <link href="/FamiSaludLa91/CSS/EstilosReferencia.css" rel="stylesheet" type="text/css"/>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
 
@@ -44,7 +45,7 @@
                     <a class="nav-link opciones" href="#" id="navbarDropdown">
                         Inventario
                     </a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">
+                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrPedido?accion=listarped" id="navbarDropdown">
                         Pedidos
                     </a>
                     <a class="nav-link opciones" href="#" id="navbarDropdown">
@@ -75,21 +76,25 @@
                 </div>
 
 
-            <div class="container mt-4">
-                <div class="pedido-card d-flex flex-column mb-3 p-3 border rounded bg-light">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="flex-grow-1">
-                            <p><strong>ID:</strong> </p>
-                            <p><strong>Nombre:</strong> </p>
-                            <p><strong>Dirección:</strong> </p>
+                <div class="container mt-4">
+                    <c:forEach var="ped" items="${listarped}" varStatus="status">
+                        <c:set var="usuario" value="${usuarios[status.index]}"/>
+                        <div class="pedido-card d-flex flex-column mb-3 p-3 border rounded bg-light">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="flex-grow-1">
+                                    <p><strong>ID:</strong> ${ped.id}</p>
+                                    <p><strong>Nombre:</strong> ${usuario.nombre} ${usuario.apellido}</p>
+                                    <p><strong>Dirección:</strong> ${usuario.direccion}</p>
+                                </div>
+                                <div class="d-flex flex-column align-items-end ms-3">
+                                    <p><strong>Fecha:</strong> ${ped.fechaActual}</p>
+                                    <button class="btn btn-primary">➔</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="d-flex flex-column align-items-end ms-3">
-                            <p><strong>Fecha:</strong> </p>
-                            <button class="btn btn-primary">➔</button>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
-            </div>
+
             </div>
         </div>
 
