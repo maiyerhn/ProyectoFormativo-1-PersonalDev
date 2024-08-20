@@ -33,25 +33,33 @@ public class CtrCategorias extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   
     CategoriaDAO cdao = new CategoriaDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String accion = request.getParameter("accion");
         System.out.println("accion= " + accion);
-
+        String id;
         try {
- List<Categoria> categoria = new ArrayList();
- 
+            List<Categoria> categoria = new ArrayList();
+
             categoria = cdao.listar();
-             System.out.println("categorias " + categoria.size());
+            System.out.println("categorias " + categoria.size());
             switch (accion) {
                 case "listarCategorias":
                     request.setAttribute("categoria", categoria);
-                   System.out.println("Entro A enviar las categorias" + categoria);
+                    System.out.println("Entro A enviar las categorias" + categoria);
                     request.getRequestDispatcher("/Vistas/Categorias.jsp").forward(request, response);
                     break;
+                 case "eliminar":
+                id = request.getParameter("id");
+                System.out.println("Entró a eliminar la categoría con ID: " + id);
+                cdao.eliminar(id);
+                categoria = cdao.listar();
+                request.setAttribute("categoria", categoria);
+                System.out.println("Enviando la lista actualizada de categorías: " + categoria);
+                 response.sendRedirect("/FamiSaludLa91/Vistas/Categorias.jsp?mensaje=Categoría eliminada exitosamente");
+                break;
             }
 
         } catch (Exception e) {
