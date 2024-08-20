@@ -11,9 +11,10 @@ package Modelo;
  */
 public class Proveedor {
     
-    int id;
+    int id,idprod;
     String nombre,correo,telefono,direccion;
 
+    
     public Proveedor() {
     }
 
@@ -56,9 +57,19 @@ public class Proveedor {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+    
+        public int getIdprod() {
+        return idprod;
+    }
 
-    public Proveedor(int id, String nombre, String correo, String telefono, String direccion) {
+    public void setIdprod(int idprod) {
+        this.idprod = idprod;
+    }
+
+
+    public Proveedor(int id, String nombre, String correo, String telefono, String direccion, int idprod) {
         this.id = id;
+        this.idprod = idprod;
         this.nombre = nombre;
         this.correo = correo;
         this.telefono = telefono;

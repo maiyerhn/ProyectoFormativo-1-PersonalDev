@@ -33,15 +33,18 @@ public class CtrPro extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     ProveedorDAO prdao = new ProveedorDAO();
+    Proveedor prov = new Proveedor();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String accion = request.getParameter("accion");
         System.out.println("accion= " + accion);
+        int id,idprod;
+        String nombre,correo,telefono,direccion;
 
         try {
             List<Proveedor> proveedor = prdao.obtenerproveedor();
-            
+
             System.out.println("proveedor " + proveedor.size());
 
             switch (accion) {
@@ -49,13 +52,40 @@ public class CtrPro extends HttpServlet {
                     request.setAttribute("proveedor", proveedor);
                     request.getRequestDispatcher("/Vistas/Proveedores.jsp").forward(request, response);
                     break;
+
+                case "Agregar":
+                    System.out.println("id: " + request.getParameter("txtid"));
+                    id = Integer.parseInt(request.getParameter("txtid"));
+                    nombre = request.getParameter("txtnombre");
+                    correo = request.getParameter("txtcorreo");
+                    telefono = request.getParameter("txttelefono");
+                    direccion = request.getParameter("txtdireccion");
+                    idprod = Integer.parseInt(request.getParameter("txtidprod"));
+                    
+                    System.out.println("id: " + id);
+                    System.out.println("nombre: " + nombre);
+                    System.out.println("correo: " + correo);
+                    System.out.println("telefono: " + telefono);
+                    System.out.println("direccion: " + direccion);
+                    System.out.println("idprod: " + idprod);
+
+                    prov.setId(id);
+                    prov.setNombre(nombre);
+                    prov.setCorreo(correo);
+                    prov.setTelefono(telefono);
+                    prov.setDireccion(direccion);
+                    prov.setIdprod(idprod);
+                    if (prdao.crear(prov) == true) {
+                        System.out.println("Se creo el proveedor");
+                        request.getRequestDispatcher("CtrPro?accion=listarp").forward(request, response);
+                    }
+                    break;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error en el procesamiento de la solicitud");
         }
-        
 
     }
 
@@ -66,8 +96,7 @@ public class CtrPro extends HttpServlet {
      * out.println("<html>"); out.println("<head>"); out.println("<title>Servlet
      * CtrPro</title>"); out.println("</head>"); out.println("<body>");
      * out.println("<h1>Servlet CtrPro at " + request.getContextPath() +
-     * "</h1>"); out.println("</body>"); out.println("</html>");
-        }
+     * "</h1>"); out.println("</body>"); out.println("</html>"); }
      */
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

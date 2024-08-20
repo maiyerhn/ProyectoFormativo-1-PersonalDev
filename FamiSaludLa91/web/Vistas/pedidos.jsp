@@ -67,7 +67,7 @@
                 <div class="input-group mb-3 d-flex justify-content-end " >
                     <div class="input-group-append">
                         <form class="d-flex ">
-                            <input class="ms-0" type="search" placeholder="Buscar predido..." aria-label="Buscar">
+                            <input class="ms-0" type="search" placeholder="Buscar pedido..." aria-label="Buscar">
                             <button class="btn btn-outline-light bg-success icono fs-9" type="submit"><i class="bi bi-search"> Buscar </i></button> 
                         </form>
 
