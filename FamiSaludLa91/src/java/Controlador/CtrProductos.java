@@ -6,16 +6,19 @@
 package Controlador;
 
 import Configuracion.conectar;
+import Modelo.Carrito;
 import Modelo.Productos;
 import Modelo.ProductosDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,8 +36,14 @@ public class CtrProductos extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    List<Carrito> listacarrito = new ArrayList();
     ProductosDAO pdao = new ProductosDAO();
     Productos pro = new Productos();
+    Carrito car;
+    int subtotal;
+    int cantidad, idp;
+    int totalpagar;
+    String ultimoP;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -46,6 +55,7 @@ public class CtrProductos extends HttpServlet {
             List<Productos> productos = pdao.obtenerProductos();
             List<Productos> lpro = pdao.obtenerProductos();
             System.out.println("productos " + productos.get(0).getNombre());
+            Productos p = new Productos();
 
             switch (accion) {
                 case "home":
@@ -89,6 +99,60 @@ public class CtrProductos extends HttpServlet {
                         request.getRequestDispatcher("CtrProductos?accion=listar").forward(request, response);
                     }
                     break;
+                case "Inicio":
+                    request.setAttribute("Productos", productos);
+                    System.out.println("Entro A enviar los Productos");
+                     request.setAttribute("contador", listacarrito.size());
+                    request.getRequestDispatcher("/Vistas/Inicio.jsp").forward(request, response);
+                    break;
+                case "AgregarCarrito":
+                    System.out.println("entro a agregar producto al carrito carrito");
+                    cantidad = 1;
+                    int pos = 0;
+                    idp = Integer.parseInt(request.getParameter("id"));
+                    p = pdao.listarid(idp);
+
+                    if (listacarrito.size() > 0) {
+                        for (int i = 0; i < listacarrito.size(); i++) {
+                            if (idp == listacarrito.get(i).getIdproducto()) {
+                                pos = i;
+                            }
+                        }
+                        if (idp == listacarrito.get(pos).getIdproducto()) {
+                            cantidad = cantidad + listacarrito.get(pos).getCantidad();
+                            subtotal = cantidad * listacarrito.get(pos).getPreciocompra();
+                            listacarrito.get(pos).setCantidad(cantidad);
+                            listacarrito.get(pos).setSubTotal(subtotal);
+                        } else {
+                            car = new Carrito();
+                            car.setIdproducto(idp);
+                            car.setNombre(p.getNombre());
+                            car.setFoto(p.getFoto());
+                            car.setCantidad(cantidad);
+                            car.setPreciocompra(p.getPrecio());
+                            car.setSubTotal(cantidad * p.getPrecio());
+                            listacarrito.add(car);
+                        }
+                    } else {
+                        car = new Carrito();
+                        car.setIdproducto(idp);
+                        car.setNombre(p.getNombre());
+                        car.setFoto(p.getFoto());
+                        car.setCantidad(cantidad);
+                        car.setPreciocompra(p.getPrecio());
+                        car.setSubTotal(cantidad * p.getPrecio());
+                        listacarrito.add(car);
+                    }
+                    request.setAttribute("contador", listacarrito.size());
+                    request.getRequestDispatcher("CtrProductos?accion=Inicio").forward(request, response);
+                    break;
+                case "Carrito":
+                    System.out.println("entro al carrito");
+                    request.setAttribute("carrito", listacarrito);
+                    request.setAttribute("contador", listacarrito.size());
+                    request.getRequestDispatcher("Vistas/Carrito.jsp").forward(request, response);
+
+                    break;
 
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Accion no reconocida");
@@ -100,7 +164,7 @@ public class CtrProductos extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

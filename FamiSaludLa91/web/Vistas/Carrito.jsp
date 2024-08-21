@@ -1,23 +1,47 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta charset="UTF-8">
     <title>Carrito - Famisalud la 91</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link href="../CSS/EstilosReferencia.css" rel="stylesheet" type="text/css" />
+    <link href="/FamiSaludLa91/CSS/EstilosReferencia.css" rel="stylesheet" type="text/css" />
     <style>
-        #imagencarrito {
-            margin-top: 50px; 
+        /* Estilo para el contenedor de la imagen grande */
+        #imagenGrande {
+            width: 100%; /* Ocupa el ancho completo del contenedor padre */
+            text-align: center; /* Centra el contenido */
+            margin-bottom: 20px; /* Espacio inferior */
+            margin-top: 40px; /* Espacio superior */
         }
-        .table-wrapper {
-            max-height: 400px;
-            overflow-y: auto;
+
+        /* Estilo para la imagen dentro del contenedor */
+        #imagenGrande img {
+            max-width: 100%;
+            height: 500px; /* Ajusta la altura de la imagen grande */
+            object-fit: contain; /* Para mantener la proporción de la imagen */
         }
-        .summary-table {
-            margin-top: 20px;
+
+        /* Estilo para las imágenes en la tabla */
+        .table img {
+            cursor: pointer;
+            width: 80px; /* Tamaño uniforme para todas las imágenes */
+            height: 80px;
+            object-fit: cover; /* Asegura que las imágenes cubran el área del contenedor */
+            transition: transform 0.2s ease;
+        }
+
+        /* Estilo para el efecto de hover en las imágenes de la tabla */
+        .table img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Estilo para la tabla con scroll */
+        .table-responsive {
+            max-height: 400px; /* Ajusta la altura según tus necesidades */
+            overflow-y: auto; /* Habilita el scroll vertical si el contenido excede la altura */
         }
     </style>
 </head>
@@ -36,10 +60,10 @@
                         <i class="bi bi-search"></i>
                     </button>
                 </form>
-                <a class="nav-link nav-link-icon carrito" href="#" data-bs-toggle="modal" data-bs-target="#ModalError">
-                    <i class="bi bi-cart3 fs-4"></i>
-                </a>
-                <a class="nav-link nav-link-icon carrito" href="#" data-bs-toggle="modal" data-bs-target="#ModalError">
+                <a class="nav-link nav-link-icon carrito"  href="/FamiSaludLa91/CtrProductos?accion=Carrito">
+                        <i class="bi bi-cart3 fs-4">(<label style="color: darkorange">${contador}</label>)</i>
+                    </a>
+                <a class="nav-link nav-link-icon carrito" href="#">
                     <i class="bi bi-person-fill text-white fs-3"></i>
                 </a>
             </div>
@@ -50,15 +74,15 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-2">
-                    <h2 class="fs-4 fw-bold text-white mb-2">CategorÃ­as</h2>
+                    <h2 class="fs-4 fw-bold text-white mb-2">Categorías</h2>
                 </div>
                 <div class="col-md-10">
-                    <div id="carouselCategories" class="carousel slide">
+                    <div id="carouselCategorias" class="carousel slide">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <div class="row row-cols-3 g-3">
                                     <div class="col">
-                                        <a href="/FamiSaludLa91/CtrProductos?accion=home" class="category-item d-flex align-items-center justify-content-center">
+                                        <a href="/FamiSaludLa91/CtrProductos?accion=Inicio" class="category-item d-flex align-items-center justify-content-center">
                                             <i class="bi bi-house me-4"></i>
                                             Inicio
                                         </a>
@@ -82,7 +106,7 @@
                                     <div class="col">
                                         <a href="#" class="category-item d-flex align-items-center justify-content-center">
                                             <i class="bi bi-heart-pulse-fill"></i>
-                                            <span>Cuidado al BebÃ©</span>
+                                            <span>Cuidado al Bebé</span>
                                         </a>
                                     </div>
                                     <div class="col">
@@ -100,11 +124,11 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselCategories" data-bs-slide="prev">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselCategorias" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselCategories" data-bs-slide="next">
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselCategorias" data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
@@ -116,9 +140,14 @@
 
     <div class="container py-6">
         <div class="row">
+            <!-- Imagen en grande -->
             <div class="col-md-6">
-                <img src="../imagenes/Amoxicilina.jpg" alt="Amoxicilina" width="400" height="400" id="imagencarrito" class="img-fluid rounded-lg" />
+                <div id="imagenGrande">
+                    <img id="imagenGrandeImg" src="/FamiSaludLa91/imagenes/imagenCarrito.avif" alt="Imagen Grande">
+                </div>
             </div>
+
+            <!-- Tabla del carrito -->
             <div class="col-md-6">
                 <div class="mb-4">
                     <h1 class="fw-bold fs-1">Carrito de Compra</h1>
@@ -135,72 +164,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="align-middle">
-                                <td class="text-center">
-                                    <img src="../imagenes/Paracetamol.jpg" alt="Paracetamol" width="64" height="64" class="img-fluid rounded" />
-                                </td>
-                                <td>Paracetamol</td>
-                                <td>
-                                    <input type="number" class="form-control form-control-sm" value="2" min="1" />
-                                </td>
-                                <td>$4.99</td>
-                                <td>$9.98</td>
-                            </tr>
-                            <tr class="align-middle">
-                                <td class="text-center">
-                                    <img src="../imagenes/Ibuprofeno.jpg" alt="Ibuprofeno" width="64" height="64" class="img-fluid rounded" />
-                                </td>
-                                <td>Ibuprofeno</td>
-                                <td>
-                                    <input type="number" class="form-control form-control-sm" value="1" min="1" />
-                                </td>
-                                <td>$7.99</td>
-                                <td>$7.99</td>
-                            </tr>
-                            <tr class="align-middle">
-                                <td class="text-center">
-                                    <img src="../imagenes/GelAntibacterial.jpg" alt="Gel Antibacterial" width="64" height="64" class="img-fluid rounded" />
-                                </td>
-                                <td>Gel Antibacterial</td>
-                                <td>
-                                    <input type="number" class="form-control form-control-sm" value="3" min="1" />
-                                </td>
-                                <td>$3.49</td>
-                                <td>$10.47</td>
-                            </tr>
-                            <tr class="align-middle">
-                                <td class="text-center">
-                                    <img src="../imagenes/Vitaminas.jpg" alt="Multivitaminas" width="64" height="64" class="img-fluid rounded" />
-                                </td>
-                                <td>Multivitaminas</td>
-                                <td>
-                                    <input type="number" class="form-control form-control-sm" value="1" min="1" />
-                                </td>
-                                <td>$12.99</td>
-                                <td>$12.99</td>
-                            </tr>
-                            <tr class="align-middle">
-                                <td class="text-center">
-                                    <img src="../imagenes/Tensiometro.jpg" alt="TensiÃ³metro" width="64" height="64" class="img-fluid rounded" />
-                                </td>
-                                <td>TensiÃ³metro</td>
-                                <td>
-                                    <input type="number" class="form-control form-control-sm" value="1" min="1" />
-                                </td>
-                                <td>$24.99</td>
-                                <td>$24.99</td>
-                            </tr>
-                            <tr class="align-middle">
-                                <td class="text-center">
-                                    <img src="../imagenes/Oxigeno.jpg" alt="OxÃ­metro" width="64" height="64" class="img-fluid rounded" />
-                                </td>
-                                <td>OxÃ­metro</td>
-                                <td>
-                                    <input type="number" class="form-control form-control-sm" value="1" min="1" />
-                                </td>
-                                <td>$19.99</td>
-                                <td>$19.99</td>
-                            </tr>
+                            <c:forEach var="car" items="${carrito}">
+                                <tr class="align-middle">
+                                    <td class="text-center">
+                                        <img src="${car.foto}" alt="" class="img-fluid rounded" />
+                                    </td>
+                                    <td>${car.nombre}</td>
+                                    <td>
+                                        <input type="number" class="form-control form-control-sm" value="${car.cantidad}" min="1" />
+                                    </td>
+                                    <td>${car.preciocompra}</td>
+                                    <td>${car.subTotal}</td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -210,15 +186,15 @@
                         <tbody>
                             <tr>
                                 <th scope="row">Subtotal</th>
-                                <td>$86.41</td>
+                                <td>$<c:out value="${subtotal}" /></td>
                             </tr>
                             <tr>
-                                <th scope="row">EnvÃ­o</th>
-                                <td>$5.00</td>
+                                <th scope="row">Envío</th>
+                                <td>$<c:out value="${envio}" /></td>
                             </tr>
                             <tr>
                                 <th scope="row">Total</th>
-                                <td class="fs-4 fw-bold">$91.41</td>
+                                <td class="fs-4 fw-bold">$<c:out value="${total}" /></td>
                             </tr>
                         </tbody>
                     </table>
@@ -231,7 +207,31 @@
         </div>
     </div>
 
-    <script src="../JSc/carruselCategoria.js" type="text/javascript"></script>
+    <script>
+        // Definir la imagen por defecto
+        const imagenPorDefecto = '/FamiSaludLa91/imagenes/imagenCarrito.avif';
+        
+        // Obtener todos los elementos de imagen en la tabla
+        document.querySelectorAll('.table img').forEach(img => {
+            img.addEventListener('mouseover', function() {
+                document.getElementById('imagenGrandeImg').src = this.src;
+                document.getElementById('imagenGrande').style.display = 'block';
+            });
+
+            img.addEventListener('mouseout', function() {
+                document.getElementById('imagenGrandeImg').src = imagenPorDefecto;
+            });
+        });
+
+        // Asegurarse de que la imagen grande esté oculta cuando el cursor no está sobre ninguna imagen
+        document.querySelectorAll('.table img').forEach(img => {
+            img.addEventListener('mouseleave', function() {
+                document.getElementById('imagenGrandeImg').src = imagenPorDefecto;
+                document.getElementById('imagenGrande').style.display = 'block';
+            });
+        });
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 
