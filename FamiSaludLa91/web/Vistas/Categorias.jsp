@@ -45,23 +45,35 @@
             </header>
             <div class="menu">
                 <div class="Lista">
-                    <a class="nav-link opciones" href="" id="navbarDropdown">Inicio</a>
-                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=listar" id="navbarDropdown">Inventario</a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">Pedidos</a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">Proveedores</a>
-                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrCategorias?accion=listarCategorias" id="navbarDropdown">Categorías</a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">Usuarios</a>
+                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=home" id="navbarDropdown">
+                        Inventario
+                    </a>
+                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=listar" id="navbarDropdown">
+                        Productos
+                    </a>
+                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrPedido?accion=listarped" id="navbarDropdown">
+                        Pedidos
+                    </a>
+                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrPro?accion=listarp" id="navbarDropdown">
+                        Proveedores
+                    </a>
+                    <a class="nav-link opciones"href="/FamiSaludLa91/CtrCategorias?accion=listarCategorias"  id="navbarDropdown">
+                        Categorias
+                    </a>
+                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrUsuario?accion=listarU" id="navbarDropdown">
+                        Usuarios
+                    </a>
                 </div>
             </div>
         </div>
         <div class="container mt-5">
-            <h2 class="titulo-inventario text-center fw-bold">Categorías</h2>
+            <h2 class="titulo-inventario text-center fw-bold titulos">Categorías</h2>
             <div class="input-group mb-3 d-flex justify-content-end">
                 <div class="input-group-append">
                     <form class="d-flex">
                         <input class="ms-0" type="search" placeholder="Buscar productos..." aria-label="Buscar">
                         <button class="btn btn-outline-light bg-success me-2 fs-9" type="submit"><i class="bi bi-search"> Buscar </i></button>
-                        <button class="btn btn-outline-light bg-success fs-9" id="agg" type="button" data-bs-toggle="modal" data-bs-target="#agregarproducto">Agregar</button>
+                        <button class="btn btn-outline-light bg-success fs-9" id="agg" type="button" data-bs-toggle="modal" data-bs-target="#crearCategoria">Agregar</button>
                     </form>
                 </div>
             </div>
@@ -84,7 +96,7 @@
                             <td class="border text-center">${categoria.getDescripcion()}</td>
                             <td class="border text-center">${categoria.getOfertas()}</td>
                             <td class="text-center border">
-                                <a class="btn btn-primary" href="#">
+                                <a class="btn btn-primary" href="/FamiSaludLa91/CtrCategorias?accion=EditarCategoria&idc=${categoria.getId()}">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
                                 <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#eliminar" data-id="${categoria.getId()}">
@@ -96,7 +108,7 @@
                 </tbody>
             </table>
         </div>
-        
+
         <!-- Modal de Confirmación de Eliminación -->
         <div class="modal fade" id="eliminar" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -116,9 +128,94 @@
             </div>
         </div>
 
+        <%-- modal de agregar Categorias --%>
+        <div class="modal fade" id="crearCategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Categoria</h1>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-sing" action="/FamiSaludLa91/CtrCategorias?accion=Agregar" method="POST">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="txtid" class="form-label">Id</label>
+                                    <input type="number" class="form-control" id="txtid" name="txtid" placeholder="Ingrese ID" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="txtnombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="txtnombre" name="txtnombre" placeholder="Ingrese nombre" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="txtdescripcion" class="form-label">Descripción</label>
+                                    <input type="text" class="form-control" id="txtdescripcion" name="txtdescripcion" placeholder="Ingrese descripción" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="txtofertas" class="form-label">Ofertas</label>
+                                    <input type="number" class="form-control" id="txtofertas" name="txtofertas" placeholder="Ingrese Oferta" required>
+                                </div>
+                            </div>
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-success" name="btnagregar" value="Agregar">Agregar <i class="bi bi-floppy"></i></button>
+                                <a class="btn btn-secondary" name="regresar" href="#">Regresar <i class="bi bi-box-arrow-left"></i></a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <%-- modal de editar Categorias --%>
+        <div class="modal fade" id="editarCategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Categoria</h1>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-sing" action="/FamiSaludLa91/CtrCategorias?accion=actualizarCategoria" method="POST">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="txtid" class="form-label">Id</label>actualizarCategoria
+                                    <input type="number" class="form-control" id="txtid" name="txtid" value="${CategoriaE.getId()}" readonly required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="txtnombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="txtnombre" name="txtnombre" value="${CategoriaE.getNombre()}" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="txtdescripcion" class="form-label">Descripción</label>
+                                    <input type="text" class="form-control" id="txtdescripcion" name="txtdescripcion" value="${CategoriaE.getDescripcion()}" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="txtofertas" class="form-label">Ofertas</label>
+                                    <input type="number" class="form-control" id="txtofertas" name="txtofertas" value="${CategoriaE.getOfertas()}" required>
+                                </div>
+                            </div>
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-success" name="btnagregar" value="Agregar">Agregar <i class="bi bi-floppy"></i></button>
+                                <a class="btn btn-secondary" name="regresar" href="#">Regresar <i class="bi bi-box-arrow-left"></i></a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script src="/FamiSaludLa91/JSc/eliminarCategoria.js" type="text/javascript"></script>
+         <script>
+            $(document).ready(function() {
+                
+                    <c:if test="${editarCat}">
+                        $('#editarCategoria').modal('show');
+                    </c:if>
+                
+            });
+        </script>
     </body>
 </html>

@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-        toastr.success(mensaje, 'Éxito');
+        toastr.success(mensaje, 'Exito');
     }
 });
 

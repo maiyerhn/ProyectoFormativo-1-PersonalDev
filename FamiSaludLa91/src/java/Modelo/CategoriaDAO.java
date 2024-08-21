@@ -66,4 +66,100 @@ public class CategoriaDAO {
         }
         return true;
     }
+    
+    public boolean crear(Categoria cat){
+        try{
+            Conexcion = new conectar();
+            Connection con = Conexcion.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+
+            }
+            pstm = con.prepareStatement("insert into categoria (id, nombre, descripcion, ofertas) Value(?,?,?,?)");
+            pstm.setInt(1, cat.getId());
+            System.out.println(cat.getId());
+            pstm.setString(2, cat.getNombre());
+            System.out.println(cat.getNombre());
+            pstm.setString(3, cat.getDescripcion());
+            System.out.println(cat.getDescripcion());
+            pstm.setInt(4, cat.getOfertas());
+            System.out.println(cat.getOfertas());
+            pstm.executeUpdate();
+            return true;
+        }catch(Exception e){
+             System.out.println("Error al crear los productos" + e);
+             return false;
+        }
+    }
+    
+    public Categoria listarT(int idc){
+        Categoria cat = new Categoria();
+        try {
+            Conexcion = new conectar();
+            Connection con = Conexcion.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+
+            }
+            pstm = con.prepareStatement("select * from categoria where id= ?");
+            pstm.setInt(1, idc);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                cat.setId(rs.getInt(1));
+                cat.setNombre(rs.getString(2));
+                cat.setDescripcion(rs.getString(3));
+                cat.setOfertas(rs.getInt(4));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error al listar los productos " + e);
+        }
+        return cat;
+    }
+    
+        public List listarT(){
+        List<Categoria> categoria = new ArrayList();
+        try {
+            Conexcion = new conectar();
+            Connection con = Conexcion.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+
+            }
+            pstm = con.prepareStatement("select * from categoria");
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Categoria cat = new Categoria();
+                cat.setId(rs.getInt(1));
+                cat.setNombre(rs.getString(2));
+                cat.setDescripcion(rs.getString(3));
+                cat.setOfertas(rs.getInt(4));
+               
+                categoria.add(cat);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error al listar los productos " + e);
+        }
+        return categoria;
+    } 
+        
+        public void editar(Categoria cat){
+        try{
+            Conexcion = new conectar();
+            Connection con = Conexcion.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+
+            }
+            pstm = con.prepareStatement("update categoria set Nombre=?, Descripcion=?, ofertas=? where id = ?");
+            pstm.setString(1, cat.getNombre());
+            pstm.setString(2, cat.getDescripcion());
+            pstm.setInt(3, cat.getOfertas());
+            pstm.setInt(4, cat.getId());
+            pstm.executeUpdate();
+        }catch(Exception e){
+             System.out.println("Error al editar los productos" + e);
+        }
+    }
 }

@@ -132,6 +132,12 @@ body{
     width: 100%;
     text-align: center;
     height: auto; 
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;   
+    z-index: 900;
+    padding-top: 40px;
 }
 .menu .Lista {
     list-style-type: none; 
@@ -451,4 +457,8 @@ body{
 .table-responsive {
     max-height: 400px; 
     overflow-y: auto; 
+}
+
+.titulos {
+    margin-top: 90px; 
 }
