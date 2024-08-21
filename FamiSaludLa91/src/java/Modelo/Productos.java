@@ -17,11 +17,12 @@ public class Productos {
     String foto;
     int idCategoria;
     int stock;
+    int proveedor;
 
     public Productos() {
     }
 
-    public Productos(int id, String nombre, String descripcion, int precio, String foto, int idCategoria, int stock) {
+    public Productos(int id, String nombre, String descripcion, int precio, String foto, int idCategoria, int stock, int proveedor) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -29,6 +30,15 @@ public class Productos {
         this.foto = foto;
         this.idCategoria = idCategoria;
         this.stock = stock;
+        this.proveedor = proveedor;
+    }
+
+    public int getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(int proveedor) {
+        this.proveedor = proveedor;
     }
 
     public int getId() {
