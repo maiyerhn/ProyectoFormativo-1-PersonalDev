@@ -32,28 +32,28 @@
             <div class="menu">
                 <div class="Lista">
                     <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=home" id="navbarDropdown">
-                        Inicio
+                        Inventario
                     </a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">
-                        inventario
+                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=listar" id="navbarDropdown">
+                        Productos
                     </a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">
+                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrPedido?accion=listarped" id="navbarDropdown">
                         Pedidos
                     </a>
                     <a class="nav-link opciones" href="/FamiSaludLa91/CtrPro?accion=listarp" id="navbarDropdown">
                         Proveedores
                     </a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">
+                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrCategorias?accion=listarCategorias" id="navbarDropdown">
                         Categorias
                     </a>
-                    <a class="nav-link opciones" href="#" id="navbarDropdown">
+                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrUsuario?accion=listarU" id="navbarDropdown">
                         Usuarios
                     </a>
                 </div>
             </div>
         </div>
         <div class="container mt-5">
-            <h2 class="titulo-inventario text-center fw-bold">Proveedores</h2>
+            <h2 class="titulo-inventario text-center fw-bold titulos">Proveedores</h2>
             <div class="input-group mb-3 d-flex justify-content-end " >
                 <div class="input-group-append">
                     <form class="d-flex ">
