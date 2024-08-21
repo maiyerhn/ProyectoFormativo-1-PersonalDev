@@ -9,40 +9,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
         <link href="/FamiSaludLa91/CSS/EstilosReferencia.css" rel="stylesheet" type="text/css" />
         <style>
-            /* Estilo para el contenedor de la imagen grande */
-            #imagenGrande {
-                width: 100%; /* Ocupa el ancho completo del contenedor padre */
-                text-align: center; /* Centra el contenido */
-                margin-bottom: 20px; /* Espacio inferior */
-                margin-top: 40px; /* Espacio superior */
-            }
-
-            /* Estilo para la imagen dentro del contenedor */
-            #imagenGrande img {
-                max-width: 100%;
-                height: 500px; /* Ajusta la altura de la imagen grande */
-                object-fit: contain; /* Para mantener la proporción de la imagen */
-            }
-
-            /* Estilo para las imágenes en la tabla */
-            .table img {
-                cursor: pointer;
-                width: 80px; /* Tamaño uniforme para todas las imágenes */
-                height: 80px;
-                object-fit: cover; /* Asegura que las imágenes cubran el área del contenedor */
-                transition: transform 0.2s ease;
-            }
-
-            /* Estilo para el efecto de hover en las imágenes de la tabla */
-            .table img:hover {
-                transform: scale(1.1);
-            }
-
-            /* Estilo para la tabla con scroll */
-            .table-responsive {
-                max-height: 400px; /* Ajusta la altura según tus necesidades */
-                overflow-y: auto; /* Habilita el scroll vertical si el contenido excede la altura */
-            }
+          
         </style>
     </head>
 
@@ -140,14 +107,14 @@
 
         <div class="container py-6">
             <div class="row">
-                <!-- Imagen en grande -->
+                
                 <div class="col-md-6">
                     <div id="imagenGrande">
                         <img id="imagenGrandeImg" src="/FamiSaludLa91/imagenes/imagenCarrito.avif" alt="Imagen Grande">
                     </div>
                 </div>
 
-                <!-- Tabla del carrito -->
+              
                 <div class="col-md-6">
                     <div class="mb-4">
                         <h1 class="fw-bold fs-1">Carrito de Compra</h1>
@@ -180,7 +147,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- Resumen de la compra -->
+                    
                     <div class="table-responsive summary-table">
                         <table class="table table-bordered bg-light">
                             <tbody>
