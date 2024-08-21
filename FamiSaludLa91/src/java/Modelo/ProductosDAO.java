@@ -18,6 +18,7 @@ public class ProductosDAO {
     conectar Conexcion;
     Connection con;
     PreparedStatement pstm;
+     ResultSet rs;
     
     public List<Productos> obtenerProductos(){
         List<Productos> productos = new ArrayList<>();
@@ -78,5 +79,40 @@ public class ProductosDAO {
              System.out.println("Error al crear los productos" + e);
              return false;
         }
+    }
+     
+     public Productos listarid(int idp){
+        Productos p = new Productos();
+        try {
+            Conexcion = new conectar();
+            Connection con = Conexcion.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+
+            }
+            pstm = con.prepareStatement("select * from productos where Stock >0 and id = ?");
+            pstm.setInt(1, idp);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                p.setId(rs.getInt(1));
+                System.out.println(p.getId());
+                p.setNombre(rs.getString(2));
+                System.out.println(p.getNombre());
+                p.setDescripcion(rs.getString(3));
+                System.out.println(p.getDescripcion());
+                p.setPrecio(rs.getInt(4));
+                System.out.println(p.getPrecio());
+                p.setFoto(rs.getString(5));
+                System.out.println(p.getFoto());
+                p.setIdCategoria(rs.getInt(6));
+                System.out.println(p.getIdCategoria());
+                p.setStock(rs.getInt(7));
+                System.out.println(p.getStock());
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error al listar los productos " + e);
+        }
+        return p;
     }
 }
