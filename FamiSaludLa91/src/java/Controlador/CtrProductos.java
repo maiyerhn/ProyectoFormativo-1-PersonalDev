@@ -7,8 +7,12 @@ package Controlador;
 
 import Configuracion.conectar;
 import Modelo.Carrito;
+import Modelo.Categoria;
+import Modelo.CategoriaDAO;
 import Modelo.Productos;
 import Modelo.ProductosDAO;
+import Modelo.Proveedor;
+import Modelo.ProveedorDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -37,13 +41,17 @@ public class CtrProductos extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     List<Carrito> listacarrito = new ArrayList();
+    List<Categoria> categoria = new ArrayList();
+    List<Proveedor> proveedor = new ArrayList();
     ProductosDAO pdao = new ProductosDAO();
+    CategoriaDAO cdao = new CategoriaDAO();
+    ProveedorDAO prdao = new ProveedorDAO();
     Productos pro = new Productos();
     Carrito car;
     int subtotal;
-    int cantidad, idp;
+    int cantidad, idp, prep, catp, stocp, prove;
     int totalpagar;
-    String ultimoP;
+    String ultimoP, nomp, descp, fotop;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -64,6 +72,14 @@ public class CtrProductos extends HttpServlet {
                     request.getRequestDispatcher("/Vistas/Referencia.jsp").forward(request, response);
                     break;
                 case "listar":
+                    categoria = cdao.listar();
+                    System.out.println("categorias: " + categoria.size());
+                    request.setAttribute("Categorias", categoria);
+                    
+                    proveedor = prdao.obtenerproveedor();
+                    System.out.println("proveedor: " + proveedor.size());
+                    request.setAttribute("Proveedor", proveedor);
+                    
                     request.setAttribute("listar", lpro);
                     System.out.println("Entro A Listar los Productos");
                     request.getRequestDispatcher("/Vistas/Productos.jsp").forward(request, response);
@@ -73,13 +89,20 @@ public class CtrProductos extends HttpServlet {
                     id = Integer.parseInt(request.getParameter("txtid"));
                     System.out.println("id: " + id);
                     nombre = request.getParameter("txtnombre");
+                    System.out.println("nombre: " + nombre);
                     descripcion = request.getParameter("txtdescripcion");
+                    System.out.println("descripcion: " + descripcion);
                     precio = Integer.parseInt(request.getParameter("txtprecio"));
+                    System.out.println("precio: " + precio);
                     fotos = request.getParameter("foto");
-                    //categ = Integer.parseInt(request.getParameter("categoria"));
-                    categ = 1;
+                    System.out.println("fotos: " + fotos);
+                    categ = Integer.parseInt(request.getParameter("categoria"));
+                    System.out.println("categoria: " + categ);
                     stock = Integer.parseInt(request.getParameter("txtstock"));
-
+                    System.out.println("stock: " + stock);
+                    prove = Integer.parseInt(request.getParameter("proveedor"));
+                    System.out.println("proveedor: " + prove);
+                    
                     System.out.println("nombre: " + nombre);
                     System.out.println("descripcion: " + descripcion);
                     System.out.println("precio: " + precio);
@@ -94,6 +117,7 @@ public class CtrProductos extends HttpServlet {
                     pro.setFoto(fotos);
                     pro.setIdCategoria(categ);
                     pro.setStock(stock);
+                    pro.setProveedor(prove);
                     if (pdao.crear(pro) == true) {
                         System.out.println("Se creo El producto");
                         request.getRequestDispatcher("CtrProductos?accion=listar").forward(request, response);
@@ -152,6 +176,48 @@ public class CtrProductos extends HttpServlet {
                     request.setAttribute("contador", listacarrito.size());
                     request.getRequestDispatcher("Vistas/Carrito.jsp").forward(request, response);
 
+                    break;
+                case "EditarProducto":
+                    System.out.println("entro a editar");
+                    idp = Integer.parseInt(request.getParameter("idp"));
+                    System.out.println("id" + idp);
+                    pro = pdao.listarT(idp);
+                    
+                    System.out.println("octuvo categoria: " + pro);
+                    request.setAttribute("productoE", pro);
+                    request.setAttribute("editarPro", true);
+                    productos = pdao.listarT();
+                    request.setAttribute("productos", productos);
+                    categoria = cdao.listar();
+                    request.setAttribute("Categorias", categoria);
+                    proveedor = prdao.obtenerproveedor();
+                    request.setAttribute("Proveedor", proveedor);
+                    request.getRequestDispatcher("/Vistas/Productos.jsp").forward(request, response);
+                    break;
+                    
+                case "actualizarProducto":
+                    System.out.println("Entro a editar Producto");
+                    idp = Integer.parseInt(request.getParameter("txtid"));
+                    nomp = request.getParameter("txtnombre");
+                    descp = request.getParameter("txtdescripcion");
+                    prep = Integer.parseInt(request.getParameter("txtprecio"));
+                    fotop = request.getParameter("foto");
+                    catp = Integer.parseInt(request.getParameter("categorias"));
+                    stocp = Integer.parseInt(request.getParameter("txtstock"));
+                    prove = Integer.parseInt(request.getParameter("proveedores"));
+                    System.out.println("almaceno los datos");
+                    System.out.println(idp + nomp + descp + prep+" " + fotop + catp +" "+ stocp + prove);
+
+                    pro.setId(idp);
+                    pro.setNombre(nomp);
+                    pro.setDescripcion(descp);
+                    pro.setPrecio(prep);
+                    pro.setFoto(fotop);
+                    pro.setIdCategoria(catp);
+                    pro.setStock(stocp);
+                    pro.setProveedor(prove);
+                    pdao.editar(pro);
+                     request.getRequestDispatcher("CtrProductos?accion=listar").forward(request, response);
                     break;
 
                 default:

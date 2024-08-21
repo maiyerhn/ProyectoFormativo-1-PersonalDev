@@ -93,7 +93,7 @@
                             <td class="border text-center">${p.getStock()}</td>
                             <td class="border text-center">
                                 <input type="hidden" name="id" id="id" value="${p.getId()}">
-                                <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#editarproducto">
+                                <a class="btn btn-primary" href="/FamiSaludLa91/CtrProductos?accion=EditarProducto&idp=${p.getId()}">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
                                 <a class="btn btn-danger" id="btneliminar" href="#">
@@ -157,6 +157,14 @@
                             <label for="foto" class="form-label">Imagen</label>
                             <input type="file" class="form-control" id="foto" name="foto" required>
                         </div>
+                        <div class="col-md-6">
+                            <label for="proveedor" class="form-label">Proveedor</label>
+                            <select class="form-select" id="proveedor" name="proveedor">
+                                <c:forEach var="prov" items="${Proveedor}">
+                                        <option value="${prov.getId()}">${prov.getNombre()}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
                     </div>
                     <div class="text-center mt-4">
                         <button type="submit" class="btn btn-success" name="btnagregar" value="Agregar">Agregar <i class="bi bi-floppy"></i></button>
@@ -177,39 +185,74 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="form-sing" action="#" method="POST" enctype="multipart/form-data">
+                <form class="form-sing" action="/FamiSaludLa91/CtrProductos?accion=actualizarProducto" method="POST">
                     <div class="row g-3">
                         <div class="col-md-6">
+                                    <label for="txtid" class="form-label">Id</label>actualizarProducto
+                                    <input type="number" class="form-control" id="txtid" name="txtid" value="${productoE.getId()}" readonly required>
+                                </div>
+                        <div class="col-md-6">
                             <label for="txtnombre" class="form-label">Nombre</label>
-                            <input type="hidden" class="form-control" name="txtid" id="txtid" value="#">
-                            <input type="text" class="form-control" id="txtnombre" name="txtnombre" value="" placeholder="Ingrese nombre" required>
+                            <input type="text" class="form-control" id="txtnombre" name="txtnombre" value="${productoE.getNombre()}" placeholder="Ingrese nombre" required>
                         </div>
                         <div class="col-md-6">
                             <label for="txtprecio" class="form-label">Precio</label>
-                            <input type="number" class="form-control" id="txtprecio" name="txtprecio" value="#" placeholder="Ingrese precio" required>
+                            <input type="number" class="form-control" id="txtprecio" name="txtprecio" value="${productoE.getPrecio()}" placeholder="Ingrese precio" required>
                         </div>
                         <div class="col-md-6">
                             <label for="txtdescripcion" class="form-label">Descripción</label>
-                            <input type="text" class="form-control" id="txtdescripcion" name="txtdescripcion" value="" placeholder="Ingrese descripción" required>
+                            <input type="text" class="form-control" id="txtdescripcion" name="txtdescripcion" value="${productoE.getDescripcion()}" placeholder="Ingrese descripción" required>
                         </div>
                         <div class="col-md-6">
                             <label for="txtstock" class="form-label">Stock</label>
-                            <input type="number" class="form-control" id="txtstock" name="txtstock" value="#" placeholder="Ingrese disponibilidad" required>
+                            <input type="number" class="form-control" id="txtstock" name="txtstock" value="${productoE.getStock()}" placeholder="Ingrese disponibilidad" required>
                         </div>
                         <div class="col-md-6">
                             <label for="categoria" class="form-label">Categoría</label>
-                            <select class="form-select" id="categoria" name="categoria" onchange="actualizarInputOculto(this)">
-                                <c:forEach var="#" items="#">
-                                    <option value="#"></option>
+                            <input type="hidden" class="form-control" value="${productoE.getIdCategoria()}" name="categoria" id="categoria">
+                            <select class="form-select" id="categoria" name="categorias" onchange="actualizarInputOculto(this)">>
+                                <c:forEach var="cat" items="${Categorias}">
+                                        <option value="${cat.getId()}">${cat.getNombre()}</option>
                                 </c:forEach>
                             </select>
-                            <input type="hidden" class="form-control" name="#" id="cat" value="#">
                         </div>
+                        <script>
+                            function actualizarInputOculto(selectElement) {
+                            var inputOculto = document.getElementById("categoria");
+                            inputOculto.value = selectElement.value;
+                                            }
+                        </script>
                         <div class="col-md-6">
                             <label for="foto" class="form-label">Imagen</label>
                             <input type="file" class="form-control" id="foto" name="foto" onchange="actualizarInputOculto2(this)">
-                            <input type="hidden" class="form-control" value="#" name="foto2" id="foto2">
+                            <input type="hidden" class="form-control" value="${productoE.getFoto()}" name="foto" id="foto2">
                         </div>
+                        <script>
+                            function actualizarInputOculto2(selectElement) {
+                            var inputOculto = document.getElementById("foto");
+                            var filePath = selectElement.value;
+                            var fileName = filePath.split('\\').pop().split('/').pop(); // Esto obtiene el nombre del archivo
+                            inputOculto.value = "Imagenes/" + fileName;
+                            //inputOculto.value = "Imagenes/" + selectElement.value;
+                                            }
+                        </script>
+                         <div class="col-md-6">
+                            <label for="proveedor" class="form-label">Proveedor</label>
+                            <input type="hidden" class="form-control" value="${productoE.getProveedor()}" name="proveedor" id="proveedor">
+                            <select class="form-select" id="proveedor" name="proveedores" onchange="actualizarInputOculto3(this)">>
+                                
+                                <c:forEach var="prov" items="${Proveedor}">
+                                        <option value="${prov.getId()}">${prov.getNombre()}</option>
+                                </c:forEach>
+                                     
+                            </select>
+                        </div>
+                            <script>
+                            function actualizarInputOculto3(selectElement) {
+                            var inputOculto = document.getElementById("proveedor");
+                            inputOculto.value = selectElement.value;
+                                            }
+                        </script>
                     </div>
                     <div class="text-center mt-4">
                         <button type="submit" class="btn btn-success" name="btnagregar" value="Agregar">Guardar <i class="bi bi-floppy"></i></button>
@@ -220,24 +263,17 @@
         </div>
     </div>
 </div>
-
-<script>
-    function actualizarInputOculto(selectElement) {
-        var inputOculto = document.getElementById("categ");
-        inputOculto.value = selectElement.value;
-    }
-
-    function actualizarInputOculto2(selectElement) {
-        var inputOculto = document.getElementById("foto2");
-        var filePath = selectElement.value;
-        var fileName = filePath.split('\\').pop().split('/').pop();
-        inputOculto.value = "Imagenes/" + fileName;
-    }
-</script>
-
-
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function() {
+                
+                    <c:if test="${editarPro}">
+                        $('#editarproducto').modal('show');
+                    </c:if>
+                
+            });
+        </script>
     </body>
 </html>
