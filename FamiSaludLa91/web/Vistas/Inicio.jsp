@@ -26,9 +26,15 @@
                 <a class="nav-link nav-link-icon carrito" href="/FamiSaludLa91/CtrProductos?accion=Carrito">
                     <i class="bi bi-cart3 fs-4">(<label style="color: darkorange">${contador}</label>)</i>
                 </a>
-                <a class="nav-link nav-link-icon carrito" href="#">
-                    <i class="bi bi-person-fill text-white fs-3"></i>
-                </a>
+                <div class="dropdown">
+                        <a class="nav-link dropdown-toggle carrito" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-fill text-white fs-3"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="#">Usuario</a></li>
+                            <li><a class="dropdown-item" href="#">Salir</a></li>
+                        </ul>
+                    </div>
             </div>
         </header>
     </div>
