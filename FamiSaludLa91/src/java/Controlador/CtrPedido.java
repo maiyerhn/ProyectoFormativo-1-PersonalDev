@@ -56,7 +56,17 @@ public class CtrPedido extends HttpServlet {
                     request.setAttribute("usuarios", usuarios);
                     request.getRequestDispatcher("/Vistas/pedidos.jsp").forward(request, response);
                     break;
-
+                case "actualizarEstado":
+                    int id = Integer.parseInt(request.getParameter("id"));
+                    String estado = request.getParameter("estado");
+                    boolean success = pedidodao.actualizarEstado(id, estado);
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    PrintWriter out = response.getWriter();
+                    out.print("{\"success\": " + success + "}");
+                    out.flush();
+                    System.out.println("Entro A actualizarEstado");
+                    break;
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Accion no reconocida");
                     break;

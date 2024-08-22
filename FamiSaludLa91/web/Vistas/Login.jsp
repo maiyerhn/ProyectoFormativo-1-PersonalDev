@@ -47,7 +47,7 @@
                                 <label class="form-check-label" for="rememberMe">Olvidaste tu contraseña</label>
                             </div>
                             <button type="submit" name="accion" value="ingresar" class="btn btn-success ingresar">Ingresar</button>
-                        </form>
+                        </form>
                     </div>
                     <div class="texto-stile">
                         <p> Otros</p>

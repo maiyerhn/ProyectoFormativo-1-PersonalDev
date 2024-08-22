@@ -26,37 +26,63 @@ public class UsuarioDAO {
     Usuario usua;
 
     public Usuario Validar(String correo, String pass) {
+        Usuario usua = null;
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+
         try {
-            conexion = new conectar();
+            conectar conexion = new conectar();
             con = conexion.crearconexion();
             if (con != null) {
-                System.out.println("se conecto");
-                pstm = con.prepareStatement("select * from usuarios where correo = ? and contrasena = ? ");
+                String query = "SELECT * FROM usuarios WHERE correo = ? AND contrasena = ?";
+                pstm = con.prepareStatement(query);
                 pstm.setString(1, correo);
-                pstm.setString(2, pass);
+                String hashedPass = hashPassword(pass);
+                pstm.setString(2, hashedPass);
                 rs = pstm.executeQuery();
-                while (rs.next()) {
-                    System.out.println("el rs tiene algo");
-                    if (!rs.getString("correo").equals("")) {
-                        usua = new Usuario();
-                        System.out.println("Entro A la Validacion");
-                        usua.setCorreo(rs.getString("correo"));
-                        usua.setId(rs.getInt("id"));
-                        usua.setContrasena(rs.getString("contrasena"));
-                        usua.setNombre(rs.getString("nombre"));
-                        usua.setRol(rs.getString("rol"));
-                        usua.setDireccion(rs.getString("direccion"));
-                        usua.setApellido(rs.getString("apellidos"));
-                        usua.setTelefono(rs.getString("telefono"));
-                    }
+                if (rs.next()) {
+                    usua = new Usuario();
+                    usua.setCorreo(rs.getString("correo"));
+                    usua.setId(rs.getInt("id"));
+                    usua.setContrasena(rs.getString("contrasena"));
+                    usua.setNombre(rs.getString("nombre"));
+                    usua.setRol(rs.getString("rol"));
+                    usua.setDireccion(rs.getString("direccion"));
+                    usua.setApellido(rs.getString("apellidos"));
+                    usua.setTelefono(rs.getString("telefono"));
                 }
-
             }
         } catch (Exception e) {
-            System.out.println("Eror Al Conectarse A la Base de Datos");
+            System.out.println("Error al conectarse a la base de datos: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         return usua;
+    }
+    private String hashPassword(String password) {
+        return password;
     }
     public List<Usuario> obtenerUsuarios(){
          List<Usuario> users = new ArrayList<>();
