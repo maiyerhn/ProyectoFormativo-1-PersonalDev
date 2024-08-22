@@ -462,3 +462,7 @@ body{
 .titulos {
     margin-top: 90px; 
 }
+
+.dropdown-toggle::after {
+    display: none;
+}
