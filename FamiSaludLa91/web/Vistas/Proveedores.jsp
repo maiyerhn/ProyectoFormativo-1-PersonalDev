@@ -86,7 +86,7 @@
                         <td class="border">${p.getDireccion()}</td>
                         <td scope="col" class ="text-center border">
                             <input type="hidden" name="id" id="id" value="">
-                            <a class="btn btn-warning" href="/AxppWeb/CtrProducto?accion=EditarPro&idpro=" data-bs-toggle="modal" data-bs-target="#editarproveedor"><i class="bi bi-pencil-fill"></i></a>
+                            <a class="btn btn-primary" href="/AxppWeb/CtrProducto?accion=EditarPro&idpro=" data-bs-toggle="modal" data-bs-target="#editarproveedor"><i class="bi bi-pencil-fill"></i></a>
                             <a class="btn btn-danger" id="btneliminar" href="#"><i class="bi bi-trash-fill"></i></a>
                         </td>
                     </tr>
@@ -98,39 +98,39 @@
         <!-- Modal -->
 
         <div class="modal fade" id="agregarproveedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content"> 
-            <div class="modal-header">
+            <div class="modal-header bg-primary text-white">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Producto</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="form-sing" action="#" method="POST" >
-                    <div class="row">
-                        <div class="col-6">
-                                    <label>ID</label> 
-                                    <input type="text" class="form-control" name="txtid" placeholder="ID" required="">
+                <form class="form-sing" action="/FamiSaludLa91/CtrPro?accion=Agregar" method="POST" >
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                                    <label for="txtid" class="form-label">ID</label> 
+                                    <input type="number" class="form-control" name="txtid" placeholder="Ingrese ID" required>
                                 </div>  
-                                <div class="col-6">
-                                    <label>Nombre</label> 
-                                    <input type="text" class="form-control" name="txtnombre" placeholder="Nombre" required="">
+                                <div class="col-md-6">
+                                    <label for="txtnombre" class="form-label">Nombre</label> 
+                                    <input type="text" class="form-control" id="txtnombre" name="txtnombre" placeholder="Ingrese nombre" required>
                                 </div>
-                                <div class="col-6">
-                                    <label>Correo</label> 
-                                    <input type="text" class="form-control" name="txtcorreo" placeholder="Correo" required="">
+                                <div class="col-md-6">
+                                    <label for="txtcorreo" class="form-label">Correo</label> 
+                                    <input type="text" class="form-control" id="txtcorreo" name="txtcorreo" placeholder="Ingrese Correo" required>
                                 </div>
-                                <div class="col-6">
-                                    <label>Telefono</label> 
-                                    <input type="text" class="form-control" name="txttelefono" placeholder="Telefono" required="">
+                                <div class="col-md-6">
+                                    <label for="txttelefono" class="form-label">Telefono</label> 
+                                    <input type="number" class="form-control" id="txttelefono" name="txttelefono" placeholder="Ingrese Telefono" required>
                                 </div>
-                                <div class="col-6">
-                                    <label>Direccion</label> 
-                                    <input type="direcion" class="form-control" name="txtdireccion" placeholder="Direccion" required="">
+                                <div class="col-md-6">
+                                    <label for="txtdireccion" class="form-label">Direccion</label> 
+                                    <input type="txt" class="form-control" id="txtdireccion" name="txtdireccion" placeholder="Ingrese Direccion" required>
                                 </div>
                             </div>    
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary mt-4 mb-2" name="btnagregar" value="Agregar">Agregar <i class="bi bi-floppy"></i></button>
-                        <a class="btn btn-danger mt-4 mb-2" name="regresar" href="#">Regresar <i class="bi bi-box-arrow-left"></i></a>
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success" name="btnagregar" value="Agregar">Agregar <i class="bi bi-floppy"></i></button>
+                        <a class="btn btn-secondary" name="regresar" href="#">Regresar <i class="bi bi-box-arrow-left"></i></a>
                     </div>
                 </form>
             </div>
@@ -141,48 +141,45 @@
                             
                             
            <div class="modal fade" id="editarproveedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Proveedor</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-sing" action="#" method="POST">
-                            <div class="row">
-                                <div class="col-6">
-                                    <label>ID</label> 
-                                    <input type="text" class="form-control" name="txtid" placeholder="ID" required="">
-                                </div>  
-                                <div class="col-6">
-                                    <label>Nombre</label> 
-                                    <input type="text" class="form-control" name="txtnombre" placeholder="Nombre" required="">
-                                </div>
-                                <div class="col-6">
-                                    <label>Correo</label> 
-                                    <input type="text" class="form-control" name="txtcorreo" placeholder="Correo" required="">
-                                </div>
-                                <div class="col-6">
-                                    <label>Telefono</label> 
-                                    <input type="text" class="form-control" name="txttelefono" placeholder="Telefono" required="">
-                                </div>
-                                <div class="col-6">
-                                    <label>Direccion</label> 
-                                    <input type="direcion" class="form-control" name="txtdireccion" placeholder="Direccion" required="">
-                                </div
-                            </div>    
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary mt-4 mb-2" name="btnagregar" value="Agregar">Guardar <i class="bi bi-floppy"></i></button>
-                                <a class="btn btn-danger mt-4 mb-2" name="regresar" href="#">Regresar <i class="bi bi-box-arrow-left"></i></a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content"> 
+            <div class="modal-header bg-primary text-white">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Producto</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </div>                 
-                            
-                                
+            <div class="modal-body">
+                <form class="form-sing" action="#" method="POST" >
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                                    <label for="txtid" class="form-label">ID</label> 
+                                    <input type="number" class="form-control" name="txtid" placeholder="Ingrese ID" required>
+                                </div>  
+                                <div class="col-md-6">
+                                    <label for="txtnombre" class="form-label">Nombre</label> 
+                                    <input type="text" class="form-control" id="txtnombre" name="txtnombre" placeholder="Ingrese nombre" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="txtcorreo" class="form-label">Correo</label> 
+                                    <input type="text" class="form-control" id="txtcorreo" name="txtcorreo" placeholder="Ingrese Correo" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="txttelefono" class="form-label">Telefono</label> 
+                                    <input type="number" class="form-control" id="txttelefono" name="txttelefono" placeholder="Ingrese Telefono" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="txtdireccion" class="form-label">Direccion</label> 
+                                    <input type="txt" class="form-control" id="txtdireccion" name="txtdireccion" placeholder="Ingrese Direccion" required>
+                                </div>
+                            </div>    
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success" name="btnagregar" value="Agregar">Agregar <i class="bi bi-floppy"></i></button>
+                        <a class="btn btn-secondary" name="regresar" href="#">Regresar <i class="bi bi-box-arrow-left"></i></a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
