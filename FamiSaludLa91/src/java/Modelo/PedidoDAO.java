@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +52,20 @@ public class PedidoDAO {
         return pedidos;
     }
 
+        public boolean actualizarEstado(int id, String estado) {
+        String sql = "UPDATE pedidos SET estado = ? WHERE id = ?";
+        conectar conexion = new conectar();
+        try (Connection conn = conexion.crearconexion();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, estado);
+            stmt.setInt(2, id);
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     public Usuario obtenerUsuarioPorId(int idUsuario) {
         Usuario usua = new Usuario();
         try {

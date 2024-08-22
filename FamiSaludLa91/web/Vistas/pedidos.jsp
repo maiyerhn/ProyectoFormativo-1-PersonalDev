@@ -39,27 +39,27 @@
             <div class="menu">
 
                 <div class="menu">
-                <div class="Lista">
-                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=home" id="navbarDropdown">
-                        Inventario
-                    </a>
-                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=listar" id="navbarDropdown">
-                        Productos
-                    </a>
-                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrPedido?accion=listarped" id="navbarDropdown">
-                        Pedidos
-                    </a>
-                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrPro?accion=listarp" id="navbarDropdown">
-                        Proveedores
-                    </a>
-                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrCategorias?accion=listarCategorias" id="navbarDropdown">
-                        Categorias
-                    </a>
-                    <a class="nav-link opciones" href="/FamiSaludLa91/CtrUsuario?accion=listarU" id="navbarDropdown">
-                        Usuarios
-                    </a>
+                    <div class="Lista">
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=home" id="navbarDropdown">
+                            Inventario
+                        </a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=listar" id="navbarDropdown">
+                            Productos
+                        </a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrPedido?accion=listarped" id="navbarDropdown">
+                            Pedidos
+                        </a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrPro?accion=listarp" id="navbarDropdown">
+                            Proveedores
+                        </a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrCategorias?accion=listarCategorias" id="navbarDropdown">
+                            Categorias
+                        </a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrUsuario?accion=listarU" id="navbarDropdown">
+                            Usuarios
+                        </a>
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
 
@@ -89,13 +89,32 @@
                                     <p><strong>Dirección:</strong> ${usuario.direccion}</p>
                                 </div>
                                 <div class="d-flex flex-column align-items-end ms-3">
-                                    <p><strong>Fecha:</strong> ${ped.fechaActual}</p>
-                                    <button class="btn btn-primary">➔</button>
+                                    <select class="form-select" data-pedido-id="${ped.id}">
+                                        <option value="Esperando" ${ped.estado == 'Esperando' ? 'selected' : ''}>Esperando</option>
+                                        <option value="Enviado" ${ped.estado == 'Enviado' ? 'selected' : ''}>Enviado</option>
+                                        <option value="Entregado" ${ped.estado == 'Entregado' ? 'selected' : ''}>Entregado</option>
+                                    </select>
+
+                                    <button class="btn btn-primary mt-2 redirect-btn" data-pedido-id="${ped.id}" idp="1">➔</button>
+                                    <p class="mt-2"><strong>Fecha:</strong> ${ped.fechaActual}</p>
                                 </div>
                             </div>
                         </div>
                     </c:forEach>
                 </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const buttons = document.querySelectorAll('.redirect-btn');
+
+                        buttons.forEach(button => {
+                            button.addEventListener('click', () => {
+                                const idPedido = button.getAttribute('idp');
+                                console.log(idPedido);
+                                window.location.href = /FamiSaludLa91/CtrDetallePedidos?accion = listarped & idPedido =${idPedido};
+                            });
+                        });
+                    });
+                </script>
 
             </div>
         </div>
@@ -105,6 +124,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="/FamiSaludLa91/JSc/Estado-Pedido.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 </body>
 </html>

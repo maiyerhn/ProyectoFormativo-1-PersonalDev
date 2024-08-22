@@ -79,36 +79,54 @@ public class CtrValidar extends HttpServlet {
             throws ServletException, IOException {
         try {
             String accion = request.getParameter("accion");
-        if (accion.equalsIgnoreCase("ingresar")) {
-            System.out.println("2");
-            HttpSession sesion = request.getSession();
-            String usu = request.getParameter("email");
-            String pass = request.getParameter("password");
-            user = usudao.Validar(usu, pass);
-            if (user.getCorreo() != null) {
-                System.out.println("3");
-                sesion.setAttribute("log", '1');
-                sesion.setAttribute("correo", user.getCorreo());
-                sesion.setAttribute("nombre", user.getNombre());
-                sesion.setAttribute("contrasena", user.getContrasena());
-                sesion.setAttribute("id", user.getId());
-                sesion.setAttribute("direccion", user.getDireccion());
-                sesion.setAttribute("telefono", user.getTelefono());
-                sesion.setAttribute("rol", user.getRol());
-                sesion.setAttribute("apellido", user.getApellido());
-                if (user.getRol().equals("ADMINISTRADOR")) {
-                    System.out.println("redirect");
-                    response.sendRedirect("/FamiSaludLa91/CtrProductos?accion=home");
-                }else{
-                    response.sendRedirect("/FamiSaludLa91/Vistas/registrarse.jsp");
+            if ("exit".equalsIgnoreCase(accion)) {
+                HttpSession sesion = request.getSession(false);
+                if (sesion != null) {
+                    sesion.invalidate();
+                    System.out.println("Sesión invalidada correctamente.");
+                }
+                response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+                response.setHeader("Pragma", "no-cache");
+                response.setDateHeader("Expires", 0);
+                response.sendRedirect(request.getContextPath() + "/Vistas/Login.jsp");
+                return;
+            }
+
+            if ("ingresar".equalsIgnoreCase(accion)) {
+                HttpSession sesion = request.getSession(false);
+                if (sesion != null) {
+                    sesion.invalidate();
+                    System.out.println("Sesión previa invalidada.");
+                }
+                sesion = request.getSession(true);
+                String usu = request.getParameter("email");
+                String pass = request.getParameter("password");
+                Usuario user = usudao.Validar(usu, pass);
+                if (user != null && user.getCorreo() != null) {
+                    sesion.setAttribute("log", '1');
+                    sesion.setAttribute("correo", user.getCorreo());
+                    sesion.setAttribute("nombre", user.getNombre());
+                    sesion.setAttribute("contrasena", user.getContrasena());
+                    sesion.setAttribute("id", user.getId());
+                    sesion.setAttribute("direccion", user.getDireccion());
+                    sesion.setAttribute("telefono", user.getTelefono());
+                    sesion.setAttribute("rol", user.getRol());
+                    sesion.setAttribute("apellido", user.getApellido());
+                    if ("ADMINISTRADOR".equalsIgnoreCase(user.getRol())) {
+                        response.sendRedirect(request.getContextPath() + "/Vistas/Inventario.jsp");
+                    } else {
+                        response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=Inicio");
+                    }
+                } else {
+                    request.setAttribute("error", "Usuario o Contraseña Incorrectos");
+                    request.getRequestDispatcher("/Vistas/Login.jsp").forward(request, response);
                 }
             }
-        }
         } catch (Exception e) {
-            String errormensage = "Usuario O Contraseña Incorrecto";
-            request.setAttribute("error", errormensage);
+            request.setAttribute("error", "Ocurrió un error durante el proceso.");
             request.getRequestDispatcher("/Vistas/Login.jsp").forward(request, response);
         }
+
     }
 
     /**

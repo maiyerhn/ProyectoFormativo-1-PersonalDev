@@ -32,7 +32,12 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                             <li><a class="dropdown-item" href="#">Usuario</a></li>
-                            <li><a class="dropdown-item" href="#">Salir</a></li>
+                            <li>
+                                <form method="POST" action="/FamiSaludLa91/CtrValidar">
+                                    <input type="hidden" name="accion" value="exit">
+                                    <button type="submit" class="dropdown-item">Salir</button>
+                                </form>
+                            </li>
                         </ul>
                     </div>
             </div>
