@@ -466,3 +466,20 @@ body{
 .dropdown-toggle::after {
     display: none;
 }
+/* Estilo personalizado para Toastr */
+.toast-succes{
+    background-color: #28a745;
+    color: white;
+}
+.toast-error {
+    background-color: #dc3545;
+    color: white;
+}
+.toast-info {
+    background-color: #17a2b8;
+    color: white;
+}
+.toast-warning {
+    background-color: #ffc107;
+    color: black;
+}

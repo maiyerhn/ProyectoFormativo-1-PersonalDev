@@ -13,8 +13,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Productos - Famisalud la 91</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.3/font/bootstrap-icons.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <link href="/FamiSaludLa91/CSS/EstilosReferencia.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     </head>
     <body>
 
@@ -82,7 +85,7 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${listar}" var="p" >
-                        <tr>
+                        <tr style="background-color: white;">
                             <td class="border text-center"><label>${p.getNombre()}</label></td>
                             <td class="border text-center">${p.getDescripcion()}</td>
                             <td class="border text-center precio">${p.getPrecio()}</td>
@@ -96,7 +99,7 @@
                                 <a class="btn btn-primary" href="/FamiSaludLa91/CtrProductos?accion=EditarProducto&idp=${p.getId()}">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
-                                <a class="btn btn-danger" id="btneliminar" href="#">
+                                <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#eliminar" data-id="${p.getId()}">
                                     <i class="bi bi-trash-fill"></i>
                                 </a>
                             </td>
@@ -112,6 +115,24 @@
                 </script>
                 </tbody>
             </table>
+        </div>
+        <!-- Modal de Confirmación de Eliminación -->
+        <div class="modal fade" id="eliminar" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que quieres eliminar este producto?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <a id="confirmDeleteBtn" class="btn btn-danger" href="#">Eliminar</a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <%-- modal de agregar productos --%>
@@ -168,7 +189,7 @@
                     </div>
                     <div class="text-center mt-4">
                         <button type="submit" class="btn btn-success" name="btnagregar" value="Agregar">Agregar <i class="bi bi-floppy"></i></button>
-                        <a class="btn btn-secondary" name="regresar" href="#">Regresar <i class="bi bi-box-arrow-left"></i></a>
+                        <a class="btn btn-secondary" name="regresar" href="/FamiSaludLa91/CtrProductos?accion=listar">Regresar <i class="bi bi-box-arrow-left"></i></a>
                     </div>
                 </form>
             </div>
@@ -232,7 +253,7 @@
                             var inputOculto = document.getElementById("foto");
                             var filePath = selectElement.value;
                             var fileName = filePath.split('\\').pop().split('/').pop(); // Esto obtiene el nombre del archivo
-                            inputOculto.value = "Imagenes/" + fileName;
+                            inputOculto.value = "imagenes/" + fileName;
                             //inputOculto.value = "Imagenes/" + selectElement.value;
                                             }
                         </script>
@@ -256,7 +277,7 @@
                     </div>
                     <div class="text-center mt-4">
                         <button type="submit" class="btn btn-success" name="btnagregar" value="Agregar">Guardar <i class="bi bi-floppy"></i></button>
-                        <a class="btn btn-secondary" name="regresar" href="#">Regresar <i class="bi bi-box-arrow-left"></i></a>
+                        <a class="btn btn-secondary" name="regresar" href="/FamiSaludLa91/CtrProductos?accion=listar">Regresar <i class="bi bi-box-arrow-left"></i></a>
                     </div>
                 </form>
             </div>
@@ -266,6 +287,8 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script src="/FamiSaludLa91/JSc/eliminarProductos.js" type="text/javascript"></script>
         <script>
             $(document).ready(function() {
                 

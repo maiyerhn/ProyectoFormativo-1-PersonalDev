@@ -199,4 +199,19 @@ public class ProductosDAO {
              System.out.println("Error al editar los productos" + e);
         }
     }
+     public boolean eliminar(String ide){
+        try {
+            Conexcion = new conectar();
+            Connection con = Conexcion.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+            }
+            pstm = con.prepareStatement("delete from productos where id = ?");
+            pstm.setString(1, ide);
+            pstm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error al eliminar el Producto " + e);
+        }
+        return true;
+    }
 }

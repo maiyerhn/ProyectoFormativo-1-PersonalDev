@@ -59,6 +59,7 @@ public class CtrProductos extends HttpServlet {
         String nombre, descripcion, fotos;
         int id, precio, stock, categ;
         System.out.println("accion= " + accion);
+        
         try {
             List<Productos> productos = pdao.obtenerProductos();
             List<Productos> lpro = pdao.obtenerProductos();
@@ -218,6 +219,15 @@ public class CtrProductos extends HttpServlet {
                     pro.setProveedor(prove);
                     pdao.editar(pro);
                      request.getRequestDispatcher("CtrProductos?accion=listar").forward(request, response);
+                    break;
+                case "eliminar":
+                    String ide = request.getParameter("ide");
+                    System.out.println("Entró a eliminar el producto con el ID: " + ide);
+                    pdao.eliminar(ide);
+                    productos = pdao.listarT();
+                    request.setAttribute("productos", productos);
+                    System.out.println("Enviando la lista actualizada de productos: " + productos);
+                    response.sendRedirect("/FamiSaludLa91/CtrProductos?accion=listar&mensaje=Producto eliminado exitosamente");
                     break;
 
                 default:
