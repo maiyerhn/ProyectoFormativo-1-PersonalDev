@@ -149,6 +149,33 @@ public class UsuarioDAO {
         } catch (Exception e) {
             System.out.println("Error Al Crear El Usuario" + e);
             return false;
-        }
+        }  
     }
+    
+    public int contarUsuarios() {
+        int cantidadUsuarios = 0;
+
+        try {
+            conectar conection = new conectar();
+            Connection conexion = conection.crearconexion();
+
+            if (conexion != null) {
+                System.out.println("Se ha establecido una conexión con la base de datos");
+            }
+
+            String consulta = "SELECT COUNT(*) AS total FROM usuarios";
+            PreparedStatement stm = conexion.prepareStatement(consulta);
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                cantidadUsuarios = rs.getInt("total");
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Hubo un Error Al Contar Los Usuarios: " + ex);
+        }
+
+        return cantidadUsuarios;
+    }
+
 }

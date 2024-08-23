@@ -199,4 +199,30 @@ public class ProductosDAO {
              System.out.println("Error al editar los productos" + e);
         }
     }
+     
+     public int contarProductos() {
+        int cantidadProductos = 0;
+
+        try {
+            conectar conection = new conectar();
+            Connection conexion = conection.crearconexion();
+
+            if (conexion != null) {
+                System.out.println("Se ha establecido una conexión con la base de datos");
+            }
+
+            String consulta = "SELECT COUNT(*) AS total FROM productos";
+            PreparedStatement stm = conexion.prepareStatement(consulta);
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                cantidadProductos = rs.getInt("total");
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Hubo un Error Al Contar Los Usuarios: " + ex);
+        }
+
+        return cantidadProductos;
+    }
 }
