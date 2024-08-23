@@ -40,6 +40,8 @@ public class CtrPro extends HttpServlet {
         String accion = request.getParameter("accion");
         System.out.println("accion= " + accion);
         int id;
+        int idpr, idp;
+        String nomp, corp, telp, dirp;
         String nombre, correo, telefono, direccion;
 
         try {
@@ -75,6 +77,39 @@ public class CtrPro extends HttpServlet {
                         System.out.println("Se creo el proveedor");
                         request.getRequestDispatcher("CtrPro?accion=listarp").forward(request, response);
                     }
+                    break;
+                    
+                    case "EditarProveedor":
+                    System.out.println("entro a editar");
+                    idpr = Integer.parseInt(request.getParameter("idpr"));
+                    System.out.println("id" + idpr);
+                    prov = prdao.listarT(idpr);
+                    
+                    request.setAttribute("proveedorE", prov);
+                    request.setAttribute("editarPro", true);
+                    proveedor = prdao.obtenerproveedor();
+                    request.setAttribute("proveedor", proveedor);
+                    request.getRequestDispatcher("/Vistas/Proveedores.jsp").forward(request, response);
+                    break;
+                    
+                    case "actualizarProveedor":
+                    System.out.println("Entro a editar Producto");
+                    idp = Integer.parseInt(request.getParameter("txtid"));
+                    nomp = request.getParameter("txtnombre");
+                    corp = request.getParameter("txtcorreo");
+                    telp = request.getParameter("txttelefono");
+                    dirp = request.getParameter("txtdireccion");
+                    
+                    System.out.println("almaceno los datos");
+                    System.out.println(idp + nomp + corp + telp + dirp);
+
+                    prov.setId(idp);
+                    prov.setNombre(nomp);
+                    prov.setCorreo(corp);
+                    prov.setTelefono(telp);
+                    prov.setDireccion(dirp);
+                    prdao.editar(prov);
+                     request.getRequestDispatcher("CtrPro?accion=listarp").forward(request, response);
                     break;
             }
 
