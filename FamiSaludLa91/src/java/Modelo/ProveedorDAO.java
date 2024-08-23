@@ -118,4 +118,33 @@ public class ProveedorDAO {
              System.out.println("Error al editar el proveedor" + e);
         }
     }
+    
+    public List listarT(String nombre){
+        List<Proveedor> proveedor = new ArrayList();
+        nombre = "%"+nombre+"%";
+        try {
+            conectar conection = new conectar();
+            con  = conection.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+
+            }
+            pstm = con.prepareStatement("select * from proveedores where nombre like ?");
+            pstm.setString(1, nombre);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Proveedor p = new Proveedor();
+                p.setId(rs.getInt(1));
+                p.setNombre(rs.getString(2));
+                p.setCorreo(rs.getString(3));
+                p.setTelefono(rs.getString(4));
+                p.setDireccion(rs.getString(5));
+                proveedor.add(p);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error al listar los productos " + e);
+        }
+        return proveedor;
+    }
 }

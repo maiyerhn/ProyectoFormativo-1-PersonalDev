@@ -111,6 +111,15 @@ public class CtrPro extends HttpServlet {
                     prdao.editar(prov);
                      request.getRequestDispatcher("CtrPro?accion=listarp").forward(request, response);
                     break;
+                    
+                    case "buscarp":
+                        nombre = request.getParameter("txtbuscar");
+                        System.out.println("nombre: "+nombre);
+                        proveedor = prdao.listarT(nombre);
+                        //proveedor = prdao.obtenerproveedor();
+                        request.setAttribute("proveedor", proveedor);
+                        request.getRequestDispatcher("/Vistas/Proveedores.jsp").forward(request, response);
+                        break;
             }
 
         } catch (Exception e) {
