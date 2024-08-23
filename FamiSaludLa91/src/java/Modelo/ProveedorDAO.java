@@ -72,34 +72,7 @@ public class ProveedorDAO {
         }
     }
     
-    public List listarT(){
-        List<Proveedor> proveedor = new ArrayList();
-        try {
-            conectar conection = new conectar();
-            con  = conection.crearconexion();
-            if (con != null) {
-                System.out.println("Se ha establecido una conexcion con la base de datos");
-
-            }
-            pstm = con.prepareStatement("select * from proveedores");
-            rs = pstm.executeQuery();
-            while (rs.next()) {
-                Proveedor prove = new Proveedor();
-                prove.setId(rs.getInt(1));
-                prove.setNombre(rs.getString(2));
-                prove.setCorreo(rs.getString(3));
-                prove.setTelefono(rs.getString(4));
-                prove.setDireccion(rs.getString(5));
-                
-                proveedor.add(prove);
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error al listar los proveedores " + e);
-        }
-       
-        return proveedor;
-    }
+    
     
     public Proveedor listarT(int idpr){
         Proveedor proved = new Proveedor();

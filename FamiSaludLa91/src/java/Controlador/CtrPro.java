@@ -87,7 +87,7 @@ public class CtrPro extends HttpServlet {
                     
                     request.setAttribute("proveedorE", prov);
                     request.setAttribute("editarPro", true);
-                    proveedor = prdao.listarT();
+                    proveedor = prdao.obtenerproveedor();
                     request.setAttribute("proveedor", proveedor);
                     request.getRequestDispatcher("/Vistas/Proveedores.jsp").forward(request, response);
                     break;
