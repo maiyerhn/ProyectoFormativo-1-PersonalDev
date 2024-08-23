@@ -56,9 +56,10 @@
             <h2 class="titulo-inventario text-center fw-bold titulos">Proveedores</h2>
             <div class="input-group mb-3 d-flex justify-content-end " >
                 <div class="input-group-append">
-                    <form class="d-flex ">
-                        <input class="ms-0" type="search" placeholder="Buscar proveedor..." aria-label="Buscar">
-                        <button class="btn btn-outline-light bg-success me-2 fs-9" type="submit"><i class="bi bi-search"> Buscar </i></button>
+                    <form class="d-flex " action="/FamiSaludLa91/CtrPro?accion=buscarp">
+                        <input class="ms-0" type="text" name="txtbuscar" placeholder="Buscar proveedor..." aria-label="Buscar">
+                        <button type="submit" class="btn btn-outline-light bg-success me-2 fs-9" name="accion" value="buscarp"><i class="bi bi-search"> Buscar </i></button>
+                        
                         <button class="btn btn-outline-light bg-success  fs-9" id="agg" type="button" data-bs-toggle="modal" data-bs-target="#agregarproveedor">Agregar</button>      
                     </form>
 
