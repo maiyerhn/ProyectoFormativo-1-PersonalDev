@@ -85,8 +85,8 @@
                         <td class="border">${p.getTelefono()}</td>
                         <td class="border">${p.getDireccion()}</td>
                         <td scope="col" class ="text-center border">
-                            <input type="hidden" name="id" id="id" value="">
-                            <a class="btn btn-primary" href="/AxppWeb/CtrProducto?accion=EditarPro&idpro=" data-bs-toggle="modal" data-bs-target="#editarproveedor"><i class="bi bi-pencil-fill"></i></a>
+                            <input type="hidden" name="id" id="id" value="${p.getId()}">
+                            <a class="btn btn-primary" href="/FamiSaludLa91/CtrPro?accion=EditarProveedor&idpr=${p.getId()}"><i class="bi bi-pencil-fill"></i></a>
                             <a class="btn btn-danger" id="btneliminar" href="#"><i class="bi bi-trash-fill"></i></a>
                         </td>
                     </tr>
@@ -95,7 +95,7 @@
             </table>
         </div>
 
-        <!-- Modal -->
+        <!-- agrgar proveedor -->
 
         <div class="modal fade" id="agregarproveedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -139,36 +139,36 @@
 </div>
         
                             
-                            
+                <!-- editar proveedor -->            
            <div class="modal fade" id="editarproveedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content"> 
             <div class="modal-header bg-primary text-white">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Producto</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Proveedor</h1>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="form-sing" action="#" method="POST" >
+                <form class="form-sing" action="/FamiSaludLa91/CtrPro?accion=actualizarProveedor" method="POST" >
                     <div class="row g-3">
-                        <div class="col-md-6">
-                                    <label for="txtid" class="form-label">ID</label> 
-                                    <input type="number" class="form-control" name="txtid" placeholder="Ingrese ID" required>
+                       <div class="col-md-6">
+                                    <label for="txtid" class="form-label">Id</label>actualizarProveedor
+                                    <input type="number" class="form-control" id="txtid" name="txtid" value="${proveedorE.getId()}" readonly required>
                                 </div>  
                                 <div class="col-md-6">
                                     <label for="txtnombre" class="form-label">Nombre</label> 
-                                    <input type="text" class="form-control" id="txtnombre" name="txtnombre" placeholder="Ingrese nombre" required>
+                                    <input type="text" class="form-control" id="txtnombre" name="txtnombre" value="${proveedorE.getNombre()}" placeholder="Ingrese nombre" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="txtcorreo" class="form-label">Correo</label> 
-                                    <input type="text" class="form-control" id="txtcorreo" name="txtcorreo" placeholder="Ingrese Correo" required>
+                                    <input type="text" class="form-control" id="txtcorreo" name="txtcorreo" value="${proveedorE.getCorreo()}" placeholder="Ingrese Correo" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="txttelefono" class="form-label">Telefono</label> 
-                                    <input type="number" class="form-control" id="txttelefono" name="txttelefono" placeholder="Ingrese Telefono" required>
+                                    <input type="number" class="form-control" id="txttelefono" name="txttelefono" value="${proveedorE.getTelefono()}" placeholder="Ingrese Telefono" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="txtdireccion" class="form-label">Direccion</label> 
-                                    <input type="txt" class="form-control" id="txtdireccion" name="txtdireccion" placeholder="Ingrese Direccion" required>
+                                    <input type="txt" class="form-control" id="txtdireccion" name="txtdireccion" value="${proveedorE.getDireccion()}" placeholder="Ingrese Direccion" required>
                                 </div>
                             </div>    
                     <div class="text-center mt-4">
@@ -185,5 +185,14 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script>
+            $(document).ready(function() {
+                
+                    <c:if test="${editarPro}">
+                        $('#editarproveedor').modal('show');
+                    </c:if>
+                
+            });
+        </script>
 </body>
 </html>
