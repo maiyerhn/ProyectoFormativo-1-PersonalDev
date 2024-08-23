@@ -92,5 +92,58 @@ public class PedidoDAO {
         return usua;
 
     }
+     public int contarPedidos() {
+        int cantidadPedidos = 0;
+
+        try {
+            conectar conection = new conectar();
+            Connection conexion = conection.crearconexion();
+
+            if (conexion != null) {
+                System.out.println("Se ha establecido una conexión con la base de datos");
+            }
+
+            String consulta = "SELECT COUNT(*) AS total FROM pedidos";
+            PreparedStatement stm = conexion.prepareStatement(consulta);
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                cantidadPedidos = rs.getInt("total");
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Hubo un Error Al Contar Los Pedidos: " + ex);
+        }
+
+        return cantidadPedidos;
+    }
+     
+     public List<Pedido> pedidosEnEpera() {
+        List<Pedido> pedidos = new ArrayList<>();
+        try {
+            conectar conection = new conectar();
+            Connection conexion = conection.crearconexion();
+            if (conexion != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+
+            }
+            String consulta = "SELECT * FROM pedidos WHERE estado = 'Esperando'";
+            PreparedStatement stm = conexion.prepareStatement(consulta);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int idUsuario = rs.getInt("idUsuario");
+                Date fechaCreacion = rs.getDate("fechaCreacion");
+                String estado = rs.getString("estado");
+                int total = rs.getInt("total");
+                Pedido pedido = new Pedido(id, idUsuario, total, fechaCreacion, estado);
+                pedidos.add(pedido);
+            }
+        } catch (Exception ex) {
+            System.out.println("Hubo un Error Al Cargar Los Productos " + ex);
+        }
+
+        return pedidos;
+    }
 
 }

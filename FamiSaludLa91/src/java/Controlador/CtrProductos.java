@@ -9,10 +9,14 @@ import Configuracion.conectar;
 import Modelo.Carrito;
 import Modelo.Categoria;
 import Modelo.CategoriaDAO;
+import Modelo.Pedido;
+import Modelo.PedidoDAO;
 import Modelo.Productos;
 import Modelo.ProductosDAO;
 import Modelo.Proveedor;
 import Modelo.ProveedorDAO;
+import Modelo.Usuario;
+import Modelo.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -43,6 +47,9 @@ public class CtrProductos extends HttpServlet {
     List<Carrito> listacarrito = new ArrayList();
     List<Categoria> categoria = new ArrayList();
     List<Proveedor> proveedor = new ArrayList();
+    List<Pedido> listapEspera = new ArrayList();
+    UsuarioDAO usudao = new UsuarioDAO();
+    PedidoDAO pedidodao = new PedidoDAO();
     ProductosDAO pdao = new ProductosDAO();
     CategoriaDAO cdao = new CategoriaDAO();
     ProveedorDAO prdao = new ProveedorDAO();
@@ -50,6 +57,7 @@ public class CtrProductos extends HttpServlet {
     Carrito car;
     int subtotal;
     int cantidad, idp, prep, catp, stocp, prove;
+    int cantidadUsuarios, cantidadPedidos, cantidadProductos;
     int totalpagar;
     String ultimoP, nomp, descp, fotop;
 
@@ -218,6 +226,25 @@ public class CtrProductos extends HttpServlet {
                     pro.setProveedor(prove);
                     pdao.editar(pro);
                      request.getRequestDispatcher("CtrProductos?accion=listar").forward(request, response);
+                    break;
+                case "listarInventario":
+                    cantidadUsuarios = usudao.contarUsuarios();
+                    cantidadProductos = pdao.contarProductos();
+                    cantidadPedidos = pedidodao.contarPedidos();
+                    listapEspera = pedidodao.pedidosEnEpera();
+                    List<Usuario> usuarios = new ArrayList<>();
+                    for (Pedido ped : listapEspera) {
+                        Usuario usuario = pedidodao.obtenerUsuarioPorId(ped.getIdUsuario());
+                        System.out.println(usuario.getNombre());
+                        usuarios.add(usuario);
+                    }
+                    request.setAttribute("cantidadU", cantidadUsuarios);
+                    request.setAttribute("cantidadPro", cantidadProductos);
+                    request.setAttribute("cantidadPe", cantidadPedidos);
+                    request.setAttribute("pedidos", listapEspera);
+                    request.setAttribute("usuarios", usuarios);
+                    
+                    request.getRequestDispatcher("/Vistas/Inventario.jsp").forward(request, response);
                     break;
 
                 default:

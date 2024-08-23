@@ -1,4 +1,3 @@
-
 package Modelo;
 
 public class Carrito {
@@ -74,5 +73,3 @@ public class Carrito {
    
     
 }
-
-
