@@ -225,4 +225,68 @@ public class ProductosDAO {
 
         return cantidadProductos;
     }
+     
+     public List listarT(String nombre){
+        List<Productos> producto = new ArrayList();
+        nombre = "%"+nombre+"%";
+        System.out.println("Buscando productos con nombre: " + nombre);
+        try {
+            Conexcion = new conectar();
+            Connection con = Conexcion.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+
+            
+            }
+            pstm = con.prepareStatement("select * from productos where nombre like ?");
+            pstm.setString(1, nombre);
+            System.out.println("Consulta SQL: " + pstm.toString());
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Productos pro = new Productos();
+                pro.setId(rs.getInt(1));
+                pro.setNombre(rs.getString(2));
+                pro.setDescripcion(rs.getString(3));
+                pro.setPrecio(rs.getInt(4));
+                pro.setFoto(rs.getString(5));
+                pro.setIdCategoria(rs.getInt(6));
+                pro.setStock(rs.getInt(7));
+                producto.add(pro);
+                System.out.println("Producto encontrado: " + pro.getNombre());
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error al listar los productos " + e);
+        }
+        return producto;
+    }
+     public List buscarcat(int idcat){
+       List<Productos> producto = new ArrayList();
+        try {
+            Conexcion = new conectar();
+            Connection con = Conexcion.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+
+            }
+            pstm = con.prepareStatement("select * from productos where  idCategoria = ?");
+            pstm.setInt(1, idcat);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Productos p = new Productos();
+                p.setId(rs.getInt(1));
+                p.setNombre(rs.getString(2));
+                p.setDescripcion(rs.getString(3));                                
+                p.setPrecio(rs.getInt(4));
+                p.setFoto(rs.getString(5));
+                p.setIdCategoria(rs.getInt(6));
+                p.setStock(rs.getInt(7));                        
+                producto.add(p);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error al listar los productos por categoria " + e);
+        }
+        return producto;  
+    }
 }

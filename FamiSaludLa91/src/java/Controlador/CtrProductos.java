@@ -246,6 +246,20 @@ public class CtrProductos extends HttpServlet {
                     
                     request.getRequestDispatcher("/Vistas/Inventario.jsp").forward(request, response);
                     break;
+                case "buscarpr":
+                    nombre = request.getParameter("txtbuscar");
+                    System.out.println("nombre: " + nombre);
+                    productos = pdao.listarT(nombre); 
+                    request.setAttribute("listar", productos);
+                    request.getRequestDispatcher("/Vistas/Productos.jsp").forward(request, response);
+                    break;
+                case "buscarcat":
+                int idcat =Integer.parseInt(request.getParameter("catid"));
+                productos = pdao.buscarcat(idcat);
+                request.setAttribute("Categorias", categoria);
+                request.setAttribute("listar", productos);
+                request.getRequestDispatcher("Vistas/Productos.jsp").forward(request, response);
+                break;
 
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Accion no reconocida");

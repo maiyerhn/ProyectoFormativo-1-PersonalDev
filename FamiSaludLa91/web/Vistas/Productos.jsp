@@ -59,9 +59,23 @@
             <h2 class="titulo-inventario text-center fw-bold titulos">Productos</h2>
             <div class="input-group mb-3 d-flex justify-content-end " >
                 <div class="input-group-append">
-                    <form class="d-flex ">
-                        <input class="ms-0" type="search" placeholder="Buscar productos..." aria-label="Buscar">
-                        <button class="btn btn-outline-light bg-success me-2 fs-9" type="submit"><i class="bi bi-search"> Buscar </i></button>
+                    <form class="d-flex " action="/FamiSaludLa91/CtrProductos?accion=buscarpr">
+                        
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <button class="btn btn-outline-light bg-secondary fs-9 me-2"  type="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</button> 
+                                <ul class="dropdown-menu dropdown-menu-primary">
+                                    <c:forEach var="cat" items="${Categorias}">
+                                        <li><a class="dropdown-item" href="/FamiSaludLa91/CtrProductos?accion=buscarcat&catid=${cat.getId()}" >${cat.getNombre()}</a></li>
+                                        <input type="hidden" value="${cat.getId()}" name="catid" id="catid">
+                                    </c:forEach>
+                                    <li><a class="dropdown-item" href="/FamiSaludLa91/CtrProductos?accion=listar" ><i></i> Todas</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <input class="ms-0" type="text" name="txtbuscar" placeholder="Buscar productos..." aria-label="Buscar">
+                        <button type="submit" class="btn btn-outline-light bg-success me-2 fs-9" name="accion" value="buscarpr"><i class="bi bi-search"> Buscar </i></button>
+                        
                         <button class="btn btn-outline-light bg-secondary fs-9" id="agg" type="button" data-bs-toggle="modal" data-bs-target="#agregarproducto">Agregar</button>     
                     </form>
 
@@ -168,7 +182,7 @@
                     </div>
                     <div class="text-center mt-4">
                         <button type="submit" class="btn btn-success" name="btnagregar" value="Agregar">Agregar <i class="bi bi-floppy"></i></button>
-                        <a class="btn btn-secondary" name="regresar" href="#">Regresar <i class="bi bi-box-arrow-left"></i></a>
+                        <a class="btn btn-secondary" name="regresar" href="/FamiSaludLa91/CtrProductos?accion=listar">Regresar <i class="bi bi-box-arrow-left"></i></a>
                     </div>
                 </form>
             </div>
@@ -232,7 +246,7 @@
                             var inputOculto = document.getElementById("foto");
                             var filePath = selectElement.value;
                             var fileName = filePath.split('\\').pop().split('/').pop(); // Esto obtiene el nombre del archivo
-                            inputOculto.value = "Imagenes/" + fileName;
+                            inputOculto.value = "imagenes/" + fileName;
                             //inputOculto.value = "Imagenes/" + selectElement.value;
                                             }
                         </script>
@@ -256,7 +270,7 @@
                     </div>
                     <div class="text-center mt-4">
                         <button type="submit" class="btn btn-success" name="btnagregar" value="Agregar">Guardar <i class="bi bi-floppy"></i></button>
-                        <a class="btn btn-secondary" name="regresar" href="#">Regresar <i class="bi bi-box-arrow-left"></i></a>
+                        <a class="btn btn-secondary" name="regresar" href="/FamiSaludLa91/CtrProductos?accion=listar">Regresar <i class="bi bi-box-arrow-left"></i></a>
                     </div>
                 </form>
             </div>
