@@ -51,8 +51,8 @@
             <div class="input-group mb-3 d-flex justify-content-end " >
                 <div class="input-group-append">
                     <form class="d-flex ">
-                        <input class="ms-0" type="search" placeholder="Buscar productos..." aria-label="Buscar">
-                        <button class="btn btn-outline-light bg-success me-2 fs-9" type="submit"><i class="bi bi-search"> Buscar </i></button>
+                        <input class="ms-0" type="text" name="txtbuscar" placeholder="Buscar usuarios..." aria-label="Buscar">
+                        <button class="btn btn-outline-light bg-success me-2 fs-9" type="submit" name="accion" value="buscarus"><i class="bi bi-search"> Buscar </i></button>
                         <button class="btn btn-outline-light bg-secondary  fs-9" id="agg" type="button" data-bs-toggle="modal" data-bs-target="#agregarproveedor">Agregar</button>      
                     </form>
 

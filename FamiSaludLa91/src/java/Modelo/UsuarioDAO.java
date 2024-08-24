@@ -177,5 +177,40 @@ public class UsuarioDAO {
 
         return cantidadUsuarios;
     }
+    public List listarT(String nombre){
+        List<Usuario> users = new ArrayList();
+        nombre = "%"+nombre+"%";
+        System.out.println("Buscando usuarios con nombre: " + nombre);
+        try {
+            conexion = new conectar();
+            Connection con = conexion.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+
+            
+            }
+            pstm = con.prepareStatement("select * from usuarios where nombre like ?");
+            pstm.setString(1, nombre);
+            System.out.println("Consulta SQL: " + pstm.toString());
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Usuario usu = new Usuario();
+                usu.setId(rs.getInt(1));
+                usu.setNombre(rs.getString(2));
+                usu.setApellido(rs.getString(3));
+                usu.setCorreo(rs.getString(4));
+                usu.setTelefono(rs.getString(5));
+                usu.setContrasena(rs.getString(6));
+                usu.setDireccion(rs.getString(7));
+                usu.setRol(rs.getString(8));
+                users.add(usu);
+                System.out.println("usuario encontrado: " + usu.getNombre());
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error al listar los productos " + e);
+        }
+        return users;
+    }
 
 }

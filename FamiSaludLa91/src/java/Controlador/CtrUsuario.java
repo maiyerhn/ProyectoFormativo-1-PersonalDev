@@ -95,6 +95,13 @@ public class CtrUsuario extends HttpServlet {
                 System.out.println("Entro A Listar los Productos");
                 request.getRequestDispatcher("/Vistas/Usuarios.jsp").forward(request, response);
                 break;
+            case "buscarus":
+                nombre = request.getParameter("txtbuscar");
+                System.out.println("nombre: " + nombre);
+                user = dao.listarT(nombre); 
+                request.setAttribute("listarUs",user);
+                request.getRequestDispatcher("/Vistas/Usuarios.jsp").forward(request, response);
+                break;
            }
     }
 
