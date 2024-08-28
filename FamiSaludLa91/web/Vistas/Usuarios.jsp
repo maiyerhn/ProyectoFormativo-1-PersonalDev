@@ -53,7 +53,7 @@
                     <form class="d-flex ">
                         <input class="ms-0" type="text" name="txtbuscar" placeholder="Buscar usuarios..." aria-label="Buscar">
                         <button class="btn btn-outline-light bg-success me-2 fs-9" type="submit" name="accion" value="buscarus"><i class="bi bi-search"> Buscar </i></button>
-                        <button class="btn btn-outline-light bg-secondary  fs-9" id="agg" type="button" data-bs-toggle="modal" data-bs-target="#agregarproveedor">Agregar</button>      
+                        <button class="btn btn-outline-light bg-secondary  fs-9" id="agg" type="button" data-bs-toggle="modal" data-bs-target="#agregarusuario">Agregar</button>      
                     </form>
 
                 </div>
@@ -97,6 +97,71 @@
                 </tbody>
             </table>
         </div>
+        
+        
+        <div class="modal fade" id="agregarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Usuario</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body login-form">
+                <form action="/FamiSaludLa91/CtrUsuario?accion=Agregar" method="GET">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="Nombre">Nombre</label>
+                                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingresa Nombre" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="Apellidos">Apellidos</label>
+                                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingresa Apellidos" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="Telefono">Telefono</label>
+                                <input type="text" class="form-control"  name="telefono" id="telefono" placeholder="Ingresa Telefono" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="Direccion">Direccion</label>
+                                <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Ingresa Direccion" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="User">Usuario (E-mail)</label>
+                                <input type="text" class="form-control" id="user" name="user" placeholder="Ingresa Usuario" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="password">Contraseña</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa Contraseña" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="password1">Confirmar Contraseña</label>
+                                <input type="password" class="form-control" id="password1" name="password1" placeholder="Confirma Contraseña" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                            <label for="rol">Rol</label>
+                                <select class="form-select" id="rol" name="rol" required>
+                                    <option value="">Selecciona un rol</option>
+                                    <option value="CLIENTE">Cliente</option>
+                                    <option value="ADMINISTRADOR">Administrador</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="acceptTerms">
+                                    <label class="form-check-label" for="acceptTerms">Aceptar Términos y Condiciones</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="login-btn text-center mt-4">
+                            <button type="submit" name="accion" value="Agregar" class="btn btn-success ingresar">Agregar</button>
+                            <button type="button" id="btnCancelar" class="btn btn-danger botones"  id="cancelar">Cancelar</button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/FamiSaludLa91/JSc/Scripagregarusuario.js" type="text/javascript"></script>
     </body>
 </html>

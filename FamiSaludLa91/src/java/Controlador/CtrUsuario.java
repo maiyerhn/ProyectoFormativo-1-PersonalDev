@@ -102,6 +102,28 @@ public class CtrUsuario extends HttpServlet {
                 request.setAttribute("listarUs",user);
                 request.getRequestDispatcher("/Vistas/Usuarios.jsp").forward(request, response);
                 break;
+            case "Agregar":
+                nombre = request.getParameter("nombre");
+                apellido = request.getParameter("apellido");
+                correo = request.getParameter("user");
+                telefono = request.getParameter("telefono");
+                contrasena = request.getParameter("password");
+                direccion = request.getParameter("direccion");
+                rol = request.getParameter("rol");
+                us.setNombre(nombre);
+                us.setApellido(apellido);
+                us.setCorreo(correo);
+                us.setTelefono(telefono);
+                us.setRol(rol);
+                us.setDireccion(direccion); 
+                us.setContrasena(contrasena);
+                if (dao.crear(us) == true) {
+                    request.getRequestDispatcher("CtrUsuario?accion=listarU").forward(request, response);
+
+                } else {
+                    System.out.println("Error al insertar el usuarios");
+
+                }
            }
     }
 
