@@ -177,6 +177,37 @@ public class UsuarioDAO {
 
         return cantidadUsuarios;
     }
+    
+    public Usuario listarT(int idu){
+        Usuario usu = new Usuario();
+        try {
+            conexion = new conectar();
+            Connection con = conexion.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+                
+            }
+            pstm = con.prepareStatement("select * from usuarios where id= ?");
+            pstm.setInt(1, idu);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                usu.setId(rs.getInt(1));
+                usu.setNombre(rs.getString(2));
+                usu.setApellido(rs.getString(3));
+                usu.setCorreo(rs.getString(4));
+                usu.setTelefono(rs.getString(5));
+                usu.setContrasena(rs.getString(6));
+                usu.setDireccion(rs.getString(7));
+                usu.setRol(rs.getString(8));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error al listar los usuarios " + e);
+        }
+        return usu;
+    }
+    
+    
     public List listarT(String nombre){
         List<Usuario> users = new ArrayList();
         nombre = "%"+nombre+"%";
@@ -211,6 +242,24 @@ public class UsuarioDAO {
             System.out.println("Error al listar los productos " + e);
         }
         return users;
+    }
+    public void editar(Usuario us){
+        try{
+            conexion = new conectar();
+            Connection con = conexion.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+            }
+            pstm = con.prepareStatement("update usuarios set rol=? where id = ?");                   
+            pstm.setString(1, us.getRol());
+            System.out.println(us.getRol());
+            pstm.setInt(2, us.getId());
+            System.out.println(us.getId());
+            pstm.executeUpdate();
+            System.out.println("registros actulizado");
+        }catch(Exception e){
+             System.out.println("Error al editar los usuarios" + e);
+        }
     }
 
 }

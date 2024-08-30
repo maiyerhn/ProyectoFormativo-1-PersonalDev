@@ -25,6 +25,7 @@ public class CtrUsuario extends HttpServlet {
         
     UsuarioDAO dao = new UsuarioDAO();
     Usuario us = new Usuario();
+    String role;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -65,6 +66,7 @@ public class CtrUsuario extends HttpServlet {
             throws ServletException, IOException {
         List<Usuario> user = dao.obtenerUsuarios();
         String id, nombre, apellido, correo, telefono, contrasena, direccion, rol;
+        int idu;
         String accion = request.getParameter("accion");
         switch (accion) {
             case "registrarse":
@@ -124,6 +126,31 @@ public class CtrUsuario extends HttpServlet {
                     System.out.println("Error al insertar el usuarios");
 
                 }
+                break;
+            case "EditarUsuario":
+                System.out.println("Entro a editar Usuario");
+                System.out.println("entro a editar");
+                idu = Integer.parseInt(request.getParameter("idu"));
+                System.out.println("id " + idu);
+                us = dao.listarT(idu);    
+                
+                request.setAttribute("usuarioE", us);
+                request.setAttribute("editarus", true);
+                user = dao.obtenerUsuarios(); 
+                request.setAttribute("listarUs", user);
+                request.getRequestDispatcher("/Vistas/Usuarios.jsp").forward(request, response);
+                break;
+                
+            case "actualizarUsuario":
+                System.out.println("entro a actualizar");
+                role = request.getParameter("rol");
+                us.setRol(role);
+                dao.editar(us);
+                request.setAttribute("usuarioE", us);
+                user = dao.obtenerUsuarios(); 
+                request.setAttribute("listarUs", user);
+                request.getRequestDispatcher("CtrUsuario?accion=listarU").forward(request, response);
+                break;
            }
     }
 
