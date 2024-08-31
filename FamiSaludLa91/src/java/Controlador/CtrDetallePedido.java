@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Modelo.DetallePedido;
 import Modelo.DetallePedidoDAO;
 import Modelo.Pedido;
 import Modelo.Productos;
@@ -47,8 +48,10 @@ public class CtrDetallePedido extends HttpServlet {
                     int idped = Integer.parseInt(request.getParameter("idPedido"));
                     String fechaCompleta = request.getParameter("fechaCompleta");
                     List<Productos> prod = detalleDao.ListarProd(idped);
+                    List<DetallePedido> lPed = detalleDao.ListarPed(idped);
                     Usuario user = detalleDao.obtenerDatosUsuarioId(idped);
                     request.setAttribute("idPedido", idped);
+                    request.setAttribute("Lped", lPed);
                     request.setAttribute("fechaCompleta", fechaCompleta);
                     request.setAttribute("usuario", user);
                     request.setAttribute("productos", prod);

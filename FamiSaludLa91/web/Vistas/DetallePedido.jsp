@@ -79,19 +79,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="producto" items="${productos}" >
-                        <tr>
-                            <td>${producto.nombre}</td>
-                            <td>${producto.cantidad}</td>
-                            <td>${producto.precio}</td>
-                            <td>${producto.total}</td>
-                        </tr>
-                    </c:forEach>
+                        <c:forEach var="producto" items="${productos}" varStatus="pos" >
+                            <c:set var="dped" value="${Lped[pos.index]}"/>
+                            <tr>
+                                <td>${producto.nombre}</td>
+                                <td>${dped.cantidad}</td>
+                                <td>${producto.precio}</td>
+                                <td>${dped.total}</td>
+                            </tr>
+                            <c:set var="totalFinal" value="${totalFinal + dped.total}" />
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>
             <div class="total d-flex justify-content-between">
-                <p><strong>Total a Pagar:</strong> $ ${pedido.total}</p> 
+                <p><strong>Total a Pagar:</strong> $ ${totalFinal}</p> 
             </div>
         </div>
 

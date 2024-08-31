@@ -66,7 +66,7 @@ public class DetallePedidoDAO {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
 
             }
-            pstm = con.prepareStatement("SELECT p.id AS productoId,p.nombre,p.descripcion,p.precio,p.foto,p.idCategoria,p.stock,p.idproveedor,dp.cantidad,dp.total FROM DetallePedido dp JOIN Productos p ON dp.idProducto = p.id WHERE dp.idPedido = ?;");
+            pstm = con.prepareStatement("SELECT p.id AS productoId,p.nombre,p.descripcion,p.precio,p.foto,p.idCategoria,p.stock,p.idproveedor,dp.cantidad,dp.total FROM DetallePedido dp JOIN Productos p ON dp.idProducto = p.id WHERE dp.idPedido = ?");
             pstm.setInt(1, idp);
             rs = pstm.executeQuery();
             while (rs.next()) {
@@ -87,6 +87,36 @@ public class DetallePedidoDAO {
         }
         return prod;
     }
+    public List<DetallePedido> ListarPed(int idp){
+        List<DetallePedido> Lped = new ArrayList<>();
+        try {
+            DetallePedido ped;
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            conectar Conexcion  = new conectar();
+            Connection con = Conexcion.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
 
+            }
+            pstm = con.prepareStatement("SELECT dp.id, dp.idPedido, dp.idProducto, dp.cantidad, dp.total FROM DetallePedido dp WHERE dp.idPedido = ?");
+            pstm.setInt(1, idp);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                ped = new DetallePedido();
+                ped.setId(rs.getInt("id"));
+                ped.setIdPedido(rs.getInt("idPedido"));
+                ped.setIdProducto(rs.getInt("idProducto"));
+                ped.setCantidad(rs.getInt("cantidad"));
+                ped.setTotal(rs.getInt("total"));
+                Lped.add(ped);
+            }
+            System.out.println("Entro A Listar El los PEdidos");
+
+        } catch (Exception e) {
+            System.out.println("Error al listar los Pedidos " + e);
+        }
+        return Lped;
+    }
    
 }
