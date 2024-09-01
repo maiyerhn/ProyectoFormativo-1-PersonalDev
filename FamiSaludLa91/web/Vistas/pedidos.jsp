@@ -94,27 +94,15 @@
                                         <option value="Enviado" ${ped.estado == 'Enviado' ? 'selected' : ''}>Enviado</option>
                                         <option value="Entregado" ${ped.estado == 'Entregado' ? 'selected' : ''}>Entregado</option>
                                     </select>
-
-                                    <button class="btn btn-primary mt-2 redirect-btn" data-pedido-id="${ped.id}" idp="1">➔</button>
+                                    <input type="hidden" value="${ped.id}" name="idPedido">
+                                    <input type="hidden" value="${ped.fechaActual}" name="fechaCompleta">
+                                    <a href="/FamiSaludLa91/CtrDetallePedido?accion=mostrar&idPedido=${ped.id}&fechaCompleta=${ped.fechaActual}"> <button class="btn btn-primary mt-2 redirect-btn" data-pedido-id="${ped.id}" >➔</button></a> 
                                     <p class="mt-2"><strong>Fecha:</strong> ${ped.fechaActual}</p>
                                 </div>
                             </div>
                         </div>
                     </c:forEach>
                 </div>
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const buttons = document.querySelectorAll('.redirect-btn');
-
-                        buttons.forEach(button => {
-                            button.addEventListener('click', () => {
-                                const idPedido = button.getAttribute('idp');
-                                console.log(idPedido);
-                                window.location.href = /FamiSaludLa91/CtrDetallePedidos?accion = listarped & idPedido =${idPedido};
-                            });
-                        });
-                    });
-                </script>
 
             </div>
         </div>
