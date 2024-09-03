@@ -158,7 +158,7 @@
                             </div>
                             <div class="text-center mt-4">
                                 <button type="submit" class="btn btn-success" name="btnagregar" value="Agregar">Agregar <i class="bi bi-floppy"></i></button>
-                                <a class="btn btn-secondary" name="regresar" href="#">Regresar <i class="bi bi-box-arrow-left"></i></a>
+                                <a class="btn btn-secondary" name="regresar" href="/FamiSaludLa91/CtrCategorias?accion=listarCategorias">Regresar <i class="bi bi-box-arrow-left"></i></a>
                             </div>
                         </form>
                     </div>
@@ -196,7 +196,7 @@
                             </div>
                             <div class="text-center mt-4">
                                 <button type="submit" class="btn btn-success" name="btnagregar" value="Agregar">Agregar <i class="bi bi-floppy"></i></button>
-                                <a class="btn btn-secondary" name="regresar" href="#">Regresar <i class="bi bi-box-arrow-left"></i></a>
+                                <a class="btn btn-secondary" name="regresar" href="/FamiSaludLa91/CtrCategorias?accion=listarCategorias">Regresar <i class="bi bi-box-arrow-left"></i></a>
                             </div>
                         </form>
                     </div>

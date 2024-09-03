@@ -85,7 +85,7 @@
                             <td class="border">${u.getDireccion()}</td>
                             <td class="border">${u.getRol()}</td>
                             <td class="text-center border">
-                                <a class="btn btn-primary" href="">
+                                <a class="btn btn-primary" href="/FamiSaludLa91/CtrUsuario?accion=EditarUsuario&idu=${u.getId()}">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
                                 <a class="btn btn-danger" href="#" >
@@ -99,6 +99,7 @@
         </div>
         
         
+        <%-- modal de agregar usuarios --%>
         <div class="modal fade" id="agregarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -154,14 +155,89 @@
                         </div>
                         <div class="login-btn text-center mt-4">
                             <button type="submit" name="accion" value="Agregar" class="btn btn-success ingresar">Agregar</button>
-                            <button type="button" id="btnCancelar" class="btn btn-danger botones"  id="cancelar">Cancelar</button>
+                            <a class="btn btn-secondary" name="regresar" href="/FamiSaludLa91/CtrUsuario?accion=listarU">Regresar <i class="bi bi-box-arrow-left"></i></a>
                         </div>
                     </form>
             </div>
         </div>
     </div>
 </div>
+        
+        <%-- modal de editar usuarios --%>
+        
+        <div class="modal fade" id="editarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Usuario</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/FamiSaludLa91/CtrUsuario?accion=actualizarUsuario" method="GET">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="Nombre">Nombre</label>
+                                <input type="text" class="form-control" name="nombre" value="${usuarioE.getNombre()}" readonly id="nombre" placeholder="Ingresa Nombre" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="Apellidos">Apellidos</label>
+                                <input type="text" class="form-control" name="apellido" value="${usuarioE.getApellido()}" readonly id="apellido" placeholder="Ingresa Apellidos" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="Telefono">Telefono</label>
+                                <input type="text" class="form-control"  name="telefono" value="${usuarioE.getTelefono()}"  readonly  id="telefono" placeholder="Ingresa Telefono" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="Direccion">Direccion</label>
+                                <input type="text" class="form-control" name="direccion" value="${usuarioE.getDireccion()}" readonly id="direccion" placeholder="Ingresa Direccion" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="User">Usuario (E-mail)</label>
+                                <input type="text" class="form-control" id="user" name="user"  value="${usuarioE.getCorreo()}"  readonly placeholder="Ingresa Usuario" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="password">Contraseña</label>
+                                <input type="password" class="form-control" id="password" name="password" value="${usuarioE.getContrasena()}"  readonly placeholder="Ingresa Contraseña" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="password1">Confirmar Contraseña</label>
+                                <input type="password" class="form-control" id="password1" name="password1" value="${usuarioE.getContrasena()}"  readonly placeholder="Confirma Contraseña" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                            <label for="rol">Rol</label>
+                                <select class="form-select" id="rol" name="rol" required>
+                                    <option value="">Selecciona un rol</option>
+                                    <option value="CLIENTE">Cliente</option>
+                                    <option value="ADMINISTRADOR">Administrador</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="acceptTerms">
+                                    <label class="form-check-label" for="acceptTerms">Aceptar Términos y Condiciones</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="login-btn text-center mt-4">
+                            <button type="submit" name="accion" value="actualizarUsuario" class="btn btn-success ingresar">Agregar</button>
+                            <a class="btn btn-secondary" name="regresar" href="/FamiSaludLa91/CtrUsuario?accion=listarU">Regresar <i class="bi bi-box-arrow-left"></i></a>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="/FamiSaludLa91/JSc/Scripagregarusuario.js" type="text/javascript"></script>
+        <script>
+            $(document).ready(function() {
+                
+                    <c:if test="${editarus}">
+                        $('#editarusuario').modal('show');
+                    </c:if>
+                
+            });
+        </script>
     </body>
 </html>
