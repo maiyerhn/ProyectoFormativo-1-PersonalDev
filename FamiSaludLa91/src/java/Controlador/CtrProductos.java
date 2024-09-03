@@ -6,9 +6,11 @@
 package Controlador;
 
 import Configuracion.conectar;
-import Modelo.Carrito;
+
 import Modelo.Categoria;
 import Modelo.CategoriaDAO;
+import Modelo.DetallePedido;
+import Modelo.DetallePedidoDAO;
 import Modelo.Pedido;
 import Modelo.PedidoDAO;
 import Modelo.Productos;
@@ -44,7 +46,8 @@ public class CtrProductos extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    List<Carrito> listacarrito = new ArrayList();
+    List<DetallePedido> listacarrito;
+    List<Productos> listaProductos = new ArrayList();
     List<Categoria> categoria = new ArrayList();
     List<Proveedor> proveedor = new ArrayList();
     List<Pedido> listapEspera = new ArrayList();
@@ -53,8 +56,10 @@ public class CtrProductos extends HttpServlet {
     ProductosDAO pdao = new ProductosDAO();
     CategoriaDAO cdao = new CategoriaDAO();
     ProveedorDAO prdao = new ProveedorDAO();
+    DetallePedidoDAO detalleDAO = new DetallePedidoDAO();
+    Pedido ped = new Pedido();
     Productos pro = new Productos();
-    Carrito car;
+    DetallePedido detalleP;
     int subtotal;
     int cantidad, idp, prep, catp, stocp, prove;
     int cantidadUsuarios, cantidadPedidos, cantidadProductos;
@@ -132,56 +137,101 @@ public class CtrProductos extends HttpServlet {
                     }
                     break;
                 case "Inicio":
+                    idp = Integer.parseInt(request.getParameter("id"));
+                    System.out.println("ingreso el usuario con id: " + idp);
+                    String estado = "CARRITO";
+                    int total = 0;
+                    
+                    boolean dato = pedidodao.buscarPedido(idp);
+                    if(dato == true){
+                        System.out.println("tiene pedido? " + dato);
+                        ped = pedidodao.obtenerPedido(idp);
+                        System.out.println("encontro el pedido con id:" + ped.getId());
+                        boolean dato1 = pedidodao.buscarDetalle(ped.getId());
+                        if(dato1 == true){
+                            System.out.println("contiene detalle de pedido? " + dato1);
+                            listacarrito = new ArrayList();
+                            listacarrito = pedidodao.obtenerDetalle(ped.getId());
+                        }else if(dato1 == false){
+                            System.out.println("contiene detalle de pedido? " + dato1);
+                            listacarrito = new ArrayList();
+                        }
+                    }else if(dato == false){
+                        System.out.println("tiene pedido? " + dato);
+                        boolean dato2 = pedidodao.crearPedido(idp, estado, total);
+                        System.out.println("se creo el pedido? " + dato2);
+                        System.out.println("creo el pedido: " + ped);
+                        listacarrito = new ArrayList();
+                    } 
                     request.setAttribute("Productos", productos);
                     System.out.println("Entro A enviar los Productos");
-                     request.setAttribute("contador", listacarrito.size());
+                    request.setAttribute("contador", listacarrito.size());
+                    request.setAttribute("idUsuario", idp);
                     request.getRequestDispatcher("/Vistas/Inicio.jsp").forward(request, response);
                     break;
                 case "AgregarCarrito":
-                    System.out.println("entro a agregar producto al carrito carrito");
+                    System.out.println("entro a agregar un producto al carrito");
+                    int idproducto = Integer.parseInt(request.getParameter("idproducto"));
+                    System.out.println("id del producto: " + idproducto);
+                    System.out.println("id del usuario: " + idp);
+
                     cantidad = 1;
-                    int pos = 0;
-                    idp = Integer.parseInt(request.getParameter("id"));
-                    p = pdao.listarid(idp);
+                    int posicion = 0;
+                    p = pdao.listarId(idproducto);
+                    System.out.println("producto: " + p.getNombre() + " " + p.getId());
 
                     if (listacarrito.size() > 0) {
                         for (int i = 0; i < listacarrito.size(); i++) {
-                            if (idp == listacarrito.get(i).getIdproducto()) {
-                                pos = i;
+                            if (idproducto == listacarrito.get(i).getIdProducto()) {
+                                posicion = i;
                             }
                         }
-                        if (idp == listacarrito.get(pos).getIdproducto()) {
-                            cantidad = cantidad + listacarrito.get(pos).getCantidad();
-                            subtotal = cantidad * listacarrito.get(pos).getPreciocompra();
-                            listacarrito.get(pos).setCantidad(cantidad);
-                            listacarrito.get(pos).setSubTotal(subtotal);
+                        if (idproducto == listacarrito.get(posicion).getIdProducto()) {
+                            cantidad = cantidad + listacarrito.get(posicion).getCantidad();
+                            total = cantidad * p.getPrecio();
+                            listacarrito.get(posicion).setCantidad(cantidad);
+                            listacarrito.get(posicion).setTotal(total);
+                            int idDetalle = listacarrito.get(posicion).getId();
+                            System.out.println("id del detalle pedido a actulizar");
+                            boolean d2 = pedidodao.actualizarDetalle(idDetalle, cantidad, total);
                         } else {
-                            car = new Carrito();
-                            car.setIdproducto(idp);
-                            car.setNombre(p.getNombre());
-                            car.setFoto(p.getFoto());
-                            car.setCantidad(cantidad);
-                            car.setPreciocompra(p.getPrecio());
-                            car.setSubTotal(cantidad * p.getPrecio());
-                            listacarrito.add(car);
+                            detalleP = new DetallePedido();
+                            detalleP.setIdProducto(p.getId());
+                            detalleP.setIdPedido(ped.getId());
+                            detalleP.setCantidad(cantidad);
+                            detalleP.setTotal(cantidad * p.getPrecio());
+                            listacarrito.add(detalleP);
+                            boolean d1 = pedidodao.crearDetalle(detalleP.getIdPedido(), detalleP.getIdProducto(), detalleP.getCantidad(), detalleP.getTotal());
+                            if (d1 == true) {
+                                System.out.println("creo detalle de pedido");
+                            }
                         }
                     } else {
-                        car = new Carrito();
-                        car.setIdproducto(idp);
-                        car.setNombre(p.getNombre());
-                        car.setFoto(p.getFoto());
-                        car.setCantidad(cantidad);
-                        car.setPreciocompra(p.getPrecio());
-                        car.setSubTotal(cantidad * p.getPrecio());
-                        listacarrito.add(car);
+                        detalleP = new DetallePedido();
+                        detalleP.setIdProducto(p.getId());
+                        detalleP.setIdPedido(ped.getId());
+                        detalleP.setCantidad(cantidad);
+                        detalleP.setTotal(cantidad * p.getPrecio());
+                        listacarrito.add(detalleP);
+                        boolean d1 = pedidodao.crearDetalle(detalleP.getIdPedido(), detalleP.getIdProducto(), detalleP.getCantidad(), detalleP.getTotal());
+                        if (d1 == true) {
+                            System.out.println("creo detalle de pedido");
+                        }
+
                     }
                     request.setAttribute("contador", listacarrito.size());
-                    request.getRequestDispatcher("CtrProductos?accion=Inicio").forward(request, response);
+                    request.getRequestDispatcher("CtrProductos?accion=Inicio&id=" + idp).forward(request, response);
                     break;
                 case "Carrito":
                     System.out.println("entro al carrito");
+                    System.out.println("id del usuario: " + idp);
+                    int idusuario = idp;
+                    ped = pedidodao.obtenerPedido(idp);
+                    listaProductos = detalleDAO.ListarProd(ped.getId());
+                    request.setAttribute("productos", listaProductos);
                     request.setAttribute("carrito", listacarrito);
                     request.setAttribute("contador", listacarrito.size());
+                    request.setAttribute("idUsuario", idusuario);
                     request.getRequestDispatcher("Vistas/Carrito.jsp").forward(request, response);
 
                     break;

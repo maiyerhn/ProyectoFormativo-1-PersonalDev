@@ -55,7 +55,7 @@
                             <div class="carousel-item active">
                                 <div class="row row-cols-3 g-3">
                                     <div class="col">
-                                        <a href="/FamiSaludLa91/CtrProductos?accion=Inicio" class="category-item d-flex align-items-center justify-content-center">
+                                        <a href="/FamiSaludLa91/CtrProductos?accion=Inicio&id=${idUsuario}" class="category-item d-flex align-items-center justify-content-center">
                                             <i class="bi bi-house me-4"></i>
                                             Inicio
                                         </a>
@@ -138,7 +138,7 @@
                         <h2 class="product-name"><label>${c.getNombre()}</label></h2>
                         <img src="${c.getFoto()}" alt="Producto">
                         <p class="product-description"><label>${c.getDescripcion()}</label></p>
-                        <a href="/FamiSaludLa91/CtrProductos?accion=AgregarCarrito&id=${c.getId()}" class="add-to-cart">
+                        <a href="/FamiSaludLa91/CtrProductos?accion=AgregarCarrito&idproducto=${c.getId()}" class="add-to-cart">
                             <button class="btn btn-primary text-light">Agregar al Carrito</button>
                         </a>
                         <button class="btn btn-success">Comprar</button>

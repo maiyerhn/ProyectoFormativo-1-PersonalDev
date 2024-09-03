@@ -4,24 +4,27 @@
  * and open the template in the editor.
  */
 package Modelo;
+
 import Configuracion.conectar;
-    import java.sql.Connection;
-    import java.sql.PreparedStatement;
-    import java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author Maiyer
  */
 public class ProductosDAO {
+
     conectar Conexcion;
     Connection con;
     PreparedStatement pstm;
-     ResultSet rs;
-    
-    public List<Productos> obtenerProductos(){
+    ResultSet rs;
+
+    public List<Productos> obtenerProductos() {
         List<Productos> productos = new ArrayList<>();
         try {
             conectar conection = new conectar();
@@ -33,7 +36,7 @@ public class ProductosDAO {
             String consulta = "Select * from productos";
             PreparedStatement stm = conexion.prepareStatement(consulta);
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 String nombre = rs.getString("nombre");
                 String descripcion = rs.getString("descripcion");
@@ -42,18 +45,18 @@ public class ProductosDAO {
                 int idCategoria = rs.getInt("idCategoria");
                 int stock = rs.getInt("stock");
                 int proveedor = rs.getInt("idproveedor");
-                Productos producto = new Productos(id,nombre,descripcion,precio,foto,idCategoria,stock,proveedor);
+                Productos producto = new Productos(id, nombre, descripcion, precio, foto, idCategoria, stock, proveedor);
                 productos.add(producto);
             }
         } catch (Exception ex) {
-            System.out.println("Hubo un Error Al Cargar Los Productos "+ ex);
+            System.out.println("Hubo un Error Al Cargar Los Productos " + ex);
         }
-        
+
         return productos;
     }
-    
-     public boolean crear(Productos pro){
-        try{
+
+    public boolean crear(Productos pro) {
+        try {
             Conexcion = new conectar();
             Connection con = Conexcion.crearconexion();
             if (con != null) {
@@ -79,13 +82,13 @@ public class ProductosDAO {
             System.out.println(pro.getProveedor());
             pstm.executeUpdate();
             return true;
-        }catch(Exception e){
-             System.out.println("Error al crear los productos" + e);
-             return false;
+        } catch (Exception e) {
+            System.out.println("Error al crear los productos" + e);
+            return false;
         }
     }
-     
-     public Productos listarid(int idp){
+
+    public Productos listarid(int idp) {
         Productos p = new Productos();
         try {
             Conexcion = new conectar();
@@ -119,7 +122,8 @@ public class ProductosDAO {
         }
         return p;
     }
-     public List listarT(){
+
+    public List listarT() {
         List<Productos> productos = new ArrayList();
         try {
             Conexcion = new conectar();
@@ -139,18 +143,18 @@ public class ProductosDAO {
                 pro.setFoto(rs.getString(5));
                 pro.setIdCategoria(rs.getInt(6));
                 pro.setStock(rs.getInt(7));
-                
+
                 productos.add(pro);
             }
 
         } catch (SQLException e) {
             System.out.println("Error al listar los productos " + e);
         }
-       
+
         return productos;
     }
-     
-     public Productos listarT(int idp){
+
+    public Productos listarT(int idp) {
         Productos pro = new Productos();
         try {
             Conexcion = new conectar();
@@ -177,15 +181,15 @@ public class ProductosDAO {
         }
         return pro;
     }
-     
-     public void editar(Productos pro){
-        try{
+
+    public void editar(Productos pro) {
+        try {
             Conexcion = new conectar();
             Connection con = Conexcion.crearconexion();
             if (con != null) {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
             }
-            pstm = con.prepareStatement("update productos set nombre=?, descripcion=?,  precio=?, foto=?, idCategoria=?, stock=?, idproveedor=? where id = ?");          
+            pstm = con.prepareStatement("update productos set nombre=?, descripcion=?,  precio=?, foto=?, idCategoria=?, stock=?, idproveedor=? where id = ?");
             pstm.setString(1, pro.getNombre());
             pstm.setString(2, pro.getDescripcion());
             pstm.setInt(3, pro.getPrecio());
@@ -195,12 +199,12 @@ public class ProductosDAO {
             pstm.setInt(7, pro.getProveedor());
             pstm.setInt(8, pro.getId());
             pstm.executeUpdate();
-        }catch(Exception e){
-             System.out.println("Error al editar los productos" + e);
+        } catch (Exception e) {
+            System.out.println("Error al editar los productos" + e);
         }
     }
-     
-     public int contarProductos() {
+
+    public int contarProductos() {
         int cantidadProductos = 0;
 
         try {
@@ -225,10 +229,10 @@ public class ProductosDAO {
 
         return cantidadProductos;
     }
-     
-     public List listarT(String nombre){
+
+    public List listarT(String nombre) {
         List<Productos> producto = new ArrayList();
-        nombre = "%"+nombre+"%";
+        nombre = "%" + nombre + "%";
         System.out.println("Buscando productos con nombre: " + nombre);
         try {
             Conexcion = new conectar();
@@ -236,7 +240,6 @@ public class ProductosDAO {
             if (con != null) {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
 
-            
             }
             pstm = con.prepareStatement("select * from productos where nombre like ?");
             pstm.setString(1, nombre);
@@ -260,8 +263,9 @@ public class ProductosDAO {
         }
         return producto;
     }
-     public List buscarcat(int idcat){
-       List<Productos> producto = new ArrayList();
+
+    public List buscarcat(int idcat) {
+        List<Productos> producto = new ArrayList();
         try {
             Conexcion = new conectar();
             Connection con = Conexcion.crearconexion();
@@ -276,17 +280,52 @@ public class ProductosDAO {
                 Productos p = new Productos();
                 p.setId(rs.getInt(1));
                 p.setNombre(rs.getString(2));
-                p.setDescripcion(rs.getString(3));                                
+                p.setDescripcion(rs.getString(3));
                 p.setPrecio(rs.getInt(4));
                 p.setFoto(rs.getString(5));
                 p.setIdCategoria(rs.getInt(6));
-                p.setStock(rs.getInt(7));                        
+                p.setStock(rs.getInt(7));
                 producto.add(p);
             }
 
         } catch (Exception e) {
             System.out.println("Error al listar los productos por categoria " + e);
         }
-        return producto;  
+        return producto;
     }
+
+    public Productos listarId(int idProducto) {
+        Productos producto = null;
+        conectar Conexcion = new conectar();
+        try (
+                
+                Connection con = Conexcion.crearconexion();
+                PreparedStatement pstm = con.prepareStatement("SELECT * FROM productos WHERE id = ?")) {
+
+            if (con != null) {
+                System.out.println("Se ha establecido una conexión con la base de datos");
+            }
+            pstm.setInt(1, idProducto);
+
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next()) {
+                    producto = new Productos();
+                    producto.setId(rs.getInt("id"));
+                    producto.setNombre(rs.getString("nombre"));
+                    producto.setDescripcion(rs.getString("descripcion"));
+                    producto.setPrecio(rs.getInt("precio"));
+                    producto.setFoto(rs.getString("foto"));
+                    producto.setIdCategoria(rs.getInt("id_categoria"));
+                    producto.setStock(rs.getInt("stock"));
+                } else {
+                    System.out.println("No se encontró el producto con ID: " + idProducto);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al listar el producto por ID: " + e.getMessage());
+        }
+
+        return producto;
+    }
+
 }

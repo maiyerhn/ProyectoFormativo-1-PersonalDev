@@ -49,7 +49,7 @@
                                 <div class="carousel-item active">
                                     <div class="row row-cols-3 g-3">
                                         <div class="col">
-                                            <a href="/FamiSaludLa91/CtrProductos?accion=Inicio" class="category-item d-flex align-items-center justify-content-center">
+                                            <a href="/FamiSaludLa91/CtrProductos?accion=Inicio&id=${idUsuario}" class="category-item d-flex align-items-center justify-content-center">
                                                 <i class="bi bi-house me-4"></i>
                                                 Inicio
                                             </a>
@@ -131,19 +131,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="car" items="${carrito}">
+                                <c:forEach var="pro" items="${productos}" varStatus="pos" >
+                                    <c:set var="det" value="${carrito[pos.index]}"/>
                                     <tr class="align-middle">
                                         <td class="text-center">
-                                            <img src="${car.foto}" alt="" class="img-fluid rounded" />
+                                            <img src="${pro.foto}" alt="" class="img-fluid rounded" />
                                         </td>
-                                        <td>${car.nombre}</td>
-                                        <td>
-                                            <input type="number" class="form-control form-control-sm" value="${car.cantidad}" min="1" />
+                                        <td>${pro.nombre}</td>
+                                        <td> <input id="idpro" type="hidden" class="form-control form-control-sm" value="${pro.id}" min="1" />
+                                            <input id="cantidad" type="number" class="form-control form-control-sm" value="${det.cantidad}" min="1" />
                                         </td>
-                                        <td>${car.preciocompra}</td>
-                                        <td>${car.subTotal}</td>
+                                        <td>${pro.precio}</td>
+                                        <td>${det.total}</td>
                                     </tr>
-                                </c:forEach>
+                                 <c:set var="totalFinal" value="${totalFinal + dped.total}" />
+                        </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -176,6 +178,24 @@
 
         <script src="/FamiSaludLa91/JSc/manejoImagen.js" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script>
+            $("tr #cantidad").click(function (){
+                    alert ("Entro en Cantidad!");
+                    var idp = $(this).parent().find("#idpro").val();
+                    var Cantidad = $(this).parent().find("#cantidad").val();
+                    var url = "CtrProducto?accion=ActualizarCantidad";
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: "idp=" + idp +"&Cantidad=" + Cantidad,
+                        success: function (data, textStatus, jqXHR){
+                            //alert ("Entro en Cantidad!");
+                            location.href="CtrProducto?accion=Carrito";
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 
 </html>
