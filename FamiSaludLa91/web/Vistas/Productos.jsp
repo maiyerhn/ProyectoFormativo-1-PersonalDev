@@ -15,6 +15,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.3/font/bootstrap-icons.min.css" rel="stylesheet">
         <link href="/FamiSaludLa91/CSS/EstilosReferencia.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     </head>
     <body>
 
@@ -110,7 +111,7 @@
                                 <a class="btn btn-primary" href="/FamiSaludLa91/CtrProductos?accion=EditarProducto&idp=${p.getId()}">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
-                                <a class="btn btn-danger" id="btneliminar" href="#">
+                                <a class="btn btn-danger"  href="#" data-bs-toggle="modal" data-bs-target="#eliminar" data-id="${p.getId()}">
                                     <i class="bi bi-trash-fill"></i>
                                 </a>
                             </td>
@@ -127,6 +128,42 @@
                 </tbody>
             </table>
         </div>
+        
+        <!-- Modal de Confirmación de Eliminación -->
+        <div class="modal fade" id="eliminar" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que quieres eliminar este producto?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <a id="confirmDeleteBtn" class="btn btn-danger" href="#">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Notificación -->
+        <div class="modal fade" id="mensajeModal" tabindex="-1" aria-labelledby="mensajeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content bg-success text-light"> 
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="mensajeModalLabel">Notificación</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="mensajeModalBody">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
 
         <%-- modal de agregar productos --%>
         <div class="modal fade" id="agregarproducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -280,6 +317,8 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/FamiSaludLa91/JSc/eliminarProductos.js" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
         <script>
             $(document).ready(function() {
                 

@@ -259,7 +259,22 @@ public class CtrProductos extends HttpServlet {
                 request.setAttribute("Categorias", categoria);
                 request.setAttribute("listar", productos);
                 request.getRequestDispatcher("Vistas/Productos.jsp").forward(request, response);
-                break;
+                    break;
+                case "eliminar":
+                    String ide = request.getParameter("ide");
+                    System.out.println("Entró a eliminar el producto con el ID: " + ide);
+                    try {
+                        pdao.eliminar(ide);
+                        productos = pdao.listarT();
+                        request.setAttribute("productos", productos);
+                        System.out.println("Enviando la lista actualizada de productos: " + productos);
+                        response.sendRedirect("/FamiSaludLa91/CtrProductos?accion=listar&mensaje=Producto%20eliminado%20exitosamente");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        response.sendRedirect("/FamiSaludLa91/CtrProductos?accion=listar&mensaje=Error%20al%20eliminar%20el%20producto");
+                    }
+                    break;
+
 
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Accion no reconocida");
