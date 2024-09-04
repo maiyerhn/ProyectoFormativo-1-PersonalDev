@@ -57,11 +57,16 @@ public class CtrCategorias extends HttpServlet {
                 case "eliminar":
                     id = request.getParameter("id");
                     System.out.println("Entró a eliminar la categoría con ID: " + id);
+                    try{
                     cdao.eliminar(id);
                     categoria = cdao.listar();
                     request.setAttribute("categoria", categoria);
                     System.out.println("Enviando la lista actualizada de categorías: " + categoria);
                     response.sendRedirect("/FamiSaludLa91/CtrCategorias?accion=listarCategorias&mensaje=Categoria eliminada exitosamente");
+                    }catch (Exception e) {
+                    e.printStackTrace();
+                    response.sendRedirect("/FamiSaludLa91/CtrCategorias?accion=listarCategorias&mensaje=Error%20al%20eliminar%20La%20categoria");
+                    }
                     break;
                 case "Agregar":
                     System.out.println("Entro a agregar Categoria");

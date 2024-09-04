@@ -3,19 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 document.addEventListener('DOMContentLoaded', function () {
     var deleteButtons = document.querySelectorAll('a[data-bs-toggle="modal"][data-bs-target="#eliminar"]');
     var confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
 
     deleteButtons.forEach(function (button) {
         button.addEventListener('click', function () {
-            var categoryId = this.getAttribute('data-id');
-            confirmDeleteBtn.href = '/FamiSaludLa91/CtrCategorias?accion=eliminar&id=' + categoryId;
+            var productoId = this.getAttribute('data-id');
+            confirmDeleteBtn.href = '/FamiSaludLa91/CtrProductos?accion=eliminar&ide=' + productoId;
         });
     });
 
-    // Mensaje de eliminacion  :)
     var urlParams = new URLSearchParams(window.location.search);
     var mensaje = urlParams.get('mensaje');
     
@@ -30,4 +28,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 3000);
     }
 });
+
+
 
