@@ -261,5 +261,22 @@ public class UsuarioDAO {
              System.out.println("Error al editar los usuarios" + e);
         }
     }
-
+    
+    
+    public boolean eliminar(String idus){
+        try {
+            conexion = new conectar();
+            Connection con = conexion.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+            }
+            pstm = con.prepareStatement("delete from usuarios where id = ?");
+            pstm.setString(1, idus);
+            pstm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error al eliminar el Producto " + e);
+        }
+        return true;
+    }
+    
 }

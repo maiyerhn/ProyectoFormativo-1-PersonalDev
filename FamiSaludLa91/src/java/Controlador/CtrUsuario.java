@@ -151,6 +151,22 @@ public class CtrUsuario extends HttpServlet {
                 request.setAttribute("listarUs", user);
                 request.getRequestDispatcher("CtrUsuario?accion=listarU").forward(request, response);
                 break;
+                
+            case "eliminar":
+                String idus = request.getParameter("idus");
+                System.out.println("Entró a eliminar el usuario con el ID: " + idus);
+                try {
+                    dao.eliminar(idus);
+                    user = dao.obtenerUsuarios();
+                    request.setAttribute("listarUs", user);
+                    System.out.println("Enviando la lista actualizada de usuarios: " + user);
+                    response.sendRedirect("/FamiSaludLa91/CtrUsuario?accion=listarU&mensaje=Usuario%20eliminado%20exitosamente");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    response.sendRedirect("/FamiSaludLa91/CtrUsuario?accion=listarU&mensaje=Error%20al%20eliminar%20el%20Usuario");
+                }
+                break;
+                    
            }
     }
 

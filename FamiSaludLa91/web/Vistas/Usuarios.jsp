@@ -8,6 +8,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <link href="/FamiSaludLa91/CSS/EstilosReferencia.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
         <title>Usuarios - Famisalud la 91</title>
     </head>
     <body>
@@ -47,7 +48,7 @@
             </div>
         </div>
         <div class="container mt-5">
-            <h2 class="titulo-inventario text-center fw-bold">Usuarios</h2>
+            <h2 class="titulo-inventario text-center fw-bold titulos">Usuarios</h2>
             <div class="input-group mb-3 d-flex justify-content-end " >
                 <div class="input-group-append">
                     <form class="d-flex ">
@@ -88,7 +89,7 @@
                                 <a class="btn btn-primary" href="/FamiSaludLa91/CtrUsuario?accion=EditarUsuario&idu=${u.getId()}">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
-                                <a class="btn btn-danger" href="#" >
+                                <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#eliminar" data-id="${u.getId()}">
                                     <i class="bi bi-trash-fill"></i>
                                 </a>
                             </td>
@@ -98,6 +99,38 @@
             </table>
         </div>
         
+        <!-- Modal de Confirmación de Eliminación -->
+        <div class="modal fade" id="eliminar" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que quieres eliminar este Usuario?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <a id="confirmDeleteBtn" class="btn btn-danger" href="#">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Notificación -->
+        <div class="modal fade" id="mensajeModal" tabindex="-1" aria-labelledby="mensajeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content bg-success text-light"> 
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="mensajeModalLabel">Notificación</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="mensajeModalBody">
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <%-- modal de agregar usuarios --%>
         <div class="modal fade" id="agregarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -219,7 +252,7 @@
                             </div>
                         </div>
                         <div class="login-btn text-center mt-4">
-                            <button type="submit" name="accion" value="actualizarUsuario" class="btn btn-success ingresar">Agregar</button>
+                            <button type="submit" name="accion" value="actualizarUsuario" class="btn btn-success ingresar">Guardar</button>
                             <a class="btn btn-secondary" name="regresar" href="/FamiSaludLa91/CtrUsuario?accion=listarU">Regresar <i class="bi bi-box-arrow-left"></i></a>
                         </div>
                     </form>
@@ -230,6 +263,8 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="/FamiSaludLa91/JSc/Scripagregarusuario.js" type="text/javascript"></script>
+        <script src="/FamiSaludLa91/JSc/eliminarUsuario.js" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
         <script>
             $(document).ready(function() {
                 

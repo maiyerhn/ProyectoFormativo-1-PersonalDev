@@ -147,4 +147,20 @@ public class ProveedorDAO {
         }
         return proveedor;
     }
+    
+    public boolean eliminar(String idpre){
+        try {
+            Conexcion = new conectar();
+            Connection con = Conexcion.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+            }
+            pstm = con.prepareStatement("delete from proveedores where id = ?");
+            pstm.setString(1, idpre);
+            pstm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error al eliminar el Proveedor " + e);
+        }
+        return true;
+    }
 }

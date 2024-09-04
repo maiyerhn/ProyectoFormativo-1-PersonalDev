@@ -120,6 +120,21 @@ public class CtrPro extends HttpServlet {
                         request.setAttribute("proveedor", proveedor);
                         request.getRequestDispatcher("/Vistas/Proveedores.jsp").forward(request, response);
                         break;
+                        
+                    case "eliminar":
+                    String idpre = request.getParameter("idpre");
+                    System.out.println("Entró a eliminar el Proveedor con el ID: " + idpre);
+                    try {
+                        prdao.eliminar(idpre);
+                        proveedor = prdao.obtenerproveedor();
+                        request.setAttribute("proveedor", proveedor);
+                        System.out.println("Enviando la lista actualizada de Proveedores: " + proveedor);
+                        response.sendRedirect("/FamiSaludLa91/CtrPro?accion=listarp&mensaje=Proveedor%20eliminado%20exitosamente");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        response.sendRedirect("/FamiSaludLa91/CtrPro?accion=listarp&mensaje=Error%20al%20eliminar%20el%20Proveedor");
+                    }
+                    break;
             }
 
         } catch (Exception e) {
