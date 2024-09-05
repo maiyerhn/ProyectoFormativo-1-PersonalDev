@@ -235,6 +235,29 @@ public class CtrProductos extends HttpServlet {
                     request.getRequestDispatcher("Vistas/Carrito.jsp").forward(request, response);
 
                     break;
+                case "ActualizarCantidad":
+                    System.out.println("ingreso a cambiar la cantidad del producto");
+                    idproducto = Integer.parseInt(request.getParameter("idp"));
+                    cantidad = Integer.parseInt(request.getParameter("Cantidad"));
+                    System.out.println("datos: id: " + idproducto + " cantidad: " + cantidad );
+                    dato = pedidodao.actualizarCantidad(idproducto, cantidad);
+                    if (dato == true) {
+                        System.out.println("se actulizo la cantidad");
+                    } else {
+                        System.out.println("error al actulizar la cantidad");
+                    }
+                    break;
+                case "EliminarDeCarrito":
+                    System.out.println("eliminar producto del carrito");
+                    idproducto = Integer.parseInt(request.getParameter("idp"));
+                    
+                    dato = pedidodao.eliminarDetalle(idproducto);
+                    if (dato == true) {
+                        System.out.println("se elimino el producto del carrito");
+                    } else {
+                        System.out.println("error al eliminar el producto del carrito");
+                    }
+                    break;
                 case "EditarProducto":
                     System.out.println("entro a editar");
                     idp = Integer.parseInt(request.getParameter("idp"));

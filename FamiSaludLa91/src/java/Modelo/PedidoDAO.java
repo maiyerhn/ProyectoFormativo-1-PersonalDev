@@ -465,6 +465,77 @@ public class PedidoDAO {
     return exito;
 }
 
+    public boolean actualizarCantidad(int idDetalle, int cantidad) {
+        Connection conexion = null;
+        PreparedStatement pstmt = null;
+        boolean exito = false;
 
+        try {
+            conectar conection = new conectar();
+            conexion = conection.crearconexion();
+
+            if (conexion != null) {
+                System.out.println("Se ha establecido una conexión con la base de datos");
+                String sql = "UPDATE detallePedido SET cantidad = ? WHERE id = ?";
+                pstmt = conexion.prepareStatement(sql);
+                pstmt.setInt(1, cantidad);
+                pstmt.setInt(2, idDetalle);
+                int filasAfectadas = pstmt.executeUpdate();
+                exito = filasAfectadas > 0;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Hubo un error al actualizar el detalle del pedido: " + ex.getMessage());
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (conexion != null) {
+                    conexion.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar los recursos: " + ex.getMessage());
+            }
+        }
+
+        return exito;
+    }
+    
+    public boolean eliminarDetalle(int idDetalle) {
+        Connection conexion = null;
+        PreparedStatement pstmt = null;
+        boolean resultado = false;
+
+        try {
+            conectar conection = new conectar();
+            conexion = conection.crearconexion();
+            
+            System.out.println("Se ha establecido una conexión con la base de datos");
+              
+            String sql = "DELETE FROM detallepedido WHERE id = ?";
+            pstmt = conexion.prepareStatement(sql);
+            pstmt.setInt(1, idDetalle);
+
+           
+            int filasAfectadas = pstmt.executeUpdate();
+            resultado = (filasAfectadas > 0);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (conexion != null) {
+                    conexion.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return resultado;
+    }
 
 }
