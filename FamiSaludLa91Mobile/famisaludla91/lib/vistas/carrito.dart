@@ -1,4 +1,5 @@
 
+import 'package:famisaludla91/vistas/buscar.dart';
 import 'package:famisaludla91/vistas/vistainicio.dart';
 import 'package:flutter/material.dart';
 
@@ -83,6 +84,23 @@ class Carrito extends StatelessWidget {
             label: 'Buscar',
           ),
         ],
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
+              break;
+            case 1:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Buscar()),
+              );
+              break;
+              
+          }
+        },
       ),
     );
   }

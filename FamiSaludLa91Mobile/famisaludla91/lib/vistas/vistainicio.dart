@@ -1,4 +1,6 @@
 
+import 'package:famisaludla91/main.dart';
+import 'package:famisaludla91/vistas/buscar.dart';
 import 'package:famisaludla91/vistas/carrito.dart';
 import 'package:flutter/material.dart';
 
@@ -72,6 +74,23 @@ class HomePage extends StatelessWidget {
               title: Text('Alimentos y bebidas'),
               onTap: () {
                 Navigator.pop(context);
+              },
+            ),
+            Divider(),
+            Spacer(),
+            
+            ListTile(
+              leading: Icon(Icons.settings, color: Colors.blue),
+              title: Text('Configuración'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app, color: Colors.blue),
+              title: Text('Salir'),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()));
               },
             ),
           ],
@@ -165,6 +184,24 @@ class HomePage extends StatelessWidget {
         ],
         selectedItemColor: Colors.blue,
         backgroundColor: Colors.white,
+
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
+              break;
+            case 1:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Buscar()),
+              );
+              break;
+              
+          }
+        },
       ),
     );
   }
