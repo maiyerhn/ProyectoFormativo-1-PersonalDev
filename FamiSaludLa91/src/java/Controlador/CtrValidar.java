@@ -116,7 +116,7 @@ public class CtrValidar extends HttpServlet {
                     if ("ADMINISTRADOR".equalsIgnoreCase(user.getRol())) {
                         response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=listarInventario");
                     } else {
-                        response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=Inicio");
+                        response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=Inicio&id=" + user.getId());
                     }
                 } else {
                     request.setAttribute("error", "Usuario o Contraseña Incorrectos");

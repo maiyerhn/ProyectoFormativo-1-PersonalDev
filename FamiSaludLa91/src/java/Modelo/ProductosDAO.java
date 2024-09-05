@@ -305,4 +305,39 @@ public class ProductosDAO {
         }
         return true;
     }
+     
+     public Productos listarId(int idProducto) {
+        Productos producto = null;
+        conectar Conexcion = new conectar();
+        try (
+                
+                Connection con = Conexcion.crearconexion();
+                PreparedStatement pstm = con.prepareStatement("SELECT * FROM productos WHERE id = ?")) {
+
+            if (con != null) {
+                System.out.println("Se ha establecido una conexión con la base de datos");
+            }
+            pstm.setInt(1, idProducto);
+
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next()) {
+                    producto = new Productos();
+                    producto.setId(rs.getInt("id"));
+                    producto.setNombre(rs.getString("nombre"));
+                    producto.setDescripcion(rs.getString("descripcion"));
+                    producto.setPrecio(rs.getInt("precio"));
+                    producto.setFoto(rs.getString("foto"));
+                    producto.setIdCategoria(rs.getInt("id_categoria"));
+                    producto.setStock(rs.getInt("stock"));
+                } else {
+                    System.out.println("No se encontró el producto con ID: " + idProducto);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al listar el producto por ID: " + e.getMessage());
+        }
+
+        return producto;
+    }
+
 }
