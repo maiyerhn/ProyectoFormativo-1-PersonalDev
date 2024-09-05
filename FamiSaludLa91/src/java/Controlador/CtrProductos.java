@@ -162,6 +162,9 @@ public class CtrProductos extends HttpServlet {
                         System.out.println("creo el pedido: " + ped);
                         listacarrito = new ArrayList();
                     } 
+                    CategoriaDAO catdao = new CategoriaDAO();
+                    List<Categoria> cat = catdao.listarT();
+                    request.setAttribute("Categorias", cat);
                     request.setAttribute("Productos", productos);
                     System.out.println("Entro A enviar los Productos");
                     request.setAttribute("contador", listacarrito.size());
