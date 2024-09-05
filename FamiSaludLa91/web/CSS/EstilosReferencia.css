@@ -471,3 +471,23 @@ body{
 .dropdown-toggle::after {
     display: none;
 }
+.encabezado {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-lg-custom {
+            font-size: 1.25rem;
+            padding: 0.75rem 1.25rem;
+        }
+        .dropdown-item-custom {
+            font-size: 1.1rem;
+            padding: 0.75rem 1.25rem;
+        }
+        .category-item {
+            font-size: 1.1rem;
+        }
+        .container-fluid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }

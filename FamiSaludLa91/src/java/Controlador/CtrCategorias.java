@@ -115,6 +115,14 @@ public class CtrCategorias extends HttpServlet {
                     cdao.editar(cat);
                      request.getRequestDispatcher("CtrCategorias?accion=listarCategorias").forward(request, response);
                     break;
+                    
+                case "buscarCatInicio":
+                    CategoriaDAO catdao = new CategoriaDAO();
+                    List<Categoria> cat = catdao.listarT();
+                    request.setAttribute("Categorias", cat);
+                    request.getRequestDispatcher("/Vistas/Inicio.jsp").forward(request, response);
+                    
+                    break;
             }
 
         } catch (Exception e) {
