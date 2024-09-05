@@ -15,7 +15,7 @@
         <div class="container-fluid encabezado">
             <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="/FamiSaludLa91/CtrProductos?accion=Inicio&id=" + ${user.getId()}">
+                    <a class="navbar-brand" href="/FamiSaludLa91/CtrProductos?accion=Inicio&id=${user.getId()}">
                         <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Famisalud la 91 Logo">
                     </a>
                     <p  class="navbar-text fs-3 fw-bold text-white">Famisalud la 91</p>
@@ -46,33 +46,34 @@
             </header>
         </div>
         <section class="container-fluid py-1 encabezado">
-            <div class="container ">
-                <div class="col-md-4 align-items-center justify-content-center">
+            <div class="container">
+                <div class="row align-items-center justify-content-between">
+                    <!-- Botón de Categorías -->
+                    <div class="col-md-4 d-flex justify-content-center">
                         <div class="dropdown">
                             <button class="btn btn-primary btn-lg-custom dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                 Categorías<i class="bi bi-arrow-down-short"></i>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <c:forEach var="cat" items="${Categorias}">
-                                        <li><a class="dropdown-item" href="" >${cat.getNombre()}</a></li>
-                                        <input type="hidden" value="${cat.getId()}" name="catid" id="catid">
-                                    </c:forEach>
+                                    <li><a class="dropdown-item" href="">${cat.getNombre()}</a></li>
+                                    <input type="hidden" value="${cat.getId()}" name="catid" id="catid">
+                                </c:forEach>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-9 d-flex justify-content-center py-1">
+
+                    <!-- Enlaces de Categorías -->
+                    <div class="col-md-8 d-flex justify-content-center">
                         <div class="category-list d-flex flex-wrap align-items-center justify-content-center">
                             <a href="#" class="category-item d-flex align-items-center mb-3 me-4">
-                                <i class="bi bi-capsule me-2"></i>
-                                Medicamentos
+                                <i class="bi bi-capsule me-2"></i> Medicamentos
                             </a>
                             <a href="#" class="category-item d-flex align-items-center mb-3 me-4">
-                                <i class="bi bi-brush me-2"></i>
-                                Belleza
+                                <i class="bi bi-brush me-2"></i> Belleza
                             </a>
                             <a href="#" class="category-item d-flex align-items-center mb-3 me-4">
-                                <i class="bi bi-heart-pulse-fill me-2"></i>
-                                Cuidado al Bebé
+                                <i class="bi bi-heart-pulse-fill me-2"></i> Cuidado al Bebé
                             </a>
                         </div>
                     </div>
