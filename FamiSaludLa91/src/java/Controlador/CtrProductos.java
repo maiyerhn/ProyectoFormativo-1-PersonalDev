@@ -57,6 +57,7 @@ public class CtrProductos extends HttpServlet {
     ProveedorDAO prdao = new ProveedorDAO();
     DetallePedidoDAO detalleDAO = new DetallePedidoDAO();
     Productos pro = new Productos();
+    Usuario user;
     Pedido ped;
     DetallePedido detalleP;
     int subtotal;
@@ -140,6 +141,8 @@ public class CtrProductos extends HttpServlet {
                     System.out.println("ingreso el usuario con id: " + idp);
                     String estado = "CARRITO";
                     int total = 0;
+                    user = usudao.listarT(idp);
+                    System.out.println("el usuario es: "+  user.getNombre() + " " + user.getId());
                     
                     boolean dato = pedidodao.buscarPedido(idp);
                     if(dato == true){
@@ -168,7 +171,7 @@ public class CtrProductos extends HttpServlet {
                     request.setAttribute("Productos", productos);
                     System.out.println("Entro A enviar los Productos");
                     request.setAttribute("contador", listacarrito.size());
-                    request.setAttribute("idUsuario", idp);
+                    request.setAttribute("user", user);
                     request.getRequestDispatcher("/Vistas/Inicio.jsp").forward(request, response);
                     break;
                 case "AgregarCarrito":
@@ -234,7 +237,7 @@ public class CtrProductos extends HttpServlet {
                     request.setAttribute("carrito", listacarrito);
                     request.setAttribute("contador", listacarrito.size());
                     request.setAttribute("idUsuario", idusuario);
-                    request.getRequestDispatcher("Vistas/Carrito.jsp").forward(request, response);
+                    request.getRequestDispatcher("/Vistas/Carrito.jsp").forward(request, response);
 
                     break;
                 case "ActualizarCantidad":
