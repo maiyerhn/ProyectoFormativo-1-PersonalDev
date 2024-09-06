@@ -78,7 +78,7 @@ class RegistroPage extends StatelessWidget {
 
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
+                      backgroundColor: Colors.green,
                       foregroundColor: Colors.white,
                     ),
                     child: Text('Registrase'),
@@ -91,14 +91,14 @@ class RegistroPage extends StatelessWidget {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()));
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
+                      backgroundColor: Colors.blue,
                       foregroundColor: Colors.white,
                     ),
-                    child: Text('Cancelar'),
+                    child: Text('Iniciar sesion'),
                   ),
                 ),
               ],
-            ),
+            ),/*
             SizedBox(height: 20),
             Center(
               child: GestureDetector(
@@ -110,7 +110,7 @@ class RegistroPage extends StatelessWidget {
                   style: TextStyle(color: Colors.blue),
                 ),
               ),
-            ),
+            ),*/
           ],
         ),
       ),
