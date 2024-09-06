@@ -1,6 +1,7 @@
 
 import 'package:famisaludla91/vistas/registrarse.dart';
 import 'package:famisaludla91/vistas/vistainicio.dart';
+import 'package:famisaludla91/vistas/vistainicioadm.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -109,7 +110,8 @@ class Inicio extends StatelessWidget {
             SizedBox(height: 10),
             GestureDetector(
               onTap: () {
-                // Acción de recuperar contraseña
+                // ingresar a la vista de administrador
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Inicioad()));
               },
               child: Text(
                 '¿Olvidaste tu contraseña?',
