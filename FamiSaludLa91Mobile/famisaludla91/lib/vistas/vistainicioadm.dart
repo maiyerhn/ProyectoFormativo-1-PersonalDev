@@ -1,4 +1,9 @@
 import 'package:famisaludla91/main.dart';
+import 'package:famisaludla91/vistas/categoria.dart';
+
+import 'package:famisaludla91/vistas/productos.dart';
+import 'package:famisaludla91/vistas/proveedores.dart';
+import 'package:famisaludla91/vistas/usuarios.dart';
 import 'package:flutter/material.dart';
 
 class Inicioad extends StatelessWidget {
@@ -65,7 +70,7 @@ class Inicioad extends StatelessWidget {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
-        children: [
+            children: [
           UserAccountsDrawerHeader(
             accountName: Text('Thomas Marriaga'),
             accountEmail: Text('thomasmarriaga123@gmail.com'),
@@ -94,35 +99,40 @@ class Inicioad extends StatelessWidget {
             leading: Icon(Icons.production_quantity_limits, color: Colors.blue),
             title: Text('Productos'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Productos()));
+              //Navigator.pop(context);
             },
           ),
           ListTile(
             leading: Icon(Icons.shopping_cart, color: Colors.blue),
             title: Text('Pedidos'),
             onTap: () {
-              Navigator.pop(context);
+          
+              //Navigator.pop(context);
             },
           ),
           ListTile(
             leading: Icon(Icons.local_shipping, color: Colors.blue),
             title: Text('Proveedores'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Proveedores()));
+              //Navigator.pop(context);
             },
           ),
           ListTile(
             leading: Icon(Icons.category, color: Colors.blue),
             title: Text('Categorias'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CategoriasScreen()));
+              //Navigator.pop(context);
             },
           ),
           ListTile(
             leading: Icon(Icons.people, color: Colors.blue),
             title: Text('Usuarios'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Usuarios()));
+              //Navigator.pop(context);
             },
           ),
           Divider(),
