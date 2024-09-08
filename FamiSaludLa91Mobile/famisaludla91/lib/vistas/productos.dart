@@ -10,16 +10,18 @@ import 'package:flutter/material.dart';
 
 
 class Productos extends StatelessWidget {
+  const Productos({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
-        title: Center(child: Text('Famisalud la 91')),
+        title: const Center(child: Text('Famisalud la 91')),
         actions: [
           IconButton(
-            icon: Icon(Icons.person),
+            icon: const Icon(Icons.person),
             onPressed: () {
               // Acción del perfil
             },
@@ -30,7 +32,7 @@ class Productos extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
            children: [
-          UserAccountsDrawerHeader(
+          const UserAccountsDrawerHeader(
             accountName: Text('Thomas Marriaga'),
             accountEmail: Text('thomasmarriaga123@gmail.com'),
             currentAccountPicture: CircleAvatar(
@@ -48,66 +50,66 @@ class Productos extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.inventory, color: Colors.blue),
-            title: Text('Inventario'),
+            leading: const Icon(Icons.inventory, color: Colors.blue),
+            title: const Text('Inventario'),
             onTap: () {
-              Navigator.pop(context, MaterialPageRoute(builder: (context) => Inventario()));
+              Navigator.pop(context, MaterialPageRoute(builder: (context) => const Inventario()));
             },
           ),
           ListTile(
-            leading: Icon(Icons.production_quantity_limits, color: Colors.blue),
-            title: Text('Productos'),
+            leading: const Icon(Icons.production_quantity_limits, color: Colors.blue),
+            title: const Text('Productos'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Productos()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Productos()));
               //Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.shopping_cart, color: Colors.blue),
-            title: Text('Pedidos'),
+            leading: const Icon(Icons.shopping_cart, color: Colors.blue),
+            title: const Text('Pedidos'),
             onTap: () {
             
               //Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.local_shipping, color: Colors.blue),
-            title: Text('Proveedores'),
+            leading: const Icon(Icons.local_shipping, color: Colors.blue),
+            title: const Text('Proveedores'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Proveedores()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Proveedores()));
               //Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.category, color: Colors.blue),
-            title: Text('Categorias'),
+            leading: const Icon(Icons.category, color: Colors.blue),
+            title: const Text('Categorias'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => CategoriasScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const CategoriasScreen()));
               //Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.people, color: Colors.blue),
-            title: Text('Usuarios'),
+            leading: const Icon(Icons.people, color: Colors.blue),
+            title: const Text('Usuarios'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Usuarios()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Usuarios()));
               //Navigator.pop(context);
             },
           ),
-          Divider(),
-          Spacer(),
+          const Divider(),
+          const Spacer(),
           ListTile(
-            leading: Icon(Icons.settings, color: Colors.blue),
-            title: Text('Configuración'),
+            leading: const Icon(Icons.settings, color: Colors.blue),
+            title: const Text('Configuración'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.exit_to_app, color: Colors.blue),
-            title: Text('Salir'),
+            leading: const Icon(Icons.exit_to_app, color: Colors.blue),
+            title: const Text('Salir'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Inicio()));
             },
           ),
         ],
@@ -123,23 +125,23 @@ class Productos extends StatelessWidget {
                   child: TextField(
                     decoration: InputDecoration(
                       hintText: 'Buscar',
-                      prefixIcon: Icon(Icons.search),
+                      prefixIcon: const Icon(Icons.search),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 ElevatedButton(
                   onPressed: () {
                     // Acción de búsqueda
                   },
-                  child: Text('Buscar'),
+                  child: const Text('Buscar'),
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -147,17 +149,17 @@ class Productos extends StatelessWidget {
                   onPressed: () {
                     // Acción de agregar producto
                   },
-                  child: Text('Agregar'),
+                  child: const Text('Agregar'),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     // Acción de filtrar por categoría
                   },
-                  child: Text('Categoría'),
+                  child: const Text('Categoría'),
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Expanded(
               child: ListView(
                 children: [
@@ -199,39 +201,39 @@ class Productos extends StatelessWidget {
 
   Widget _buildProductItem(BuildContext context, {required String imageUrl, required String title, required String price, required String category, required String stock, required String description}) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8.0),
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
             Image.asset(imageUrl, width: 80, height: 80, fit: BoxFit.cover),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
                   ),
                   Text(
                     'Precio: $price',
-                    style: TextStyle(fontSize: 14),
+                    style: const TextStyle(fontSize: 14),
                   ),
                   Text(
                     'Categoría: $category',
-                    style: TextStyle(fontSize: 14),
+                    style: const TextStyle(fontSize: 14),
                   ),
                   Text(
                     'Stock: $stock',
-                    style: TextStyle(fontSize: 14),
+                    style: const TextStyle(fontSize: 14),
                   ),
                   Text(
                     description,
-                    style: TextStyle(fontSize: 12),
+                    style: const TextStyle(fontSize: 12),
                   ),
                 ],
               ),
@@ -239,13 +241,13 @@ class Productos extends StatelessWidget {
             Column(
               children: [
                 IconButton(
-                  icon: Icon(Icons.edit, color: Colors.blue),
+                  icon: const Icon(Icons.edit, color: Colors.blue),
                   onPressed: () {
                     // Acción de editar
                   },
                 ),
                 IconButton(
-                  icon: Icon(Icons.delete, color: Colors.red),
+                  icon: const Icon(Icons.delete, color: Colors.red),
                   onPressed: () {
                     // Acción de eliminar
                   },

@@ -7,22 +7,24 @@ import 'package:flutter/material.dart';
 import 'package:famisaludla91/vistas/productos.dart';
 
 class Usuarios extends StatelessWidget {
+  const Usuarios({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
-        title: Text('Usuarios'),
+        title: const Text('Usuarios'),
         actions: [
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {
               // Acción para el botón de búsqueda
             },
           ),
           IconButton(
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
             onPressed: () {
               // Acción para el botón de agregar
             },
@@ -33,7 +35,7 @@ class Usuarios extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            UserAccountsDrawerHeader(
+            const UserAccountsDrawerHeader(
               accountName: Text('Thomas Marriaga'),
               accountEmail: Text('thomasmarriaga123@gmail.com'),
               currentAccountPicture: CircleAvatar(
@@ -51,72 +53,72 @@ class Usuarios extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.inventory, color: Colors.blue),
-              title: Text('Inventario'),
+              leading: const Icon(Icons.inventory, color: Colors.blue),
+              title: const Text('Inventario'),
               onTap: () {
-                Navigator.pop(context, MaterialPageRoute(builder: (context) => Inventario()));
+                Navigator.pop(context, MaterialPageRoute(builder: (context) => const Inventario()));
               },
             ),
             ListTile(
-              leading: Icon(Icons.production_quantity_limits, color: Colors.blue),
-              title: Text('Productos'),
+              leading: const Icon(Icons.production_quantity_limits, color: Colors.blue),
+              title: const Text('Productos'),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Productos()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const Productos()));
               },
             ),
             ListTile(
-              leading: Icon(Icons.shopping_cart, color: Colors.blue),
-              title: Text('Pedidos'),
+              leading: const Icon(Icons.shopping_cart, color: Colors.blue),
+              title: const Text('Pedidos'),
               onTap: () {
                
               },
             ),
             ListTile(
-              leading: Icon(Icons.local_shipping, color: Colors.blue),
-              title: Text('Proveedores'),
+              leading: const Icon(Icons.local_shipping, color: Colors.blue),
+              title: const Text('Proveedores'),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Proveedores()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const Proveedores()));
               },
             ),
             ListTile(
-              leading: Icon(Icons.category, color: Colors.blue),
-              title: Text('Categorias'),
+              leading: const Icon(Icons.category, color: Colors.blue),
+              title: const Text('Categorias'),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => CategoriasScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const CategoriasScreen()));
               },
             ),
             ListTile(
-              leading: Icon(Icons.people, color: Colors.blue),
-              title: Text('Usuarios'),
+              leading: const Icon(Icons.people, color: Colors.blue),
+              title: const Text('Usuarios'),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Usuarios()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const Usuarios()));
               },
             ),
-            Divider(),
-            Spacer(),
+            const Divider(),
+            const Spacer(),
             ListTile(
-              leading: Icon(Icons.settings, color: Colors.blue),
-              title: Text('Configuración'),
+              leading: const Icon(Icons.settings, color: Colors.blue),
+              title: const Text('Configuración'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.exit_to_app, color: Colors.blue),
-              title: Text('Salir'),
+              leading: const Icon(Icons.exit_to_app, color: Colors.blue),
+              title: const Text('Salir'),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const Inicio()));
               },
             ),
           ],
         ),
       ),
       body: ListView.builder(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         itemCount: 10, // Número de usuarios
         itemBuilder: (context, index) {
           return Card(
-            margin: EdgeInsets.symmetric(vertical: 8.0),
+            margin: const EdgeInsets.symmetric(vertical: 8.0),
             elevation: 3,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
@@ -124,7 +126,7 @@ class Usuarios extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListTile(
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   backgroundColor: Colors.blue,
                   child: Icon(
                     Icons.person,
@@ -133,7 +135,7 @@ class Usuarios extends StatelessWidget {
                 ),
                 title: Text(
                   'Usuario $index',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
@@ -148,13 +150,13 @@ class Usuarios extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     IconButton(
-                      icon: Icon(Icons.edit, color: Colors.blue),
+                      icon: const Icon(Icons.edit, color: Colors.blue),
                       onPressed: () {
                         // Acción para editar usuario
                       },
                     ),
                     IconButton(
-                      icon: Icon(Icons.delete, color: Colors.red),
+                      icon: const Icon(Icons.delete, color: Colors.red),
                       onPressed: () {
                         // Acción para eliminar usuario
                       },
@@ -165,7 +167,7 @@ class Usuarios extends StatelessWidget {
                   // Navegar a la pantalla de productos cuando se toca un usuario
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Productos()),
+                    MaterialPageRoute(builder: (context) => const Productos()),
                   );
                 },
               ),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:famisaludla91/vistas/registrarse.dart';
 import 'package:famisaludla91/vistas/vistainicio.dart';
 import 'package:famisaludla91/vistas/vistainicioadm.dart';
@@ -173,45 +175,49 @@ class _InicioState extends State<Inicio> {
   }
 
   Future<void> _login(BuildContext context) async {
-    final String email = emailController.text;
-    final String password = passwordController.text;
+  final String email = emailController.text;
+  final String password = passwordController.text;
 
-    try {
-      final url = Uri.parse('https://feaf-45-238-146-4.ngrok-free.app/login');
-      final response = await http.post(
-        url,
-        body: jsonEncode({'email': email, 'password': password}),
-        headers: {'Content-Type': 'application/json'},
-      );
+  try {
+    final url = Uri.parse('https://8c0b-45-238-146-4.ngrok-free.app/login');
+    final response = await http.post(
+      url,
+      body: jsonEncode({'email': email, 'password': password}),
+      headers: {'Content-Type': 'application/json'},
+    );
 
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        final String role = data['user']['role'];
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final String role = data['user']['role'];
 
-        if (role == 'ADMINISTRADOR') {
-          // ignore: use_build_context_synchronously
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Inicioad()));
-        } else if (role == 'CLIENTE') {
-          // ignore: use_build_context_synchronously
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-        } else {
-          // ignore: use_build_context_synchronously
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Rol desconocido: $role')),
-          );
-        }
+      if (role == 'ADMINISTRADOR') {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Inicioad()));
+      } else if (role == 'CLIENTE') {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
       } else {
-        final error = jsonDecode(response.body)['errors'];
-        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('$error')),
+          SnackBar(content: Text('Rol desconocido: $role')),
         );
       }
-    } catch (e) {
-      // ignore: use_build_context_synchronously
+    } else {
+      final error = jsonDecode(response.body)['errors'] ?? 'Error desconocido';
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error de conexión: $e')),
+        SnackBar(content: Text('$error')),
       );
     }
+  } on SocketException {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Error de conexión. Verifica tu conexión a internet.')),
+    );
+  } on FormatException {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Error en la respuesta del servidor.')),
+    );
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Ocurrió un error: $e')),
+    );
   }
+}
+
 }

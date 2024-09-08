@@ -1,145 +1,146 @@
-
+import 'dart:convert';
 import 'package:famisaludla91/main.dart';
+import 'package:famisaludla91/models/product.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:famisaludla91/vistas/buscar.dart';
 import 'package:famisaludla91/vistas/carrito.dart';
-import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late Future<List<Producto>> _productosFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _productosFuture = _fetchProductos();
+  }
+
+  Future<List<Producto>> _fetchProductos() async {
+    try {
+      final response = await http
+          .get(Uri.parse('https://8c0b-45-238-146-4.ngrok-free.app/productos'));
+
+      final contentType = response.headers['content-type'];
+      if (contentType != null && contentType.contains('application/json')) {
+        if (response.statusCode == 200) {
+          List<dynamic> data = jsonDecode(response.body);
+
+          if (data is List) {
+            return data.map((item) {
+              if (item is Map<String, dynamic>) {
+                return Producto.fromJson(item);
+              } else {
+                throw Exception('Formato de datos inesperado');
+              }
+            }).toList();
+          } else {
+            throw Exception('Formato de datos inesperado');
+          }
+        } else {
+          throw Exception('Error al cargar productos: ${response.statusCode}');
+        }
+      } else {
+        throw Exception('Respuesta no es JSON: ${response.body}');
+      }
+    } catch (e) {
+      print('Error: $e');
+      throw Exception('Error al cargar productos: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
-        title: Center(child: Text('Famisalud la 91')),
+        title: const Center(child: Text('Famisalud la 91')),
         actions: [
           IconButton(
-            icon: Icon(Icons.shopping_cart),
+            icon: const Icon(Icons.shopping_cart),
             onPressed: () {
-              // Acción del carrito
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Carrito()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Carrito()));
             },
           ),
         ],
       ),
-
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            UserAccountsDrawerHeader(
+            const UserAccountsDrawerHeader(
               accountName: Text('Thomas Marriaga'),
               accountEmail: Text('thomasmarriaga123@gmail.com'),
-
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
-                child: Center(child: 
-                  Icon(
+                child: Center(
+                  child: Icon(
                     Icons.person,
                     size: 50.0,
                     color: Colors.blue,
                   ),
                 ),
               ),
-              
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
             ),
-
-
-             ListTile(
-              leading: Icon(Icons.local_pharmacy, color: Colors.blue),
-              title: Text('Medicamentos'),
+            ListTile(
+              leading: const Icon(Icons.local_pharmacy, color: Colors.blue),
+              title: const Text('Medicamentos'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.face, color: Colors.blue),
-              title: Text('Belleza'),
+              leading: const Icon(Icons.face, color: Colors.blue),
+              title: const Text('Belleza'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.child_care, color: Colors.blue),
-              title: Text('Cuidado al bebe'),
+              leading: const Icon(Icons.child_care, color: Colors.blue),
+              title: const Text('Cuidado al bebe'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.food_bank, color: Colors.blue),
-              title: Text('Alimentos y bebidas'),
+              leading: const Icon(Icons.food_bank, color: Colors.blue),
+              title: const Text('Alimentos y bebidas'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
-            Divider(),
-            Spacer(),
-            
+            const Divider(),
+            const Spacer(),
             ListTile(
-              leading: Icon(Icons.settings, color: Colors.blue),
-              title: Text('Configuración'),
+              leading: const Icon(Icons.settings, color: Colors.blue),
+              title: const Text('Configuración'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.exit_to_app, color: Colors.blue),
-              title: Text('Salir'),
+              leading: const Icon(Icons.exit_to_app, color: Colors.blue),
+              title: const Text('Salir'),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Inicio()));
               },
             ),
           ],
         ),
       ),
-      /*drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'Menu',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              title: Text('Medicamentos'),
-              onTap: () {
-                
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Belleza'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Cuidado al bebe'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Alimentos y bebidas'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),*/
       body: Column(
         children: [
           Container(
@@ -148,31 +149,55 @@ class HomePage extends StatelessWidget {
             child: Image.asset('lib/imagenes/medicamentos.jpg'),
           ),
           Expanded(
-            child: GridView.count(
-              crossAxisCount: 2,
-              padding: EdgeInsets.all(8.0),
-              crossAxisSpacing: 8.0,
-              mainAxisSpacing: 8.0,
-              children: [
-                _buildProductCard(
+  child: FutureBuilder<List<Producto>>(
+    future: _productosFuture,
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(child: CircularProgressIndicator());
+      } else if (snapshot.hasError) {
+        return const Center(child: Text('Error al cargar productos'));
+      } else {
+        final productos = snapshot.data!;
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            int crossAxisCount = 2;
+            if (constraints.maxWidth < 600) {
+              crossAxisCount = 2;
+            } else if (constraints.maxWidth < 900) {
+              crossAxisCount = 3;
+            } else {
+              crossAxisCount = 4;
+            }
+            double childAspectRatio = (constraints.maxWidth / crossAxisCount) / 250;
+            return GridView.builder(
+              itemCount: productos.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
+                childAspectRatio: childAspectRatio,
+              ),
+              itemBuilder: (context, index) {
+                final producto = productos[index];
+                return _buildProductCard(
                   context,
-                  foto: 'lib/imagenes/VitaminaC.jpg',
-                  nombre: 'Vitamina C',
-                  descripcion: 'Analgésico y antiinflamatorio',
-                ),
-                _buildProductCard(
-                  context,
-                  foto: 'lib/imagenes/Amoxicilina.jpg',
-                  nombre: 'Amoxicilina',
-                  descripcion: 'Antibiótico para infecciones',
-                ),
-              ],
-            ),
-          ),
+                  foto: producto.image,
+                  nombre: producto.name,
+                  descripcion: producto.description,
+                );
+              },
+            );
+          },
+        );
+      }
+    },
+  ),
+),
+
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Inicio',
@@ -184,87 +209,87 @@ class HomePage extends StatelessWidget {
         ],
         selectedItemColor: Colors.blue,
         backgroundColor: Colors.white,
-
         onTap: (index) {
           switch (index) {
             case 0:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage()),
+                MaterialPageRoute(builder: (context) => const HomePage()),
               );
               break;
             case 1:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Buscar()),
+                MaterialPageRoute(builder: (context) => const Buscar()),
               );
               break;
-              
           }
         },
       ),
     );
   }
 
-  Widget _buildProductCard(BuildContext context, {
-    required String foto,
-    required String nombre,
-    required String descripcion}) {
+  Widget _buildProductCard(BuildContext context,
+      {required String foto,
+      required String nombre,
+      required String descripcion}) {
     return Card(
-    elevation: 4.0,
-    child: Column(
-      children: [
-        Image.network(foto, height: 100, fit: BoxFit.cover),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Text(
-                nombre,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 8),
-              Text(
-                descripcion,
-                style: TextStyle(fontSize: 12),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 8),
-              Column(  // Cambiado de Row a Column
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                    ),
-                    child: Text(
-                      'Agregar',
-                      style: TextStyle(
-                        color: Colors.white,
+      elevation: 4.0,
+      child: Column(
+        children: [
+          Image.network(foto,
+              height: 100,
+              fit: BoxFit.cover),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Text( 
+                  nombre,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  descripcion,
+                  style: const TextStyle(fontSize: 12),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 8),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                      ),
+                      child: const Text(
+                        'Agregar',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 8), // Espacio entre los botones
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                    ),
-                    child: Text(
-                      'Comprar',
-                      style: TextStyle(
-                        color: Colors.white,
+                    const SizedBox(height: 8),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                      ),
+                      child: const Text(
+                        'Comprar',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
-    ),
-  );
-}
+        ],
+      ),
+    );
+  }
 }

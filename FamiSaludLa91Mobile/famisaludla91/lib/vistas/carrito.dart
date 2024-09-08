@@ -5,18 +5,20 @@ import 'package:flutter/material.dart';
 
 
 class Carrito extends StatelessWidget {
+  const Carrito({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
-        title: Center(child: Text('Famisalud la 91')),
+        title: const Center(child: Text('Famisalud la 91')),
         actions: [
           IconButton(
-            icon: Icon(Icons.shopping_cart),
+            icon: const Icon(Icons.shopping_cart),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage()));
             },
           ),
         ],
@@ -25,28 +27,28 @@ class Carrito extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            CartItem(
+            const CartItem(
               nombre: 'Amoxicilina',
               precio: 34500,
               cantidad: 1,
               foto: 'lib/imagenes/Amoxicilina.jpg',
             ),
-            Divider(),
-            CartItem(
+            const Divider(),
+            const CartItem(
               nombre: 'Vitamina C',
               precio: 9500,
               cantidad: 1,
               foto: 'lib/imagenes/VitaminaC.jpg',
             ),
-            Divider(),
-            Spacer(),
-            SummarySection(subtotal: 44000, envio: 5000),
-            Divider(),
-            TotalSection(total: 49000),
-            SizedBox(height: 20),
+            const Divider(),
+            const Spacer(),
+            const SummarySection(subtotal: 44000, envio: 5000),
+            const Divider(),
+            const TotalSection(total: 49000),
+            const SizedBox(height: 20),
             Row(
               children: [
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 ElevatedButton(
                   onPressed: () {
                     // Handle payment
@@ -55,9 +57,9 @@ class Carrito extends StatelessWidget {
                     backgroundColor: Colors.blue,
                     foregroundColor: Colors.white,
                   ),
-                  child: Text('Hacer Pago'),
+                  child: const Text('Hacer Pago'),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 ElevatedButton(
                   onPressed: () {
                     // Handle continue shopping
@@ -66,7 +68,7 @@ class Carrito extends StatelessWidget {
                     backgroundColor: Colors.grey,
                     foregroundColor: Colors.white,
                   ),
-                  child: Text('seguir compra'),
+                  child: const Text('seguir compra'),
                 ),
               ],
             ),
@@ -74,7 +76,7 @@ class Carrito extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Inicio',
@@ -89,13 +91,13 @@ class Carrito extends StatelessWidget {
             case 0:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage()),
+                MaterialPageRoute(builder: (context) => const HomePage()),
               );
               break;
             case 1:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Buscar()),
+                MaterialPageRoute(builder: (context) => const Buscar()),
               );
               break;
               
@@ -113,12 +115,12 @@ class CartItem extends StatelessWidget {
   final String foto;
 
   const CartItem({
-    Key? key,
+    super.key,
     required this.nombre,
     required this.precio,
     required this.cantidad,
     required this.foto,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -130,14 +132,14 @@ class CartItem extends StatelessWidget {
           height: 50,
           fit: BoxFit.cover,
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 nombre,
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
               Text(
                 '\$${precio.toString()}',
@@ -147,17 +149,17 @@ class CartItem extends StatelessWidget {
           ),
         ),
         IconButton(
-          icon: Icon(Icons.remove_circle_outline),
+          icon: const Icon(Icons.remove_circle_outline),
           onPressed: () {
             // Handle decrement quantity
           },
         ),
         Text(
           '$cantidad',
-          style: TextStyle(fontSize: 16),
+          style: const TextStyle(fontSize: 16),
         ),
         IconButton(
-          icon: Icon(Icons.add_circle_outline),
+          icon: const Icon(Icons.add_circle_outline),
           onPressed: () {
             // Handle increment quantity
           },
@@ -172,10 +174,10 @@ class SummarySection extends StatelessWidget {
   final int envio;
 
   const SummarySection({
-    Key? key,
+    super.key,
     required this.subtotal,
     required this.envio,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -185,15 +187,15 @@ class SummarySection extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('SubTotal:'),
+            const Text('SubTotal:'),
             Text('\$${subtotal.toString()}'),
           ],
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Envio:'),
+            const Text('Envio:'),
             Text('\$${envio.toString()}'),
           ],
         ),
@@ -206,9 +208,9 @@ class TotalSection extends StatelessWidget {
   final int total;
 
   const TotalSection({
-    Key? key,
+    super.key,
     required this.total,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -218,13 +220,13 @@ class TotalSection extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Total:',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(
               '\$${total.toString()}',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ],
         ),
