@@ -1,5 +1,6 @@
 import 'package:famisaludla91/main.dart';
 import 'package:famisaludla91/vistas/categoria.dart';
+import 'package:famisaludla91/vistas/inventario.dart';
 
 import 'package:famisaludla91/vistas/proveedores.dart';
 import 'package:famisaludla91/vistas/usuarios.dart';
@@ -50,7 +51,7 @@ class Productos extends StatelessWidget {
             leading: Icon(Icons.inventory, color: Colors.blue),
             title: Text('Inventario'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pop(context, MaterialPageRoute(builder: (context) => Inventario()));
             },
           ),
           ListTile(
