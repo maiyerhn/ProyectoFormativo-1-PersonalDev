@@ -24,20 +24,20 @@ class Inventario extends StatelessWidget {
           ),
         ],
       ),
-      drawer: AppDrawer(),
-      body: SingleChildScrollView( // Permite el desplazamiento si el contenido es demasiado largo
+      drawer: const AppDrawer(),
+      body: const SingleChildScrollView( // Permite el desplazamiento si el contenido es demasiado largo
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch, // Asegura que el contenido ocupe todo el ancho
             children: [
               // Información del Administrador
               AdministratorInfo(),
-              const SizedBox(height: 10),
+              SizedBox(height: 10),
 
               // Pedidos en Espera
               PendingOrders(),
-              const SizedBox(height: 10),
+              SizedBox(height: 10),
 
               // Productos Más y Menos Vendidos
               TopProducts(),
@@ -360,14 +360,14 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.inventory, color: Colors.blue),
             title: const Text('Inventario'),
             onTap: () {
-              Navigator.pop(context, MaterialPageRoute(builder: (context) => Inventario()));
+              Navigator.pop(context, MaterialPageRoute(builder: (context) => const Inventario()));
             },
           ),
           ListTile(
             leading: const Icon(Icons.production_quantity_limits, color: Colors.blue),
             title: const Text('Productos'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Productos()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Productos()));
               //Navigator.pop(context);
             },
           ),
@@ -383,7 +383,7 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.local_shipping, color: Colors.blue),
             title: const Text('Proveedores'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Proveedores()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Proveedores()));
               //Navigator.pop(context);
             },
           ),
@@ -391,7 +391,7 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.category, color: Colors.blue),
             title: const Text('Categorias'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => CategoriasScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const CategoriasScreen()));
               //Navigator.pop(context);
             },
           ),
@@ -399,7 +399,7 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.people, color: Colors.blue),
             title: const Text('Usuarios'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Usuarios()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Usuarios()));
               //Navigator.pop(context);
             },
           ),

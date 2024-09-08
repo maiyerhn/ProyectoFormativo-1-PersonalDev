@@ -137,7 +137,7 @@ class _InicioState extends State<Inicio> {
             const SizedBox(height: 10),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Inicioad()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const Inicioad()));
               },
               child: const Text(
                 '¿Olvidaste tu contraseña?',
@@ -179,7 +179,7 @@ class _InicioState extends State<Inicio> {
   final String password = passwordController.text;
 
   try {
-    final url = Uri.parse('https://1d37-45-238-146-4.ngrok-free.app/login');
+    final url = Uri.parse('https://8fab-45-238-146-4.ngrok-free.app/login');
     final response = await http.post(
       url,
       body: jsonEncode({'email': email, 'password': password}),
@@ -191,9 +191,9 @@ class _InicioState extends State<Inicio> {
       final String role = data['user']['role'];
 
       if (role == 'ADMINISTRADOR') {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Inicioad()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const Inicioad()));
       } else if (role == 'CLIENTE') {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage()));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Rol desconocido: $role')),
@@ -207,11 +207,11 @@ class _InicioState extends State<Inicio> {
     }
   } on SocketException {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Error de conexión. Verifica tu conexión a internet.')),
+      const SnackBar(content: Text('Error de conexión. Verifica tu conexión a internet.')),
     );
   } on FormatException {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Error en la respuesta del servidor.')),
+      const SnackBar(content: Text('Error en la respuesta del servidor.')),
     );
   } catch (e) {
     ScaffoldMessenger.of(context).showSnackBar(

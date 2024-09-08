@@ -52,7 +52,7 @@ class Inicioad extends StatelessWidget {
             case 0:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Inicioad()),
+                MaterialPageRoute(builder: (context) => const Inicioad()),
               );
               break;
             /*case 1:
@@ -95,14 +95,14 @@ class Inicioad extends StatelessWidget {
             leading: const Icon(Icons.inventory, color: Colors.blue),
             title: const Text('Inventario'),
             onTap: () {
-              Navigator.pop(context, MaterialPageRoute(builder: (context) => Inventario()));
+              Navigator.pop(context, MaterialPageRoute(builder: (context) => const Inventario()));
             },
           ),
           ListTile(
             leading: const Icon(Icons.production_quantity_limits, color: Colors.blue),
             title: const Text('Productos'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Productos()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Productos()));
               //Navigator.pop(context);
             },
           ),
@@ -118,7 +118,7 @@ class Inicioad extends StatelessWidget {
             leading: const Icon(Icons.local_shipping, color: Colors.blue),
             title: const Text('Proveedores'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Proveedores()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Proveedores()));
               //Navigator.pop(context);
             },
           ),
@@ -126,7 +126,7 @@ class Inicioad extends StatelessWidget {
             leading: const Icon(Icons.category, color: Colors.blue),
             title: const Text('Categorias'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => CategoriasScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const CategoriasScreen()));
               //Navigator.pop(context);
             },
           ),
@@ -134,7 +134,7 @@ class Inicioad extends StatelessWidget {
             leading: const Icon(Icons.people, color: Colors.blue),
             title: const Text('Usuarios'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Usuarios()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Usuarios()));
               //Navigator.pop(context);
             },
           ),

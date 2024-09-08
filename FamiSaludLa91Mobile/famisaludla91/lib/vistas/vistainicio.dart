@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
             icon: const Icon(Icons.shopping_cart),
             onPressed: () {
               // Acción del carrito
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Carrito()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Carrito()));
             },
           ),
         ],
@@ -192,13 +192,13 @@ class HomePage extends StatelessWidget {
             case 0:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage()),
+                MaterialPageRoute(builder: (context) => const HomePage()),
               );
               break;
             case 1:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Buscar()),
+                MaterialPageRoute(builder: (context) => const Buscar()),
               );
               break;
               
