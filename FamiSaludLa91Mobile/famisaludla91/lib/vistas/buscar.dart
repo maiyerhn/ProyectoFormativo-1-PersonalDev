@@ -4,16 +4,18 @@ import 'package:famisaludla91/vistas/vistainicio.dart';
 import 'package:flutter/material.dart';
 
 class Buscar extends StatelessWidget {
+  const Buscar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
-        title: Center(child: Text('Famisalud la 91')),
+        title: const Center(child: Text('Famisalud la 91')),
         actions: [
           IconButton(
-            icon: Icon(Icons.shopping_cart),
+            icon: const Icon(Icons.shopping_cart),
             onPressed: () {
               // Acción del carrito
               Navigator.push(context, MaterialPageRoute(builder: (context) => Carrito()));
@@ -26,7 +28,7 @@ class Buscar extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            UserAccountsDrawerHeader(
+            const UserAccountsDrawerHeader(
               accountName: Text('Thomas Marriaga'),
               accountEmail: Text('thomasmarriaga123@gmail.com'),
 
@@ -46,50 +48,50 @@ class Buscar extends StatelessWidget {
               ),
             ),
              ListTile(
-              leading: Icon(Icons.local_pharmacy, color: Colors.blue),
-              title: Text('Medicamentos'),
+              leading: const Icon(Icons.local_pharmacy, color: Colors.blue),
+              title: const Text('Medicamentos'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.face, color: Colors.blue),
-              title: Text('Belleza'),
+              leading: const Icon(Icons.face, color: Colors.blue),
+              title: const Text('Belleza'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.child_care, color: Colors.blue),
-              title: Text('Cuidado al bebe'),
+              leading: const Icon(Icons.child_care, color: Colors.blue),
+              title: const Text('Cuidado al bebe'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.food_bank, color: Colors.blue),
-              title: Text('Alimentos y bebidas'),
+              leading: const Icon(Icons.food_bank, color: Colors.blue),
+              title: const Text('Alimentos y bebidas'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
 
             // agrgar al proyecto
-            Divider(),
-            Spacer(),
+            const Divider(),
+            const Spacer(),
             
             ListTile(
-            leading: Icon(Icons.settings, color: Colors.blue),
-            title: Text('Configuración'),
+            leading: const Icon(Icons.settings, color: Colors.blue),
+            title: const Text('Configuración'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.exit_to_app, color: Colors.blue),
-            title: Text('Salir'),
+            leading: const Icon(Icons.exit_to_app, color: Colors.blue),
+            title: const Text('Salir'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Inicio()));
             },
           ),
           ],
@@ -111,12 +113,12 @@ class Buscar extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 ElevatedButton(
                   onPressed: () {
                     // Acción de búsqueda
                   },
-                  child: Text('Buscar'),
+                  child: const Text('Buscar'),
                 ),
                 
               ],
@@ -126,7 +128,7 @@ class Buscar extends StatelessWidget {
       ),
 
       bottomNavigationBar: BottomNavigationBar(
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Inicio',

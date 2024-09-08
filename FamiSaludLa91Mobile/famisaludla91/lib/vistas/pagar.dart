@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
 class PagarPage extends StatelessWidget {
+  const PagarPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pagar'),
+        title: const Text('Pagar'),
       ),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
             Navigator.pushNamed(context, '/factura');
           },
-          child: Text('Ver Factura'),
+          child: const Text('Ver Factura'),
         ),
       ),
     );

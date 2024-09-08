@@ -7,17 +7,19 @@ import 'package:famisaludla91/vistas/usuarios.dart';
 import 'package:flutter/material.dart';
 
 class CategoriasScreen extends StatelessWidget {
+  const CategoriasScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
-        title: Center(child: Text('Famisalud la 91')),
+        title: const Center(child: Text('Famisalud la 91')),
      
         actions: [
           IconButton(
-            icon: Icon(Icons.account_circle, size: 30),
+            icon: const Icon(Icons.account_circle, size: 30),
             onPressed: () {
               // Acción para perfil
             },
@@ -36,35 +38,35 @@ class CategoriasScreen extends StatelessWidget {
                   child: TextField(
                     decoration: InputDecoration(
                       hintText: 'Buscar',
-                      prefixIcon: Icon(Icons.search),
+                      prefixIcon: const Icon(Icons.search),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 ElevatedButton(
                   onPressed: () {
                     // Acción de búsqueda
                   },
-                  child: Text('Buscar'),
+                  child: const Text('Buscar'),
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
                 // Acción para agregar categoría
               },
-              child: Text('Agregar'),
+              child: const Text('Agregar'),
             ),
-            SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               'Categorías',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Expanded(
               child: ListView(
                 children: [
@@ -95,7 +97,7 @@ class CategoriasScreen extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          UserAccountsDrawerHeader(
+          const UserAccountsDrawerHeader(
             accountName: Text('Thomas Marriaga'),
             accountEmail: Text('thomasmarriaga123@gmail.com'),
             currentAccountPicture: CircleAvatar(
@@ -113,60 +115,60 @@ class CategoriasScreen extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.inventory, color: Colors.blue),
-            title: Text('Inventario'),
+            leading: const Icon(Icons.inventory, color: Colors.blue),
+            title: const Text('Inventario'),
             onTap: () {
               Navigator.pop(context, MaterialPageRoute(builder: (context) => Inventario()));
             },
           ),
           ListTile(
-            leading: Icon(Icons.production_quantity_limits, color: Colors.blue),
-            title: Text('Productos'),
+            leading: const Icon(Icons.production_quantity_limits, color: Colors.blue),
+            title: const Text('Productos'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Productos()));
             },
           ),
           ListTile(
-            leading: Icon(Icons.shopping_cart, color: Colors.blue),
-            title: Text('Pedidos'),
+            leading: const Icon(Icons.shopping_cart, color: Colors.blue),
+            title: const Text('Pedidos'),
             onTap: () {
             
             },
           ),
           ListTile(
-            leading: Icon(Icons.local_shipping, color: Colors.blue),
-            title: Text('Proveedores'),
+            leading: const Icon(Icons.local_shipping, color: Colors.blue),
+            title: const Text('Proveedores'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Proveedores()));
             },
           ),
           ListTile(
-            leading: Icon(Icons.category, color: Colors.blue),
-            title: Text('Categorias'),
+            leading: const Icon(Icons.category, color: Colors.blue),
+            title: const Text('Categorias'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => CategoriasScreen()));
             },
           ),
           ListTile(
-            leading: Icon(Icons.people, color: Colors.blue),
-            title: Text('Usuarios'),
+            leading: const Icon(Icons.people, color: Colors.blue),
+            title: const Text('Usuarios'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Usuarios()));
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.settings, color: Colors.blue),
-            title: Text('Configuración'),
+            leading: const Icon(Icons.settings, color: Colors.blue),
+            title: const Text('Configuración'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.exit_to_app, color: Colors.blue),
-            title: Text('Salir'),
+            leading: const Icon(Icons.exit_to_app, color: Colors.blue),
+            title: const Text('Salir'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Inicio()));
             },
           ),
         ],
@@ -181,7 +183,7 @@ class CategoriasScreen extends StatelessWidget {
     required String descripcion,
   }) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8.0),
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -189,48 +191,48 @@ class CategoriasScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(Icons.category, size: 30),
-                SizedBox(width: 10),
+                const Icon(Icons.category, size: 30),
+                const SizedBox(width: 10),
                 Text(
                   'ID: $id',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
                 ),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 Text(
                   'Nombre: $nombre',
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 Text(
                   'Ofertas: $ofertas',
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
-                Spacer(),
+                const Spacer(),
                 IconButton(
-                  icon: Icon(Icons.edit, color: Colors.blue),
+                  icon: const Icon(Icons.edit, color: Colors.blue),
                   onPressed: () {
                     // Acción de editar categoría
                   },
                 ),
                 IconButton(
-                  icon: Icon(Icons.delete, color: Colors.red),
+                  icon: const Icon(Icons.delete, color: Colors.red),
                   onPressed: () {
                     // Acción de eliminar categoría
                   },
                 ),
               ],
             ),
-            SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               'Descripción:',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
             ),
             Text(
               descripcion,
-              style: TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
             ),
           ],
         ),
@@ -241,51 +243,61 @@ class CategoriasScreen extends StatelessWidget {
 
 // Simula las otras pantallas
 class ProductosScreen extends StatelessWidget {
+  const ProductosScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Productos')),
-      body: Center(child: Text('Pantalla de Productos')),
+      appBar: AppBar(title: const Text('Productos')),
+      body: const Center(child: Text('Pantalla de Productos')),
     );
   }
 }
 
 class PedidosScreen extends StatelessWidget {
+  const PedidosScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Pedidos')),
-      body: Center(child: Text('Pantalla de Pedidos')),
+      appBar: AppBar(title: const Text('Pedidos')),
+      body: const Center(child: Text('Pantalla de Pedidos')),
     );
   }
 }
 
 class ProveedoresScreen extends StatelessWidget {
+  const ProveedoresScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Proveedores')),
-      body: Center(child: Text('Pantalla de Proveedores')),
+      appBar: AppBar(title: const Text('Proveedores')),
+      body: const Center(child: Text('Pantalla de Proveedores')),
     );
   }
 }
 
 class UsuariosScreen extends StatelessWidget {
+  const UsuariosScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Usuarios')),
-      body: Center(child: Text('Pantalla de Usuarios')),
+      appBar: AppBar(title: const Text('Usuarios')),
+      body: const Center(child: Text('Pantalla de Usuarios')),
     );
   }
 }
 
 class InicioScreen extends StatelessWidget {
+  const InicioScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Inicio')),
-      body: Center(child: Text('Pantalla de Inicio')),
+      appBar: AppBar(title: const Text('Inicio')),
+      body: const Center(child: Text('Pantalla de Inicio')),
     );
   }
 }

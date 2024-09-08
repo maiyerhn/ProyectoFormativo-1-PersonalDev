@@ -6,16 +6,18 @@ import 'package:famisaludla91/vistas/usuarios.dart';
 import 'package:flutter/material.dart';
 
 class Inventario extends StatelessWidget {
+  const Inventario({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
-        title: Center(child: Text('Famisalud la 91')),
+        title: const Center(child: Text('Famisalud la 91')),
         actions: [
           IconButton(
-            icon: Icon(Icons.person),
+            icon: const Icon(Icons.person),
             onPressed: () {
               // Acción del perfil
             },
@@ -31,11 +33,11 @@ class Inventario extends StatelessWidget {
             children: [
               // Información del Administrador
               AdministratorInfo(),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
 
               // Pedidos en Espera
               PendingOrders(),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
 
               // Productos Más y Menos Vendidos
               TopProducts(),
@@ -52,7 +54,9 @@ class AdministratorInfo extends StatelessWidget {
   final String name = ''; // Replace with actual name
   final String email = ''; // Replace with actual email
   final String phone = ''; // Replace with actual phone number
-  final String role = ''; // Replace with actual role
+  final String role = '';
+
+  const AdministratorInfo({super.key}); // Replace with actual role
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +66,7 @@ class AdministratorInfo extends StatelessWidget {
     );
 
     return Card(
-      margin: EdgeInsets.all(16),
+      margin: const EdgeInsets.all(16),
       elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -80,13 +84,13 @@ class AdministratorInfo extends StatelessWidget {
                 color: Colors.blueGrey[800],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildInfoRow(context, Icons.person, 'Nombre:', name, textStyle),
-            Divider(),
+            const Divider(),
             _buildInfoRow(context, Icons.email, 'Email:', email, textStyle),
-            Divider(),
+            const Divider(),
             _buildInfoRow(context, Icons.phone, 'Teléfono:', phone, textStyle),
-            Divider(),
+            const Divider(),
             _buildInfoRow(context, Icons.work, 'Rol:', role, textStyle),
           ],
         ),
@@ -98,7 +102,7 @@ class AdministratorInfo extends StatelessWidget {
     return Row(
       children: <Widget>[
         Icon(icon, color: Colors.blueGrey[600]),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         Expanded(
           child: RichText(
             text: TextSpan(
@@ -106,7 +110,7 @@ class AdministratorInfo extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   text: '$label ',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 TextSpan(
                   text: value.isEmpty ? 'Sin información' : value,
@@ -122,6 +126,8 @@ class AdministratorInfo extends StatelessWidget {
 }
 
 class PendingOrders extends StatefulWidget {
+  const PendingOrders({super.key});
+
   @override
   _PendingOrdersState createState() => _PendingOrdersState();
 }
@@ -130,7 +136,7 @@ class _PendingOrdersState extends State<PendingOrders> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(16),
+      margin: const EdgeInsets.all(16),
       elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -140,7 +146,7 @@ class _PendingOrdersState extends State<PendingOrders> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
+            const Text(
               'Pedidos En Espera',
               style: TextStyle(
                 fontSize: 20,
@@ -148,14 +154,14 @@ class _PendingOrdersState extends State<PendingOrders> {
                 color: Colors.black87,
               ),
             ),
-            SizedBox(height: 8),
-            Text(
+            const SizedBox(height: 8),
+            const Text(
               'Resumen de los Pedidos que se encuentran en Espera:',
               style: TextStyle(
                 color: Colors.black54,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             // DataTable widget
             Container(
               decoration: BoxDecoration(
@@ -168,17 +174,17 @@ class _PendingOrdersState extends State<PendingOrders> {
                   columnSpacing: 24,
                   dataRowHeight: 50, // Default row height
                   headingRowHeight: 50, // Default heading row height
-                  headingRowColor: MaterialStateColor.resolveWith(
+                  headingRowColor: WidgetStateColor.resolveWith(
                     (states) => Colors.white, // White background for heading rows
                   ),
-                  dataRowColor: MaterialStateColor.resolveWith(
+                  dataRowColor: WidgetStateColor.resolveWith(
                     (states) => Colors.white, // White background for data rows
                   ),
                   columns: [
                     DataColumn(
                       label: Container(
-                        padding: EdgeInsets.all(12),
-                        child: Text(
+                        padding: const EdgeInsets.all(12),
+                        child: const Text(
                           'Correo',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -189,8 +195,8 @@ class _PendingOrdersState extends State<PendingOrders> {
                     ),
                     DataColumn(
                       label: Container(
-                        padding: EdgeInsets.all(12),
-                        child: Text(
+                        padding: const EdgeInsets.all(12),
+                        child: const Text(
                           'Estado',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -201,8 +207,8 @@ class _PendingOrdersState extends State<PendingOrders> {
                     ),
                     DataColumn(
                       label: Container(
-                        padding: EdgeInsets.all(12),
-                        child: Text(
+                        padding: const EdgeInsets.all(12),
+                        child: const Text(
                           'Fecha y Hora',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -213,8 +219,8 @@ class _PendingOrdersState extends State<PendingOrders> {
                     ),
                     DataColumn(
                       label: Container(
-                        padding: EdgeInsets.all(12),
-                        child: Text(
+                        padding: const EdgeInsets.all(12),
+                        child: const Text(
                           'Monto',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -224,7 +230,7 @@ class _PendingOrdersState extends State<PendingOrders> {
                       ),
                     ),
                   ],
-                  rows: [], // No rows initially
+                  rows: const [], // No rows initially
                 ),
               ),
             ),
@@ -236,10 +242,12 @@ class _PendingOrdersState extends State<PendingOrders> {
 }
 
 class TopProducts extends StatelessWidget {
+  const TopProducts({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(16),
+      margin: const EdgeInsets.all(16),
       elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -257,9 +265,9 @@ class TopProducts extends StatelessWidget {
                 color: Colors.blueGrey[800],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildProductSection('Más Vendidos', []),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildProductSection('Menos Vendidos', []),
           ],
         ),
@@ -279,7 +287,7 @@ class TopProducts extends StatelessWidget {
             color: Colors.blueGrey[700],
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         products.isEmpty
             ? Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -305,8 +313,8 @@ class TopProducts extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Icon(Icons.trending_up, color: Colors.green[700]), // Icono representativo
-            SizedBox(width: 8),
-            Expanded(
+            const SizedBox(width: 8),
+            const Expanded(
               child: Text(
                 'Nombre del Producto - Cantidad', // Texto de ejemplo
                 style: TextStyle(
@@ -323,13 +331,15 @@ class TopProducts extends StatelessWidget {
 }
 
 class AppDrawer extends StatelessWidget {
+  const AppDrawer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          UserAccountsDrawerHeader(
+          const UserAccountsDrawerHeader(
             accountName: Text('Thomas Marriaga'),
             accountEmail: Text('thomasmarriaga123@gmail.com'),
             currentAccountPicture: CircleAvatar(
@@ -347,66 +357,66 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.inventory, color: Colors.blue),
-            title: Text('Inventario'),
+            leading: const Icon(Icons.inventory, color: Colors.blue),
+            title: const Text('Inventario'),
             onTap: () {
               Navigator.pop(context, MaterialPageRoute(builder: (context) => Inventario()));
             },
           ),
           ListTile(
-            leading: Icon(Icons.production_quantity_limits, color: Colors.blue),
-            title: Text('Productos'),
+            leading: const Icon(Icons.production_quantity_limits, color: Colors.blue),
+            title: const Text('Productos'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Productos()));
               //Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.shopping_cart, color: Colors.blue),
-            title: Text('Pedidos'),
+            leading: const Icon(Icons.shopping_cart, color: Colors.blue),
+            title: const Text('Pedidos'),
             onTap: () {
             
               //Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.local_shipping, color: Colors.blue),
-            title: Text('Proveedores'),
+            leading: const Icon(Icons.local_shipping, color: Colors.blue),
+            title: const Text('Proveedores'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Proveedores()));
               //Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.category, color: Colors.blue),
-            title: Text('Categorias'),
+            leading: const Icon(Icons.category, color: Colors.blue),
+            title: const Text('Categorias'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => CategoriasScreen()));
               //Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.people, color: Colors.blue),
-            title: Text('Usuarios'),
+            leading: const Icon(Icons.people, color: Colors.blue),
+            title: const Text('Usuarios'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Usuarios()));
               //Navigator.pop(context);
             },
           ),
-          Divider(),
-          Spacer(),
+          const Divider(),
+          const Spacer(),
           ListTile(
-            leading: Icon(Icons.settings, color: Colors.blue),
-            title: Text('Configuración'),
+            leading: const Icon(Icons.settings, color: Colors.blue),
+            title: const Text('Configuración'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.exit_to_app, color: Colors.blue),
-            title: Text('Salir'),
+            leading: const Icon(Icons.exit_to_app, color: Colors.blue),
+            title: const Text('Salir'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Inicio()));
             },
           ),
         ],

@@ -9,19 +9,21 @@ import 'package:flutter/material.dart';
 
 
 class FacturaPage extends StatelessWidget {
+  const FacturaPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           'Famisalud la 91',
           style: TextStyle(color: Colors.white),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.account_circle, color: Colors.white),
+            icon: const Icon(Icons.account_circle, color: Colors.white),
             onPressed: () {
               // Acción al presionar el icono de usuario
             },
@@ -38,21 +40,21 @@ class FacturaPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                  icon: Icon(Icons.arrow_back, color: Colors.blue, size: 30.0),
+                  icon: const Icon(Icons.arrow_back, color: Colors.blue, size: 30.0),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                 ),
-                Text('ID: 1', style: TextStyle(fontWeight: FontWeight.bold)),
+                const Text('ID: 1', style: TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),
-            SizedBox(height: 8),
-            Text('Fecha: 13/12/2023', style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(height: 8),
-            Text('Nombre: Maiyer Hernandez', style: TextStyle(fontWeight: FontWeight.bold)),
-            Text('Dirección: Kar 21 #21-52'),
-            Text('Teléfono: 8354274239872'),
-            SizedBox(height: 16),
+            const SizedBox(height: 8),
+            const Text('Fecha: 13/12/2023', style: TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
+            const Text('Nombre: Maiyer Hernandez', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text('Dirección: Kar 21 #21-52'),
+            const Text('Teléfono: 8354274239872'),
+            const SizedBox(height: 16),
             Table(
               border: TableBorder.all(color: Colors.grey),
               children: [
@@ -60,65 +62,65 @@ class FacturaPage extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.blue[100],
                   ),
-                  children: [
+                  children: const [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Text('Nombre', style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Text('Cantidad', style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Text('Precio unitario', style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Text('Total', style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
                   ],
                 ),
-                TableRow(children: [
+                const TableRow(children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Text('Mieltertos'),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Text('3'),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Text('\$2.500'),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Text('\$7.500'),
                   ),
                 ]),
-                TableRow(children: [
+                const TableRow(children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Text('Noraver Gripa'),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Text('3'),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Text('\$2.500'),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Text('\$7.500'),
                   ),
                 ]),
               ],
             ),
-            SizedBox(height: 16),
-            Row(
+            const SizedBox(height: 16),
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Total a Pagar: \$15.000', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -133,7 +135,7 @@ class FacturaPage extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-          UserAccountsDrawerHeader(
+          const UserAccountsDrawerHeader(
             accountName: Text('Thomas Marriaga'),
             accountEmail: Text('thomasmarriaga123@gmail.com'),
             currentAccountPicture: CircleAvatar(
@@ -151,66 +153,66 @@ class FacturaPage extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.inventory, color: Colors.blue),
-            title: Text('Inventario'),
+            leading: const Icon(Icons.inventory, color: Colors.blue),
+            title: const Text('Inventario'),
             onTap: () {
               Navigator.pop(context, MaterialPageRoute(builder: (context) => Inventario()));
             },
           ),
           ListTile(
-            leading: Icon(Icons.production_quantity_limits, color: Colors.blue),
-            title: Text('Productos'),
+            leading: const Icon(Icons.production_quantity_limits, color: Colors.blue),
+            title: const Text('Productos'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Productos()));
               //Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.shopping_cart, color: Colors.blue),
-            title: Text('Pedidos'),
+            leading: const Icon(Icons.shopping_cart, color: Colors.blue),
+            title: const Text('Pedidos'),
             onTap: () {
              
               //Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.local_shipping, color: Colors.blue),
-            title: Text('Proveedores'),
+            leading: const Icon(Icons.local_shipping, color: Colors.blue),
+            title: const Text('Proveedores'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Proveedores()));
               //Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.category, color: Colors.blue),
-            title: Text('Categorias'),
+            leading: const Icon(Icons.category, color: Colors.blue),
+            title: const Text('Categorias'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => CategoriasScreen()));
               //Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.people, color: Colors.blue),
-            title: Text('Usuarios'),
+            leading: const Icon(Icons.people, color: Colors.blue),
+            title: const Text('Usuarios'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Usuarios()));
               //Navigator.pop(context);
             },
           ),
-          Divider(),
-          Spacer(),
+          const Divider(),
+          const Spacer(),
           ListTile(
-            leading: Icon(Icons.settings, color: Colors.blue),
-            title: Text('Configuración'),
+            leading: const Icon(Icons.settings, color: Colors.blue),
+            title: const Text('Configuración'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.exit_to_app, color: Colors.blue),
-            title: Text('Salir'),
+            leading: const Icon(Icons.exit_to_app, color: Colors.blue),
+            title: const Text('Salir'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Inicio()));
             },
           ),
         ],
@@ -218,7 +220,7 @@ class FacturaPage extends StatelessWidget {
       ),
       // Bottom Navigation Bar
       bottomNavigationBar: BottomNavigationBar(
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Inicio',

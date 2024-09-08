@@ -5,16 +5,18 @@ import 'package:famisaludla91/vistas/carrito.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
-        title: Center(child: Text('Famisalud la 91')),
+        title: const Center(child: Text('Famisalud la 91')),
         actions: [
           IconButton(
-            icon: Icon(Icons.shopping_cart),
+            icon: const Icon(Icons.shopping_cart),
             onPressed: () {
               // Acción del carrito
               Navigator.push(context, MaterialPageRoute(builder: (context) => Carrito()));
@@ -27,7 +29,7 @@ class HomePage extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            UserAccountsDrawerHeader(
+            const UserAccountsDrawerHeader(
               accountName: Text('Thomas Marriaga'),
               accountEmail: Text('thomasmarriaga123@gmail.com'),
 
@@ -49,48 +51,48 @@ class HomePage extends StatelessWidget {
 
 
              ListTile(
-              leading: Icon(Icons.local_pharmacy, color: Colors.blue),
-              title: Text('Medicamentos'),
+              leading: const Icon(Icons.local_pharmacy, color: Colors.blue),
+              title: const Text('Medicamentos'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.face, color: Colors.blue),
-              title: Text('Belleza'),
+              leading: const Icon(Icons.face, color: Colors.blue),
+              title: const Text('Belleza'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.child_care, color: Colors.blue),
-              title: Text('Cuidado al bebe'),
+              leading: const Icon(Icons.child_care, color: Colors.blue),
+              title: const Text('Cuidado al bebe'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.food_bank, color: Colors.blue),
-              title: Text('Alimentos y bebidas'),
+              leading: const Icon(Icons.food_bank, color: Colors.blue),
+              title: const Text('Alimentos y bebidas'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
-            Divider(),
-            Spacer(),
+            const Divider(),
+            const Spacer(),
             
             ListTile(
-              leading: Icon(Icons.settings, color: Colors.blue),
-              title: Text('Configuración'),
+              leading: const Icon(Icons.settings, color: Colors.blue),
+              title: const Text('Configuración'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.exit_to_app, color: Colors.blue),
-              title: Text('Salir'),
+              leading: const Icon(Icons.exit_to_app, color: Colors.blue),
+              title: const Text('Salir'),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const Inicio()));
               },
             ),
           ],
@@ -150,7 +152,7 @@ class HomePage extends StatelessWidget {
           Expanded(
             child: GridView.count(
               crossAxisCount: 2,
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               crossAxisSpacing: 8.0,
               mainAxisSpacing: 8.0,
               children: [
@@ -172,7 +174,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Inicio',
@@ -221,15 +223,15 @@ class HomePage extends StatelessWidget {
             children: [
               Text(
                 nombre,
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 descripcion,
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Column(  // Cambiado de Row a Column
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -238,20 +240,20 @@ class HomePage extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                     ),
-                    child: Text(
+                    child: const Text(
                       'Agregar',
                       style: TextStyle(
                         color: Colors.white,
                       ),
                     ),
                   ),
-                  SizedBox(height: 8), // Espacio entre los botones
+                  const SizedBox(height: 8), // Espacio entre los botones
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                     ),
-                    child: Text(
+                    child: const Text(
                       'Comprar',
                       style: TextStyle(
                         color: Colors.white,
