@@ -19,9 +19,7 @@
                         <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Logo" class="me-2"/>
                     </a>
                     <p class="navbar-text fs-3 fw-bold text-white text-start ms-3">Famisalud la 91</p>
-                    <a class="nav-link nav-link-icon carrito ms-auto" href="#" data-bs-toggle="modal" data-bs-target="#ModalError">
-                        <i class="bi bi-person-fill text-white fs-3"></i>
-                    </a>
+                    
                 </div>
             </header>
             <div class="menu">

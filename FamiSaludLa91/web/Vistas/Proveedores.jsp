@@ -25,9 +25,7 @@
                     </a>
                    <p class="navbar-text fs-3 fw-bold text-white text-start ms-3">Famisalud la 91</p>
 
-                   <a class="nav-link nav-link-icon carrito ms-auto" href="#" data-bs-toggle="modal" data-bs-target="#ModalError">
-                        <i class="bi bi-person-fill text-white fs-3"></i>
-                    </a>                   
+                                      
                 </div>        
             </header>
             <div class="menu">
@@ -61,7 +59,7 @@
                         <input class="ms-0" type="text" name="txtbuscar" placeholder="Buscar proveedor..." aria-label="Buscar">
                         <button type="submit" class="btn btn-outline-light bg-success me-2 fs-9" name="accion" value="buscarp"><i class="bi bi-search"> Buscar </i></button>
                         
-                        <button class="btn btn-outline-light bg-success  fs-9" id="agg" type="button" data-bs-toggle="modal" data-bs-target="#agregarproveedor">Agregar</button>      
+                        <button class="btn btn-outline-light bg-secondary  fs-9" id="agg" type="button" data-bs-toggle="modal" data-bs-target="#agregarproveedor">Agregar</button>      
                     </form>
 
                 </div>

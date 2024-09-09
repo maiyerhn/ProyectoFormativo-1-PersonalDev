@@ -165,8 +165,10 @@ public class CtrProductos extends HttpServlet {
                         System.out.println("creo el pedido: " + ped);
                         listacarrito = new ArrayList();
                     } 
+                    List<Pedido> pedidosUser = pedidodao.pedidoUser(idp);
                     CategoriaDAO catdao = new CategoriaDAO();
                     List<Categoria> cat = catdao.listarT();
+                    request.setAttribute("pedidos", pedidosUser);
                     request.setAttribute("Categorias", cat);
                     request.setAttribute("Productos", productos);
                     System.out.println("Entro A enviar los Productos");
@@ -186,6 +188,7 @@ public class CtrProductos extends HttpServlet {
                     System.out.println("producto: " + p.getNombre() + " " + p.getId());
 
                     if (listacarrito.size() > 0) {
+                        System.out.println("tiene productos en el carrito");
                         for (int i = 0; i < listacarrito.size(); i++) {
                             if (idproducto == listacarrito.get(i).getIdProducto()) {
                                 posicion = i;
@@ -198,14 +201,23 @@ public class CtrProductos extends HttpServlet {
                             listacarrito.get(posicion).setTotal(total);
                             int idDetalle = listacarrito.get(posicion).getId();
                             System.out.println("id del detalle pedido a actulizar");
+                            System.out.println(ped.getTotal() +" "+  p.getPrecio());
+                            ped.setTotal(ped.getTotal() + p.getPrecio());
+                            pedidodao.agregarTotal(ped.getId(), ped.getTotal());
                             boolean d2 = pedidodao.actualizarDetalle(idDetalle, cantidad, total);
+                            
                         } else {
+                            System.out.println("el producto no esta en el carrito");
                             detalleP = new DetallePedido();
                             detalleP.setIdProducto(p.getId());
                             detalleP.setIdPedido(ped.getId());
                             detalleP.setCantidad(cantidad);
                             detalleP.setTotal(cantidad * p.getPrecio());
+                            ped.setTotal(ped.getTotal() + p.getPrecio());
                             listacarrito.add(detalleP);
+                            System.out.println("entro a agregar el total");
+                            System.out.println(ped.getId() + "    " + ped.getTotal());
+                            pedidodao.agregarTotal(ped.getId(), ped.getTotal());
                             boolean d1 = pedidodao.crearDetalle(detalleP.getIdPedido(), detalleP.getIdProducto(), detalleP.getCantidad(), detalleP.getTotal());
                             if (d1 == true) {
                                 System.out.println("creo detalle de pedido");
@@ -217,7 +229,11 @@ public class CtrProductos extends HttpServlet {
                         detalleP.setIdPedido(ped.getId());
                         detalleP.setCantidad(cantidad);
                         detalleP.setTotal(cantidad * p.getPrecio());
+                        ped.setTotal(ped.getTotal() + p.getPrecio());
                         listacarrito.add(detalleP);
+                        System.out.println("entro a agregar el total");
+                        System.out.println(ped.getId() + "    " + ped.getTotal());
+                        pedidodao.agregarTotal(ped.getId(), ped.getTotal());
                         boolean d1 = pedidodao.crearDetalle(detalleP.getIdPedido(), detalleP.getIdProducto(), detalleP.getCantidad(), detalleP.getTotal());
                         if (d1 == true) {
                             System.out.println("creo detalle de pedido");
@@ -237,26 +253,50 @@ public class CtrProductos extends HttpServlet {
                     request.setAttribute("carrito", listacarrito);
                     request.setAttribute("contador", listacarrito.size());
                     request.setAttribute("idUsuario", idusuario);
+                    request.setAttribute("total", ped.getTotal());
                     request.getRequestDispatcher("/Vistas/Carrito.jsp").forward(request, response);
 
                     break;
                 case "ActualizarCantidad":
                     System.out.println("ingreso a cambiar la cantidad del producto");
-                    idproducto = Integer.parseInt(request.getParameter("idp"));
+                    int idDetalle = Integer.parseInt(request.getParameter("idp"));
+                    DetallePedido det = pedidodao.obtenerDetalles(idDetalle);
+                    precio = Integer.parseInt(request.getParameter("precio"));
                     cantidad = Integer.parseInt(request.getParameter("Cantidad"));
-                    System.out.println("datos: id: " + idproducto + " cantidad: " + cantidad );
-                    dato = pedidodao.actualizarCantidad(idproducto, cantidad);
+                    System.out.println("datos: id: " + idDetalle + " cantidad: " + cantidad );
+                    total = cantidad * precio;
+                    dato = pedidodao.actualizarCantidad(idDetalle, cantidad, total);
                     if (dato == true) {
                         System.out.println("se actulizo la cantidad");
                     } else {
                         System.out.println("error al actulizar la cantidad");
                     }
+                    pro = pdao.listarId(det.getIdProducto());
+                    if(cantidad > det.getCantidad()){
+                        System.out.println("la cantidad en mayor");
+                        System.out.println(cantidad + "   " + det.getCantidad() );
+                        System.out.println("entro a agregar el total");
+                        System.out.println(ped.getTotal()+"  " + pro.getPrecio());
+                        ped.setTotal(ped.getTotal() + pro.getPrecio());
+                        pedidodao.agregarTotal(ped.getId(), ped.getTotal());
+                    }else if(cantidad < det.getCantidad()){
+                        System.out.println("la cantidad en menor");
+                        System.out.println(cantidad + "   " + det.getCantidad() );
+                        System.out.println("entro a agregar el total");
+                        ped.setTotal(ped.getTotal() - pro.getPrecio());
+                        pedidodao.agregarTotal(ped.getId(), ped.getTotal());
+                    }
+                   
                     break;
                 case "EliminarDeCarrito":
                     System.out.println("eliminar producto del carrito");
-                    idproducto = Integer.parseInt(request.getParameter("idp"));
-                    
-                    dato = pedidodao.eliminarDetalle(idproducto);
+                    idDetalle = Integer.parseInt(request.getParameter("idp"));
+                    det = pedidodao.obtenerDetalles(idDetalle);
+                    System.out.println("entro a agregar el total");
+                        ped.setTotal(ped.getTotal() - det.getTotal());
+                        System.out.println(ped.getId() + "    " + ped.getTotal());
+                        pedidodao.agregarTotal(ped.getId(), ped.getTotal());
+                    dato = pedidodao.eliminarDetalle(idDetalle);
                     if (dato == true) {
                         System.out.println("se elimino el producto del carrito");
                     } else {
@@ -306,6 +346,8 @@ public class CtrProductos extends HttpServlet {
                      request.getRequestDispatcher("CtrProductos?accion=listar").forward(request, response);
                     break;
                 case "listarInventario":
+                    id = Integer.parseInt(request.getParameter("id"));
+                    user = usudao.listarT(id);
                     cantidadUsuarios = usudao.contarUsuarios();
                     cantidadProductos = pdao.contarProductos();
                     cantidadPedidos = pedidodao.contarPedidos();
@@ -321,7 +363,7 @@ public class CtrProductos extends HttpServlet {
                     request.setAttribute("cantidadPe", cantidadPedidos);
                     request.setAttribute("pedidos", listapEspera);
                     request.setAttribute("usuarios", usuarios);
-                    
+                    request.setAttribute("user", user);
                     request.getRequestDispatcher("/Vistas/Inventario.jsp").forward(request, response);
                     break;
                 case "buscarpr":
@@ -352,8 +394,54 @@ public class CtrProductos extends HttpServlet {
                         response.sendRedirect("/FamiSaludLa91/CtrProductos?accion=listar&mensaje=Error%20al%20eliminar%20el%20producto");
                     }
                     break;
+                case "ActualizarUser":
+                    String apellido,
+                     correo,
+                     telefono,
+                     contrasena,
+                     direccion,
+                     rol;
+                    
+                    id = Integer.parseInt(request.getParameter("id")); 
+                    nombre = request.getParameter("name"); 
+                    apellido = request.getParameter("apellidos"); 
+                    correo = request.getParameter("email"); 
+                    telefono = request.getParameter("phone"); 
+                    direccion = request.getParameter("direccion"); 
+                    contrasena = request.getParameter("password"); 
 
+                    System.out.println("ID: " + id);
+                    System.out.println("Nombre: " + nombre);
+                    System.out.println("Apellido: " + apellido);
+                    System.out.println("Correo: " + correo);
+                    System.out.println("Teléfono: " + telefono);
+                    System.out.println("Dirección: " + direccion);
+                    usudao.editarUser(id, nombre, apellido, correo, contrasena, telefono, direccion);
+                    user = usudao.listarT(id);
+                    request.setAttribute("user", user);
+                    request.setAttribute("contador", listacarrito.size());
+                    request.getRequestDispatcher("/Vistas/Inicio.jsp").forward(request, response);
+                    break;
+                 case "ActualizarUserInventario":
+                    id = Integer.parseInt(request.getParameter("id")); 
+                    nombre = request.getParameter("name"); 
+                    apellido = request.getParameter("apellidos"); 
+                    correo = request.getParameter("email"); 
+                    telefono = request.getParameter("phone"); 
+                    direccion = request.getParameter("direccion"); 
+                    contrasena = request.getParameter("password"); 
 
+                    System.out.println("ID: " + id);
+                    System.out.println("Nombre: " + nombre);
+                    System.out.println("Apellido: " + apellido);
+                    System.out.println("Correo: " + correo);
+                    System.out.println("Teléfono: " + telefono);
+                    System.out.println("Dirección: " + direccion);
+                    usudao.editarUser(id, nombre, apellido, correo, contrasena, telefono, direccion);
+                    user = usudao.listarT(id);
+                    request.setAttribute("user", user);
+                    request.getRequestDispatcher("/FamiSaludLa91/CtrProductos?accion=listarInventario").forward(request, response);
+                    break;
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Accion no reconocida");
                     break;

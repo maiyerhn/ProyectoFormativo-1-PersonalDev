@@ -166,7 +166,7 @@ public class CtrUsuario extends HttpServlet {
                     response.sendRedirect("/FamiSaludLa91/CtrUsuario?accion=listarU&mensaje=Error%20al%20eliminar%20el%20Usuario");
                 }
                 break;
-                    
+                
            }
     }
 

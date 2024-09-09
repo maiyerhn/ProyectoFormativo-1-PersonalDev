@@ -463,7 +463,7 @@ public class PedidoDAO {
     return exito;
 }
 
-    public boolean actualizarCantidad(int idDetalle, int cantidad) {
+    public boolean actualizarCantidad(int idDetalle, int cantidad, int total) {
         Connection conexion = null;
         PreparedStatement pstmt = null;
         boolean exito = false;
@@ -474,10 +474,11 @@ public class PedidoDAO {
 
             if (conexion != null) {
                 System.out.println("Se ha establecido una conexión con la base de datos");
-                String sql = "UPDATE detallePedido SET cantidad = ? WHERE id = ?";
+                String sql = "UPDATE detallePedido SET cantidad = ?, total = ? WHERE id = ?";
                 pstmt = conexion.prepareStatement(sql);
                 pstmt.setInt(1, cantidad);
-                pstmt.setInt(2, idDetalle);
+                pstmt.setInt(2, total);
+                pstmt.setInt(3, idDetalle);
                 int filasAfectadas = pstmt.executeUpdate();
                 exito = filasAfectadas > 0;
             }
@@ -535,5 +536,124 @@ public class PedidoDAO {
 
         return resultado;
     }
+    public void agregarTotal(int id, int total) {
+    Connection conexion = null;
+    PreparedStatement pstmt = null;
+
+    try {
+        conectar conection = new conectar();
+        conexion = conection.crearconexion();
+        System.out.println("Se ha establecido una conexión con la base de datos para editar total");
+
+        String sql = "UPDATE pedidos SET total = ? WHERE id = ?";
+        pstmt = conexion.prepareStatement(sql);
+        pstmt.setInt(1, total);
+        pstmt.setInt(2, id);
+
+        int filasAfectadas = pstmt.executeUpdate(); 
+        if (filasAfectadas > 0) {
+            System.out.println("El total se actualizó correctamente.");
+        } else {
+            System.out.println("No se encontró el pedido con el ID especificado.");
+        }
+    } catch (Exception ex) {
+        System.out.println("Error al editar el total: " + ex.getMessage());
+    } finally {
+       
+        if (pstmt != null) {
+            try {
+                pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (conexion != null) {
+            try {
+                conexion.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+    
+   public DetallePedido obtenerDetalles(int idDetalle) {
+    Connection conexion = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    DetallePedido detallePedido = null; 
+
+    try {
+        conectar conection = new conectar();
+        conexion = conection.crearconexion();
+
+        if (conexion != null) {
+            System.out.println("Se ha establecido una conexión con la base de datos");
+            String sql = "SELECT * FROM detallepedido WHERE id = ?";
+
+            pstmt = conexion.prepareStatement(sql);
+            pstmt.setInt(1, idDetalle);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) { 
+                detallePedido = new DetallePedido();
+                detallePedido.setId(rs.getInt("id"));
+                detallePedido.setIdProducto(rs.getInt("idProducto"));
+                detallePedido.setIdPedido(rs.getInt("idPedido"));
+                detallePedido.setCantidad(rs.getInt("cantidad"));
+                detallePedido.setTotal(rs.getInt("total"));
+            }
+        }
+    } catch (SQLException ex) {
+        System.out.println("Hubo un error al obtener los detalles del pedido: " + ex.getMessage());
+    } finally {
+        
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            if (conexion != null) {
+                conexion.close();
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al cerrar los recursos: " + ex.getMessage());
+        }
+    }
+
+    return detallePedido; 
+}
+   
+  public List<Pedido> pedidoUser(int idUsuario) {
+    List<Pedido> pedidos = new ArrayList<>();
+    String sql = "SELECT * FROM pedidos WHERE idUsuario = ? AND (estado = 'Esperando' OR estado = 'Enviado' OR estado = 'Entregado')";
+
+    try (Connection conexion = new conectar().crearconexion();
+         PreparedStatement pstmt = conexion.prepareStatement(sql)) {
+        
+        pstmt.setInt(1, idUsuario);
+        try (ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                Pedido p = new Pedido();
+                p.setId(rs.getInt("id"));
+                p.setIdUsuario(rs.getInt("idUsuario"));
+                p.setFechaActual(rs.getDate("fechaCreacion"));
+                p.setEstado(rs.getString("estado"));
+                p.setTotal(rs.getInt("total"));
+                
+                pedidos.add(p);
+            }
+        }
+        
+    } catch (SQLException ex) {
+        System.err.println("Hubo un error al obtener los detalles del pedido: " + ex.getMessage());
+    }
+
+    return pedidos;
+}
+
+
 
 }

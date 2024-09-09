@@ -24,9 +24,7 @@
                         <img src="/FamiSaludLa91/imagenes/logo9.png" alt="" class="me-2" style="max-width: 100px;"/>
                     </a>
                     <p class="navbar-text fs-3 fw-bold text-white mb-0">Famisalud la 91</p>
-                    <a class="ms-auto" href="#">
-                        <i class="bi bi-person-fill text-white fs-3"></i>
-                    </a>                   
+                                      
                 </div>        
             </header>
 

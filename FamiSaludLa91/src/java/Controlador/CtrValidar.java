@@ -114,7 +114,7 @@ public class CtrValidar extends HttpServlet {
                     sesion.setAttribute("apellido", user.getApellido());
                     sesion.setAttribute("usuario", user);
                     if ("ADMINISTRADOR".equalsIgnoreCase(user.getRol())) {
-                        response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=listarInventario");
+                        response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=listarInventario&id=" + user.getId());
                     } else {
                         response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=Inicio&id=" + user.getId());
                     }

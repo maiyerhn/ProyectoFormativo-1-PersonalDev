@@ -9,147 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="/FamiSaludLa91/CSS/EstilosReferencia.css" rel="stylesheet" type="text/css">
     <style>
-        .info-box, .recent-orders, .admin-info, .top-products {
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: #f8f9fa;
-            margin-bottom: 30px;
-        }
-        .info-box h5, .recent-orders h5, .admin-info h5, .top-products h5 {
-            margin-bottom: 10px;
-        }
-        .info-box small, .recent-orders small {
-            display: block;
-            margin-bottom: 20px;
-            color: #6c757d;
-        }
-        .info-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            border-radius: 8px;
-            background-color: #e9ecef;
-            margin-bottom: 10px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
-        .info-item i {
-            font-size: 2rem;
-            margin-right: 15px;
-            color: #007bff;
-        }
-        .info-item strong {
-            display: block;
-            font-size: 1.1rem;
-        }
-        .icon-box {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            border-radius: 8px;
-            background-color: #e9ecef;
-            margin-bottom: 10px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-        .icon-box i {
-            font-size: 2.5rem;
-            margin-right: 15px;
-            color: #007bff;
-        }
-        .icon-box .text-box {
-            flex: 1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .icon-box .text-box h6 {
-            margin: 0;
-            font-size: 1rem;
-        }
-        .icon-box .text-box p {
-            font-size: 1.5rem;
-            margin: 0;
-            font-weight: bold;
-        }
-        .icon-box .text-box a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .icon-box .text-box a:hover {
-            text-decoration: underline;
-        }
-        .icon-box .arrow {
-            font-size: 1.5rem;
-            color: #007bff;
-        }
-        .recent-orders {
-            margin-bottom: 30px;
-            margin-top: 40px;
-        }
-        .recent-orders .table {
-            font-size: 0.75rem;
-            margin: 0;
-        }
-        .recent-orders .table th, .recent-orders .table td {
-            text-align: center;
-            padding: 6px;
-        }
-        .recent-orders .table thead th {
-            background-color: #f1f1f1;
-        }
-        .recent-orders .table tbody tr:nth-child(odd) {
-            background-color: #f9f9f9;
-        }
-        .admin-info {
-            position: relative;
-            padding-left: 60px;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            text-align: left;
-            margin-top: 40px;
-        }
-        .admin-info .admin-details {
-            padding: 15px;
-            border-radius: 8px;
-            background-color: #e9ecef;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
-        .admin-info .admin-details strong {
-            display: block;
-            font-size: 1.1rem;
-        }
-        .admin-info i {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            font-size: 3rem;
-            color: #007bff;
-        }
-        .admin-info-container {
-            margin-bottom: 40px;
-        }
-        .top-products ul {
-            list-style: none;
-            padding: 0;
-        }
-        .top-products ul li {
-            padding: 8px;
-            background-color: #e9ecef;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
-        @media (max-width: 768px) {
-            .admin-info-container, .recent-orders {
-                margin-bottom: 20px;
-            }
-            .admin-info, .recent-orders {
-                margin-right: 0;
-                margin-left: 0;
-            }
-        }
+        
     </style>
 </head>
 <body>
@@ -159,21 +19,21 @@
                 <a class="navbar-brand" href="#">
                     <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Famisalud la 91" class="me-2" />
                 </a>
-                <p class="navbar-text fs-3 fw-bold text-white text-start ms-3">Famisalud la 91</p>
+                <p class="navbar-text fs-3 fw-bold text-white text-start ms-5">Famisalud la 91</p>
                 <div class="dropdown">
-                    <a class="nav-link dropdown-toggle carrito" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-fill text-white fs-3"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item" href="#">Usuario</a></li>
-                        <li>
-                            <form method="POST" action="/FamiSaludLa91/CtrValidar">
-                                <input type="hidden" name="accion" value="exit">
-                                <button type="submit" class="dropdown-item">Salir</button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
+                        <a class="nav-link dropdown-toggle carrito" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-fill text-white fs-3"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item btn-Usuario" href="#">Usuario</a></li>
+                            <li>
+                                <form method="POST" action="/FamiSaludLa91/CtrValidar">
+                                    <input type="hidden" name="accion" value="exit">
+                                    <button type="submit" class="dropdown-item">Salir</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
             </div>                   
         </header>
         <nav class="menu">
@@ -188,22 +48,83 @@
         </nav>
     </div>
     <main>
-        <h2 class="titulo-inventario text-center fw-bold titulos">Inventario</h2>
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-lg-4 admin-info-container">
-                    <div class="admin-info">
-                        <i class="bi bi-person-fill-lock"></i> 
-                        <div class="admin-details">
-                            <h5>Información del Administrador</h5>
-                            <strong>Nombre:</strong> ${usuario.getNombre()}
-                            <strong>Email:</strong> ${usuario.getCorreo()}
-                            <strong>Teléfono:</strong> ${usuario.getTelefono()}
-                            <strong>Rol:</strong> ${usuario.getRol()}
-                        </div>
+        <div class="overlay"></div>
+            <div class="custom-confirm">
+                <div class="modal-header">
+                    <img src="/FamiSaludLa91/imagenes/icons.jpg" alt="User Avatar" id="imgIcon" />
+                </div>
+                <div class="modal-body">
+                    <div class="view-mode">
+                        <c:if test="${not empty user}">
+                            <p><strong>Nombre:</strong> <span id="view-nombre">${user.getNombre()}</span></p>
+                            <p><strong>Apellidos:</strong> <span id="view-apellido">${user.getApellido()}</span></p>
+                            <p><strong>Email:</strong> <span id="view-email">${user.getCorreo()}</span></p>
+                            <p><strong>Contraseña:</strong> <span id="view-contrasena">${user.getContrasena()}</span></p>
+                            <p><strong>Teléfono:</strong> <span id="view-telefono">${user.getTelefono()}</span></p>
+                            <p><strong>Dirección:</strong> <span id="view-direccion">${user.getDireccion()}</span></p>
+                            </c:if>
+                    </div>
+                    <div class="edit-mode">
+                        <h2>Editar Información</h2>
+                        <form id="editForm" action="/FamiSaludLa91/CtrProductos?accion=ActualizarUserInventario" method="POST">
+                            <c:if test="${not empty user}">
+                                <div class="mb-3">
+                                    <label for="editName" class="form-label">Nombre:</label>
+                                    <input type="hidden" id="editId" name="id" class="form-control" value="${user.getId()}">
+                                    <input type="text" id="editName" name="name" class="form-control" required minlength="2" maxlength="50" value="${user.getNombre()}">
+                                    <div class="error-message" id="errorName"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editApellidos" class="form-label">Apellido:</label>
+                                    <input type="text" id="editApellidos" name="apellidos" class="form-control" required minlength="2" maxlength="50" value="${user.getApellido()}">
+                                    <div class="error-message" id="errorApellidos"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editEmail" class="form-label">Correo Electrónico:</label>
+                                    <input type="email" id="editEmail" name="email" class="form-control" required value="${user.getCorreo()}">
+                                    <div class="error-message" id="errorEmail"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editPhone" class="form-label">Teléfono:</label>
+                                    <input type="number" id="editPhone" name="phone" class="form-control" required pattern="\d{10}" value="${user.getTelefono()}">
+                                    <div class="error-message" id="errorPhone"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editDireccion" class="form-label">Dirección:</label>
+                                    <input type="text" id="editDireccion" name="direccion" class="form-control" required minlength="2" maxlength="50" value="${user.getDireccion()}">
+                                    <div class="error-message" id="errorDireccion"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editPassword" class="form-label">Contraseña:</label>
+                                    <input type="password" id="editPassword" name="password" class="form-control" required minlength="8" maxlength="20" value="${user.getContrasena()}">
+                                    <div class="error-message" id="errorPassword"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Confirmar Contraseña:</label>
+                                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required minlength="8" maxlength="20" value="${user.getContrasena()}">
+                                    <div class="error-message" id="errorConfirmPassword"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-save" id="btnSave" disabled>Guardar</button>
+                                    <button type="button" class="btn btn-cancel" onclick="toggleEditMode()">Cancelar</button>
+                                </div>
+                            </c:if>
+                        </form>
+
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-edit">Editar</button>
+                    <a href=""><button type="button" class="btn btn-save" style="display: none;">Guardar Cambios</button></a>
+                    <button type="button" class="btn btn-cerrar btn-secondary">Cerrar</button>
+                </div>
+            </div>
+        <div class="container mt-5">
+            <div class="row">
+                 <h2 class="titulo-inventario text-center fw-bold titulos">Inventario</h2>
+                <!-- Columna izquierda: Tabla de pedidos -->
                 <div class="col-lg-8 mb-4">
+                   
                     <div class="recent-orders">
                         <h5>Pedidos En Espera</h5>
                         <small>Resumen de los Pedidos que se encuentran en Espera:</small>
@@ -238,8 +159,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+
+                <!-- Columna derecha: Estadísticas -->
                 <div class="col-lg-4 mb-4">
                     <div class="icon-box">
                         <i class="bi bi-person"></i> 
@@ -271,42 +192,13 @@
                             <a href="/FamiSaludLa91/CtrPedido?accion=listarped" class="arrow"><i class="bi bi-chevron-right"></i></a>
                         </div>
                     </div>
-                    <div class="icon-box">
-                        <i class="bi bi-activity"></i>
-                        <div class="text-box">
-                            <div>
-                                <strong>Ingresos Totales:</strong>
-                                <p>$12,345,000 COP</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-8 mb-4">
-                    <div class="top-products">
-                        <h5>5 Productos Más y Menos Vendidos</h5>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6>Más Vendidos</h6>
-                                <ul>
-                                    <li>Producto A - 500 unidades</li>
-                                    <!-- Añadir más productos más vendidos aquí -->
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <h6>Menos Vendidos</h6>
-                                <ul>
-                                    <li>Producto F - 50 unidades</li>
-                                    <!-- Añadir más productos menos vendidos aquí -->
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/FamiSaludLa91/JSc/validacionUser.js" type="text/javascript"></script>
     <script src="/FamiSaludLa91/JSc/Estado-Pedido.js" type="text/javascript"></script>
 </body>
 </html>

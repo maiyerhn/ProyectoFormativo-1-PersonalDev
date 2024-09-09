@@ -68,9 +68,6 @@
                 <a class="nav-link nav-link-icon carrito" href="/FamiSaludLa91/CtrProductos?accion=Carrito">
                     <i class="bi bi-cart3 fs-4">(<label style="color: darkorange">${contador}</label>)</i>
                 </a>
-                <a class="nav-link nav-link-icon carrito" href="#">
-                    <i class="bi bi-person-fill text-white fs-3"></i>
-                </a>
             </div>
         </header>
     </div>
@@ -186,8 +183,9 @@
                                     </td>
                                     <td>${pro.nombre}</td>
                                     <td>
+                                        <input class="precio" type="hidden" value="${pro.precio}" />
                                         <input class="idpro" type="hidden" value="${det.id}" />
-                                        <input class="cantidad" type="number" value="${det.cantidad}" min="1" />
+                                        <input class="cantidad" id="cantidad" type="number" value="${det.cantidad}" min="1" />
                                     </td>
                                     <td>${pro.precio}</td>
                                     <td>${det.total}</td>
@@ -207,16 +205,8 @@
                     <table class="table table-bordered bg-light">
                         <tbody>
                             <tr>
-                                <th scope="row">Subtotal</th>
-                                <td>$<c:out value="${subtotal}" /></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Envío</th>
-                                <td>$<c:out value="${envio}" /></td>
-                            </tr>
-                            <tr>
                                 <th scope="row">Total</th>
-                                <td class="fs-4 fw-bold">$<c:out value="${total}" /></td>
+                                <td class="fs-4 fw-bold" >${total}</td>
                             </tr>
                         </tbody>
                     </table>

@@ -327,14 +327,14 @@ public class ProductosDAO {
                     producto.setDescripcion(rs.getString("descripcion"));
                     producto.setPrecio(rs.getInt("precio"));
                     producto.setFoto(rs.getString("foto"));
-                    producto.setIdCategoria(rs.getInt("id_categoria"));
+                    producto.setIdCategoria(rs.getInt("idCategoria"));
                     producto.setStock(rs.getInt("stock"));
                 } else {
                     System.out.println("No se encontró el producto con ID: " + idProducto);
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Error al listar el producto por ID: " + e.getMessage());
+            System.err.println("Error al listar el producto por ID: juan" + e.getMessage());
         }
 
         return producto;

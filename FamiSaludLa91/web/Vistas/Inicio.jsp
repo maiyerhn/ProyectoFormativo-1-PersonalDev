@@ -10,88 +10,81 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="/FamiSaludLa91/CSS/EstilosReferencia.css" rel="stylesheet" type="text/css">
     <style>
-        .custom-confirm {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            padding: 20px;
-            background: white;
-            color: black;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            z-index: 1000;
+        .form-control.error {
+            border-color: red;
         }
 
-        .custom-confirm .modal-title {
-            font-size: 18px;
-            margin-bottom: 10px;
+        .error-message {
+            color: red;
+            font-size: 0.875em; 
+            margin-top: 0.25em; 
         }
 
-        .custom-confirm .modal-buttons {
-            margin-top: 20px;
+        .modal-body {
+            max-height: 60vh;
+            overflow-y: auto; 
         }
+   /* Estilos del modal de pedidos */
+.modal-content {
+    background-color: #f0f8ff; 
+    color: #333; 
+    border-radius: 8px;
+}
 
-        .custom-confirm .btn {
-            margin: 0 10px;
-        }
+.modal-header,
+.modal-footer {
+    background-color: #007bff; 
+    color: #ffffff; 
+}
 
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
+.modal-title {
+    color: #ffffff; 
+}
 
-        .full-width-carousel {
-            position: relative;
-        }
+.pedido-card {
+    border: 1px solid #007bff; 
+    border-radius: 8px;
+    padding: 1em;
+    margin-bottom: 1em;
+    background-color: #ffffff; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-        .thumbnail-indicators img {
-            cursor: pointer;
-        }
+.pedido-card h6 {
+    margin-top: 0;
+    font-size: 1.25em;
+    color: #007bff;
+}
 
-        .category-item {
-            display: inline-flex;
-            align-items: center;
-            padding: 5px 10px;
-            background-color: #f8f9fa;
-            border-radius: 4px;
-            margin: 0 5px;
-            text-decoration: none;
-            color: #343a40;
-        }
+.pedido-card p {
+    margin: 0.5em 0;
+    font-size: 1em;
+    color: #333333; 
+}
 
-        .product-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+.pedido-card strong {
+    color: #007bff;
+}
 
-        .product-card img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
 
-        .product-name {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
+.btn-outline-light.bg-success {
+    border-color: #007bff; 
+    color: #007bff;
+}
 
-        .product-description {
-            font-size: 0.9rem;
-            color: #6c757d;
-        }
+.btn-outline-light.bg-success:hover {
+    background-color: #007bff; 
+    color: #ffffff; 
+}
+
+.category-item {
+    color: #004085; 
+}
+
+.category-item:hover {
+    color: #007bff; 
+}
+
     </style>
 </head>
 <body>
@@ -117,6 +110,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                         <li><a class="dropdown-item btn-Usuario" href="#">Usuario</a></li>
+                        <li><a class="dropdown-item btn-pedidos" href="#" data-bs-toggle="modal" data-bs-target="#pedidosModal">Pedidos</a></li>
                         <li>
                             <form method="POST" action="/FamiSaludLa91/CtrValidar">
                                 <input type="hidden" name="accion" value="exit">
@@ -164,21 +158,106 @@
         </div>
     </section>
 
+    <!-- Modal de Pedidos -->
+<div class="modal fade" id="pedidosModal" tabindex="-1" aria-labelledby="pedidosModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pedidosModalLabel">Mis Pedidos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Aquí se cargarán los pedidos del usuario -->
+                <div id="pedidosList">
+                    <c:forEach var="pedido" items="${pedidos}">
+                        <div class="pedido-card">
+                            <h6>Pedido #${pedido.getId()}</h6>
+                            <p><strong>Estado:</strong> ${pedido.getEstado()}</p>
+                            <p><strong>Fecha:</strong> ${pedido.getFechaActual()}</p>
+                            <p><strong>Total:</strong> ${pedido.getTotal()}</p>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
     <!-- Modal de Información de Usuario -->
     <section class="full-width-carousel">
         <div class="overlay"></div>
         <div class="custom-confirm">
-            <div class="modal-title">Información de Usuario</div>
-            <div class="user-info">
-                <c:if test="${not empty user}">
-                    <p><strong>Nombre:</strong> ${user.getNombre()}</p>
-                    <p><strong>Email:</strong> ${user.getCorreo()}</p>
-                    <p><strong>Teléfono:</strong> ${user.getTelefono()}</p>
-                </c:if>
+            <div class="modal-header">
+                <img src="/FamiSaludLa91/imagenes/icons.jpg" alt="User Avatar" id="imgIcon" />
             </div>
-            <div class="modal-buttons">
-                <button type="button" class="btn btn-light btn-edit">Editar</button>
-                <button type="button" class="btn btn-secondary btn-cancel">Cancelar</button>
+            <div class="modal-body">
+                <div class="view-mode">
+                    <c:if test="${not empty user}">
+                        <p><strong>Nombre:</strong> <span id="view-nombre">${user.getNombre()}</span></p>
+                        <p><strong>Apellidos:</strong> <span id="view-apellido">${user.getApellido()}</span></p>
+                        <p><strong>Email:</strong> <span id="view-email">${user.getCorreo()}</span></p>
+                        <p><strong>Contraseña:</strong> <span id="view-contrasena">${user.getContrasena()}</span></p>
+                        <p><strong>Teléfono:</strong> <span id="view-telefono">${user.getTelefono()}</span></p>
+                        <p><strong>Dirección:</strong> <span id="view-direccion">${user.getDireccion()}</span></p>
+                        </c:if>
+                </div>
+                <div class="edit-mode">
+                    <h2>Editar Información</h2>
+                    <form id="editForm" action="/FamiSaludLa91/CtrProductos?accion=ActualizarUser" method="POST">
+                        <c:if test="${not empty user}">
+                            <div class="mb-3">
+                                <label for="editName" class="form-label">Nombre:</label>
+                                <input type="hidden" id="editId" name="id" class="form-control" value="${user.getId()}">
+                                <input type="text" id="editName" name="name" class="form-control" required minlength="2" maxlength="50" value="${user.getNombre()}">
+                                <div class="error-message" id="errorName"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editApellidos" class="form-label">Apellido:</label>
+                                <input type="text" id="editApellidos" name="apellidos" class="form-control" required minlength="2" maxlength="50" value="${user.getApellido()}">
+                                <div class="error-message" id="errorApellidos"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editEmail" class="form-label">Correo Electrónico:</label>
+                                <input type="email" id="editEmail" name="email" class="form-control" required value="${user.getCorreo()}">
+                                <div class="error-message" id="errorEmail"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editPhone" class="form-label">Teléfono:</label>
+                                <input type="number" id="editPhone" name="phone" class="form-control" required pattern="\d{10}" value="${user.getTelefono()}">
+                                <div class="error-message" id="errorPhone"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editDireccion" class="form-label">Dirección:</label>
+                                <input type="text" id="editDireccion" name="direccion" class="form-control" required minlength="2" maxlength="50" value="${user.getDireccion()}">
+                                <div class="error-message" id="errorDireccion"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editPassword" class="form-label">Contraseña:</label>
+                                <input type="password" id="editPassword" name="password" class="form-control" required minlength="8" maxlength="20" value="${user.getContrasena()}">
+                                <div class="error-message" id="errorPassword"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirmPassword" class="form-label">Confirmar Contraseña:</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required minlength="8" maxlength="20" value="${user.getContrasena()}">
+                                <div class="error-message" id="errorConfirmPassword"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-save" id="btnSave" disabled>Guardar</button>
+                                <button type="button" class="btn btn-cancel" onclick="toggleEditMode()">Cancelar</button>
+                            </div>
+                        </c:if>
+                    </form>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-edit">Editar</button>
+                <a href=""><button type="button" class="btn btn-save" style="display: none;">Guardar Cambios</button></a>
+                <button type="button" class="btn btn-cerrar btn-secondary">Cerrar</button>
             </div>
         </div>
         <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -223,33 +302,8 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var overlay = document.querySelector('.overlay');
-            var customConfirm = document.querySelector('.custom-confirm');
-            var btnCancel = document.querySelector('.btn-cancel');
-
-            document.querySelector('.btn-Usuario').addEventListener('click', function () {
-                // Mostrar el modal con la información del usuario
-                overlay.style.display = 'block';
-                customConfirm.style.display = 'block';
-            });
-
-            document.querySelector('.btn-edit').addEventListener('click', function () {
-                // Redirige a una página de edición del perfil o realiza alguna acción para editar el perfil
-                window.location.href = '/FamiSaludLa91/CtrUsuario?accion=EditarPerfil'; // Ajusta esta URL según tu necesidad
-            });
-
-            btnCancel.addEventListener('click', function () {
-                overlay.style.display = 'none';
-                customConfirm.style.display = 'none';
-            });
-
-            overlay.addEventListener('click', function () {
-                overlay.style.display = 'none';
-                customConfirm.style.display = 'none';
-            });
-        });
-    </script>
+    <script src="/FamiSaludLa91/JSc/validacionUser.js" type="text/javascript"></script>
+    <script src="/FamiSaludLa91/JSc/funcion.js" type="text/javascript"></script>
+    <script src="/FamiSaludLa91/JSc/CarruselImagenes.js" type="text/javascript"></script>
 </body>
 </html>

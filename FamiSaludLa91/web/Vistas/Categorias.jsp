@@ -38,9 +38,7 @@
                         <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Logo" class="me-2"/>
                     </a>
                     <p class="navbar-text fs-3 fw-bold text-white text-start ms-3">Famisalud la 91</p>
-                    <a class="nav-link nav-link-icon carrito ms-auto" href="#" data-bs-toggle="modal" data-bs-target="#ModalError">
-                        <i class="bi bi-person-fill text-white fs-3"></i>
-                    </a>
+                   
                 </div>
             </header>
             <div class="menu">
@@ -70,10 +68,10 @@
             <h2 class="titulo-inventario text-center fw-bold titulos">Categorías</h2>
             <div class="input-group mb-3 d-flex justify-content-end">
                 <div class="input-group-append">
-                    <form class="d-flex">
-                        <input class="ms-0" type="search" placeholder="Buscar productos..." aria-label="Buscar">
+                    <form class="d-flex" action="/FamiSaludLa91/CtrCategorias?accion=buscarCategoria" method="POST">
+                        <input class="ms-0" type="search" name="busquedaCat" placeholder="Buscar productos..." aria-label="Buscar">
                         <button class="btn btn-outline-light bg-success me-2 fs-9" type="submit"><i class="bi bi-search"> Buscar </i></button>
-                        <button class="btn btn-outline-light bg-success fs-9" id="agg" type="button" data-bs-toggle="modal" data-bs-target="#crearCategoria">Agregar</button>
+                        <button class="btn btn-outline-light fs-9 bg-secondary" id="agg" type="button" data-bs-toggle="modal" data-bs-target="#crearCategoria">Agregar</button>
                     </form>
                 </div>
             </div>

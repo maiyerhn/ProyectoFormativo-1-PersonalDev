@@ -29,9 +29,7 @@
                     </a>
                     <p class="navbar-text fs-3 fw-bold text-white mb-0">Famisalud la 91</p>
 
-                    <a class="ms-auto" href="#">
-                        <i class="bi bi-person-fill text-white fs-3"></i>
-                    </a>                   
+                                      
                 </div>        
             </header>
 

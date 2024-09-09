@@ -37,6 +37,7 @@ public class CtrCategorias extends HttpServlet {
     int idc, ofertas;
     String nombre, descripcion;
     Categoria cat = new Categoria();
+    List<Categoria> categ;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -122,6 +123,13 @@ public class CtrCategorias extends HttpServlet {
                     request.setAttribute("Categorias", cat);
                     request.getRequestDispatcher("/Vistas/Inicio.jsp").forward(request, response);
                     
+                    break;
+                case "buscarCategoria":
+                    String cate = request.getParameter("busquedaCat");
+                    categ = cdao.buscarCat(cate);
+                    System.out.println(categ);
+                    request.setAttribute("categoria", categ);
+                    request.getRequestDispatcher("/Vistas/Categorias.jsp").forward(request, response);
                     break;
             }
 

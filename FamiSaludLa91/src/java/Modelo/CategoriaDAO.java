@@ -117,7 +117,7 @@ public class CategoriaDAO {
         return cat;
     }
     
-        public List listarT(){
+    public List listarT(){
         List<Categoria> categoria = new ArrayList();
         try {
             Conexcion = new conectar();
@@ -144,7 +144,7 @@ public class CategoriaDAO {
         return categoria;
     } 
         
-        public void editar(Categoria cat){
+    public void editar(Categoria cat){
         try{
             Conexcion = new conectar();
             Connection con = Conexcion.crearconexion();
@@ -162,4 +162,32 @@ public class CategoriaDAO {
              System.out.println("Error al editar los productos" + e);
         }
     }
+        
+    public  List buscarCat(String Nombre){
+           List<Categoria> categ = new ArrayList();
+           Categoria cat = new Categoria();
+           Nombre = "%"+Nombre+"%";
+            try{
+                Conexcion = new conectar();
+                Connection con = Conexcion.crearconexion();
+                if (con != null) {
+                    System.out.println("Se ha establecido una conexcion con la base de datos");
+
+                } 
+                pstm = con.prepareStatement("SELECT * FROM `categoria` WHERE nombre like ?; ");
+                pstm.setString(1,Nombre);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                cat.setId(rs.getInt(1));
+                cat.setNombre(rs.getString(2));
+                cat.setDescripcion(rs.getString(3));
+                cat.setOfertas(rs.getInt(4));
+                categ.add(cat);
+            }
+                
+            }catch(Exception e){
+                System.out.println("Error al buscar la categoria" + e);
+            }
+            return categ;
+    } 
 }
