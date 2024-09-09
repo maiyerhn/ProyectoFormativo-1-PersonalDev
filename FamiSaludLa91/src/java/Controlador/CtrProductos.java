@@ -107,7 +107,7 @@ public class CtrProductos extends HttpServlet {
                     System.out.println("descripcion: " + descripcion);
                     precio = Integer.parseInt(request.getParameter("txtprecio"));
                     System.out.println("precio: " + precio);
-                    fotos = request.getParameter("foto");
+                    fotos = "imagenes/" + request.getParameter("foto");
                     System.out.println("fotos: " + fotos);
                     categ = Integer.parseInt(request.getParameter("categoria"));
                     System.out.println("categoria: " + categ);
@@ -327,7 +327,7 @@ public class CtrProductos extends HttpServlet {
                     nomp = request.getParameter("txtnombre");
                     descp = request.getParameter("txtdescripcion");
                     prep = Integer.parseInt(request.getParameter("txtprecio"));
-                    fotop = request.getParameter("foto");
+                    fotop = request.getParameter("foto2");
                     catp = Integer.parseInt(request.getParameter("categorias"));
                     stocp = Integer.parseInt(request.getParameter("txtstock"));
                     prove = Integer.parseInt(request.getParameter("proveedores"));
