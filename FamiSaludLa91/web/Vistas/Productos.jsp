@@ -274,11 +274,11 @@
                         <div class="col-md-6">
                             <label for="foto" class="form-label">Imagen</label>
                             <input type="file" class="form-control" id="foto" name="foto" onchange="actualizarInputOculto2(this)">
-                            <input type="hidden" class="form-control" value="${productoE.getFoto()}" name="foto" id="foto2">
+                            <input type="hidden" class="form-control" value="${productoE.getFoto()}" name="foto2" id="foto2">
                         </div>
                         <script>
                             function actualizarInputOculto2(selectElement) {
-                            var inputOculto = document.getElementById("foto");
+                            var inputOculto = document.getElementById("foto2");
                             var filePath = selectElement.value;
                             var fileName = filePath.split('\\').pop().split('/').pop(); // Esto obtiene el nombre del archivo
                             inputOculto.value = "imagenes/" + fileName;
