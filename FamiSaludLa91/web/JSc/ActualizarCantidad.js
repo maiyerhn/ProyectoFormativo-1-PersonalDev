@@ -10,15 +10,14 @@ $(document).ready(function () {
 
         var idp = $(this).siblings('input.idpro').val();
         var cantidad = $(this).val();
-        alert(idp + " " + cantidad);
-
-        alert("entro al JavasCript para actulizar Cantidad");
+        var precio = $(this).siblings('input.precio').val();
+        
         var url = '/FamiSaludLa91/CtrProductos?accion=ActualizarCantidad';
 
         $.ajax({
             type: 'POST',
             url: url,
-            data: {idp: idp, Cantidad: cantidad},
+            data: {idp: idp, Cantidad: cantidad, precio: precio},
             success: function (response) {
                 $.get('/FamiSaludLa91/CtrProductos?accion=Carrito', function (data) {
                     $('.carrito-contenido').html(data);

@@ -491,3 +491,277 @@ body{
             justify-content: center;
             align-items: center;
         }
+/*Estilos de la caja de usuario*/
+        
+.custom-confirm {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        max-width: 400px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        overflow: hidden;
+    }
+
+    .custom-confirm .modal-header {
+        position: relative;
+        height: 120px;
+        background-color: #0284c7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .custom-confirm .modal-header img {
+        position: absolute;
+        bottom: -40px;
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        border: 4px solid #fff;
+        object-fit: cover;
+    }
+
+    .custom-confirm .modal-body {
+        padding: 20px;
+        text-align: left;
+        max-height: 300px; 
+        overflow-y: auto;
+    }
+
+    .custom-confirm .modal-body h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .custom-confirm .modal-body p {
+        font-size: 0.875rem;
+        color: #6b7280;
+    }
+
+    .custom-confirm .modal-body .edit-mode {
+        display: none;
+    }
+
+    .custom-confirm .modal-body .view-mode {
+        display: block;
+    }
+
+    .custom-confirm .modal-body .view-mode.hidden {
+        display: none;
+    }
+
+    .custom-confirm .modal-body .edit-mode.hidden {
+        display: none;
+    }
+
+    .custom-confirm .modal-footer {
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        border-top: 1px solid #ddd;
+    }
+
+    .custom-confirm .modal-footer .btn {
+        margin: 0 10px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .custom-confirm .modal-footer .btn-edit {
+        background-color: #0284c7;
+        color: #fff;
+    }
+
+    .custom-confirm .modal-footer .btn-edit:hover {
+        background-color: #0369a1;
+    }
+
+    .custom-confirm .modal-footer .btn-cancel {
+        background-color: #6b7280;
+        color: #fff;
+    }
+
+    .custom-confirm .modal-footer .btn-cancel:hover {
+        background-color: #4b5563;
+    }
+
+    .custom-confirm .modal-footer .btn-save {
+        background-color: #38bdf8;
+        color: #fff;
+    }
+
+    .custom-confirm .modal-footer .btn-save:hover {
+        background-color: #0ea5e9;
+    }
+
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 999;
+    }
+
+    #imgIcon {
+        margin-bottom: 10px;
+    }
+    
+    .hidden {
+        display: none;
+    }
+
+ 
+    .custom-confirm .modal-body input {
+        width: calc(100% - 20px); 
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .custom-confirm .modal-body label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        text-align: left;
+    }
+
+    .custom-confirm .modal-body input[type="text"],
+    .custom-confirm .modal-body input[type="email"],
+    .custom-confirm .modal-body input[type="password"] {
+        font-size: 1rem; 
+    }
+
+    .custom-confirm .modal-body .edit-mode {
+        padding: 20px;
+    }
+
+    .custom-confirm .modal-body .edit-mode label,
+    .custom-confirm .modal-body .edit-mode input {
+        display: block;
+        margin-bottom: 15px; 
+    }
+    .info-box, .recent-orders, .admin-info, .top-products {
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f8f9fa;
+            margin-bottom: 30px;
+        }
+        .info-box h5, .recent-orders h5, .admin-info h5, .top-products h5 {
+            margin-bottom: 10px;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #e9ecef;
+            margin-bottom: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .info-item i {
+            font-size: 2rem;
+            margin-right: 15px;
+            color: #007bff;
+        }
+        .info-item strong {
+            display: block;
+            font-size: 1.1rem;
+        }
+        .icon-box {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #e9ecef;
+            margin-bottom: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .icon-box i {
+            font-size: 2.5rem;
+            margin-right: 15px;
+            color: #007bff;
+        }
+        .icon-box .text-box {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .icon-box .text-box h6 {
+            margin: 0;
+            font-size: 1rem;
+        }
+        .icon-box .text-box p {
+            font-size: 1.5rem;
+            margin: 0;
+            font-weight: bold;
+        }
+        .icon-box .text-box a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .icon-box .text-box a:hover {
+            text-decoration: underline;
+        }
+        .icon-box .arrow {
+            font-size: 1.5rem;
+            color: #007bff;
+        }
+        .recent-orders {
+            margin-bottom: 30px;
+        }
+        .recent-orders .table {
+            font-size: 0.75rem;
+            margin: 0;
+        }
+        .recent-orders .table th, .recent-orders .table td {
+            text-align: center;
+            padding: 6px;
+        }
+        .recent-orders .table thead th {
+            background-color: #f1f1f1;
+        }
+        .recent-orders .table tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+        @media (max-width: 768px) {
+            .icon-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .icon-box .text-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+        .row{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .navbar-text {
+    margin: 0;
+    flex: 1;
+    text-align: left; 
+}
+
+.navbar-brand {
+    flex: 0; 
+}
