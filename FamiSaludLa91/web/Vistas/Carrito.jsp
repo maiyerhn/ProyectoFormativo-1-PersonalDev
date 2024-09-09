@@ -52,103 +52,54 @@
 </head>
 
 <body>
-    <div class="container-fluid encabezado">
-        <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Famisalud la 91 Logo">
-                </a>
-                <p class="navbar-text fs-3 fw-bold text-white">Famisalud la 91</p>
-                <form class="form-control ms-auto d-flex busqueda">
-                    <input class="form-control me-1" type="search" placeholder="Buscar productos..." aria-label="Buscar">
-                    <button class="btn btn-outline-light bg-success icono fs-9" type="submit">
-                        <i class="bi bi-search"></i>
+   <div class="container-fluid encabezado">
+    <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container-fluid d-flex align-items-center">
+            <a class="navbar-brand" href="/FamiSaludLa91/CtrProductos?accion=Inicio&id=${user.getId()}">
+                <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Famisalud la 91 Logo">
+            </a>
+            <p class="navbar-text fs-3 fw-bold text-white mb-0 me-2">Famisalud la 91</p>
+            <div class="col-md-4 d-flex justify-content-center me-2">
+                <div class="dropdown">
+                    <button class="btn btn-primary btn-lg-custom dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Categorías <i class="bi bi-arrow-down-short"></i>
                     </button>
-                </form>
-                <a class="nav-link nav-link-icon carrito" href="/FamiSaludLa91/CtrProductos?accion=Carrito">
-                    <i class="bi bi-cart3 fs-4">(<label style="color: darkorange">${contador}</label>)</i>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <c:forEach var="cat" items="${Categorias}">
+                            <li><a class="dropdown-item" href="#">${cat.getNombre()}</a></li>
+                            <input type="hidden" value="${cat.getId()}" name="catid" id="catid">
+                        </c:forEach>
+                    </ul>
+                </div>
+            </div>
+            <form class="form-control ms-auto d-flex busqueda" style="max-width: 350px;">
+                <input class="form-control me-1" type="search" placeholder="Buscar productos..." aria-label="Buscar">
+                <button class="btn btn-outline-light bg-success icono fs-9" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
+            <a class="nav-link nav-link-icon carrito ms-2" href="/FamiSaludLa91/CtrProductos?accion=Carrito">
+                <i class="bi bi-cart3 fs-4">(<label style="color: darkorange">${contador}</label>)</i>
+            </a>
+            <div class="dropdown">
+                <a class="nav-link dropdown-toggle carrito" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-fill text-white fs-3"></i>
                 </a>
-            </div>
-        </header>
-    </div>
-
-    <div class="overlay"></div>
-    <div class="custom-confirm">
-        <div class="modal-title">Eliminar Producto</div>
-        <div>¿Estás seguro de que deseas eliminar este producto del carrito?</div>
-        <div class="modal-buttons">
-            <button type="button" class="btn btn-light btn-confirm">Eliminar</button>
-            <button type="button" class="btn btn-secondary btn-cancel">Cancelar</button>
-        </div>
-    </div>
-
-    <section class="container-categoria py-3">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-2">
-                    <h2 class="fs-4 fw-bold text-white mb-2">Categorías</h2>
-                </div>
-                <div class="col-md-10">
-                    <div id="carouselCategorias" class="carousel slide">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="row row-cols-3 g-3">
-                                    <div class="col">
-                                        <a href="/FamiSaludLa91/CtrProductos?accion=Inicio&id=${idUsuario}" class="category-item d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-house me-4"></i>
-                                            Inicio
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#" class="category-item d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-capsule me-4"></i>
-                                            <span>Medicamentos</span>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#" class="category-item d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-brush me-4"></i>
-                                            <span>Belleza</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row row-cols-3 g-3">
-                                    <div class="col">
-                                        <a href="#" class="category-item d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-heart-pulse-fill"></i>
-                                            <span>Cuidado al Bebé</span>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#" class="category-item d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-basket me-4"></i>
-                                            <span>Alimentos y Bebidas</span>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#" class="category-item d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-box me-4"></i>
-                                            <span>Otros</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselCategorias" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselCategorias" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </div>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item btn-Usuario" href="#">Usuario</a></li>
+                    <li><a class="dropdown-item btn-pedidos" href="#" data-bs-toggle="modal" data-bs-target="#pedidosModal">Pedidos</a></li>
+                    <li>
+                        <form method="POST" action="/FamiSaludLa91/CtrValidar">
+                            <input type="hidden" name="accion" value="exit">
+                            <button type="submit" class="dropdown-item">Salir</button>
+                        </form>
+                    </li>
+                </ul>
             </div>
         </div>
-    </section>
+    </header>
+</div>
+
 
     <div class="container py-6">
         <div class="row">

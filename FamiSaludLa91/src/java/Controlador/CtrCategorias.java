@@ -124,6 +124,13 @@ public class CtrCategorias extends HttpServlet {
                     request.getRequestDispatcher("/Vistas/Inicio.jsp").forward(request, response);
                     
                     break;
+                case "buscarCatCarrito":
+                    CategoriaDAO catdao2 = new CategoriaDAO();
+                    List<Categoria> cat2 = catdao2.listarT();
+                    request.setAttribute("Categorias", cat2);
+                    request.getRequestDispatcher("/CtrProductos?accion=Carrito").forward(request, response);
+                    
+                    break;
                 case "buscarCategoria":
                     String cate = request.getParameter("busquedaCat");
                     categ = cdao.buscarCat(cate);
