@@ -34,7 +34,7 @@ public class PedidoDAO {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
 
             }
-            String consulta = "Select * from Pedidos";
+            String consulta = "Select * from Pedidos where (estado = 'Esperando' OR estado = 'Enviado')";
             PreparedStatement stm = conexion.prepareStatement(consulta);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -680,7 +680,30 @@ public class PedidoDAO {
 
     return pedidos;
 }
+  
+  public void cambiarEstado(int idPedido){
+      Connection conexion = null;
+    PreparedStatement pstmt = null;
 
+    try {
+        conectar conection = new conectar();
+        conexion = conection.crearconexion();
+        System.out.println("Se ha establecido una conexión con la base de datos para editar total");
 
+        String sql = "UPDATE pedidos SET estado = 'Esperando' WHERE id = ?";
+        pstmt = conexion.prepareStatement(sql);
+        pstmt.setInt(1, idPedido);
+
+        int filasAfectadas = pstmt.executeUpdate(); 
+        if (filasAfectadas > 0) {
+            System.out.println("El total se actualizó correctamente.");
+        } else {
+            System.out.println("No se encontró el pedido con el ID especificado.");
+        }
+    } catch (Exception ex) {
+        System.out.println("Error al editar el total: " + ex.getMessage());
+    } 
+        
+  }
 
 }

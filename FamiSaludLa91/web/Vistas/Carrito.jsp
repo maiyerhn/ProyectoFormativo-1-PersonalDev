@@ -163,8 +163,8 @@
                     </table>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <button type="button" class="btn btn-lg btn-primary">Proceder al Pago</button>
-                    <a href="/FamiSaludLa91/Productos" class="btn btn-lg btn-secondary">Seguir Comprando</a>
+                    <a href="/FamiSaludLa91/CtrProductos?accion=listaPago&id=${idUsuario}"><button type="button" class="btn btn-lg btn-primary">Proceder al Pago</button></a>
+                    <a href="/FamiSaludLa91/CtrProductos?accion=Inicio&id=${idUsuario}" class="btn btn-lg btn-secondary">Seguir Comprando</a>
                 </div>
             </div>
         </div>
