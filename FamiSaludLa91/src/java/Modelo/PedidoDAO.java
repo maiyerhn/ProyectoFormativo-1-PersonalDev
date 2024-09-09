@@ -52,6 +52,33 @@ public class PedidoDAO {
 
         return pedidos;
     }
+    public List<Pedido> obtenerPedidosC() {
+        List<Pedido> pedidos = new ArrayList<>();
+        try {
+            conectar conection = new conectar();
+            Connection conexion = conection.crearconexion();
+            if (conexion != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+
+            }
+            String consulta = "SELECT * FROM Pedidos WHERE Estado IN ('Esperando', 'Enviado', 'Entregado')";
+            PreparedStatement stm = conexion.prepareStatement(consulta);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int idUsuario = rs.getInt("idUsuario");
+                Date fechaCreacion = rs.getDate("fechaCreacion");
+                String estado = rs.getString("estado");
+                int total = rs.getInt("total");
+                Pedido pedido = new Pedido(id, idUsuario, total, fechaCreacion, estado);
+                pedidos.add(pedido);
+            }
+        } catch (Exception ex) {
+            System.out.println("Hubo un Error Al Cargar Los Productos " + ex);
+        }
+
+        return pedidos;
+    }
 
     public boolean actualizarEstado(int id, String estado) {
         String sql = "UPDATE pedidos SET estado = ? WHERE id = ?";

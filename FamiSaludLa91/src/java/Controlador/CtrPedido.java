@@ -46,13 +46,14 @@ public class CtrPedido extends HttpServlet {
             List<Pedido> lped = pedidodao.obtenerPedidos();
             switch (accion) {
                 case "listarped":
+                    List<Pedido> lpe2 = pedidodao.obtenerPedidosC();
                     List<Usuario> usuarios = new ArrayList<>();
-                    for (Pedido ped : lped) {
+                    for (Pedido ped : lpe2) {
                         Usuario usuario = pedidodao.obtenerUsuarioPorId(ped.getIdUsuario());
                         usuarios.add(usuario);
                         System.out.println("Entro a buscar Usuarios");
                     }
-                    request.setAttribute("listarped", lped);
+                    request.setAttribute("listarped", lpe2);
                     request.setAttribute("usuarios", usuarios);
                     request.getRequestDispatcher("/Vistas/pedidos.jsp").forward(request, response);
                     break;

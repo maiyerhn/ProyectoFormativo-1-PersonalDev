@@ -85,79 +85,58 @@
     color: #007bff; 
 }
 
-    </style>
+</style>
 </head>
 <body>
-    <div class="container-fluid encabezado">
-        <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/FamiSaludLa91/CtrProductos?accion=Inicio&id=${user.getId()}">
-                    <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Famisalud la 91 Logo">
-                </a>
-                <p class="navbar-text fs-3 fw-bold text-white">Famisalud la 91</p>
-                <form class="form-control ms-auto d-flex busqueda">
-                    <input class="form-control me-1" type="search" placeholder="Buscar productos..." aria-label="Buscar">
-                    <button class="btn btn-outline-light bg-success icono fs-9" type="submit">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </form>
-                <a class="nav-link nav-link-icon carrito" href="/FamiSaludLa91/CtrProductos?accion=Carrito">
-                    <i class="bi bi-cart3 fs-4">(<label style="color: darkorange">${contador}</label>)</i>
-                </a>
+<div class="container-fluid encabezado">
+    <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container-fluid d-flex align-items-center">
+            <a class="navbar-brand" href="/FamiSaludLa91/CtrProductos?accion=Inicio&id=${user.getId()}">
+                <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Famisalud la 91 Logo">
+            </a>
+            <p class="navbar-text fs-3 fw-bold text-white mb-0 me-2">Famisalud la 91</p>
+            <div class="col-md-4 d-flex justify-content-center me-2">
                 <div class="dropdown">
-                    <a class="nav-link dropdown-toggle carrito" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-fill text-white fs-3"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item btn-Usuario" href="#">Usuario</a></li>
-                        <li><a class="dropdown-item btn-pedidos" href="#" data-bs-toggle="modal" data-bs-target="#pedidosModal">Pedidos</a></li>
-                        <li>
-                            <form method="POST" action="/FamiSaludLa91/CtrValidar">
-                                <input type="hidden" name="accion" value="exit">
-                                <button type="submit" class="dropdown-item">Salir</button>
-                            </form>
-                        </li>
+                    <button class="btn btn-primary btn-lg-custom dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Categorías <i class="bi bi-arrow-down-short"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <c:forEach var="cat" items="${Categorias}">
+                            <li><a class="dropdown-item" href="#">${cat.getNombre()}</a></li>
+                            <input type="hidden" value="${cat.getId()}" name="catid" id="catid">
+                        </c:forEach>
                     </ul>
                 </div>
             </div>
-        </header>
-    </div>
-    <section class="container-fluid py-1 encabezado">
-        <div class="container">
-            <div class="row align-items-center justify-content-between">
-                <!-- Botón de Categorías -->
-                <div class="col-md-4 d-flex justify-content-center">
-                    <div class="dropdown">
-                        <button class="btn btn-primary btn-lg-custom dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            Categorías<i class="bi bi-arrow-down-short"></i>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <c:forEach var="cat" items="${Categorias}">
-                                <li><a class="dropdown-item" href="#">${cat.getNombre()}</a></li>
-                                <input type="hidden" value="${cat.getId()}" name="catid" id="catid">
-                            </c:forEach>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Enlaces de Categorías -->
-                <div class="col-md-8 d-flex justify-content-center">
-                    <div class="category-list d-flex flex-wrap align-items-center justify-content-center">
-                        <a href="#" class="category-item d-flex align-items-center mb-3 me-4">
-                            <i class="bi bi-capsule me-2"></i> Medicamentos
-                        </a>
-                        <a href="#" class="category-item d-flex align-items-center mb-3 me-4">
-                            <i class="bi bi-brush me-2"></i> Belleza
-                        </a>
-                        <a href="#" class="category-item d-flex align-items-center mb-3 me-4">
-                            <i class="bi bi-heart-pulse-fill me-2"></i> Cuidado al Bebé
-                        </a>
-                    </div>
-                </div>
+            <form class="form-control ms-auto d-flex busqueda" style="max-width: 350px;">
+                <input class="form-control me-1" type="search" placeholder="Buscar productos..." aria-label="Buscar">
+                <button class="btn btn-outline-light bg-success icono fs-9" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
+            <a class="nav-link nav-link-icon carrito ms-2" href="/FamiSaludLa91/CtrCategorias?accion=buscarCatCarrito">
+                <i class="bi bi-cart3 fs-4">(<label style="color: darkorange">${contador}</label>)</i>
+            </a>
+            <div class="dropdown">
+                <a class="nav-link dropdown-toggle carrito" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-fill text-white fs-3"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item btn-Usuario" href="#">Usuario</a></li>
+                    <li><a class="dropdown-item btn-pedidos" href="#" data-bs-toggle="modal" data-bs-target="#pedidosModal">Pedidos</a></li>
+                    <li>
+                        <form method="POST" action="/FamiSaludLa91/CtrValidar">
+                            <input type="hidden" name="accion" value="exit">
+                            <button type="submit" class="dropdown-item">Salir</button>
+                        </form>
+                    </li>
+                </ul>
             </div>
         </div>
-    </section>
+    </header>
+</div>
 
+   
     <!-- Modal de Pedidos -->
 <div class="modal fade" id="pedidosModal" tabindex="-1" aria-labelledby="pedidosModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
