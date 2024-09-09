@@ -25,9 +25,9 @@
             <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
-                        <img src="/FamiSaludLa91/imagenes/logo9.png" alt="" class="me-2" style="max-width: 100px;"/>
+                        <img src="/FamiSaludLa91/imagenes/logo9.png" alt="" class="me-2" />
                     </a>
-                    <p class="navbar-text fs-3 fw-bold text-white mb-0">Famisalud la 91</p>
+                    <p class="navbar-text fs-3 fw-bold text-white text-start ms-3">Famisalud la 91</p>
 
                                       
                 </div>        
@@ -64,11 +64,11 @@
 
         <div class="cuerpo">
             <div class="container mt-5">
-                <h2 class="h2 text-center fw-bold">Pedidos</h2>
+                <h2 class="titulo-inventario text-center fw-bold titulos">Pedidos</h2>
                 <div class="input-group mb-3 d-flex justify-content-end " >
                     <div class="input-group-append">
                         <form class="d-flex ">
-                            <input class="ms-0" type="search" placeholder="Buscar predido..." aria-label="Buscar">
+                            <input class="ms-0" type="search" placeholder="Buscar pedidos..." aria-label="Buscar">
                             <button class="btn btn-outline-light bg-success icono fs-9" type="submit"><i class="bi bi-search"> Buscar </i></button> 
                         </form>
 
