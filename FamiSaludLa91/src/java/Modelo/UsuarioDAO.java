@@ -322,4 +322,48 @@ public class UsuarioDAO {
             }
         }
     }
+    
+    public void editarUserpago(int id, String nombre, String apellido, String correo, String telefono, String direccion) {
+        Connection con = null;
+        PreparedStatement pstm = null;
+
+        try {
+            conectar conexion = new conectar();
+            con = conexion.crearconexion();
+
+            if (con != null) {
+                System.out.println("Se ha establecido una conexión con la base de datos");
+            }
+
+            // SQL query to update user details
+            String sql = "UPDATE usuarios SET nombre = ?, apellidos = ?, correo = ?, telefono = ?, direccion = ? WHERE id = ?";
+            pstm = con.prepareStatement(sql);
+
+            // Set parameters
+            pstm.setString(1, nombre);
+            pstm.setString(2, apellido);
+            pstm.setString(3, correo);
+            pstm.setString(4, telefono);
+            pstm.setString(5, direccion);
+            pstm.setInt(6, id);
+
+            // Execute update
+            pstm.executeUpdate();
+            System.out.println("Registro actualizado exitosamente");
+        } catch (Exception e) {
+            System.out.println("Error al actualizar el usuario: " + e);
+        } finally {
+            // Close resources
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Error al cerrar los recursos: " + e);
+            }
+        }
+    }
 }

@@ -420,16 +420,16 @@ public class CtrProductos extends HttpServlet {
                     user = usudao.listarT(id);
                     request.setAttribute("user", user);
                     request.setAttribute("contador", listacarrito.size());
-                    request.getRequestDispatcher("/Vistas/Inicio.jsp").forward(request, response);
+                    response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=Inicio&id=" + id);
                     break;
-                 case "ActualizarUserInventario":
-                    id = Integer.parseInt(request.getParameter("id")); 
-                    nombre = request.getParameter("name"); 
-                    apellido = request.getParameter("apellidos"); 
-                    correo = request.getParameter("email"); 
-                    telefono = request.getParameter("phone"); 
-                    direccion = request.getParameter("direccion"); 
-                    contrasena = request.getParameter("password"); 
+                case "ActualizarUserInventario":
+                    id = Integer.parseInt(request.getParameter("id"));
+                    nombre = request.getParameter("name");
+                    apellido = request.getParameter("apellidos");
+                    correo = request.getParameter("email");
+                    telefono = request.getParameter("phone");
+                    direccion = request.getParameter("direccion");
+                    contrasena = request.getParameter("password");
 
                     System.out.println("ID: " + id);
                     System.out.println("Nombre: " + nombre);
@@ -440,8 +440,46 @@ public class CtrProductos extends HttpServlet {
                     usudao.editarUser(id, nombre, apellido, correo, contrasena, telefono, direccion);
                     user = usudao.listarT(id);
                     request.setAttribute("user", user);
-                    request.getRequestDispatcher("/FamiSaludLa91/CtrProductos?accion=listarInventario").forward(request, response);
+                    response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=listarInventario&id=" + id);
                     break;
+                case "ActualizarUserPago":
+                    id = Integer.parseInt(request.getParameter("id"));
+                    user = usudao.listarT(id);
+                    nombre = request.getParameter("name");
+                    apellido = request.getParameter("apellidos");
+                    correo = request.getParameter("email");
+                    telefono = request.getParameter("phone");
+                    direccion = request.getParameter("direccion");
+                    
+                    System.out.println("ID: " + id);
+                    System.out.println("Nombre: " + nombre);
+                    System.out.println("Apellido: " + apellido);
+                    System.out.println("Correo: " + correo);
+                    System.out.println("Teléfono: " + telefono);
+                    System.out.println("Dirección: " + direccion);
+                    usudao.editarUserpago(id, nombre, apellido, correo, telefono, direccion);
+                    System.out.println("termino de actualizar");
+                    response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=listaPago&id=" + id);
+                    break;
+
+                case "listaPago":
+                    int userId = Integer.parseInt(request.getParameter("id"));
+                    user = usudao.listarT(userId);
+                    ped = pedidodao.obtenerPedido(userId);
+                    System.out.println(ped.getTotal());
+                    request.setAttribute("user", user);
+                    request.setAttribute("ped", ped);
+                    request.getRequestDispatcher("/Vistas/medioPagos.jsp").forward(request, response);
+                    break;
+                case "solicitarPedido":
+                     int idPedido = Integer.parseInt(request.getParameter("id"));
+                     id = Integer.parseInt(request.getParameter("idUser"));
+                     System.out.println("id:" +id);
+                     System.out.println("id del pedido: " + idPedido);
+                     pedidodao.cambiarEstado(idPedido);
+                     response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=Inicio&id=" + id);
+                     break;
+                
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Accion no reconocida");
                     break;
