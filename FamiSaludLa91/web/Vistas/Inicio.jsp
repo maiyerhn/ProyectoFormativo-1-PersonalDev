@@ -133,9 +133,9 @@
                     </ul>
                 </div>
             </div>
-            <form class="form-control ms-auto d-flex busqueda" style="max-width: 350px;">
-                <input class="form-control me-1" type="search" placeholder="Buscar productos..." aria-label="Buscar">
-                <button class="btn btn-outline-light bg-success icono fs-9" type="submit">
+            <form class="form-control ms-auto d-flex busqueda" method="post" action="/FamiSaludLa91/CtrProductos?accion=buscarprod" style="max-width: 350px;">
+                <input class="form-control me-1" type="search" name="txtbuscar" placeholder="Buscar productos..." aria-label="Buscar">
+                <button class="btn btn-outline-light bg-success icono fs-9" name="accion" value="buscarprod" type="submit">
                     <i class="bi bi-search"></i>
                 </button>
             </form>
