@@ -81,7 +81,7 @@
                 </div>
             </div>
  <!-- Utilizamos una clase en lugar de ID -->
-            <table class="table table-bordered" style="box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); border-radius: 10px;">
+            <table class="table table-bordered" style="box-shadow: 5px 5px 15px rgb(0, 0, 0,.3);">
                 <thead class="thead-light">
                     <tr style="background-color: white;">
                         <th class="text-center border">Nombre</th>
@@ -95,7 +95,7 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${listar}" var="p" >
-                        <tr>
+                        <tr style="background-color: white">
                             <td class="border text-center"><label>${p.getNombre()}</label></td>
                             <td class="border text-center">${p.getDescripcion()}</td>
                             <td class="border text-center precio">${p.getPrecio()}</td>

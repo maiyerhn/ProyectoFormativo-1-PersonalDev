@@ -481,6 +481,14 @@ public class CtrProductos extends HttpServlet {
                      pedidodao.cambiarEstadoSolicitado(idPedido);
                      response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=Inicio&id=" + id);
                      break;
+                     
+                case "buscarprod":
+                    nombre = request.getParameter("txtbuscar");
+                    System.out.println("nombre: " + nombre);
+                    List<Productos> produc = pdao.listarT(nombre);
+                    request.setAttribute("Productos", produc);
+                    request.getRequestDispatcher("/Vistas/Inicio.jsp").forward(request, response);
+                    break;
                 
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Accion no reconocida");
