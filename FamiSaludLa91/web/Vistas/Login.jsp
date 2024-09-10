@@ -10,7 +10,7 @@
         <title>Login</title>
     </head>
     <body>
-        <div class="container-fluid encabezado">
+        <div class="container-fluid m">
             <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
                 <div class="container-fluid contenedor">
                     <a class="navbar-brand" href="#">
@@ -24,7 +24,7 @@
             <div class="login-body">
                 <div class="icon-text">
                     <div class="login-header">
-                        <h1 class="text-center">Login</h1>
+                        <h1 class="text-center">Login</h1>      
                     </div>
                     <i class="bi bi-person-circle"></i>
                     <p>Ingresa tu usuario (E-mail) de Famisalud la 91</p>
