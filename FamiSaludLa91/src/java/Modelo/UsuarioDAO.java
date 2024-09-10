@@ -25,7 +25,7 @@ public class UsuarioDAO {
     Usuario us = new Usuario();
     Usuario usua;
 
-    public Usuario Validar(String correo, String pass) {
+    public Usuario Validar(String correo) {
         Usuario usua = null;
         Connection con = null;
         PreparedStatement pstm = null;
@@ -35,11 +35,9 @@ public class UsuarioDAO {
             conectar conexion = new conectar();
             con = conexion.crearconexion();
             if (con != null) {
-                String query = "SELECT * FROM usuarios WHERE correo = ? AND contrasena = ?";
+                String query = "SELECT * FROM usuarios WHERE correo = ?";
                 pstm = con.prepareStatement(query);
                 pstm.setString(1, correo);
-                String hashedPass = hashPassword(pass);
-                pstm.setString(2, hashedPass);
                 rs = pstm.executeQuery();
                 if (rs.next()) {
                     usua = new Usuario();
