@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -74,6 +75,10 @@ public class CtrValidar extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    public static boolean verificarcontrasena (String password, String contrasenaencriptada){
+        return BCrypt.checkpw(password, contrasenaencriptada);
+    }
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -101,8 +106,12 @@ public class CtrValidar extends HttpServlet {
                 sesion = request.getSession(true);
                 String usu = request.getParameter("email");
                 String pass = request.getParameter("password");
-                Usuario user = usudao.Validar(usu, pass);
-                if (user != null && user.getCorreo() != null) {
+                Usuario user = usudao.Validar(usu);
+                if (user.getCorreo() != null) {
+                    System.out.println("usuario: "+user.getContrasena());
+                    System.out.println("contraseña: "+pass);
+                boolean verificarpassword = verificarcontrasena(pass, user.getContrasena());
+                if (verificarpassword) {
                     sesion.setAttribute("log", '1');
                     sesion.setAttribute("correo", user.getCorreo());
                     sesion.setAttribute("nombre", user.getNombre());
@@ -117,11 +126,10 @@ public class CtrValidar extends HttpServlet {
                         response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=listarInventario&id=" + user.getId());
                     } else {
                         response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=Inicio&id=" + user.getId());
-                    }
-                } else {
+                    }}else {
                     request.setAttribute("error", "Usuario o Contraseña Incorrectos");
                     request.getRequestDispatcher("/Vistas/Login.jsp").forward(request, response);
-                }
+                }}
             }
         } catch (Exception e) {
             request.setAttribute("error", "Ocurrió un error durante el proceso.");
