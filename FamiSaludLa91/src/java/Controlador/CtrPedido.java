@@ -9,6 +9,7 @@ import Modelo.Pedido;
 import Modelo.PedidoDAO;
 import Modelo.Productos;
 import Modelo.Usuario;
+import Modelo.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -37,6 +38,8 @@ public class CtrPedido extends HttpServlet {
      */
     Pedido pedido = new Pedido();
     PedidoDAO pedidodao = new PedidoDAO();
+    UsuarioDAO usudao = new UsuarioDAO();
+    int idU;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -68,6 +71,20 @@ public class CtrPedido extends HttpServlet {
                     out.flush();
                     System.out.println("Entro A actualizarEstado");
                     break;
+                case "enviarValor":
+                    int envio = Integer.parseInt(request.getParameter("envio"));
+                    int idPedido = Integer.parseInt(request.getParameter("pedidoId"));
+                    int idUser = Integer.parseInt(request.getParameter("iduser"));
+                    pedidodao.actualizarEnvio(envio, idPedido);
+                    response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=listarInventario&id=" + idUser);
+                    break;
+                case "terminarPedido":
+                    idPedido = Integer.parseInt(request.getParameter("idPedido"));
+                    idUser = Integer.parseInt(request.getParameter("idUser"));
+                    pedidodao.cambiarEstado(idPedido);
+                    response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=Inicio&id=" + idUser);
+                    break;
+                    
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Accion no reconocida");
                     break;

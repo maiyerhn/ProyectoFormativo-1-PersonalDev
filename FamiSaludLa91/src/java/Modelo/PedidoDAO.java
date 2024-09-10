@@ -34,7 +34,7 @@ public class PedidoDAO {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
 
             }
-            String consulta = "Select * from Pedidos where (estado = 'Esperando' OR estado = 'Enviado')";
+            String consulta = "Select * from Pedidos";
             PreparedStatement stm = conexion.prepareStatement(consulta);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -43,7 +43,8 @@ public class PedidoDAO {
                 Date fechaCreacion = rs.getDate("fechaCreacion");
                 String estado = rs.getString("estado");
                 int total = rs.getInt("total");
-                Pedido pedido = new Pedido(id, idUsuario, total, fechaCreacion, estado);
+                int envio = rs.getInt("envio");
+                Pedido pedido = new Pedido(id, idUsuario, total, fechaCreacion, estado, envio);
                 pedidos.add(pedido);
             }
         } catch (Exception ex) {
@@ -70,7 +71,8 @@ public class PedidoDAO {
                 Date fechaCreacion = rs.getDate("fechaCreacion");
                 String estado = rs.getString("estado");
                 int total = rs.getInt("total");
-                Pedido pedido = new Pedido(id, idUsuario, total, fechaCreacion, estado);
+                int envio = rs.getInt("envio");
+                Pedido pedido = new Pedido(id, idUsuario, total, fechaCreacion, estado, envio);
                 pedidos.add(pedido);
             }
         } catch (Exception ex) {
@@ -146,7 +148,7 @@ public class PedidoDAO {
         return cantidadPedidos;
     }
 
-    public List<Pedido> pedidosEnEpera() {
+    public List<Pedido> pedidosSolicitados() {
         List<Pedido> pedidos = new ArrayList<>();
         try {
             conectar conection = new conectar();
@@ -155,7 +157,7 @@ public class PedidoDAO {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
 
             }
-            String consulta = "SELECT * FROM pedidos WHERE estado = 'Esperando'";
+            String consulta = "SELECT * FROM pedidos WHERE estado = 'Solicitado' AND envio = 0";
             PreparedStatement stm = conexion.prepareStatement(consulta);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -164,7 +166,8 @@ public class PedidoDAO {
                 Date fechaCreacion = rs.getDate("fechaCreacion");
                 String estado = rs.getString("estado");
                 int total = rs.getInt("total");
-                Pedido pedido = new Pedido(id, idUsuario, total, fechaCreacion, estado);
+                int envio = rs.getInt("envio");
+                Pedido pedido = new Pedido(id, idUsuario, total, fechaCreacion, estado, envio);
                 pedidos.add(pedido);
             }
         } catch (Exception ex) {
@@ -680,7 +683,30 @@ public class PedidoDAO {
 
     return pedidos;
 }
-  
+  public void cambiarEstadoSolicitado(int idPedido){
+      Connection conexion = null;
+    PreparedStatement pstmt = null;
+
+    try {
+        conectar conection = new conectar();
+        conexion = conection.crearconexion();
+        System.out.println("Se ha establecido una conexión con la base de datos para editar total");
+
+        String sql = "UPDATE pedidos SET estado = 'Solicitado' WHERE id = ?";
+        pstmt = conexion.prepareStatement(sql);
+        pstmt.setInt(1, idPedido);
+
+        int filasAfectadas = pstmt.executeUpdate(); 
+        if (filasAfectadas > 0) {
+            System.out.println("El total se actualizó correctamente.");
+        } else {
+            System.out.println("No se encontró el pedido con el ID especificado.");
+        }
+    } catch (Exception ex) {
+        System.out.println("Error al editar el total: " + ex.getMessage());
+    } 
+        
+  }
   public void cambiarEstado(int idPedido){
       Connection conexion = null;
     PreparedStatement pstmt = null;
@@ -704,6 +730,62 @@ public class PedidoDAO {
         System.out.println("Error al editar el total: " + ex.getMessage());
     } 
         
+  }
+  
+  public void actualizarEnvio(int envio, int id){
+    Connection conexion = null;
+    PreparedStatement pstmt = null;
+
+    try {
+        conectar conection = new conectar();
+        conexion = conection.crearconexion();
+        System.out.println("Se ha establecido una conexión con la base de datos para editar total");
+
+        String sql = "UPDATE pedidos SET envio = ? WHERE id = ?";
+        pstmt = conexion.prepareStatement(sql);
+        pstmt.setInt(1, envio);
+        pstmt.setInt(2, id);
+
+        int filasAfectadas = pstmt.executeUpdate(); 
+        if (filasAfectadas > 0) {
+            System.out.println("El envio se actualizó correctamente.");
+        } else {
+            System.out.println("No se encontró el pedido con el ID especificado.");
+        }
+    } catch (Exception ex) {
+        System.out.println("Error al editar el envio: " + ex.getMessage());
+    } 
+  }
+  
+  public List pedidoProsesado(int id){
+    Connection conexion = null;
+    PreparedStatement pstmt = null;
+    List<Pedido> pedidos = new ArrayList<>();
+    try {
+        conectar conection = new conectar();
+        conexion = conection.crearconexion();
+         String sql = "SELECT * FROM pedidos WHERE idUsuario = ? AND estado = 'Solicitado' AND envio > 0";
+         pstmt = conexion.prepareStatement(sql);
+        pstmt.setInt(1, id);
+        try (ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                Pedido p = new Pedido();
+                p.setId(rs.getInt("id"));
+                p.setIdUsuario(rs.getInt("idUsuario"));
+                p.setFechaActual(rs.getDate("fechaCreacion"));
+                p.setEstado(rs.getString("estado"));
+                p.setTotal(rs.getInt("total"));
+                p.setEnvio(rs.getInt("envio"));
+                
+                pedidos.add(p);
+            }
+        }
+        
+    } catch (SQLException ex) {
+        System.err.println("Hubo un error al obtener los detalles del pedido: " + ex.getMessage());
+    }
+
+    return pedidos;
   }
 
 }

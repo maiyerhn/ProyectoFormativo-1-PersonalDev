@@ -84,6 +84,31 @@
 .category-item:hover {
     color: #007bff; 
 }
+   /* Estilos del modal de notificaciones */
+ .notification-card {
+        border: 1px solid #007bff;
+        border-radius: 8px;
+        padding: 1em;
+        margin-bottom: 1em;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .notification-card h6 {
+        margin-top: 0;
+        font-size: 1.25em;
+        color: #007bff;
+    }
+
+    .notification-card p {
+        margin: 0.5em 0;
+        font-size: 1em;
+        color: #333333;
+    }
+
+    .notification-card strong {
+        color: #007bff;
+    }
 
 </style>
 </head>
@@ -117,6 +142,10 @@
             <a class="nav-link nav-link-icon carrito ms-2" href="/FamiSaludLa91/CtrCategorias?accion=buscarCatCarrito">
                 <i class="bi bi-cart3 fs-4">(<label style="color: darkorange">${contador}</label>)</i>
             </a>
+            <a class="nav-link nav-link-icon carrito ms-2" href="#" data-bs-toggle="modal" data-bs-target="#notificacionesModal">
+                <i class="bi bi-bell fs-4"></i>
+            </a>
+
             <div class="dropdown">
                 <a class="nav-link dropdown-toggle carrito" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-person-fill text-white fs-3"></i>
@@ -277,6 +306,37 @@
             </c:forEach>
         </div>
     </div>
+    
+   <!-- Modal de Notificaciones -->
+<div class="modal fade" id="notificacionesModal" tabindex="-1" aria-labelledby="notificacionesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="notificacionesModalLabel">Notificaciones</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Aquí se cargarán las notificaciones -->
+                <div id="notificacionesList">
+                    <c:forEach var="ped" items="${ped}">
+                        <div class="notification-card">
+                            <h6>Notificación</h6>
+                            <p><strong>El pedido ha sido revisado, el valor del envío ingresado por el Administrador es: </strong></p>
+                            <p><strong>${ped.envio}</strong></p>
+                            <a ><button type="button" class="btn btn-danger">cancelar Pedido</button></a>
+                            <a href="/FamiSaludLa91/CtrPedido?accion=terminarPedido&idPedido=${ped.id}&idUser=${user.getId()}"><button type="button" class="btn btn-primary">Realizar Pedido</button></a>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
