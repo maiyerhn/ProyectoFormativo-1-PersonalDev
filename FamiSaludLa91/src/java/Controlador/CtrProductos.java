@@ -168,6 +168,8 @@ public class CtrProductos extends HttpServlet {
                     List<Pedido> pedidosUser = pedidodao.pedidoUser(idp);
                     CategoriaDAO catdao = new CategoriaDAO();
                     List<Categoria> cat = catdao.listarT();
+                    List<Pedido> pedidos = pedidodao.pedidoProsesado(idp);
+                    request.setAttribute("ped", pedidos);
                     request.setAttribute("pedidos", pedidosUser);
                     request.setAttribute("Categorias", cat);
                     request.setAttribute("Productos", productos);
@@ -181,7 +183,7 @@ public class CtrProductos extends HttpServlet {
                     int idproducto = Integer.parseInt(request.getParameter("idproducto"));
                     System.out.println("id del producto: " + idproducto);
                     System.out.println("id del usuario: " + idp);
-
+                    ped = pedidodao.obtenerPedido(idp);
                     cantidad = 1;
                     int posicion = 0;
                     p = pdao.listarId(idproducto);
@@ -351,7 +353,7 @@ public class CtrProductos extends HttpServlet {
                     cantidadUsuarios = usudao.contarUsuarios();
                     cantidadProductos = pdao.contarProductos();
                     cantidadPedidos = pedidodao.contarPedidos();
-                    listapEspera = pedidodao.pedidosEnEpera();
+                    listapEspera = pedidodao.pedidosSolicitados();
                     List<Usuario> usuarios = new ArrayList<>();
                     for (Pedido ped : listapEspera) {
                         Usuario usuario = pedidodao.obtenerUsuarioPorId(ped.getIdUsuario());
@@ -476,7 +478,7 @@ public class CtrProductos extends HttpServlet {
                      id = Integer.parseInt(request.getParameter("idUser"));
                      System.out.println("id:" +id);
                      System.out.println("id del pedido: " + idPedido);
-                     pedidodao.cambiarEstado(idPedido);
+                     pedidodao.cambiarEstadoSolicitado(idPedido);
                      response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=Inicio&id=" + id);
                      break;
                 

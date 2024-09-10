@@ -689,14 +689,15 @@ body{
             padding: 15px;
             border-radius: 8px;
             background-color: #e9ecef;
-            margin-bottom: 10px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
             position: relative;
+            margin-bottom: 1rem;
         }
         .icon-box i {
-            font-size: 2.5rem;
-            margin-right: 15px;
             color: #007bff;
+            display: flex;
+            font-size: 2rem;
+            margin-right: 1rem;
         }
         .icon-box .text-box {
             flex: 1;
@@ -723,6 +724,16 @@ body{
         .icon-box .arrow {
             font-size: 1.5rem;
             color: #007bff;
+        }
+        .text-box {
+            flex-grow: 1;
+        }
+        .text-box .arrow {
+            text-decoration: none;
+            color: inherit;
+        }
+        .text-box .arrow i {
+            font-size: 1.5rem;
         }
         .recent-orders {
             margin-bottom: 30px;

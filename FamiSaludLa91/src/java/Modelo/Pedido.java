@@ -12,21 +12,30 @@ import java.sql.Date;
  * @author Maiyer
  */
 public class Pedido {
-    int id , idUsuario, total;
+    int id , idUsuario, total, envio;
     Date fechaActual;
     String Estado;
 
     public Pedido() {
     }
 
-    public Pedido(int id, int idUsuario, int total, Date fechaActual, String Estado) {
+    public Pedido(int id, int idUsuario, int total, Date fechaActual, String Estado, int envio) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.total = total;
         this.fechaActual = fechaActual;
         this.Estado = Estado;
+        this.envio = envio;
     }
 
+    public int getEnvio() {
+        return envio;
+    }
+
+    public void setEnvio(int envio) {
+        this.envio = envio;
+    }
+    
     public int getId() {
         return id;
     }
