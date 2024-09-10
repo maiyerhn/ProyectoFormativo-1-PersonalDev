@@ -66,7 +66,6 @@
                         <th scope="col" class="text-center border">Apellidos</th>
                         <th scope="col" class="text-center border">Correo</th>
                         <th scope="col" class="text-center border">Teléfono</th>
-                        <th scope="col" class="text-center border">Contraseña</th>
                         <th scope="col" class="text-center border">Dirección</th>
                         <th scope="col" class="text-center border">Rol</th>
                         <th scope="col" class="text-center border">Acciones</th>
@@ -79,8 +78,7 @@
                             <td class="border"><label>${u.getNombre()}</label></td>
                             <td class="border">${u.getApellido()}</td>
                             <td class="border">${u.getCorreo()}</td>
-                            <td class="border">${u.getTelefono()}</td>
-                            <td class="border">${u.getContrasena()}</td>
+                            <td class="border">${u.getTelefono()}</td>                           
                             <td class="border">${u.getDireccion()}</td>
                             <td class="border">${u.getRol()}</td>
                             <td class="text-center border">

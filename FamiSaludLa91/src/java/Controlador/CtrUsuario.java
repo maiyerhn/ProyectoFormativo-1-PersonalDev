@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -61,6 +62,13 @@ public class CtrUsuario extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    public static String encriptarcontrasena(String password){
+        String passwordencriptado = BCrypt.hashpw(password, BCrypt.gensalt());
+        return passwordencriptado;
+    }
+    
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -82,7 +90,8 @@ public class CtrUsuario extends HttpServlet {
                 us.setTelefono(telefono);
                 us.setRol("CLIENTE");
                 us.setDireccion(direccion); 
-                us.setContrasena(contrasena);
+                String contrasenaencriptada = encriptarcontrasena(contrasena);
+                us.setContrasena(contrasenaencriptada);
                 if (dao.crear(us) == true) {
                     request.getRequestDispatcher("/Vistas/Login.jsp").forward(request, response);
 
@@ -118,7 +127,9 @@ public class CtrUsuario extends HttpServlet {
                 us.setTelefono(telefono);
                 us.setRol(rol);
                 us.setDireccion(direccion); 
-                us.setContrasena(contrasena);
+                contrasenaencriptada = encriptarcontrasena(contrasena);
+                us.setContrasena(contrasenaencriptada);
+                
                 if (dao.crear(us) == true) {
                     request.getRequestDispatcher("CtrUsuario?accion=listarU").forward(request, response);
 

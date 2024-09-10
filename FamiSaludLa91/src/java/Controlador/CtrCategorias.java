@@ -71,14 +71,12 @@ public class CtrCategorias extends HttpServlet {
                     break;
                 case "Agregar":
                     System.out.println("Entro a agregar Categoria");
-                    idc = Integer.parseInt(request.getParameter("txtid"));
                     nombre = request.getParameter("txtnombre");
                     descripcion = request.getParameter("txtdescripcion");
                     ofertas = Integer.parseInt(request.getParameter("txtofertas"));
                     System.out.println("almaceno los datos");
                     System.out.println(idc + nombre + descripcion + ofertas);
 
-                    cat.setId(idc);
                     cat.setNombre(nombre);
                     cat.setDescripcion(descripcion);
                     cat.setOfertas(ofertas);
@@ -101,14 +99,13 @@ public class CtrCategorias extends HttpServlet {
                     break;
                 case "actualizarCategoria":
                     System.out.println("Entro a editar Categoria");
-                    idc = Integer.parseInt(request.getParameter("txtid"));
+
                     nombre = request.getParameter("txtnombre");
                     descripcion = request.getParameter("txtdescripcion");
                     ofertas = Integer.parseInt(request.getParameter("txtofertas"));
                     System.out.println("almaceno los datos");
                     System.out.println(idc + nombre + descripcion + ofertas);
 
-                    cat.setId(idc);
                     cat.setNombre(nombre);
                     cat.setDescripcion(descripcion);
                     cat.setOfertas(ofertas);

@@ -75,14 +75,12 @@ public class CategoriaDAO {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
 
             }
-            pstm = con.prepareStatement("insert into categoria (id, nombre, descripcion, ofertas) Value(?,?,?,?)");
-            pstm.setInt(1, cat.getId());
-            System.out.println(cat.getId());
-            pstm.setString(2, cat.getNombre());
+            pstm = con.prepareStatement("insert into categoria (nombre, descripcion, ofertas) Value(?,?,?)");
+            pstm.setString(1, cat.getNombre());
             System.out.println(cat.getNombre());
-            pstm.setString(3, cat.getDescripcion());
+            pstm.setString(2, cat.getDescripcion());
             System.out.println(cat.getDescripcion());
-            pstm.setInt(4, cat.getOfertas());
+            pstm.setInt(3, cat.getOfertas());
             System.out.println(cat.getOfertas());
             pstm.executeUpdate();
             return true;
