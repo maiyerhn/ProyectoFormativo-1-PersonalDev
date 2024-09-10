@@ -9,26 +9,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <link href="/FamiSaludLa91/CSS/EstilosReferencia.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-        <title>Categorías - Famisalud la 91</title>
-        <style>
-            /* Estilo personalizado para Toastr */
-            .toast-success {
-                background-color: #28a745;
-                color: white;
-            }
-            .toast-error {
-                background-color: #dc3545;
-                color: white;
-            }
-            .toast-info {
-                background-color: #17a2b8;
-                color: white;
-            }
-            .toast-warning {
-                background-color: #ffc107;
-                color: black;
-            }
-        </style>
+        <title>Categorías - Famisalud la 91</title>       
     </head>
     <body>
         <div class="container-fluid encabezado">
@@ -150,11 +131,7 @@
                     </div>
                     <div class="modal-body">
                         <form class="form-sing" action="/FamiSaludLa91/CtrCategorias?accion=Agregar" method="POST">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="txtid" class="form-label">Id</label>
-                                    <input type="number" class="form-control" id="txtid" name="txtid" placeholder="Ingrese ID" required>
-                                </div>
+                            <div class="row g-3">                               
                                 <div class="col-md-6">
                                     <label for="txtnombre" class="form-label">Nombre</label>
                                     <input type="text" class="form-control" id="txtnombre" name="txtnombre" placeholder="Ingrese nombre" required>
