@@ -787,5 +787,20 @@ public class PedidoDAO {
 
     return pedidos;
   }
+  
+  public void eliminarPedido(int id){
+       try {
+            Conexcion = new conectar();
+            Connection con = Conexcion.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+            }
+            pstm = con.prepareStatement("delete from pedidos where id = ?");
+            pstm.setInt(1, id);
+            pstm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error al eliminar el Producto " + e);
+        }
+  }
 
 }

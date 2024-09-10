@@ -84,7 +84,12 @@ public class CtrPedido extends HttpServlet {
                     pedidodao.cambiarEstado(idPedido);
                     response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=Inicio&id=" + idUser);
                     break;
-                    
+                case "eliminarSolicitud": 
+                    idPedido = Integer.parseInt(request.getParameter("idPedido"));
+                    pedidodao.eliminarPedido(idPedido);
+                    idUser = Integer.parseInt(request.getParameter("idUser"));
+                    response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=Inicio&id=" + idUser);
+                    break;
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Accion no reconocida");
                     break;

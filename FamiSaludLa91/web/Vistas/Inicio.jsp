@@ -323,7 +323,7 @@
                             <h6>Notificación</h6>
                             <p><strong>El pedido ha sido revisado, el valor del envío ingresado por el Administrador es: </strong></p>
                             <p><strong>${ped.envio}</strong></p>
-                            <a ><button type="button" class="btn btn-danger">cancelar Pedido</button></a>
+                            <a href="/FamiSaludLa91/CtrPedido?accion=eliminarSolicitud&idPedido=${ped.id}&idUser=${user.getId()}"><button type="button" class="btn btn-danger">cancelar Pedido</button></a>
                             <a href="/FamiSaludLa91/CtrPedido?accion=terminarPedido&idPedido=${ped.id}&idUser=${user.getId()}"><button type="button" class="btn btn-primary">Realizar Pedido</button></a>
                         </div>
                     </c:forEach>
