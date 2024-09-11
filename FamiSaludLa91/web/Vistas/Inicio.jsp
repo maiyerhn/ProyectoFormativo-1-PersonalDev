@@ -126,9 +126,9 @@
                         Categorías <i class="bi bi-arrow-down-short"></i>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <c:forEach var="cat" items="${Categorias}">
-                            <li><a class="dropdown-item" href="#">${cat.getNombre()}</a></li>
-                            <input type="hidden" value="${cat.getId()}" name="catid" id="catid">
+                        <c:forEach var="cate" items="${Categorias}">
+                            <li><a class="dropdown-item" href="/FamiSaludLa91/CtrProductos?accion=buscarcateg&catid=${cate.getId()}">${cate.getNombre()}</a></li>
+                            <input type="hidden" value="${cate.getId()}" name="catid" id="catid">
                         </c:forEach>
                     </ul>
                 </div>
