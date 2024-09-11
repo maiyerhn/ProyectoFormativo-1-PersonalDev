@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -66,6 +67,10 @@ public class CtrProductos extends HttpServlet {
     int totalpagar;
     String ultimoP, nomp, descp, fotop;
 
+    public static String encriptarcontrasena(String password){
+        return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String accion = request.getParameter("accion");
@@ -410,15 +415,22 @@ public class CtrProductos extends HttpServlet {
                     correo = request.getParameter("email"); 
                     telefono = request.getParameter("phone"); 
                     direccion = request.getParameter("direccion"); 
-                    contrasena = request.getParameter("password"); 
-
+                    contrasena = request.getParameter("password");
+                    
+                    if (contrasena != null && !contrasena.trim().isEmpty()) {
+                        contrasena = encriptarcontrasena(contrasena);
+                    } else {
+                    
+                    }
                     System.out.println("ID: " + id);
                     System.out.println("Nombre: " + nombre);
                     System.out.println("Apellido: " + apellido);
                     System.out.println("Correo: " + correo);
                     System.out.println("Teléfono: " + telefono);
                     System.out.println("Dirección: " + direccion);
+                    
                     usudao.editarUser(id, nombre, apellido, correo, contrasena, telefono, direccion);
+                    
                     user = usudao.listarT(id);
                     request.setAttribute("user", user);
                     request.setAttribute("contador", listacarrito.size());
