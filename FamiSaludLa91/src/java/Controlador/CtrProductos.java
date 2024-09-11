@@ -485,9 +485,33 @@ public class CtrProductos extends HttpServlet {
                 case "buscarprod":
                     nombre = request.getParameter("txtbuscar");
                     System.out.println("nombre: " + nombre);
+                    CategoriaDAO categodao = new CategoriaDAO();//categoria
+                    List<Categoria> catego = categodao.listarT();//categoria
                     List<Productos> produc = pdao.listarT(nombre);
+                    
+                    request.setAttribute("contador", listacarrito.size());
+                    
                     request.setAttribute("Productos", produc);
+                    request.setAttribute("user", user);//usuario
+                    request.setAttribute("Categorias", catego);//categoria
                     request.getRequestDispatcher("/Vistas/Inicio.jsp").forward(request, response);
+                    break;
+                    
+               case "buscarcateg":
+                    int idcate =Integer.parseInt(request.getParameter("catid"));
+                    productos = pdao.buscarcat(idcate);
+                    List<Pedido> pedidosUsers = pedidodao.pedidoUser(idp);//pedidos
+                    List<Pedido> pedidosp = pedidodao.pedidoProsesado(idp);
+                    CategoriaDAO catedao = new CategoriaDAO();//categoria
+                    List<Categoria> cate = catedao.listarT();//categoria
+                    
+                    request.setAttribute("pedidos", pedidosUsers);//pedidos
+                    request.setAttribute("user", user);//usuario
+                    request.setAttribute("ped", pedidosp);
+                    request.setAttribute("Categorias", cate);//categoria
+                    request.setAttribute("contador", listacarrito.size());
+                    request.setAttribute("Productos", productos);
+                    request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
                     break;
                 
                 default:
