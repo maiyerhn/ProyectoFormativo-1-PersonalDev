@@ -1,11 +1,12 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:famisaludla91/main.dart';
 import 'package:famisaludla91/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:famisaludla91/vistas/buscar.dart';
 import 'package:famisaludla91/vistas/carrito.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -21,11 +22,12 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _productosFuture = _fetchProductos();
   }
+  
 
   Future<List<Producto>> _fetchProductos() async {
     try {
       final response = await http
-          .get(Uri.parse('https://8c0b-45-238-146-4.ngrok-free.app/productos'));
+          .get(Uri.parse('https://397d-45-238-146-4.ngrok-free.app/productos'));
 
       final contentType = response.headers['content-type'];
       if (contentType != null && contentType.contains('application/json')) {
@@ -54,6 +56,62 @@ class _HomePageState extends State<HomePage> {
       throw Exception('Error al cargar productos: $e');
     }
   }
+  Future<void> _logout(BuildContext context) async {
+  try {
+    final url = Uri.parse('https://397d-45-238-146-4.ngrok-free.app/logout');
+    final String? token = await _getToken();  // Obtener el token almacenado
+
+    if (token == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('No se encontró el token de autenticación.')),
+      );
+      return;
+    }
+
+    final response = await http.post(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      // Eliminar el token almacenado
+      await _removeToken();
+
+      // Navegar a la pantalla de inicio o pantalla de inicio de sesión
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const Inicio()),
+        (route) => false,
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al cerrar sesión.')),
+      );
+    }
+  } on SocketException {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Error de conexión. Verifica tu conexión a internet.')),
+    );
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Ocurrió un error: $e')),
+    );
+  }
+}
+
+Future<void> _removeToken() async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.remove('jwt_token');
+}
+
+Future<String?> _getToken() async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getString('jwt_token');
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -131,13 +189,12 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.exit_to_app, color: Colors.blue),
-              title: const Text('Salir'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Inicio()));
-              },
-            ),
+            leading: const Icon(Icons.exit_to_app, color: Colors.blue),
+            title: const Text('Salir'),
+            onTap: () {
+              _logout(context); 
+            },
+          ),
           ],
         ),
       ),
@@ -292,4 +349,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  
 }
