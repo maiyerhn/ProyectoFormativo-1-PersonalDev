@@ -802,5 +802,33 @@ public class PedidoDAO {
             System.out.println("Error al eliminar el Producto " + e);
         }
   }
+  
+  public Pedido listarpedido(int id){
+      Pedido pe = new Pedido();
+      try{
+          Conexcion = new conectar();
+          Connection con = Conexcion.crearconexion();
+          if (con != null){
+              System.out.println("se ha establecido una conexion con la base de datos");
+          }
+          pstm = con.prepareStatement("select * from pedidos where id = ?");
+          pstm.setInt(1, id);
+          ResultSet rs = pstm.executeQuery();
+          while (rs.next()) {
+                
+                pe.setId(rs.getInt("id"));
+                pe.setIdUsuario(rs.getInt("idUsuario"));
+                pe.setFechaActual(rs.getDate("fechaCreacion"));
+                pe.setEstado(rs.getString("estado"));
+                pe.setTotal(rs.getInt("total"));
+                pe.setEnvio(rs.getInt("envio"));
+                
+            }
+      }catch(Exception e){
+          System.out.println("Error al listar los pedido" + e);
+      }
+      return pe;
+  }
 
+  
 }
