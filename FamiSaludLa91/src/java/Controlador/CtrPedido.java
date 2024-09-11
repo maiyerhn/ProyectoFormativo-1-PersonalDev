@@ -14,11 +14,21 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -44,6 +54,7 @@ public class CtrPedido extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String accion = request.getParameter("accion");
+        HttpSession sesion = request.getSession();
         System.out.println("accion= " + accion);
         try {
             List<Pedido> lped = pedidodao.obtenerPedidos();
@@ -75,9 +86,59 @@ public class CtrPedido extends HttpServlet {
                     int envio = Integer.parseInt(request.getParameter("envio"));
                     int idPedido = Integer.parseInt(request.getParameter("pedidoId"));
                     int idUser = Integer.parseInt(request.getParameter("iduser"));
+
+                    // Actualizar el envío en la base de datos
                     pedidodao.actualizarEnvio(envio, idPedido);
+
+                    // Obtener los detalles del pedido actualizado
+                    Pedido pedido = pedidodao.listarpedido(idPedido);
+                    
+           
+    Usuario         usuario = usudao.listarT(pedido.getIdUsuario());
+
+                    // Obtener el correo electrónico del usuario
+                    String emailUsuario = usuario.getCorreo(); // Implementa este método para obtener el email del usuario desde tu base de datos
+
+                    // Configuración del servidor de correo
+                    String host = "smtp.gmail.com"; // Cambia esto por tu servidor SMTP
+                    final String username = "jeromartinezcas21@gmail.com"; // Tu correo electrónico
+                    final String password = "aatdtcktjhlffaah"; // Tu contraseña
+
+                    Properties props = new Properties();
+                    props.put("mail.smtp.host", host);
+                    props.put("mail.smtp.port", "587");
+                    props.put("mail.smtp.auth", "true");
+                    props.put("mail.smtp.starttls.enable", "true");
+
+                    Session session = Session.getInstance(props, new Authenticator() {
+                        @Override
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(username, password);
+                        }
+                    });
+
+                    try {
+                        // Crear el mensaje de correo electrónico
+                        Message message = new MimeMessage(session);
+                        message.setFrom(new InternetAddress("jeromartinezcas21@gmail.com"));
+                        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailUsuario));
+                        message.setSubject("Famisalud la 91");
+                        message.setText("Solicitud de pedido " + idPedido + "\n\n tu pedido realizado el: " + pedido.getFechaActual() + "\n ha sido respondido por el administrador \n el moto del envio ingresado es de: " + pedido.getEnvio());
+
+                        // Enviar el correo electrónico
+                        Transport.send(message);
+
+                        System.out.println("Correo electrónico enviado con éxito.");
+
+                    } catch (MessagingException e) {
+                        e.printStackTrace();
+                        System.out.println("Error al enviar el correo electrónico.");
+                    }
+
+                    // Redirigir al usuario
                     response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=listarInventario&id=" + idUser);
                     break;
+
                 case "terminarPedido":
                     idPedido = Integer.parseInt(request.getParameter("idPedido"));
                     idUser = Integer.parseInt(request.getParameter("idUser"));
