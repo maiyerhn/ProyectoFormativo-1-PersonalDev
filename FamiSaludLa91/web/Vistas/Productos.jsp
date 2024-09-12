@@ -164,7 +164,7 @@
 
 
         <%-- modal de agregar productos --%>
-        <div class="modal fade" id="agregarproducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="agregarproducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
@@ -172,12 +172,8 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="form-sing" action="/FamiSaludLa91/CtrProductos?accion=Agregar" method="POST">
+                <form class="form-sing" action="/FamiSaludLa91/CtrProductos?accion=Agregar" method="POST" enctype="multipart/form-data">
                     <div class="row g-3">
-                        <div class="col-md-6">
-                            <label for="txtid" class="form-label">Id</label>
-                            <input type="number" class="form-control" name="txtid" placeholder="Ingrese ID" required>
-                        </div>
                         <div class="col-md-6">
                             <label for="txtnombre" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="txtnombre" name="txtnombre" placeholder="Ingrese nombre" required>
@@ -196,9 +192,9 @@
                         </div>
                         <div class="col-md-6">
                             <label for="categoria" class="form-label">Categoría</label>
-                            <select class="form-select" id="categoria" name="categoria">
+                            <select class="form-select" id="categoria" name="categoria" required>
                                 <c:forEach var="cat" items="${Categorias}">
-                                        <option value="${cat.getId()}">${cat.getNombre()}</option>
+                                    <option value="${cat.getId()}">${cat.getNombre()}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -208,9 +204,9 @@
                         </div>
                         <div class="col-md-6">
                             <label for="proveedor" class="form-label">Proveedor</label>
-                            <select class="form-select" id="proveedor" name="proveedor">
+                            <select class="form-select" id="proveedor" name="proveedor" required>
                                 <c:forEach var="prov" items="${Proveedor}">
-                                        <option value="${prov.getId()}">${prov.getNombre()}</option>
+                                    <option value="${prov.getId()}">${prov.getNombre()}</option>
                                 </c:forEach>
                             </select>
                         </div>
