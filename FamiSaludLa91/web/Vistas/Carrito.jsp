@@ -55,7 +55,7 @@
    <div class="container-fluid encabezado">
     <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container-fluid d-flex align-items-center">
-            <a class="navbar-brand" href="/FamiSaludLa91/CtrProductos?accion=Inicio&id=${user.getId()}">
+            <a class="navbar-brand" href="/FamiSaludLa91/CtrProductos?accion=Inicio&id=${id}">
                 <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Famisalud la 91 Logo">
             </a>
             <p class="navbar-text fs-3 fw-bold text-white mb-0 me-2">Famisalud la 91</p>
@@ -99,7 +99,14 @@
         </div>
     </header>
 </div>
-
+            <div class="overlay"></div>
+<div class="custom-confirm">
+    <div class="modal-title">Confirmar eliminación</div>
+    <div class="modal-buttons">
+        <button class="btn btn-danger btn-confirm">Confirmar</button>
+        <button class="btn btn-secondary btn-cancel">Cancelar</button>
+    </div>
+</div>
 
     <div class="container py-6">
         <div class="row">
