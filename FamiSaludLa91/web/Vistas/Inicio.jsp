@@ -110,6 +110,39 @@
         color: #007bff;
     }
 
+    /* estilos del carrusel de productos */
+    .product-carousel .carousel-item {
+        padding: 10px;
+    }
+    
+    .product-carousel .product-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1em;
+        background-color: #e6f0ff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1em;
+        max-height: 350px;
+        max-width: 300px;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .product-carousel .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .product-carousel .carousel-control-prev,
+    .product-carousel .carousel-control-next {
+        filter: invert(1) brightness(1.5);
+    }
+    
+    .product-carousel .carousel-control-prev:hover,
+    .product-carousel .carousel-control-next:hover {
+        filter: invert(0) brightness(1.2);
+    }
 </style>
 </head>
 <body>
@@ -287,7 +320,25 @@
             </div>
         </div>
     </section>
+    
+    <!-- carrusel de productos en descuento -->
+    <section class="container mt-5">
+        <div id="productCarousel" class="carousel slide product-carousel" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
 
+    
     <!-- Productos -->
     <div class="container mt-5">
         <div class="row">
