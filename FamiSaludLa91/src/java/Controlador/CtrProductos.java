@@ -18,16 +18,19 @@ import Modelo.Proveedor;
 import Modelo.ProveedorDAO;
 import Modelo.Usuario;
 import Modelo.UsuarioDAO;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -35,6 +38,7 @@ import org.mindrot.jbcrypt.BCrypt;
  * @author Maiyer
  */
 @WebServlet(name = "CtrProductos", urlPatterns = {"/CtrProductos"})
+@MultipartConfig
 public class CtrProductos extends HttpServlet {
 
     /**
@@ -103,42 +107,73 @@ public class CtrProductos extends HttpServlet {
                     request.getRequestDispatcher("/Vistas/Productos.jsp").forward(request, response);
                     break;
                 case "Agregar":
-                    System.out.println("id: " + request.getParameter("txtid"));
-                    id = Integer.parseInt(request.getParameter("txtid"));
-                    System.out.println("id: " + id);
-                    nombre = request.getParameter("txtnombre");
-                    System.out.println("nombre: " + nombre);
-                    descripcion = request.getParameter("txtdescripcion");
-                    System.out.println("descripcion: " + descripcion);
-                    precio = Integer.parseInt(request.getParameter("txtprecio"));
-                    System.out.println("precio: " + precio);
-                    fotos = "imagenes/" + request.getParameter("foto");
-                    System.out.println("fotos: " + fotos);
-                    categ = Integer.parseInt(request.getParameter("categoria"));
-                    System.out.println("categoria: " + categ);
-                    stock = Integer.parseInt(request.getParameter("txtstock"));
-                    System.out.println("stock: " + stock);
-                    prove = Integer.parseInt(request.getParameter("proveedor"));
-                    System.out.println("proveedor: " + prove);
-                    
-                    System.out.println("nombre: " + nombre);
-                    System.out.println("descripcion: " + descripcion);
-                    System.out.println("precio: " + precio);
-                    System.out.println("foto: " + fotos);
-                    System.out.println("categoria: " + categ);
-                    System.out.println("stock: " + stock);
+                    try {
+                        nombre = request.getParameter("txtnombre");
+                        System.out.println("nombre: " + nombre);
 
-                    pro.setId(id);
-                    pro.setNombre(nombre);
-                    pro.setDescripcion(descripcion);
-                    pro.setPrecio(precio);
-                    pro.setFoto(fotos);
-                    pro.setIdCategoria(categ);
-                    pro.setStock(stock);
-                    pro.setProveedor(prove);
-                    if (pdao.crear(pro) == true) {
-                        System.out.println("Se creo El producto");
-                        request.getRequestDispatcher("CtrProductos?accion=listar").forward(request, response);
+                        descripcion = request.getParameter("txtdescripcion");
+                        System.out.println("descripcion: " + descripcion);
+
+                        precio = Integer.parseInt(request.getParameter("txtprecio"));
+                        System.out.println("precio: " + precio);
+
+
+                        Part filePart = request.getPart("foto");
+                        String fileName = getFileName(filePart);
+                        String uploadPath = getServletContext().getRealPath("/imagenes");
+                        System.out.println("Ruta de subida: " + uploadPath);
+
+                        File uploadDir = new File(uploadPath);
+                        if (!uploadDir.exists()) {
+                            System.out.println("Directorio no existe, creando carpeta 'imagenes'");
+                            uploadDir.mkdir();
+                        }
+
+                        if (uploadDir.canWrite()) {
+                            System.out.println("Se puede escribir en la carpeta 'imagenes'");
+                        } else {
+                            System.out.println("No se puede escribir en la carpeta 'imagenes'");
+                        }
+
+                        File file = new File(uploadDir, fileName);
+                        filePart.write(file.getAbsolutePath());
+
+                        fotos = "imagenes/" + fileName;
+                        System.out.println("fotos: " + fotos);
+
+
+                        categ = Integer.parseInt(request.getParameter("categoria"));
+                        System.out.println("categoria: " + categ);
+
+                        stock = Integer.parseInt(request.getParameter("txtstock"));
+                        System.out.println("stock: " + stock);
+
+                        prove = Integer.parseInt(request.getParameter("proveedor"));
+                        System.out.println("proveedor: " + prove);
+
+                        System.out.println("nombre: " + nombre);
+                        System.out.println("descripcion: " + descripcion);
+                        System.out.println("precio: " + precio);
+                        System.out.println("foto: " + fotos);
+                        System.out.println("categoria: " + categ);
+                        System.out.println("stock: " + stock);
+
+                        pro.setNombre(nombre);
+                        pro.setDescripcion(descripcion);
+                        pro.setPrecio(precio);
+                        pro.setFoto(fotos);
+                        pro.setIdCategoria(categ);
+                        pro.setStock(stock);
+                        pro.setProveedor(prove);
+
+                        if (pdao.crear(pro)) {
+                            System.out.println("Se creó el producto");
+                            request.getRequestDispatcher("CtrProductos?accion=listar").forward(request, response);
+                        } else {
+                            System.out.println("Error al crear el producto");
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                     break;
                 case "Inicio":
@@ -575,5 +610,16 @@ public class CtrProductos extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    
+    private String getFileName(Part part) {
+    String contentDisposition = part.getHeader("content-disposition");
+    for (String token : contentDisposition.split(";")) {
+        if (token.trim().startsWith("filename")) {
+            return token.substring(token.indexOf('=') + 2, token.length() - 1).replace("\"", "");
+        }
+    }
+    return null;
+}
 
 }
