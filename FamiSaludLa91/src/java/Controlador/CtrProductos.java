@@ -297,7 +297,6 @@ public class CtrProductos extends HttpServlet {
                     request.setAttribute("idUsuario", idusuario);
                     request.setAttribute("total", ped.getTotal());
                     request.getRequestDispatcher("/Vistas/Carrito.jsp").forward(request, response);
-
                     break;
                 case "ActualizarCantidad":
                     System.out.println("ingreso a cambiar la cantidad del producto");
@@ -328,7 +327,12 @@ public class CtrProductos extends HttpServlet {
                         ped.setTotal(ped.getTotal() - pro.getPrecio());
                         pedidodao.agregarTotal(ped.getId(), ped.getTotal());
                     }
-                   
+                    listacarrito = pedidodao.obtenerDetalle(ped.getId());
+                    listaProductos = detalleDAO.ListarProd(ped.getId());
+                    request.setAttribute("productos", listaProductos);
+                    request.setAttribute("carrito", listacarrito);
+                    request.setAttribute("total", ped.getTotal());
+                    response.sendRedirect(request.getContextPath() + "/Vistas/Carrito.jsp");
                     break;
                 case "EliminarDeCarrito":
                     System.out.println("eliminar producto del carrito");
