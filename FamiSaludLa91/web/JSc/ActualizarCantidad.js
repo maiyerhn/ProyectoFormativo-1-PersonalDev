@@ -6,22 +6,18 @@
 
 
 $(document).ready(function () {
-    $(document).on('change', 'input.cantidad', function () {
-
+    $('input.cantidad').click(function () {
         var idp = $(this).siblings('input.idpro').val();
         var cantidad = $(this).val();
         var precio = $(this).siblings('input.precio').val();
-        
         var url = '/FamiSaludLa91/CtrProductos?accion=ActualizarCantidad';
-
+        
         $.ajax({
             type: 'POST',
             url: url,
-            data: {idp: idp, Cantidad: cantidad, precio: precio},
+            data: "idp=" + encodeURIComponent(idp) + "&Cantidad=" + encodeURIComponent(cantidad) + "&precio=" + encodeURIComponent(precio),
             success: function (response) {
-                $.get('/FamiSaludLa91/CtrProductos?accion=Carrito', function (data) {
-                    $('.carrito-contenido').html(data);
-                });
+                location.href = "/FamiSaludLa91/CtrProductos?accion=Carrito";
             },
             error: function (xhr, status, error) {
                 console.error('Error al actualizar la cantidad:', error);
@@ -29,5 +25,3 @@ $(document).ready(function () {
         });
     });
 });
-
-

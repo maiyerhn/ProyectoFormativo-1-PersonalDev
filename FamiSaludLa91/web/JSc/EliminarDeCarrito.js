@@ -25,18 +25,12 @@ $(document).ready(function () {
         $.ajax({
             type: 'POST',
             url: url,
-            data: {idp: idp},
+            data: "idp=" + encodeURIComponent(idp),
             success: function (response) {
-                $.get('/FamiSaludLa91/CtrProductos?accion=Carrito', function (data) {
-                    $('.carrito-contenido').html(data);
-                    overlay.hide();
-                    customConfirm.hide();
-                });
+                location.href = "/FamiSaludLa91/CtrProductos?accion=Carrito";
             },
             error: function (xhr, status, error) {
                 console.error('Error al eliminar el producto del carrito:', error);
-                overlay.hide();
-                customConfirm.hide();
             }
         });
     });
