@@ -87,22 +87,20 @@ public class CtrPedido extends HttpServlet {
                     int idPedido = Integer.parseInt(request.getParameter("pedidoId"));
                     int idUser = Integer.parseInt(request.getParameter("iduser"));
 
-                    // Actualizar el envío en la base de datos
+
                     pedidodao.actualizarEnvio(envio, idPedido);
 
-                    // Obtener los detalles del pedido actualizado
                     Pedido pedido = pedidodao.listarpedido(idPedido);
                     
            
-    Usuario         usuario = usudao.listarT(pedido.getIdUsuario());
+                    Usuario usuario = usudao.listarT(pedido.getIdUsuario());
 
-                    // Obtener el correo electrónico del usuario
-                    String emailUsuario = usuario.getCorreo(); // Implementa este método para obtener el email del usuario desde tu base de datos
+               
+                    String emailUsuario = usuario.getCorreo(); 
 
-                    // Configuración del servidor de correo
-                    String host = "smtp.gmail.com"; // Cambia esto por tu servidor SMTP
-                    final String username = "jeromartinezcas21@gmail.com"; // Tu correo electrónico
-                    final String password = "aatdtcktjhlffaah"; // Tu contraseña
+                    String host = "smtp.gmail.com";
+                    final String username = "jeromartinezcas21@gmail.com"; 
+                    final String password = "aatdtcktjhlffaah"; 
 
                     Properties props = new Properties();
                     props.put("mail.smtp.host", host);
@@ -118,14 +116,116 @@ public class CtrPedido extends HttpServlet {
                     });
 
                     try {
-                        // Crear el mensaje de correo electrónico
+                      
                         Message message = new MimeMessage(session);
                         message.setFrom(new InternetAddress("jeromartinezcas21@gmail.com"));
                         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailUsuario));
                         message.setSubject("Famisalud la 91");
-                        message.setText("Solicitud de pedido " + idPedido + "\n\n tu pedido realizado el: " + pedido.getFechaActual() + "\n ha sido respondido por el administrador \n el moto del envio ingresado es de: " + pedido.getEnvio());
 
-                        // Enviar el correo electrónico
+                        String htmlContent = "<!DOCTYPE html>"
+                                + "<html lang='es'>"
+                                + "<head>"
+                                + "<meta charset='UTF-8'>"
+                                + "<meta name='viewport' content='width=device-width, initial-scale=1.0'>"
+                                + "<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' rel='stylesheet'>"
+                                + "<title>Notificación de Pedido</title>"
+                                + "<style>"
+                                + "    body {"
+                                + "        font-family: Arial, sans-serif;"
+                                + "        background-color: #f8f9fa;"
+                                + "        margin: 0;"
+                                + "        padding: 20px;"
+                                + "    }"
+                                + "    .container {"
+                                + "        background-color: #ffffff;"
+                                + "        border: 2px solid #007bff;"
+                                + "        border-radius: 10px;"
+                                + "        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);"
+                                + "        padding: 30px;"
+                                + "    }"
+                                + "    .header {"
+                                + "        text-align: center;"
+                                + "        padding: 15px 20px;"
+                                + "        background-color: #007bff;"
+                                + "        border-radius: 8px;"
+                                + "        border-bottom: 2px solid #0056b3;"
+                                + "        margin-bottom: 20px;"
+                                + "    }"
+                                + "    .header .logo-container {"
+                                + "        display: inline-flex;"
+                                + "        align-items: center;"
+                                + "        justify-content: center;"
+                                + "        margin-bottom: 10px;"
+                                + "    }"
+                                + "    .header .logo-container img {"
+                                + "        width: 70px;"
+                                + "        margin-right: 10px;"
+                                + "    }"
+                                + "    .header .logo-text {"
+                                + "        color: #ffffff;"
+                                + "        font-size: 32px;"
+                                + "        font-weight: bold;"
+                                + "        line-height: 1;"
+                                + "        margin-bottom: 10px;"
+                                + "    }"
+                                + "    .header h1 {"
+                                + "        font-size: 28px;"
+                                + "        margin: 0;"
+                                + "        color: #ffffff;"
+                                + "    }"
+                                + "    .footer {"
+                                + "        text-align: center;"
+                                + "        padding: 10px;"
+                                + "        font-size: 0.9em;"
+                                + "        color: #6c757d;"
+                                + "        border-top: 1px solid #e9ecef;"
+                                + "        margin-top: 20px;"
+                                + "    }"
+                                + "    .content {"
+                                + "        margin-top: 20px;"
+                                + "        font-size: 16px;"
+                                + "        line-height: 1.5;"
+                                + "    }"
+                                + "    .content strong {"
+                                + "        font-weight: bold;"
+                                + "        color: #333;"
+                                + "    }"
+                                + "    a {"
+                                + "        color: #007bff;"
+                                + "        text-decoration: none;"
+                                + "    }"
+                                + "    a:hover {"
+                                + "        text-decoration: underline;"
+                                + "    }"
+                                + "</style>"
+                                + "</head>"
+                                + "<body>"
+                                + "    <div class='container'>"
+                                + "        <div class='header'>"
+                                + "            <div class='logo-container'>"
+                                + "                <img src='https://i.pinimg.com/736x/fc/88/df/fc88df658a41975fac07e30eae2a7e7e.jpg' alt='Famisalud la 91 Logo'>"
+                                + "                <span class='logo-text'>FamiSalud La 91</span>"
+                                + "            </div>"
+                                + "        </div>"
+                                + "        <div class='content'>"
+                                + "            <h3>Notificacion de pedido</h3>"
+                                + "            <p>Estimado usuario,</p>"
+                                + "            <p>Tu pedido realizado el: <strong>" + pedido.getFechaActual() + "</strong></p>"
+                                + "            <p>Con el ID: <strong>" + pedido.getId() + "</strong></p>"
+                                + "            <p>Ha sido respondido por el administrador.</p>"
+                                + "            <p>El monto del envío ingresado es de: <strong>" + pedido.getEnvio() + "</strong></p>"
+                                + "            <p>Gracias por confiar en nosotros.</p>"
+                                + "            <p>En el apartado de notificaciones de la pagina podra visualizar su pedido y aceptar el mismo o en su debido caso cancelarlo </p>"
+                                + "        </div>"
+                                + "        <div class='footer'>"
+                                + "            <p>Famisalud la 91</p>"
+                                + "        </div>"
+                                + "    </div>"
+                                + "</body>"
+                                + "</html>";
+
+                        message.setContent(htmlContent, "text/html");
+
                         Transport.send(message);
 
                         System.out.println("Correo electrónico enviado con éxito.");
