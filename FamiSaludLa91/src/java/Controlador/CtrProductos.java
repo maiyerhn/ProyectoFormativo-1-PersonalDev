@@ -55,6 +55,7 @@ public class CtrProductos extends HttpServlet {
     List<Categoria> categoria = new ArrayList();
     List<Proveedor> proveedor = new ArrayList();
     List<Pedido> listapEspera = new ArrayList();
+    List<Pedido> listaSolicitado = new ArrayList();
     UsuarioDAO usudao = new UsuarioDAO();
     PedidoDAO pedidodao = new PedidoDAO();
     ProductosDAO pdao = new ProductosDAO();
@@ -416,18 +417,28 @@ public class CtrProductos extends HttpServlet {
                     cantidadUsuarios = usudao.contarUsuarios();
                     cantidadProductos = pdao.contarProductos();
                     cantidadPedidos = pedidodao.contarPedidos();
-                    listapEspera = pedidodao.pedidosSolicitados();
+                    listaSolicitado = pedidodao.pedidosSolicitados();
                     List<Usuario> usuarios = new ArrayList<>();
-                    for (Pedido ped : listapEspera) {
+                    List<Usuario> usuarios1 = new ArrayList<>();
+                    for (Pedido ped : listaSolicitado) {
                         Usuario usuario = pedidodao.obtenerUsuarioPorId(ped.getIdUsuario());
                         System.out.println(usuario.getNombre());
                         usuarios.add(usuario);
                     }
+                    listapEspera = pedidodao.pedidosEspera();
+                     for (Pedido ped : listapEspera) {
+                        Usuario usuario = pedidodao.obtenerUsuarioPorId(ped.getIdUsuario());
+                        System.out.println(usuario.getNombre());
+                        usuarios1.add(usuario);
+                    }
+                    
                     request.setAttribute("cantidadU", cantidadUsuarios);
                     request.setAttribute("cantidadPro", cantidadProductos);
                     request.setAttribute("cantidadPe", cantidadPedidos);
-                    request.setAttribute("pedidos", listapEspera);
+                    request.setAttribute("pedidos", listaSolicitado);
                     request.setAttribute("usuarios", usuarios);
+                    request.setAttribute("espera", listapEspera);
+                    request.setAttribute("usuarios1", usuarios1);
                     request.setAttribute("user", user);
                     request.getRequestDispatcher("/Vistas/Inventario.jsp").forward(request, response);
                     break;
