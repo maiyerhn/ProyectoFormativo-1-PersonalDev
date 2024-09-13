@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <link href="/FamiSaludLa91/CSS/EstilosBodyLogin.css" rel="stylesheet" type="text/css"/>
         <link href="/FamiSaludLa91/CSS/EstilosEncabezadoLoginRegitro.css" rel="stylesheet" type="text/css"/>
+         <link rel="icon" type="image/png" href="/FamiSaludLa91/imagenes/logo9.png">
         <title>Login</title>
     </head>
     <body>

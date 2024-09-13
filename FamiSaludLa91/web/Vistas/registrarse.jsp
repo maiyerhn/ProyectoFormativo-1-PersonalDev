@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="../CSS/EstilosEncabezadoLoginRegitro.css" rel="stylesheet" type="text/css"/>
     <link href="../CSS/EstilosBodyRegistro.css" rel="stylesheet" type="text/css"/>
+    <link rel="icon" type="image/png" href="/FamiSaludLa91/imagenes/logo9.png">
     <title>Registrarse</title>
     
 </head>

@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="/FamiSaludLa91/CSS/EstilosReferencia.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" href="/FamiSaludLa91/imagenes/logo9.png">
     <style>
         .readonly-field {
             background-color: #f8f9fa;
@@ -20,6 +21,9 @@
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+        .solicitados{
+            margin-top: 60px;
         }
     </style>
 </head>
@@ -132,10 +136,10 @@
         <div class="container mt-5">
             <div class="row">
                 <!-- Columna de pedidos en espera -->
-                <div class="col-lg-12 mb-4">
+                <div class="col-lg-12 mb-4 solicitados">
                     <div class="recent-orders">
-                        <h5>Pedidos En Espera</h5>
-                        <small>Resumen de los Pedidos que se encuentran en Espera:</small>
+                        <h5>Pedidos Solicitados</h5>
+                        <small>Resumen de los Pedidos solicitados:</small>
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead>
@@ -146,6 +150,7 @@
                                         <th>Fecha y Hora</th>
                                         <th>Dirección</th>
                                         <th>Monto</th>
+                                        <th>Accion</th>
                                         <th>Envío</th>
                                     </tr>
                                 </thead>
@@ -159,6 +164,7 @@
                                             <td>${ped.fechaActual}</td>
                                             <td>${usuario.direccion}</td>
                                             <td>${ped.total}</td>
+                                            <td><a href="/FamiSaludLa91/CtrDetallePedido?accion=mostrar&idPedido=${ped.id}&fechaCompleta=${ped.fechaActual}"> <button class="btn btn-primary mt-2 redirect-btn" data-pedido-id="${ped.id}" >?</button></a></td>
                                             <td>
                                                 <div class="input-group">
                                                     <form method="POST" action="/FamiSaludLa91/CtrPedido?accion=enviarValor&iduser=${usuario.id}" style="display: flex; gap: 10px;">
