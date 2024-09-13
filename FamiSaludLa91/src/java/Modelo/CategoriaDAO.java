@@ -188,4 +188,31 @@ public class CategoriaDAO {
             }
             return categ;
     } 
+    
+    public List obtenerCategoriaDescuento(){
+        List<Categoria> categoria = new ArrayList();
+        try {
+            Conexcion = new conectar();
+            Connection con = Conexcion.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+
+            }
+            pstm = con.prepareStatement("SELECT * FROM Categoria WHERE ofertas > 0;");
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Categoria c = new Categoria();
+                c.setId(rs.getInt(1));
+                c.setNombre(rs.getString(2));
+                c.setDescripcion(rs.getString(3));
+                c.setOfertas(rs.getInt(4));
+                categoria.add(c);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al listar las categoriasos " + e);
+        }
+       
+        return categoria;
+    }
 }

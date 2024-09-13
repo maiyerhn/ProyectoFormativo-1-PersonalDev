@@ -19,16 +19,39 @@
     </head>
     <body>
         <div class="container-fluid encabezado ">
-            <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                        <img src="/FamiSaludLa91/imagenes/logo9.png" alt="" class="me-2"/>
-                    </a>
-                   <p class="navbar-text fs-3 fw-bold text-white text-start ms-3">Famisalud la 91</p>
-
-                                      
-                </div>        
-            </header>
+            <div class="container-fluid encabezado">
+                <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#">
+                            <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Famisalud la 91" class="me-2" />
+                        </a>
+                        <p class="navbar-text fs-3 fw-bold text-white text-start ms-5">Famisalud la 91</p>
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle carrito" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-fill text-white fs-3"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li>
+                                    <form method="POST" action="/FamiSaludLa91/CtrValidar">
+                                        <input type="hidden" name="accion" value="exit">
+                                        <button type="submit" class="dropdown-item">Salir</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>                   
+                </header>
+                <nav class="menu">
+                    <div class="Lista">
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=listarInventario&id=${id}" id="navbarDropdown">Inventario</a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=listar&id=${id}" id="navbarDropdown">Productos</a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrPedido?accion=listarped&id=${id}" id="navbarDropdown">Pedidos</a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrPro?accion=listarp&id=${id}" id="navbarDropdown">Proveedores</a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrCategorias?accion=listarCategorias&id=${id}" id="navbarDropdown">Categorías</a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrUsuario?accion=listarU&id=${id}" id="navbarDropdown">Usuarios</a>
+                    </div>
+                </nav>
+            </div>
             <div class="menu">
                 <div class="Lista">
                     <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=listarInventario&id=${id}" id="navbarDropdown">
@@ -59,7 +82,7 @@
                     <form class="d-flex " action="/FamiSaludLa91/CtrPro?accion=buscarp">
                         <input class="ms-0" type="text" name="txtbuscar" placeholder="Buscar proveedor..." aria-label="Buscar">
                         <button type="submit" class="btn btn-outline-light bg-success me-2 fs-9" name="accion" value="buscarp"><i class="bi bi-search"> Buscar </i></button>
-                        
+
                         <button class="btn btn-outline-light bg-secondary  fs-9" id="agg" type="button" data-bs-toggle="modal" data-bs-target="#agregarproveedor">Agregar</button>      
                     </form>
 
@@ -78,24 +101,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="p" items="${proveedor}">  
-                    <tr style="background-color: white">
-                        <th scope="row" class="border">${p.getId()}</th>
-                        <td class="border">${p.getNombre()}</td>
-                        <td class="border">${p.getCorreo()}</td>
-                        <td class="border">${p.getTelefono()}</td>
-                        <td class="border">${p.getDireccion()}</td>
-                        <td scope="col" class ="text-center border">
-                            <input type="hidden" name="id" id="id" value="${p.getId()}">
-                            <a class="btn btn-primary" href="/FamiSaludLa91/CtrPro?accion=EditarProveedor&idpr=${p.getId()}"><i class="bi bi-pencil-fill"></i></a>
-                            <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#eliminar" data-id="${p.getId()}"><i class="bi bi-trash-fill"></i></a>
-                        </td>
-                    </tr>
-                </c:forEach>
+                    <c:forEach var="p" items="${proveedor}">  
+                        <tr style="background-color: white">
+                            <th scope="row" class="border">${p.getId()}</th>
+                            <td class="border">${p.getNombre()}</td>
+                            <td class="border">${p.getCorreo()}</td>
+                            <td class="border">${p.getTelefono()}</td>
+                            <td class="border">${p.getDireccion()}</td>
+                            <td scope="col" class ="text-center border">
+                                <input type="hidden" name="id" id="id" value="${p.getId()}">
+                                <a class="btn btn-primary" href="/FamiSaludLa91/CtrPro?accion=EditarProveedor&idpr=${p.getId()}"><i class="bi bi-pencil-fill"></i></a>
+                                <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#eliminar" data-id="${p.getId()}"><i class="bi bi-trash-fill"></i></a>
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
-        
+
         <!-- Modal de Confirmación de Eliminación -->
         <div class="modal fade" id="eliminar" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -132,16 +155,16 @@
         <!-- Modal -->
 
         <div class="modal fade" id="agregarproveedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content"> 
-            <div class="modal-header bg-primary text-white">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Producto</h1>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form class="form-sing" action="/FamiSaludLa91/CtrPro?accion=Agregar" method="POST" >
-                    <div class="row g-3">
-                        <div class="col-md-6">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content"> 
+                    <div class="modal-header bg-primary text-white">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Producto</h1>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-sing" action="/FamiSaludLa91/CtrPro?accion=Agregar" method="POST" >
+                            <div class="row g-3">
+                                <div class="col-md-6">
                                     <label for="txtid" class="form-label">ID</label> 
                                     <input type="number" class="form-control" name="txtid" placeholder="Ingrese ID" required>
                                 </div>  
@@ -162,29 +185,29 @@
                                     <input type="txt" class="form-control" id="txtdireccion" name="txtdireccion" placeholder="Ingrese Direccion" required>
                                 </div>
                             </div>    
-                    <div class="text-center mt-4">
-                        <button type="submit" class="btn btn-success" name="btnagregar" value="Agregar">Agregar <i class="bi bi-floppy"></i></button>
-                        <a class="btn btn-secondary" name="regresar" href="/FamiSaludLa91/CtrPro?accion=listarp">Regresar <i class="bi bi-box-arrow-left"></i></a>
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-success" name="btnagregar" value="Agregar">Agregar <i class="bi bi-floppy"></i></button>
+                                <a class="btn btn-secondary" name="regresar" href="/FamiSaludLa91/CtrPro?accion=listarp">Regresar <i class="bi bi-box-arrow-left"></i></a>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-        
-                            
-                            
-           <div class="modal fade" id="editarproveedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content"> 
-            <div class="modal-header bg-primary text-white">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Proveedor</h1>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form class="form-sing" action="/FamiSaludLa91/CtrPro?accion=actualizarProveedor" method="POST" >
-                    <div class="row g-3">
-                        <div class="col-md-6">
+
+
+
+        <div class="modal fade" id="editarproveedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content"> 
+                    <div class="modal-header bg-primary text-white">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Proveedor</h1>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-sing" action="/FamiSaludLa91/CtrPro?accion=actualizarProveedor" method="POST" >
+                            <div class="row g-3">
+                                <div class="col-md-6">
                                     <label for="txtid" class="form-label">Id</label>actualizarProveedor
                                     <input type="number" class="form-control" id="txtid" name="txtid" value="${proveedorE.getId()}" readonly required>
                                 </div>  
@@ -205,30 +228,30 @@
                                     <input type="txt" class="form-control" id="txtdireccion" name="txtdireccion" value="${proveedorE.getDireccion()}" placeholder="Ingrese Direccion" required>
                                 </div>
                             </div>    
-                    <div class="text-center mt-4">
-                        <button type="submit" class="btn btn-success" name="btnagregar" value="Agregar">Guardar <i class="bi bi-floppy"></i></button>
-                        <a class="btn btn-secondary" name="regresar" href="/FamiSaludLa91/CtrPro?accion=listarp">Regresar<i class="bi bi-box-arrow-left"></i></a>
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-success" name="btnagregar" value="Agregar">Guardar <i class="bi bi-floppy"></i></button>
+                                <a class="btn btn-secondary" name="regresar" href="/FamiSaludLa91/CtrPro?accion=listarp">Regresar<i class="bi bi-box-arrow-left"></i></a>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script src="/FamiSaludLa91/JSc/eliminarProveedores.js" type="text/javascript"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-<script>
-            $(document).ready(function() {
-                
-                    <c:if test="${editarPro}">
-                        $('#editarproveedor').modal('show');
-                    </c:if>
-                
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/FamiSaludLa91/JSc/eliminarProveedores.js" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+        <script>
+            $(document).ready(function () {
+
+            <c:if test="${editarPro}">
+                $('#editarproveedor').modal('show');
+            </c:if>
+
             });
-</script>
-</body>
+        </script>
+    </body>
 </html>
