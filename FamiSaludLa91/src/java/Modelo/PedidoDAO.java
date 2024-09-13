@@ -176,6 +176,35 @@ public class PedidoDAO {
 
         return pedidos;
     }
+    
+    public List<Pedido> pedidosEspera() {
+        List<Pedido> pedidos = new ArrayList<>();
+        try {
+            conectar conection = new conectar();
+            Connection conexion = conection.crearconexion();
+            if (conexion != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+
+            }
+            String consulta = "SELECT * FROM pedidos WHERE estado = 'Esperando'";
+            PreparedStatement stm = conexion.prepareStatement(consulta);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int idUsuario = rs.getInt("idUsuario");
+                Date fechaCreacion = rs.getDate("fechaCreacion");
+                String estado = rs.getString("estado");
+                int total = rs.getInt("total");
+                int envio = rs.getInt("envio");
+                Pedido pedido = new Pedido(id, idUsuario, total, fechaCreacion, estado, envio);
+                pedidos.add(pedido);
+            }
+        } catch (Exception ex) {
+            System.out.println("Hubo un Error Al Cargar Los Productos " + ex);
+        }
+
+        return pedidos;
+    }
 
     public boolean buscarPedido(int idp) {
         Connection conexion = null;

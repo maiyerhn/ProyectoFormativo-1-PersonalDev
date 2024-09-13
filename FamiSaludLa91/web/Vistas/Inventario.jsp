@@ -40,6 +40,7 @@
                         <i class="bi bi-person-fill text-white fs-3"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item btn-Usuario" href="#">Usuario</a></li>
                         <li>
                             <form method="POST" action="/FamiSaludLa91/CtrValidar">
                                 <input type="hidden" name="accion" value="exit">
@@ -180,6 +181,47 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="col-lg-12 mb-4 solicitados">
+                    <div class="recent-orders">
+                        <h5>Pedidos en Espera</h5>
+                        <small>Resumen de los Pedidos en Espera</small>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Usuario</th>
+                                        <th>Correo</th>
+                                        <th>Estado</th>
+                                        <th>Fecha y Hora</th>
+                                        <th>Dirección</th>
+                                        <th>Monto</th>
+                                        <th>Accion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="ped" items="${espera}" varStatus="status">
+                                        <c:set var="usuario" value="${usuarios1[status.index]}"/>
+                                        <tr>
+                                            <td>${usuario.nombre}</td>
+                                            <td>${usuario.correo}</td>
+                                            <td><select class="form-select" data-pedido-id="${ped.id}">
+                                        <option value="Esperando" ${ped.estado == 'Esperando' ? 'selected' : ''}>Esperando</option>
+                                        <option value="Enviado" ${ped.estado == 'Enviado' ? 'selected' : ''}>Enviado</option>
+                                        <option value="Entregado" ${ped.estado == 'Entregado' ? 'selected' : ''}>Entregado</option>
+                                    </select></td>
+                                            <td>${ped.fechaActual}</td>
+                                            <td>${usuario.direccion}</td>
+                                            <td>${ped.total}</td>
+                                            <td><a href="/FamiSaludLa91/CtrDetallePedido?accion=mostrar&idPedido=${ped.id}&fechaCompleta=${ped.fechaActual}"> <button class="btn btn-primary mt-2 redirect-btn" data-pedido-id="${ped.id}" >?</button></a></td>
+                                           
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                 <!-- Fila de estadísticas -->
                 <div class="col-lg-12 mb-4">
                     <div class="row">
@@ -227,5 +269,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/FamiSaludLa91/JSc/validacionUser.js" type="text/javascript"></script>
+    <script src="/FamiSaludLa91/JSc/Estado-Pedido.js" type="text/javascript"></script>
 </body>
 </html>
