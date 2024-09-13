@@ -27,7 +27,7 @@ $(document).ready(function () {
             url: url,
             data: "idp=" + encodeURIComponent(idp),
             success: function (response) {
-                location.href = "/FamiSaludLa91/CtrProductos?accion=Carrito";
+                location.href = "/FamiSaludLa91/CtrCategorias?accion=buscarCatCarrito";
             },
             error: function (xhr, status, error) {
                 console.error('Error al eliminar el producto del carrito:', error);

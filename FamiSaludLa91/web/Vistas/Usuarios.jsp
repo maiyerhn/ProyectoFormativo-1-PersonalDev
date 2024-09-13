@@ -13,15 +13,39 @@
     </head>
     <body>
         <div class="container-fluid encabezado">
-            <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                        <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Logo" class="me-2"/>
-                    </a>
-                    <p class="navbar-text fs-3 fw-bold text-white text-start ms-3">Famisalud la 91</p>
-                    
-                </div>
-            </header>
+            <div class="container-fluid encabezado">
+                <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#">
+                            <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Famisalud la 91" class="me-2" />
+                        </a>
+                        <p class="navbar-text fs-3 fw-bold text-white text-start ms-5">Famisalud la 91</p>
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle carrito" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-fill text-white fs-3"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li>
+                                    <form method="POST" action="/FamiSaludLa91/CtrValidar">
+                                        <input type="hidden" name="accion" value="exit">
+                                        <button type="submit" class="dropdown-item">Salir</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>                   
+                </header>
+                <nav class="menu">
+                    <div class="Lista">
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=listarInventario&id=${id}" id="navbarDropdown">Inventario</a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=listar&id=${id}" id="navbarDropdown">Productos</a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrPedido?accion=listarped&id=${id}" id="navbarDropdown">Pedidos</a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrPro?accion=listarp&id=${id}" id="navbarDropdown">Proveedores</a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrCategorias?accion=listarCategorias&id=${id}" id="navbarDropdown">Categorías</a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrUsuario?accion=listarU&id=${id}" id="navbarDropdown">Usuarios</a>
+                    </div>
+                </nav>
+            </div>
             <div class="menu">
                 <div class="Lista">
                     <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=listarInventario&id=${id}" id="navbarDropdown">
@@ -91,10 +115,10 @@
                             </td>
                         </tr>
                     </c:forEach>
-                </tbody>
+                            </tbody>
             </table>
         </div>
-        
+
         <!-- Modal de Confirmación de Eliminación -->
         <div class="modal fade" id="eliminar" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -127,147 +151,147 @@
                 </div>
             </div>
         </div>
-        
+
         <%-- modal de agregar usuarios --%>
         <div class="modal fade" id="agregarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Usuario</h1>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body login-form">
-                <form action="/FamiSaludLa91/CtrUsuario?accion=Agregar" method="GET">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="Nombre">Nombre</label>
-                                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingresa Nombre" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="Apellidos">Apellidos</label>
-                                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingresa Apellidos" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="Telefono">Telefono</label>
-                                <input type="text" class="form-control"  name="telefono" id="telefono" placeholder="Ingresa Telefono" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="Direccion">Direccion</label>
-                                <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Ingresa Direccion" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="User">Usuario (E-mail)</label>
-                                <input type="text" class="form-control" id="user" name="user" placeholder="Ingresa Usuario" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="password">Contraseña</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa Contraseña" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="password1">Confirmar Contraseña</label>
-                                <input type="password" class="form-control" id="password1" name="password1" placeholder="Confirma Contraseña" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                            <label for="rol">Rol</label>
-                                <select class="form-select" id="rol" name="rol" required>
-                                    <option value="">Selecciona un rol</option>
-                                    <option value="CLIENTE">Cliente</option>
-                                    <option value="ADMINISTRADOR">Administrador</option>
-                                </select>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="acceptTerms">
-                                    <label class="form-check-label" for="acceptTerms">Aceptar Términos y Condiciones</label>
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Usuario</h1>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body login-form">
+                        <form action="/FamiSaludLa91/CtrUsuario?accion=Agregar" method="GET">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="Nombre">Nombre</label>
+                                    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingresa Nombre" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="Apellidos">Apellidos</label>
+                                    <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingresa Apellidos" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="Telefono">Telefono</label>
+                                    <input type="text" class="form-control"  name="telefono" id="telefono" placeholder="Ingresa Telefono" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="Direccion">Direccion</label>
+                                    <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Ingresa Direccion" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="User">Usuario (E-mail)</label>
+                                    <input type="text" class="form-control" id="user" name="user" placeholder="Ingresa Usuario" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="password">Contraseña</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa Contraseña" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="password1">Confirmar Contraseña</label>
+                                    <input type="password" class="form-control" id="password1" name="password1" placeholder="Confirma Contraseña" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="rol">Rol</label>
+                                    <select class="form-select" id="rol" name="rol" required>
+                                        <option value="">Selecciona un rol</option>
+                                        <option value="CLIENTE">Cliente</option>
+                                        <option value="ADMINISTRADOR">Administrador</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="acceptTerms">
+                                        <label class="form-check-label" for="acceptTerms">Aceptar Términos y Condiciones</label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="login-btn text-center mt-4">
-                            <button type="submit" name="accion" value="Agregar" class="btn btn-success ingresar">Agregar</button>
-                            <a class="btn btn-secondary" name="regresar" href="/FamiSaludLa91/CtrUsuario?accion=listarU">Regresar <i class="bi bi-box-arrow-left"></i></a>
-                        </div>
-                    </form>
+                            <div class="login-btn text-center mt-4">
+                                <button type="submit" name="accion" value="Agregar" class="btn btn-success ingresar">Agregar</button>
+                                <a class="btn btn-secondary" name="regresar" href="/FamiSaludLa91/CtrUsuario?accion=listarU">Regresar <i class="bi bi-box-arrow-left"></i></a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-        
+
         <%-- modal de editar usuarios --%>
-        
+
         <div class="modal fade" id="editarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Usuario</h1>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="/FamiSaludLa91/CtrUsuario?accion=actualizarUsuario" method="GET">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="Nombre">Nombre</label>
-                                <input type="text" class="form-control" name="nombre" value="${usuarioE.getNombre()}" readonly id="nombre" placeholder="Ingresa Nombre" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="Apellidos">Apellidos</label>
-                                <input type="text" class="form-control" name="apellido" value="${usuarioE.getApellido()}" readonly id="apellido" placeholder="Ingresa Apellidos" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="Telefono">Telefono</label>
-                                <input type="text" class="form-control"  name="telefono" value="${usuarioE.getTelefono()}"  readonly  id="telefono" placeholder="Ingresa Telefono" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="Direccion">Direccion</label>
-                                <input type="text" class="form-control" name="direccion" value="${usuarioE.getDireccion()}" readonly id="direccion" placeholder="Ingresa Direccion" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="User">Usuario (E-mail)</label>
-                                <input type="text" class="form-control" id="user" name="user"  value="${usuarioE.getCorreo()}"  readonly placeholder="Ingresa Usuario" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="password">Contraseña</label>
-                                <input type="password" class="form-control" id="password" name="password" value="${usuarioE.getContrasena()}"  readonly placeholder="Ingresa Contraseña" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="password1">Confirmar Contraseña</label>
-                                <input type="password" class="form-control" id="password1" name="password1" value="${usuarioE.getContrasena()}"  readonly placeholder="Confirma Contraseña" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                            <label for="rol">Rol</label>
-                                <select class="form-select" id="rol" name="rol" required>
-                                    <option value="">Selecciona un rol</option>
-                                    <option value="CLIENTE">Cliente</option>
-                                    <option value="ADMINISTRADOR">Administrador</option>
-                                </select>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="acceptTerms">
-                                    <label class="form-check-label" for="acceptTerms">Aceptar Términos y Condiciones</label>
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Usuario</h1>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/FamiSaludLa91/CtrUsuario?accion=actualizarUsuario" method="GET">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="Nombre">Nombre</label>
+                                    <input type="text" class="form-control" name="nombre" value="${usuarioE.getNombre()}" readonly id="nombre" placeholder="Ingresa Nombre" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="Apellidos">Apellidos</label>
+                                    <input type="text" class="form-control" name="apellido" value="${usuarioE.getApellido()}" readonly id="apellido" placeholder="Ingresa Apellidos" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="Telefono">Telefono</label>
+                                    <input type="text" class="form-control"  name="telefono" value="${usuarioE.getTelefono()}"  readonly  id="telefono" placeholder="Ingresa Telefono" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="Direccion">Direccion</label>
+                                    <input type="text" class="form-control" name="direccion" value="${usuarioE.getDireccion()}" readonly id="direccion" placeholder="Ingresa Direccion" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="User">Usuario (E-mail)</label>
+                                    <input type="text" class="form-control" id="user" name="user"  value="${usuarioE.getCorreo()}"  readonly placeholder="Ingresa Usuario" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="password">Contraseña</label>
+                                    <input type="password" class="form-control" id="password" name="password" value="${usuarioE.getContrasena()}"  readonly placeholder="Ingresa Contraseña" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="password1">Confirmar Contraseña</label>
+                                    <input type="password" class="form-control" id="password1" name="password1" value="${usuarioE.getContrasena()}"  readonly placeholder="Confirma Contraseña" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="rol">Rol</label>
+                                    <select class="form-select" id="rol" name="rol" required>
+                                        <option value="">Selecciona un rol</option>
+                                        <option value="CLIENTE">Cliente</option>
+                                        <option value="ADMINISTRADOR">Administrador</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="acceptTerms">
+                                        <label class="form-check-label" for="acceptTerms">Aceptar Términos y Condiciones</label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="login-btn text-center mt-4">
-                            <button type="submit" name="accion" value="actualizarUsuario" class="btn btn-success ingresar">Guardar</button>
-                            <a class="btn btn-secondary" name="regresar" href="/FamiSaludLa91/CtrUsuario?accion=listarU">Regresar <i class="bi bi-box-arrow-left"></i></a>
-                        </div>
-                    </form>
+                            <div class="login-btn text-center mt-4">
+                                <button type="submit" name="accion" value="actualizarUsuario" class="btn btn-success ingresar">Guardar</button>
+                                <a class="btn btn-secondary" name="regresar" href="/FamiSaludLa91/CtrUsuario?accion=listarU">Regresar <i class="bi bi-box-arrow-left"></i></a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="/FamiSaludLa91/JSc/Scripagregarusuario.js" type="text/javascript"></script>
         <script src="/FamiSaludLa91/JSc/eliminarUsuario.js" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
         <script>
-            $(document).ready(function() {
-                
-                    <c:if test="${editarus}">
-                        $('#editarusuario').modal('show');
-                    </c:if>
-                
+            $(document).ready(function () {
+
+            <c:if test="${editarus}">
+                $('#editarusuario').modal('show');
+            </c:if>
+
             });
         </script>
     </body>

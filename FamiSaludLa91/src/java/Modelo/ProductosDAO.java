@@ -337,5 +337,34 @@ public class ProductosDAO {
 
         return producto;
     }
+     public List<Productos> obtenerProductosDescuento(){
+        List<Productos> productos = new ArrayList<>();
+        try {
+            conectar conection = new conectar();
+            Connection conexion = conection.crearconexion();
+            if (conexion != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
 
+            }
+            String consulta = "SELECT p.* FROM Productos p JOIN Categoria c ON p.idCategoria = c.id WHERE c.ofertas > 0";
+            PreparedStatement stm = conexion.prepareStatement(consulta);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                int id = rs.getInt("id");
+                String nombre = rs.getString("nombre");
+                String descripcion = rs.getString("descripcion");
+                int precio = rs.getInt("precio");
+                String foto = rs.getString("foto");
+                int idCategoria = rs.getInt("idCategoria");
+                int stock = rs.getInt("stock");
+                int proveedor = rs.getInt("idproveedor");
+                Productos producto = new Productos(id,nombre,descripcion,precio,foto,idCategoria,stock,proveedor);
+                productos.add(producto);
+            }
+        } catch (Exception ex) {
+            System.out.println("Hubo un Error Al Cargar Los Productos "+ ex);
+        }
+        
+        return productos;
+    }
 }

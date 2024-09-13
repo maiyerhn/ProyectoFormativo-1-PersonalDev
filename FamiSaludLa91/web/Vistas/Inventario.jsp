@@ -36,7 +36,6 @@
                         <i class="bi bi-person-fill text-white fs-3"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item btn-Usuario" href="#">Usuario</a></li>
                         <li>
                             <form method="POST" action="/FamiSaludLa91/CtrValidar">
                                 <input type="hidden" name="accion" value="exit">
