@@ -155,7 +155,7 @@
                     </div>
                     <div class="modal-body">
                         <form class="form-sing" action="/FamiSaludLa91/CtrCategorias?accion=Agregar" method="POST">
-                            <div class="row g-3">                               
+                            <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="txtnombre" class="form-label">Nombre</label>
                                     <input type="text" class="form-control" id="txtnombre" name="txtnombre" placeholder="Ingrese nombre" required>
@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="txtofertas" class="form-label">Ofertas</label>
-                                    <input type="number" class="form-control" id="txtofertas" name="txtofertas" placeholder="Ingrese Oferta" required>
+                                    <input type="number" class="form-control" id="txtofertas" name="txtofertas" placeholder="Ingrese Oferta" min="0" max="100" required>
                                 </div>
                             </div>
                             <div class="text-center mt-4">
@@ -191,7 +191,7 @@
                         <form class="form-sing" action="/FamiSaludLa91/CtrCategorias?accion=actualizarCategoria" method="POST">
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label for="txtid" class="form-label">Id</label>actualizarCategoria
+                                    <label for="txtid" class="form-label">Id</label>
                                     <input type="number" class="form-control" id="txtid" name="txtid" value="${CategoriaE.getId()}" readonly required>
                                 </div>
                                 <div class="col-md-6">
@@ -204,7 +204,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="txtofertas" class="form-label">Ofertas</label>
-                                    <input type="number" class="form-control" id="txtofertas" name="txtofertas" value="${CategoriaE.getOfertas()}" required>
+                                    <input type="number" class="form-control" id="txtofertas" name="txtofertas" value="${CategoriaE.getOfertas()}" min="0" max="100" required>
                                 </div>
                             </div>
                             <div class="text-center mt-4">
@@ -216,6 +216,7 @@
                 </div>
             </div>
         </div>
+
 
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

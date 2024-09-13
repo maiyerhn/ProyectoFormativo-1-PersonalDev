@@ -336,7 +336,8 @@ public class CtrProductos extends HttpServlet {
                         System.out.println(cantidad + "   " + det.getCantidad());
                         System.out.println("entro a agregar el total");
                         System.out.println(ped.getTotal() + "  " + pro.getPrecio());
-                        ped.setTotal(ped.getTotal() + pro.getPrecio());
+                        int totalFinal = 0;
+                        ped.setTotal(totalFinal + total);
                         pedidodao.agregarTotal(ped.getId(), ped.getTotal());
                     } else if (cantidad < det.getCantidad()) {
                         System.out.println("la cantidad en menor");

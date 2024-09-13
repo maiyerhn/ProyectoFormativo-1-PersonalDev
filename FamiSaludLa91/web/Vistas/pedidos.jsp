@@ -44,6 +44,7 @@
                         </div>
                     </div>                   
                 </header>
+            </div>
             <div class="menu">
 
                 <div class="menu">
