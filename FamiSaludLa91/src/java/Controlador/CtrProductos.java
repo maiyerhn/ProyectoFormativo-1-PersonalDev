@@ -204,12 +204,16 @@ public class CtrProductos extends HttpServlet {
                         System.out.println("se creo el pedido? " + dato2);
                         System.out.println("creo el pedido: " + ped);
                         listacarrito = new ArrayList();
-                    } 
+                    }
+                    List<Productos> productosDes = pdao.obtenerProductosDescuento();
                     List<Pedido> pedidosUser = pedidodao.pedidoUser(idp);
                     CategoriaDAO catdao = new CategoriaDAO();
                     List<Categoria> cat = catdao.listarT();
                     List<Pedido> pedidos = pedidodao.pedidoProsesado(idp);
+                    List<Categoria> catDes = catdao.obtenerCategoriaDescuento();
                     request.setAttribute("ped", pedidos);
+                    request.setAttribute("ProductosDes", productosDes);
+                    request.setAttribute("catDes", catDes);
                     request.setAttribute("pedidos", pedidosUser);
                     request.setAttribute("Categorias", cat);
                     request.setAttribute("Productos", productos);
@@ -285,6 +289,7 @@ public class CtrProductos extends HttpServlet {
                     request.setAttribute("contador", listacarrito.size());
                     request.getRequestDispatcher("CtrProductos?accion=Inicio&id=" + idp).forward(request, response);
                     break;
+                    
                 case "Carrito":
                     System.out.println("entro al carrito");
                     System.out.println("id del usuario: " + idp);
@@ -564,7 +569,6 @@ public class CtrProductos extends HttpServlet {
                     request.setAttribute("Productos", productos);
                     request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
                     break;
-                
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Accion no reconocida");
                     break;

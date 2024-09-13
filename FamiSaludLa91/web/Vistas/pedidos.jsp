@@ -22,18 +22,28 @@
 
 
         <div class="container-fluid encabezado">
-            <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                        <img src="/FamiSaludLa91/imagenes/logo9.png" alt="" class="me-2" />
-                    </a>
-                    <p class="navbar-text fs-3 fw-bold text-white text-start ms-3">Famisalud la 91</p>
-
-                                      
-                </div>        
-            </header>
-
-
+            <div class="container-fluid encabezado">
+                <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#">
+                            <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Famisalud la 91" class="me-2" />
+                        </a>
+                        <p class="navbar-text fs-3 fw-bold text-white text-start ms-5">Famisalud la 91</p>
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle carrito" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-fill text-white fs-3"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li>
+                                    <form method="POST" action="/FamiSaludLa91/CtrValidar">
+                                        <input type="hidden" name="accion" value="exit">
+                                        <button type="submit" class="dropdown-item">Salir</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>                   
+                </header>
             <div class="menu">
 
                 <div class="menu">
@@ -107,10 +117,10 @@
 
     </div>
 
-<script src="/FamiSaludLa91/JSc/Estado-Pedido.js" type="text/javascript"></script>
+    <script src="/FamiSaludLa91/JSc/Estado-Pedido.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 </body>
 </html>

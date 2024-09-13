@@ -13,15 +13,39 @@
     </head>
     <body>
         <div class="container-fluid encabezado">
-            <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                        <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Logo" class="me-2"/>
-                    </a>
-                    <p class="navbar-text fs-3 fw-bold text-white text-start ms-3">Famisalud la 91</p>
-                   
-                </div>
-            </header>
+            <div class="container-fluid encabezado">
+                <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#">
+                            <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Famisalud la 91" class="me-2" />
+                        </a>
+                        <p class="navbar-text fs-3 fw-bold text-white text-start ms-5">Famisalud la 91</p>
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle carrito" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-fill text-white fs-3"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li>
+                                    <form method="POST" action="/FamiSaludLa91/CtrValidar">
+                                        <input type="hidden" name="accion" value="exit">
+                                        <button type="submit" class="dropdown-item">Salir</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>                   
+                </header>
+                <nav class="menu">
+                    <div class="Lista">
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=listarInventario&id=${id}" id="navbarDropdown">Inventario</a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=listar&id=${id}" id="navbarDropdown">Productos</a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrPedido?accion=listarped&id=${id}" id="navbarDropdown">Pedidos</a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrPro?accion=listarp&id=${id}" id="navbarDropdown">Proveedores</a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrCategorias?accion=listarCategorias&id=${id}" id="navbarDropdown">Categorías</a>
+                        <a class="nav-link opciones" href="/FamiSaludLa91/CtrUsuario?accion=listarU&id=${id}" id="navbarDropdown">Usuarios</a>
+                    </div>
+                </nav>
+            </div>
             <div class="menu">
                 <div class="Lista">
                     <a class="nav-link opciones" href="/FamiSaludLa91/CtrProductos?accion=listarInventario&id=${id}" id="navbarDropdown">
@@ -106,7 +130,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Modal de Notificación -->
         <div class="modal fade" id="mensajeModal" tabindex="-1" aria-labelledby="mensajeModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -154,7 +178,7 @@
                 </div>
             </div>
         </div>
-        
+
         <%-- modal de editar Categorias --%>
         <div class="modal fade" id="editarCategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -197,13 +221,13 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="/FamiSaludLa91/JSc/eliminarCategoria.js" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-         <script>
-            $(document).ready(function() {
-                
-                    <c:if test="${editarCat}">
-                        $('#editarCategoria').modal('show');
-                    </c:if>
-                
+        <script>
+            $(document).ready(function () {
+
+            <c:if test="${editarCat}">
+                $('#editarCategoria').modal('show');
+            </c:if>
+
             });
         </script>
     </body>
