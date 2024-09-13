@@ -456,44 +456,31 @@ public class PedidoDAO {
         return exito;
     }
     
-    public boolean actualizarDetalle(int idDetalle, int cantidad, double total) {
-    Connection conexion = null;
-    PreparedStatement pstmt = null;
-    boolean exito = false;
+  public boolean actualizarDetalle(int idDetalle, int cantidad, int total) {
+    String sql = "UPDATE detallePedido SET cantidad = ?, total = ? WHERE id = ?";
 
-    try {
-        conectar conection = new conectar();
-        conexion = conection.crearconexion();
+    try (Connection conexion = new conectar().crearconexion();
+         PreparedStatement pstmt = conexion.prepareStatement(sql)) {
 
         if (conexion != null) {
             System.out.println("Se ha establecido una conexión con la base de datos");
-            String sql = "UPDATE detallePedido SET cantidad = ?, total = ? WHERE id = ?";
-            pstmt = conexion.prepareStatement(sql);
-            pstmt.setInt(1, cantidad); 
-            pstmt.setDouble(2, total); 
+
+            pstmt.setInt(1, cantidad);
+            pstmt.setInt(2, total);  
             pstmt.setInt(3, idDetalle);
+
             int filasAfectadas = pstmt.executeUpdate();
-            exito = filasAfectadas > 0;
+            return filasAfectadas > 0;
         }
     } catch (SQLException ex) {
         System.out.println("Hubo un error al actualizar el detalle del pedido: " + ex.getMessage());
-    } finally {
-        try {
-            if (pstmt != null) {
-                pstmt.close();
-            }
-            if (conexion != null) {
-                conexion.close();
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error al cerrar los recursos: " + ex.getMessage());
-        }
     }
 
-    return exito;
+    return false;
 }
 
-    public boolean actualizarCantidad(int idDetalle, int cantidad, int total) {
+
+    public boolean actualizarCantidad(int idDetalle, int cantidad) {
         Connection conexion = null;
         PreparedStatement pstmt = null;
         boolean exito = false;
@@ -504,11 +491,10 @@ public class PedidoDAO {
 
             if (conexion != null) {
                 System.out.println("Se ha establecido una conexión con la base de datos");
-                String sql = "UPDATE detallePedido SET cantidad = ?, total = ? WHERE id = ?";
+                String sql = "UPDATE detallePedido SET cantidad = ? WHERE id = ?";
                 pstmt = conexion.prepareStatement(sql);
                 pstmt.setInt(1, cantidad);
-                pstmt.setInt(2, total);
-                pstmt.setInt(3, idDetalle);
+                pstmt.setInt(2, idDetalle);
                 int filasAfectadas = pstmt.executeUpdate();
                 exito = filasAfectadas > 0;
             }
