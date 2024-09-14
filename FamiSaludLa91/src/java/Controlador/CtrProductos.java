@@ -21,7 +21,9 @@ import Modelo.UsuarioDAO;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.ServletException;
@@ -156,7 +158,15 @@ public class CtrProductos extends HttpServlet {
                         System.out.println("foto: " + fotos);
                         System.out.println("categoria: " + categ);
                         System.out.println("stock: " + stock);
-
+                        String fv = request.getParameter("txtfechavencimiento");
+                        SimpleDateFormat formatoDate = new SimpleDateFormat("yyyy-MM-dd");
+                         Date fechaVencimiento = null;
+                         java.sql.Date fechaVencimientoSql = null;
+                        try {
+                             fechaVencimiento = formatoDate.parse(fv);
+                              fechaVencimientoSql = new java.sql.Date(fechaVencimiento.getTime());
+                        } catch (Exception e) {
+                        }
                         pro.setNombre(nombre);
                         pro.setDescripcion(descripcion);
                         pro.setPrecio(precio);
@@ -164,6 +174,7 @@ public class CtrProductos extends HttpServlet {
                         pro.setIdCategoria(categ);
                         pro.setStock(stock);
                         pro.setProveedor(prove);
+                        pro.setFechaVencimiento(fechaVencimientoSql);
 
                         if (pdao.crear(pro)) {
                             System.out.println("Se creó el producto");
