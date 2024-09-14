@@ -53,6 +53,11 @@
     </head>
 
     <body>
+        <%
+        if (session.getAttribute("log") == null || session.getAttribute("log").equals('0')){
+            response.sendRedirect("/FamiSaludLa91/Vistas/Login.jsp");
+        }
+        %>
         <div class="container-fluid encabezado">
             <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
                 <div class="container-fluid d-flex align-items-center">
