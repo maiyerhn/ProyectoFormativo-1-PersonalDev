@@ -168,11 +168,7 @@
                     </div>
                     <div class="modal-body">
                         <form class="form-sing" action="/FamiSaludLa91/CtrPro?accion=Agregar" method="POST" >
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="txtid" class="form-label">ID</label> 
-                                    <input type="number" class="form-control" name="txtid" placeholder="Ingrese ID" required>
-                                </div>  
+                            <div class="row g-3"> 
                                 <div class="col-md-6">
                                     <label for="txtnombre" class="form-label">Nombre</label> 
                                     <input type="text" class="form-control" id="txtnombre" name="txtnombre" placeholder="Ingrese nombre" required>

@@ -322,7 +322,6 @@
                             <p><strong>Nombre:</strong> <span id="view-nombre">${user.getNombre()}</span></p>
                             <p><strong>Apellidos:</strong> <span id="view-apellido">${user.getApellido()}</span></p>
                             <p><strong>Email:</strong> <span id="view-email">${user.getCorreo()}</span></p>
-                            <p><strong>Contraseña:</strong> <span id="view-contrasena">${user.getContrasena()}</span></p>
                             <p><strong>Teléfono:</strong> <span id="view-telefono">${user.getTelefono()}</span></p>
                             <p><strong>Dirección:</strong> <span id="view-direccion">${user.getDireccion()}</span></p>
                             </c:if>
