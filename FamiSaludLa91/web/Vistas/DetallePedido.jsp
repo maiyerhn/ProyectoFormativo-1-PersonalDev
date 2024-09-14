@@ -23,6 +23,11 @@
         </style>
     </head>
     <body>
+        <%
+            if (session.getAttribute("log") == null || session.getAttribute("log").equals('0') || session.getAttribute("rol").equals("CLIENTE")) {
+                response.sendRedirect("/FamiSaludLa91/Vistas/Login.jsp");
+            }
+        %>
         <div class="container-fluid encabezado">
             <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
                 <div class="container-fluid">
@@ -30,7 +35,7 @@
                         <img src="/FamiSaludLa91/imagenes/logo9.png" alt="" class="me-2" style="max-width: 100px;"/>
                     </a>
                     <p class="navbar-text fs-3 fw-bold text-white mb-0">Famisalud la 91</p>
-                                      
+
                 </div>        
             </header>
 

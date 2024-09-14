@@ -13,6 +13,11 @@
         <title>Categorías - Famisalud la 91</title>       
     </head>
     <body>
+        <%
+            if (session.getAttribute("log") == null || session.getAttribute("log").equals('0') || session.getAttribute("rol").equals("CLIENTE")) {
+                response.sendRedirect("/FamiSaludLa91/Vistas/Login.jsp");
+            }
+        %>
         <div class="container-fluid encabezado">
             <div class="container-fluid encabezado">
                 <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
