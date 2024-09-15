@@ -276,7 +276,7 @@ public class UsuarioDAO {
         return true;
     }
 
-    public void editarUser(int id, String nombre, String apellido, String correo, String contrasena, String telefono, String direccion) {
+    public void editarUser(int id, String nombre, String apellido, String correo, String telefono, String direccion) {
         Connection con = null;
         PreparedStatement pstm = null;
 
@@ -289,17 +289,16 @@ public class UsuarioDAO {
             }
 
             // SQL query to update user details
-            String sql = "UPDATE usuarios SET nombre = ?, apellidos = ?, correo = ?, contrasena = ?, telefono = ?, direccion = ? WHERE id = ?";
+            String sql = "UPDATE usuarios SET nombre = ?, apellidos = ?, correo = ?, telefono = ?, direccion = ? WHERE id = ?";
             pstm = con.prepareStatement(sql);
 
             // Set parameters
             pstm.setString(1, nombre);
             pstm.setString(2, apellido);
             pstm.setString(3, correo);
-            pstm.setString(4, contrasena);
-            pstm.setString(5, telefono);
-            pstm.setString(6, direccion);
-            pstm.setInt(7, id);
+            pstm.setString(4, telefono);
+            pstm.setString(5, direccion);
+            pstm.setInt(6, id);
 
             // Execute update
             pstm.executeUpdate();

@@ -499,7 +499,7 @@ public class CtrProductos extends HttpServlet {
                     String apellido,
                      correo,
                      telefono,
-                     contrasena,
+                    // contrasena,
                      direccion,
                      rol;
 
@@ -509,13 +509,13 @@ public class CtrProductos extends HttpServlet {
                     correo = request.getParameter("email");
                     telefono = request.getParameter("phone");
                     direccion = request.getParameter("direccion");
-                    contrasena = request.getParameter("password");
+                    //contrasena = request.getParameter("password");
 
-                    if (contrasena != null && !contrasena.trim().isEmpty()) {
-                        contrasena = encriptarcontrasena(contrasena);
-                    } else {
+                    //if (contrasena != null && !contrasena.trim().isEmpty()) {
+                    //    contrasena = encriptarcontrasena(contrasena);
+                    //} else {
 
-                    }
+                    //}
                     System.out.println("ID: " + id);
                     System.out.println("Nombre: " + nombre);
                     System.out.println("Apellido: " + apellido);
@@ -523,7 +523,7 @@ public class CtrProductos extends HttpServlet {
                     System.out.println("Teléfono: " + telefono);
                     System.out.println("Dirección: " + direccion);
 
-                    usudao.editarUser(id, nombre, apellido, correo, contrasena, telefono, direccion);
+                    usudao.editarUser(id, nombre, apellido, correo, telefono, direccion);
 
                     user = usudao.listarT(id);
                     request.setAttribute("user", user);
@@ -537,7 +537,7 @@ public class CtrProductos extends HttpServlet {
                     correo = request.getParameter("email");
                     telefono = request.getParameter("phone");
                     direccion = request.getParameter("direccion");
-                    contrasena = request.getParameter("password");
+                    //contrasena = request.getParameter("password");
 
                     System.out.println("ID: " + id);
                     System.out.println("Nombre: " + nombre);
@@ -545,7 +545,7 @@ public class CtrProductos extends HttpServlet {
                     System.out.println("Correo: " + correo);
                     System.out.println("Teléfono: " + telefono);
                     System.out.println("Dirección: " + direccion);
-                    usudao.editarUser(id, nombre, apellido, correo, contrasena, telefono, direccion);
+                    usudao.editarUser(id, nombre, apellido, correo, telefono, direccion);
                     user = usudao.listarT(id);
                     request.setAttribute("user", user);
                     response.sendRedirect(request.getContextPath() + "/CtrProductos?accion=listarInventario&id=" + id);

@@ -8,8 +8,8 @@
     var editMode = document.querySelector('.edit-mode');
     var btncerrar = document.querySelector('.btn-cerrar');
     const form = document.getElementById('editForm');
-    const passwordInput = document.getElementById('editPassword');
-    const confirmPasswordInput = document.getElementById('confirmPassword');
+    //const passwordInput = document.getElementById('editPassword');
+    //const confirmPasswordInput = document.getElementById('confirmPassword');
     const phoneInput = document.getElementById('editPhone');
     const emailInput = document.getElementById('editEmail');
 
@@ -17,9 +17,9 @@
         return /^\d{10}$/.test(phone);
     }
 
-    function validatePassword(password) {
-        return password.length >= 8 && password.length <= 20;
-    }
+    //function validatePassword(password) {
+    //    return password.length >= 8 && password.length <= 20;
+    //}
 
     function validateEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -28,15 +28,15 @@
 
     function validateForm() {
         const phone = phoneInput.value;
-        const password = passwordInput.value;
-        const confirmPassword = confirmPasswordInput.value;
+        //const password = passwordInput.value;
+        //const confirmPassword = confirmPasswordInput.value;
         const email = emailInput.value;
 
         let isValid = true;
         const errorMessages = {
             phone: '',
-            password: '',
-            confirmPassword: '',
+        //    password: '',
+        //    confirmPassword: '',
             email: ''
         };
 
@@ -45,15 +45,15 @@
             errorMessages.phone = 'El telefono debe tener exactamente 10 dígitos.';
         }
 
-        if (!validatePassword(password)) {
-            isValid = false;
-            errorMessages.password = 'La contrasena debe tener entre 8 y 20 caracteres.';
-        }
+        //if (!validatePassword(password)) {
+        //    isValid = false;
+         //   errorMessages.password = 'La contrasena debe tener entre 8 y 20 caracteres.';
+        //}
 
-        if (password !== confirmPassword) {
-            isValid = false;
-            errorMessages.confirmPassword = 'La contrasena y la confirmación de contraseña deben coincidir.';
-        }
+        //if (password !== confirmPassword) {
+         //   isValid = false;
+         //   errorMessages.confirmPassword = 'La contrasena y la confirmación de contraseña deben coincidir.';
+        //}
 
         if (!validateEmail(email)) {
             isValid = false;
@@ -61,13 +61,13 @@
         }
 
         document.getElementById('errorPhone').textContent = errorMessages.phone;
-        document.getElementById('errorPassword').textContent = errorMessages.password;
-        document.getElementById('errorConfirmPassword').textContent = errorMessages.confirmPassword;
+        //document.getElementById('errorPassword').textContent = errorMessages.password;
+        //document.getElementById('errorConfirmPassword').textContent = errorMessages.confirmPassword;
         document.getElementById('errorEmail').textContent = errorMessages.email;
 
         phoneInput.classList.toggle('error', !!errorMessages.phone);
-        passwordInput.classList.toggle('error', !!errorMessages.password);
-        confirmPasswordInput.classList.toggle('error', !!errorMessages.confirmPassword);
+        //passwordInput.classList.toggle('error', !!errorMessages.password);
+        //confirmPasswordInput.classList.toggle('error', !!errorMessages.confirmPassword);
         emailInput.classList.toggle('error', !!errorMessages.email);
 
         return isValid;
@@ -122,8 +122,8 @@
     });
 
     phoneInput.addEventListener('input', toggleSaveButton);
-    passwordInput.addEventListener('input', toggleSaveButton);
-    confirmPasswordInput.addEventListener('input', toggleSaveButton);
+    //passwordInput.addEventListener('input', toggleSaveButton);
+    //confirmPasswordInput.addEventListener('input', toggleSaveButton);
     emailInput.addEventListener('input', toggleSaveButton);
 
     btnSave.addEventListener('click', function () {
