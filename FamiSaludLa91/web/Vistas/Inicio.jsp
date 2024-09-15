@@ -356,18 +356,8 @@
                                     <input type="text" id="editDireccion" name="direccion" class="form-control" required minlength="2" maxlength="50" value="${user.getDireccion()}">
                                     <div class="error-message" id="errorDireccion"></div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="editPassword" class="form-label">Contraseña:</label>
-                                    <input type="password" id="editPassword" name="password" class="form-control" required minlength="8" maxlength="20" value="${user.getContrasena()}">
-                                    <div class="error-message" id="errorPassword"></div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="confirmPassword" class="form-label">Confirmar Contraseña:</label>
-                                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required minlength="8" maxlength="20" value="${user.getContrasena()}">
-                                    <div class="error-message" id="errorConfirmPassword"></div>
-                                </div>
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-save" id="btnSave" disabled>Guardar</button>
+                                    <button type="submit" class="btn btn-save" id="btnSave">Guardar</button>
                                     <button type="button" class="btn btn-cancel" onclick="toggleEditMode()">Cancelar</button>
                                 </div>
                             </c:if>
