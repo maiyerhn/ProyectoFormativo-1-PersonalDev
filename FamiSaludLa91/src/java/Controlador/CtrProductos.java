@@ -21,7 +21,9 @@ import Modelo.UsuarioDAO;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.ServletException;
@@ -66,7 +68,8 @@ public class CtrProductos extends HttpServlet {
     Usuario user;
     Pedido ped;
     DetallePedido detalleP;
-    int subtotal,idDetalle;
+    String fvEdit;
+    int subtotal, idDetalle;
     int cantidad, idp, prep, catp, stocp, prove;
     int cantidadUsuarios, cantidadPedidos, cantidadProductos;
     int totalpagar;
@@ -156,7 +159,16 @@ public class CtrProductos extends HttpServlet {
                         System.out.println("foto: " + fotos);
                         System.out.println("categoria: " + categ);
                         System.out.println("stock: " + stock);
-
+                        String fv = request.getParameter("txtfechavencimiento");
+                        SimpleDateFormat formatoDate = new SimpleDateFormat("yyyy-MM-dd");
+                        Date fechaVencimiento = null;
+                        java.sql.Date fechaVencimientoSql = null;
+                        try {
+                            fechaVencimiento = formatoDate.parse(fv);
+                            fechaVencimientoSql = new java.sql.Date(fechaVencimiento.getTime());
+                        } catch (Exception e) {
+                            System.out.println("Error al convertir los Datos de String a DATE");
+                        }
                         pro.setNombre(nombre);
                         pro.setDescripcion(descripcion);
                         pro.setPrecio(precio);
@@ -164,6 +176,7 @@ public class CtrProductos extends HttpServlet {
                         pro.setIdCategoria(categ);
                         pro.setStock(stock);
                         pro.setProveedor(prove);
+                        pro.setFechaVencimiento(fechaVencimientoSql);
 
                         if (pdao.crear(pro)) {
                             System.out.println("Se creó el producto");
@@ -270,7 +283,7 @@ public class CtrProductos extends HttpServlet {
                             detalleP.setIdProducto(p.getId());
                             detalleP.setIdPedido(ped.getId());
                             detalleP.setCantidad(cantidad);
-                            detalleP.setTotal(cantidad * precioConDescuento);  
+                            detalleP.setTotal(cantidad * precioConDescuento);
                             ped.setTotal(ped.getTotal() + precioConDescuento);
                             listacarrito.add(detalleP);
                             System.out.println("Agregando total al pedido");
@@ -389,7 +402,8 @@ public class CtrProductos extends HttpServlet {
 
                 case "actualizarProducto":
                     System.out.println("Entro a editar Producto");
-                    idp = Integer.parseInt(request.getParameter("txtid"));
+                    int idpp = Integer.parseInt(request.getParameter("txtid"));
+                    System.out.println("idpp:" + idpp);
                     nomp = request.getParameter("txtnombre");
                     descp = request.getParameter("txtdescripcion");
                     prep = Integer.parseInt(request.getParameter("txtprecio"));
@@ -397,10 +411,20 @@ public class CtrProductos extends HttpServlet {
                     catp = Integer.parseInt(request.getParameter("categorias"));
                     stocp = Integer.parseInt(request.getParameter("txtstock"));
                     prove = Integer.parseInt(request.getParameter("proveedores"));
+                    fvEdit = request.getParameter("fechaVencimiento");
+
                     System.out.println("almaceno los datos");
                     System.out.println(idp + nomp + descp + prep + " " + fotop + catp + " " + stocp + prove);
-
-                    pro.setId(idp);
+                    SimpleDateFormat formatoDate = new SimpleDateFormat("yyyy-MM-dd");
+                    Date fechaVencimiento = null;
+                    java.sql.Date fechaVencimientoSql = null;
+                    try {
+                        fechaVencimiento = formatoDate.parse(fvEdit);
+                        fechaVencimientoSql = new java.sql.Date(fechaVencimiento.getTime());
+                    } catch (Exception e) {
+                        System.out.println("Error al convertir los Datos de String a DATE");
+                    }
+                    pro.setId(idpp);
                     pro.setNombre(nomp);
                     pro.setDescripcion(descp);
                     pro.setPrecio(prep);
@@ -408,6 +432,7 @@ public class CtrProductos extends HttpServlet {
                     pro.setIdCategoria(catp);
                     pro.setStock(stocp);
                     pro.setProveedor(prove);
+                    pro.setFechaVencimiento(fechaVencimientoSql);
                     pdao.editar(pro);
                     request.getRequestDispatcher("CtrProductos?accion=listar").forward(request, response);
                     break;
@@ -426,12 +451,12 @@ public class CtrProductos extends HttpServlet {
                         usuarios.add(usuario);
                     }
                     listapEspera = pedidodao.pedidosEspera();
-                     for (Pedido ped : listapEspera) {
+                    for (Pedido ped : listapEspera) {
                         Usuario usuario = pedidodao.obtenerUsuarioPorId(ped.getIdUsuario());
                         System.out.println(usuario.getNombre());
                         usuarios1.add(usuario);
                     }
-                    
+
                     request.setAttribute("cantidadU", cantidadUsuarios);
                     request.setAttribute("cantidadPro", cantidadProductos);
                     request.setAttribute("cantidadPe", cantidadPedidos);

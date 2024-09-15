@@ -5,6 +5,8 @@
  */
 package Modelo;
 
+import java.sql.Date;
+
 /**
  *
  * @author Maiyer
@@ -18,11 +20,12 @@ public class Productos {
     int idCategoria;
     int stock;
     int proveedor;
+    Date fechaVencimiento;
 
     public Productos() {
     }
 
-    public Productos(int id, String nombre, String descripcion, int precio, String foto, int idCategoria, int stock, int proveedor) {
+    public Productos(int id, String nombre, String descripcion, int precio, String foto, int idCategoria, int stock, int proveedor, Date fechaVencimiento) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -31,8 +34,17 @@ public class Productos {
         this.idCategoria = idCategoria;
         this.stock = stock;
         this.proveedor = proveedor;
+        this.fechaVencimiento = fechaVencimiento;
     }
 
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
+    
     public int getProveedor() {
         return proveedor;
     }

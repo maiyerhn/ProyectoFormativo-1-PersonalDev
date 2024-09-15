@@ -6,6 +6,7 @@
 package Modelo;
 import Configuracion.conectar;
     import java.sql.Connection;
+import java.sql.Date;
     import java.sql.PreparedStatement;
     import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,7 +43,8 @@ public class ProductosDAO {
                 int idCategoria = rs.getInt("idCategoria");
                 int stock = rs.getInt("stock");
                 int proveedor = rs.getInt("idproveedor");
-                Productos producto = new Productos(id,nombre,descripcion,precio,foto,idCategoria,stock,proveedor);
+                Date fechaVencimiento = rs.getDate("fechaVencimiento");
+                Productos producto = new Productos(id,nombre,descripcion,precio,foto,idCategoria,stock,proveedor,fechaVencimiento);
                 productos.add(producto);
             }
         } catch (Exception ex) {
@@ -60,7 +62,7 @@ public class ProductosDAO {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
 
             }
-            pstm = con.prepareStatement("insert into productos (nombre, descripcion, precio, foto, idCategoria, stock, idproveedor) Value(?,?,?,?,?,?,?)");
+            pstm = con.prepareStatement("insert into productos (nombre, descripcion, precio, foto, idCategoria, stock, idproveedor, fechaVencimiento) Value(?,?,?,?,?,?,?,?)");
             pstm.setString(1, pro.getNombre());
             System.out.println(pro.getNombre());
             pstm.setString(2, pro.getDescripcion());
@@ -75,6 +77,8 @@ public class ProductosDAO {
             System.out.println(pro.getStock());
             pstm.setInt(7, pro.getProveedor());
             System.out.println(pro.getProveedor());
+            pstm.setDate(8, pro.getFechaVencimiento());
+            System.out.println(pro.getFechaVencimiento());
             pstm.executeUpdate();
             return true;
         }catch(Exception e){
@@ -183,7 +187,7 @@ public class ProductosDAO {
             if (con != null) {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
             }
-            pstm = con.prepareStatement("update productos set nombre=?, descripcion=?,  precio=?, foto=?, idCategoria=?, stock=?, idproveedor=? where id = ?");          
+            pstm = con.prepareStatement("update productos set nombre=?, descripcion=?,  precio=?, foto=?, idCategoria=?, stock=?, idproveedor=?, fechaVencimiento=? where id = ?");          
             pstm.setString(1, pro.getNombre());
             pstm.setString(2, pro.getDescripcion());
             pstm.setInt(3, pro.getPrecio());
@@ -191,10 +195,11 @@ public class ProductosDAO {
             pstm.setInt(5, pro.getIdCategoria());
             pstm.setInt(6, pro.getStock());
             pstm.setInt(7, pro.getProveedor());
-            pstm.setInt(8, pro.getId());
+            pstm.setDate(8, new java.sql.Date(pro.getFechaVencimiento().getTime())  );
+            pstm.setInt(9, pro.getId());
             pstm.executeUpdate();
         }catch(Exception e){
-             System.out.println("Error al editar los productos" + e);
+             System.out.println("Error al editar los productosd" + e);
         }
     }
      
@@ -358,7 +363,8 @@ public class ProductosDAO {
                 int idCategoria = rs.getInt("idCategoria");
                 int stock = rs.getInt("stock");
                 int proveedor = rs.getInt("idproveedor");
-                Productos producto = new Productos(id,nombre,descripcion,precio,foto,idCategoria,stock,proveedor);
+                Date fechaVencimiento = rs.getDate("fechaVencimiento");
+                Productos producto = new Productos(id,nombre,descripcion,precio,foto,idCategoria,stock,proveedor,fechaVencimiento);
                 productos.add(producto);
             }
         } catch (Exception ex) {
