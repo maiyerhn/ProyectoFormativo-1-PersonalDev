@@ -204,6 +204,7 @@
                     <div class="modal-body">
                         <form class="form-sing" action="/FamiSaludLa91/CtrProductos?accion=Agregar" method="POST" enctype="multipart/form-data">
                             <div class="row g-3">
+                                
                                 <div class="col-md-6">
                                     <label for="txtnombre" class="form-label">Nombre</label>
                                     <input type="text" class="form-control" id="txtnombre" name="txtnombre" placeholder="Ingrese nombre" required>
@@ -304,12 +305,15 @@
                                     <select class="form-select" id="proveedor" name="proveedores" onchange="actualizarInputOculto3(this)">
                                         <c:forEach var="prov" items="${Proveedor}">
                                             <option value="${prov.getId()}">${prov.getNombre()}</option>
+
                                         </c:forEach>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="fechaVencimiento" class="form-label">Fecha de Vencimiento</label>
-                                    <input type="date" class="form-control" id="fechaVencimiento" name="fechaVencimiento" required>
+                                    <input type="date" class="form-control" id="fechaVencimiento" name="fechaVencimiento" required
+                                           min="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date())%>">
+                                           <input type="hidden" value="${productoE.getId()}" name="txtid">
                                 </div>
                             </div>
                             <div class="text-center mt-4">
@@ -321,30 +325,19 @@
                 </div>
             </div>
         </div>
-
-        <!-- Script para restringir la fecha mínima -->
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var fechaVencimiento = document.getElementById('fechaVencimiento');
-                var hoy = new Date().toISOString().split('T')[0];
-                fechaVencimiento.setAttribute('min', hoy);
-            });
-        </script>
-
-
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="/FamiSaludLa91/JSc/eliminarProductos.js" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
         <script>
-    $(document).ready(function () {
+            $(document).ready(function () {
 
             <c:if test="${editarPro}">
-        $('#editarproducto').modal('show');
+                $('#editarproducto').modal('show');
             </c:if>
 
-    });
+            });
         </script>
     </body>
 </html>
