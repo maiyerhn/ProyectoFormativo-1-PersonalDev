@@ -470,7 +470,7 @@ public class CtrProductos extends HttpServlet {
                 case "buscarpr":
                     nombre = request.getParameter("txtbuscar");
                     System.out.println("nombre: " + nombre);
-                    productos = pdao.listarT(nombre);
+                    productos = pdao.buscarP(nombre);
                     request.setAttribute("listar", productos);
                     request.getRequestDispatcher("/Vistas/Productos.jsp").forward(request, response);
                     break;
@@ -593,7 +593,7 @@ public class CtrProductos extends HttpServlet {
                     System.out.println("nombre: " + nombre);
                     CategoriaDAO categodao = new CategoriaDAO();//categoria
                     List<Categoria> catego = categodao.listarT();//categoria
-                    List<Productos> produc = pdao.listarT(nombre);
+                    List<Productos> produc = pdao.buscarP(nombre);
 
                     request.setAttribute("contador", listacarrito.size());
 

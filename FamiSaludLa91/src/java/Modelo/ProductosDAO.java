@@ -229,7 +229,7 @@ public class ProductosDAO {
         return cantidadProductos;
     }
      
-     public List listarT(String nombre){
+     public List buscarP(String nombre){
         List<Productos> producto = new ArrayList();
         nombre = "%"+nombre+"%";
         System.out.println("Buscando productos con nombre: " + nombre);
@@ -247,13 +247,14 @@ public class ProductosDAO {
             rs = pstm.executeQuery();
             while (rs.next()) {
                 Productos pro = new Productos();
-                pro.setId(rs.getInt(1));
-                pro.setNombre(rs.getString(2));
-                pro.setDescripcion(rs.getString(3));
-                pro.setPrecio(rs.getInt(4));
-                pro.setFoto(rs.getString(5));
-                pro.setIdCategoria(rs.getInt(6));
-                pro.setStock(rs.getInt(7));
+                pro.setId(rs.getInt("id"));
+                pro.setNombre(rs.getString("nombre"));
+                pro.setDescripcion(rs.getString("descripcion"));
+                pro.setPrecio(rs.getInt("precio"));
+                pro.setFoto(rs.getString("foto"));
+                pro.setIdCategoria(rs.getInt("idCategoria"));
+                pro.setStock(rs.getInt("stock"));
+                pro.setFechaVencimiento(rs.getDate("fechaVencimiento"));
                 producto.add(pro);
                 System.out.println("Producto encontrado: " + pro.getNombre());
             }
@@ -276,15 +277,17 @@ public class ProductosDAO {
             pstm.setInt(1, idcat);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                Productos p = new Productos();
-                p.setId(rs.getInt(1));
-                p.setNombre(rs.getString(2));
-                p.setDescripcion(rs.getString(3));                                
-                p.setPrecio(rs.getInt(4));
-                p.setFoto(rs.getString(5));
-                p.setIdCategoria(rs.getInt(6));
-                p.setStock(rs.getInt(7));                        
-                producto.add(p);
+               Productos pro = new Productos();
+                pro.setId(rs.getInt("id"));
+                pro.setNombre(rs.getString("nombre"));
+                pro.setDescripcion(rs.getString("descripcion"));
+                pro.setPrecio(rs.getInt("precio"));
+                pro.setFoto(rs.getString("foto"));
+                pro.setIdCategoria(rs.getInt("idCategoria"));
+                pro.setStock(rs.getInt("stock"));
+                pro.setFechaVencimiento(rs.getDate("fechaVencimiento"));
+                producto.add(pro);
+                System.out.println("Producto encontrado: " + pro.getNombre());
             }
 
         } catch (Exception e) {

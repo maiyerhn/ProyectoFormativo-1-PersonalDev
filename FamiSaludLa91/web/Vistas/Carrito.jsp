@@ -65,19 +65,7 @@
                         <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Famisalud la 91 Logo">
                     </a>
                     <p class="navbar-text fs-3 fw-bold text-white mb-0 me-2">Famisalud la 91</p>
-                    <div class="col-md-4 d-flex justify-content-center me-2">
-                        <div class="dropdown">
-                            <button class="btn btn-primary btn-lg-custom dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                Categorías <i class="bi bi-arrow-down-short"></i>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <c:forEach var="cat" items="${Categorias}">
-                                    <li><a class="dropdown-item" href="#">${cat.getNombre()}</a></li>
-                                    <input type="hidden" value="${cat.getId()}" name="catid" id="catid">
-                                </c:forEach>
-                            </ul>
-                        </div>
-                    </div>
+
                    
                     <a class="nav-link nav-link-icon carrito ms-2" href="/FamiSaludLa91/CtrProductos?accion=Carrito">
                         <i class="bi bi-cart3 fs-4">(<label style="color: darkorange">${contador}</label>)</i>
