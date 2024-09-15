@@ -79,7 +79,7 @@
                             <p><strong>Nombre:</strong> <span id="view-nombre">${user.getNombre()}</span></p>
                             <p><strong>Apellidos:</strong> <span id="view-apellido">${user.getApellido()}</span></p>
                             <p><strong>Email:</strong> <span id="view-email">${user.getCorreo()}</span></p>
-                            <p><strong>Contraseña:</strong> <span id="view-contrasena">${user.getContrasena()}</span></p>
+                            <%-- <p><strong>Contraseña:</strong> <span id="view-contrasena">${user.getContrasena()}</span></p> --%>
                             <p><strong>Teléfono:</strong> <span id="view-telefono">${user.getTelefono()}</span></p>
                             <p><strong>Dirección:</strong> <span id="view-direccion">${user.getDireccion()}</span></p>
                             </c:if>
@@ -114,7 +114,7 @@
                                     <input type="text" id="editDireccion" name="direccion" class="form-control" required minlength="2" maxlength="50" value="${user.getDireccion()}">
                                     <div class="error-message" id="errorDireccion"></div>
                                 </div>
-                                <div class="mb-3">
+                                <%-- <div class="mb-3">
                                     <label for="editPassword" class="form-label">Contraseña:</label>
                                     <input type="password" id="editPassword" name="password" class="form-control" required minlength="8" maxlength="20" value="${user.getContrasena()}">
                                     <div class="error-message" id="errorPassword"></div>
@@ -123,9 +123,9 @@
                                     <label for="confirmPassword" class="form-label">Confirmar Contraseña:</label>
                                     <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required minlength="8" maxlength="20" value="${user.getContrasena()}">
                                     <div class="error-message" id="errorConfirmPassword"></div>
-                                </div>
+                                </div> --%>
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-save" id="btnSave" disabled>Guardar</button>
+                                    <button type="submit" class="btn btn-save" id="btnSave">Guardar</button>
                                     <button type="button" class="btn btn-cancel" onclick="toggleEditMode()">Cancelar</button>
                                 </div>
                             </c:if>
