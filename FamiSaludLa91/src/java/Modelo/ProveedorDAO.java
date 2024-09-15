@@ -53,16 +53,14 @@ public class ProveedorDAO {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
 
             }
-            pstm = con.prepareStatement("insert into proveedores (id, nombre, correo, telefono, direccion) Value(?,?,?,?,?)");
-            pstm.setInt(1, prov.getId());
-            System.out.println(prov.getId());
-            pstm.setString(2, prov.getNombre());
+            pstm = con.prepareStatement("insert into proveedores (nombre, correo, telefono, direccion) Value(?,?,?,?)");
+            pstm.setString(1, prov.getNombre());
             System.out.println(prov.getNombre());
-            pstm.setString(3, prov.getCorreo());
+            pstm.setString(2, prov.getCorreo());
             System.out.println(prov.getCorreo());
-            pstm.setString(4, prov.getTelefono());
+            pstm.setString(3, prov.getTelefono());
             System.out.println(prov.getTelefono());
-            pstm.setString(5, prov.getDireccion());
+            pstm.setString(4, prov.getDireccion());
             System.out.println(prov.getDireccion());
             pstm.executeUpdate();
             return true;

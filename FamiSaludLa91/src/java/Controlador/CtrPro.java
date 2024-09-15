@@ -55,20 +55,16 @@ public class CtrPro extends HttpServlet {
                     request.getRequestDispatcher("/Vistas/Proveedores.jsp").forward(request, response);
                     break;
                 case "Agregar":
-                    System.out.println("id: " + request.getParameter("txtid"));
-                    id = Integer.parseInt(request.getParameter("txtid"));
                     nombre = request.getParameter("txtnombre");
                     correo = request.getParameter("txtcorreo");
                     telefono = request.getParameter("txttelefono");
                     direccion = request.getParameter("txtdireccion");
 
-                    System.out.println("id: " + id);
                     System.out.println("nombre: " + nombre);
                     System.out.println("correo: " + correo);
                     System.out.println("telefono: " + telefono);
                     System.out.println("direccion: " + direccion);
 
-                    prov.setId(id);
                     prov.setNombre(nombre);
                     prov.setCorreo(correo);
                     prov.setTelefono(telefono);
