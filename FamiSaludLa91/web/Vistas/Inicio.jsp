@@ -227,6 +227,67 @@
             response.sendRedirect("/FamiSaludLa91/Vistas/Login.jsp");
         }
     %>
+    
+        <div class="overlay"></div>
+            <div class="custom-confirm">
+                <div class="modal-header">
+                    <img src="/FamiSaludLa91/imagenes/icons.jpg" alt="User Avatar" id="imgIcon" />
+                </div>
+                <div class="modal-body">
+                    <div class="view-mode">
+                        <c:if test="${not empty user}">
+                            <p><strong>Nombre:</strong> <span id="view-nombre">${user.getNombre()}</span></p>
+                            <p><strong>Apellidos:</strong> <span id="view-apellido">${user.getApellido()}</span></p>
+                            <p><strong>Email:</strong> <span id="view-email">${user.getCorreo()}</span></p>
+                            <p><strong>Teléfono:</strong> <span id="view-telefono">${user.getTelefono()}</span></p>
+                            <p><strong>Dirección:</strong> <span id="view-direccion">${user.getDireccion()}</span></p>
+                            </c:if>
+                    </div>
+                    <div class="edit-mode">
+                        <h2>Editar Información</h2>
+                        <form id="editForm" action="/FamiSaludLa91/CtrProductos?accion=ActualizarUser" method="POST">
+                            <c:if test="${not empty user}">
+                                <div class="mb-3">
+                                    <label for="editName" class="form-label">Nombre:</label>
+                                    <input type="hidden" id="editId" name="id" class="form-control" value="${user.getId()}">
+                                    <input type="text" id="editName" name="name" class="form-control" required minlength="2" maxlength="50" value="${user.getNombre()}">
+                                    <div class="error-message" id="errorName"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editApellidos" class="form-label">Apellido:</label>
+                                    <input type="text" id="editApellidos" name="apellidos" class="form-control" required minlength="2" maxlength="50" value="${user.getApellido()}">
+                                    <div class="error-message" id="errorApellidos"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editEmail" class="form-label">Correo Electrónico:</label>
+                                    <input type="email" id="editEmail" name="email" class="form-control" required value="${user.getCorreo()}">
+                                    <div class="error-message" id="errorEmail"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editPhone" class="form-label">Teléfono:</label>
+                                    <input type="number" id="editPhone" name="phone" class="form-control" required pattern="\d{10}" value="${user.getTelefono()}">
+                                    <div class="error-message" id="errorPhone"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editDireccion" class="form-label">Dirección:</label>
+                                    <input type="text" id="editDireccion" name="direccion" class="form-control" required minlength="2" maxlength="50" value="${user.getDireccion()}">
+                                    <div class="error-message" id="errorDireccion"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-save" id="btnSave">Guardar</button>
+                                    <button type="button" class="btn btn-cancel" onclick="toggleEditMode()">Cancelar</button>
+                                </div>
+                            </c:if>
+                        </form>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-edit">Editar</button>
+                    <a href=""><button type="button" class="btn btn-save" style="display: none;">Guardar Cambios</button></a>
+                    <button type="button" class="btn btn-cerrar btn-secondary">Cerrar</button>
+                </div>
+            </div>
         <div class="container-fluid encabezado">
             <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
                 <div class="container-fluid d-flex align-items-center">
@@ -311,66 +372,7 @@
 
         <!-- Modal de Información de Usuario -->
         <section class="full-width-carousel">
-            <div class="overlay"></div>
-            <div class="custom-confirm">
-                <div class="modal-header">
-                    <img src="/FamiSaludLa91/imagenes/icons.jpg" alt="User Avatar" id="imgIcon" />
-                </div>
-                <div class="modal-body">
-                    <div class="view-mode">
-                        <c:if test="${not empty user}">
-                            <p><strong>Nombre:</strong> <span id="view-nombre">${user.getNombre()}</span></p>
-                            <p><strong>Apellidos:</strong> <span id="view-apellido">${user.getApellido()}</span></p>
-                            <p><strong>Email:</strong> <span id="view-email">${user.getCorreo()}</span></p>
-                            <p><strong>Teléfono:</strong> <span id="view-telefono">${user.getTelefono()}</span></p>
-                            <p><strong>Dirección:</strong> <span id="view-direccion">${user.getDireccion()}</span></p>
-                            </c:if>
-                    </div>
-                    <div class="edit-mode">
-                        <h2>Editar Información</h2>
-                        <form id="editForm" action="/FamiSaludLa91/CtrProductos?accion=ActualizarUser" method="POST">
-                            <c:if test="${not empty user}">
-                                <div class="mb-3">
-                                    <label for="editName" class="form-label">Nombre:</label>
-                                    <input type="hidden" id="editId" name="id" class="form-control" value="${user.getId()}">
-                                    <input type="text" id="editName" name="name" class="form-control" required minlength="2" maxlength="50" value="${user.getNombre()}">
-                                    <div class="error-message" id="errorName"></div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="editApellidos" class="form-label">Apellido:</label>
-                                    <input type="text" id="editApellidos" name="apellidos" class="form-control" required minlength="2" maxlength="50" value="${user.getApellido()}">
-                                    <div class="error-message" id="errorApellidos"></div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="editEmail" class="form-label">Correo Electrónico:</label>
-                                    <input type="email" id="editEmail" name="email" class="form-control" required value="${user.getCorreo()}">
-                                    <div class="error-message" id="errorEmail"></div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="editPhone" class="form-label">Teléfono:</label>
-                                    <input type="number" id="editPhone" name="phone" class="form-control" required pattern="\d{10}" value="${user.getTelefono()}">
-                                    <div class="error-message" id="errorPhone"></div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="editDireccion" class="form-label">Dirección:</label>
-                                    <input type="text" id="editDireccion" name="direccion" class="form-control" required minlength="2" maxlength="50" value="${user.getDireccion()}">
-                                    <div class="error-message" id="errorDireccion"></div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-save" id="btnSave">Guardar</button>
-                                    <button type="button" class="btn btn-cancel" onclick="toggleEditMode()">Cancelar</button>
-                                </div>
-                            </c:if>
-                        </form>
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-edit">Editar</button>
-                    <a href=""><button type="button" class="btn btn-save" style="display: none;">Guardar Cambios</button></a>
-                    <button type="button" class="btn btn-cerrar btn-secondary">Cerrar</button>
-                </div>
-            </div>
+            
             <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active" data-bs-interval="3000">

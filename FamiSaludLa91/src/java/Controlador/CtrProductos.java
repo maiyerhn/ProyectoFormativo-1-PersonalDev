@@ -619,6 +619,20 @@ public class CtrProductos extends HttpServlet {
                     request.setAttribute("Productos", productos);
                     request.getRequestDispatcher("Vistas/Inicio.jsp").forward(request, response);
                     break;
+                case "buscarPedido":
+                    String d = request.getParameter("datoPedido");
+                    System.out.println("entro a buscar pedidos.");
+                    List<Pedido> pedi = pedidodao.buscarPedidos(d);
+                    usuarios = new ArrayList<>();
+                    for (Pedido ped : pedi) {
+                        Usuario usuario = pedidodao.obtenerUsuarioPorId(ped.getIdUsuario());
+                        usuarios.add(usuario);
+                        System.out.println("Entro a buscar Usuarios");
+                    }
+                    request.setAttribute("usuarios", usuarios);
+                    request.setAttribute("listarped", pedi);
+                    request.getRequestDispatcher("/Vistas/pedidos.jsp").forward(request, response);
+                    break;
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Accion no reconocida");
                     break;
