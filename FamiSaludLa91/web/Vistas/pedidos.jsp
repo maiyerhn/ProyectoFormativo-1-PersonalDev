@@ -82,9 +82,9 @@
                 <h2 class="titulo-inventario text-center fw-bold titulos">Pedidos</h2>
                 <div class="input-group mb-3 d-flex justify-content-end " >
                     <div class="input-group-append">
-                        <form class="d-flex ">
-                            <input class="ms-0" type="search" placeholder="Buscar pedidos..." aria-label="Buscar">
-                            <button class="btn btn-outline-light bg-success icono fs-9" type="submit"><i class="bi bi-search"> Buscar </i></button> 
+                        <form class="d-flex "  action="/FamiSaludLa91/CtrProductos?accion=buscarPedido" method="POST">
+                            <input class="ms-0" type="search" placeholder="Buscar pedidos..." name="datoPedido" aria-label="Buscar">
+                            <button class="btn btn-outline-light bg-success icono fs-9" type="submit" value="buscarPedido"><i class="bi bi-search"> Buscar </i></button> 
                         </form>
 
                     </div>
@@ -125,7 +125,6 @@
     <script src="/FamiSaludLa91/JSc/Estado-Pedido.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 </body>
 </html>
