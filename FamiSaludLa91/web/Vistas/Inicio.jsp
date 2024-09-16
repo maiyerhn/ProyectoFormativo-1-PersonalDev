@@ -217,7 +217,9 @@
                 color: red;
                 margin-bottom: 10px;
             }
-
+            #color{
+                color: green;
+            }
 
         </style>
     </head>
@@ -454,10 +456,10 @@
                             <h2 class="product-name"><label>${c.getNombre()}</label></h2>
                             <img src="${c.getFoto()}" alt="Producto">
                             <p class="product-description"><label>${c.getDescripcion()}</label></p>
+                            <h2 class="product-name" id="color">Precio: <label>${c.getPrecio()}</label></h2>
                             <a href="/FamiSaludLa91/CtrProductos?accion=AgregarCarrito&idproducto=${c.getId()}" class="add-to-cart">
                                 <button class="btn btn-primary text-light">Agregar al Carrito</button>
                             </a>
-                            <button class="btn btn-success">Comprar</button>
                         </div>
                     </div>
                 </c:forEach>

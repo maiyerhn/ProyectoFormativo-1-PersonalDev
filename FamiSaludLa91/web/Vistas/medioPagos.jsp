@@ -28,7 +28,7 @@
         <div class="container-fluid encabezado">
             <header class="navbar navbar-expand-lg navbar-dark navbar-custom">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="/FamiSaludLa91/CtrProductos?accion=Inicio&id=${id}">
                         <img src="/FamiSaludLa91/imagenes/logo9.png" alt="Famisalud la 91 Logo">
                     </a>
                     <p class="navbar-text fs-3 fw-bold text-white">Famisalud la 91</p>

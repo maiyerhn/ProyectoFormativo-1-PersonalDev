@@ -97,11 +97,12 @@
             <table class="table table-bordered" style="box-shadow: 5px 5px 15px rgb(0, 0, 0,.3);" >
                 <thead class="thead-light">
                     <tr style="background-color: white">
-                        <th scope="col" class="text-center border">Id</th>
+                        <th scope="col" class="text-center border">NIT</th>
                         <th scope="col" class="text-center border">Nombre</th>
                         <th scope="col" class="text-center border">Correo</th>
                         <th scope="col" class="text-center border">Telefono</th>
                         <th scope="col" class="text-center border">Dirrecion</th>
+                        <th scope="col" class="text-center border">Empresa</th>
                         <th scope="col" class="text-center border">Acciones</th>
                     </tr>
                 </thead>
@@ -113,6 +114,7 @@
                             <td class="border">${p.getCorreo()}</td>
                             <td class="border">${p.getTelefono()}</td>
                             <td class="border">${p.getDireccion()}</td>
+                            <td class="border">${p.getNombreem()}</td>
                             <td scope="col" class ="text-center border">
                                 <input type="hidden" name="id" id="id" value="${p.getId()}">
                                 <a class="btn btn-primary" href="/FamiSaludLa91/CtrPro?accion=EditarProveedor&idpr=${p.getId()}"><i class="bi bi-pencil-fill"></i></a>
@@ -163,27 +165,35 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content"> 
                     <div class="modal-header bg-primary text-white">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Producto</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Proveedor</h1>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form class="form-sing" action="/FamiSaludLa91/CtrPro?accion=Agregar" method="POST" >
                             <div class="row g-3"> 
                                 <div class="col-md-6">
-                                    <label for="txtnombre" class="form-label">Nombre</label> 
+                                    <label for="txtid" class="form-label">NIT</label> 
+                                    <input type="text" class="form-control" id="txtnombre" name="txtid" placeholder="Ingrese ID" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="txtnombre" class="form-label">Nombre Representante</label> 
                                     <input type="text" class="form-control" id="txtnombre" name="txtnombre" placeholder="Ingrese nombre" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="txtcorreo" class="form-label">Correo</label> 
+                                    <label for="txtcorreo" class="form-label">Correo Representante</label> 
                                     <input type="text" class="form-control" id="txtcorreo" name="txtcorreo" placeholder="Ingrese Correo" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="txttelefono" class="form-label">Telefono</label> 
+                                    <label for="txttelefono" class="form-label">Telefono Representante</label> 
                                     <input type="number" class="form-control" id="txttelefono" name="txttelefono" placeholder="Ingrese Telefono" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="txtdireccion" class="form-label">Direccion</label> 
+                                    <label for="txtdireccion" class="form-label">Direccion Empresa</label> 
                                     <input type="txt" class="form-control" id="txtdireccion" name="txtdireccion" placeholder="Ingrese Direccion" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="txtnombreem" class="form-label">Nombre Empresa</label> 
+                                    <input type="text" class="form-control" id="txtnombreem" name="txtnombreem" placeholder="Ingrese nombre empresa" required>
                                 </div>
                             </div>    
                             <div class="text-center mt-4">
@@ -209,7 +219,7 @@
                         <form class="form-sing" action="/FamiSaludLa91/CtrPro?accion=actualizarProveedor" method="POST" >
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label for="txtid" class="form-label">Id</label>actualizarProveedor
+                                    <label for="txtid" class="form-label">NIT</label>
                                     <input type="number" class="form-control" id="txtid" name="txtid" value="${proveedorE.getId()}" readonly required>
                                 </div>  
                                 <div class="col-md-6">
@@ -227,6 +237,10 @@
                                 <div class="col-md-6">
                                     <label for="txtdireccion" class="form-label">Direccion</label> 
                                     <input type="txt" class="form-control" id="txtdireccion" name="txtdireccion" value="${proveedorE.getDireccion()}" placeholder="Ingrese Direccion" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="txtnombreem" class="form-label">Nombre</label> 
+                                    <input type="text" class="form-control" id="txtnombreem" name="txtnombreem" value="${proveedorE.getNombreem()}" placeholder="Ingrese nombre" required>
                                 </div>
                             </div>    
                             <div class="text-center mt-4">

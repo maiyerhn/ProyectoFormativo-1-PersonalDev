@@ -195,7 +195,7 @@ body{
     margin: 1rem 0;
     text-align: center;
     width: 350px; /* Ancho fijo para las cajas de producto */
-    height: 400px;
+    height: 430px;
 }
 
 .product-card img {
