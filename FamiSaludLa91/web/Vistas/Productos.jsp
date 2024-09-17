@@ -267,7 +267,7 @@
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="form-sing" action="/FamiSaludLa91/CtrProductos?accion=actualizarProducto" method="POST">
+                        <form class="form-sing" action="/FamiSaludLa91/CtrProductos?accion=actualizarProducto" method="POST" enctype="multipart/form-data">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="txtnombre" class="form-label">Nombre</label>
@@ -296,7 +296,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="foto" class="form-label">Imagen</label>
-                                    <input type="file" class="form-control" id="foto" name="foto" onchange="actualizarInputOculto2(this)">
+                                    <input type="file" class="form-control" id="foto" name="foto">
                                     <input type="hidden" class="form-control" value="${productoE.getFoto()}" name="foto2" id="foto2">
                                 </div>
                                 <div class="col-md-6">

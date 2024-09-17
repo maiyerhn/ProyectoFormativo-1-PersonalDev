@@ -412,6 +412,24 @@ public class CtrProductos extends HttpServlet {
                     stocp = Integer.parseInt(request.getParameter("txtstock"));
                     prove = Integer.parseInt(request.getParameter("proveedores"));
                     fvEdit = request.getParameter("fechaVencimiento");
+                    
+                    Part filePart = request.getPart("foto");
+                    if (filePart != null && filePart.getSize() > 0) {
+                        // Nueva imagen proporcionada
+                        String fileName = getFileName(filePart);
+                        String uploadPath = getServletContext().getRealPath("/imagenes");
+                        System.out.println("Ruta de subida: " + uploadPath);
+
+                        File uploadDir = new File(uploadPath);
+                        if (!uploadDir.exists()) {
+                            System.out.println("Directorio no existe, creando carpeta 'imagenes'");
+                            uploadDir.mkdir();
+                        }
+
+                        File file = new File(uploadDir, fileName);
+                        filePart.write(file.getAbsolutePath());
+                        fotop = "imagenes/" + fileName; // Actualizar la ruta de la imagen
+                    }
 
                     System.out.println("almaceno los datos");
                     System.out.println(idp + nomp + descp + prep + " " + fotop + catp + " " + stocp + prove);
