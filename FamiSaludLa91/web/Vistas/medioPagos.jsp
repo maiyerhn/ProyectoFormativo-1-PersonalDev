@@ -17,6 +17,9 @@
             .form-control.error {
                 border-color: red;
             }
+            #payButton {
+                margin-bottom: 20px;
+            }
         </style>
     </head>
     <body>
@@ -107,7 +110,7 @@
                         </div>
                         <div class="card-footer">
                             <a href="/FamiSaludLa91/CtrProductos?accion=solicitarPedido&id=${ped.getId()}&idUser=${user.getId()}"><button type="button" class="btn btn-primary w-100" id="payButton">Solicitar Pedido</button></a>
-                            <button type="button" class="btn btn-danger w-100" id="cancelButton">Cancelar</button>
+                            <a href="/FamiSaludLa91/CtrCategorias?accion=buscarCatCarrito"><button type="button" class="btn btn-danger w-100" id="cancelButton">Cancelar</button></a>
                         </div>
                     </div>
                 </div>

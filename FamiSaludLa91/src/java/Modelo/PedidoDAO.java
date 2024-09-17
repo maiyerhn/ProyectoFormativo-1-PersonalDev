@@ -878,5 +878,44 @@ public class PedidoDAO {
         }
         return pedidos;
     }
+    
+    public void eliminarDetalles(int idPedido) {
+    Connection conexion = null;
+    PreparedStatement pstmt = null;
+
+    try {
+        conectar conection = new conectar();
+        conexion = conection.crearconexion();
+
+        if (conexion != null) {
+            System.out.println("Se ha establecido una conexión con la base de datos de eliminar");
+            String sql = "DELETE FROM detallepedido WHERE idPedido = ?";
+
+            pstmt = conexion.prepareStatement(sql);
+            pstmt.setInt(1, idPedido);
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Detalles del pedido eliminados con éxito.");
+            } else {
+                System.out.println("No se encontraron detalles para eliminar.");
+            }
+        }
+    } catch (SQLException ex) {
+        System.out.println("Hubo un error al eliminar los detalles del pedido: " + ex.getMessage());
+    } finally {
+        try {
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            if (conexion != null) {
+                conexion.close();
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al cerrar los recursos: " + ex.getMessage());
+        }
+    }
+}
+
 
 }
