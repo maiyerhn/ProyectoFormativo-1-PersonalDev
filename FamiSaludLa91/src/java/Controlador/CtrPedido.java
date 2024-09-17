@@ -99,8 +99,8 @@ public class CtrPedido extends HttpServlet {
                     String emailUsuario = usuario.getCorreo(); 
 
                     String host = "smtp.gmail.com";
-                    final String username = "jeromartinezcas21@gmail.com"; 
-                    final String password = "aatdtcktjhlffaah"; 
+                    final String username = "famisaludla91@gmail.com"; 
+                    final String password = "tghznqkwkhuvjasm"; 
 
                     Properties props = new Properties();
                     props.put("mail.smtp.host", host);
@@ -118,7 +118,7 @@ public class CtrPedido extends HttpServlet {
                     try {
                       
                         Message message = new MimeMessage(session);
-                        message.setFrom(new InternetAddress("jeromartinezcas21@gmail.com"));
+                        message.setFrom(new InternetAddress("famisaludla91@gmail.com"));
                         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailUsuario));
                         message.setSubject("Famisalud la 91");
 
