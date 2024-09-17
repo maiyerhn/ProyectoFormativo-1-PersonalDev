@@ -363,4 +363,34 @@ public class UsuarioDAO {
             }
         }
     }
+     public boolean correoExiste(String correo) {
+        Connection conexion = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conectar conection = new conectar();
+            conexion = conection.crearconexion();
+
+            String sql = "SELECT COUNT(*) FROM usuarios WHERE correo = ?";
+            pstmt = conexion.prepareStatement(sql);
+            pstmt.setString(1, correo);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (Exception ex) {
+            System.out.println("Error al verificar el correo electrónico: " + ex.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conexion != null) conexion.close();
+            } catch (Exception ex) {
+                System.out.println("Error al cerrar los recursos: " + ex.getMessage());
+            }
+        }
+        return false;
+    }
 }

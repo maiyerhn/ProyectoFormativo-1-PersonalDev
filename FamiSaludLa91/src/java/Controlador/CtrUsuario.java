@@ -89,17 +89,22 @@ public class CtrUsuario extends HttpServlet {
                 us.setCorreo(correo);
                 us.setTelefono(telefono);
                 us.setRol("CLIENTE");
-                us.setDireccion(direccion); 
-                String contrasenaencriptada = encriptarcontrasena(contrasena);
-                us.setContrasena(contrasenaencriptada);
-                if (dao.crear(us) == true) {
-                    request.getRequestDispatcher("/Vistas/Login.jsp").forward(request, response);
+                us.setDireccion(direccion);
 
+                if (dao.correoExiste(correo)) {
+                    request.setAttribute("error", "El correo electrónico ya está registrado.");
+                    request.getRequestDispatcher("/Vistas/registrarse.jsp").forward(request, response);
                 } else {
-                    System.out.println("Error al insertar el usuarios");
-
+                    String contrasenaencriptada = encriptarcontrasena(contrasena);
+                    us.setContrasena(contrasenaencriptada);
+                    if (dao.crear(us)) {
+                        request.getRequestDispatcher("/Vistas/Login.jsp").forward(request, response);
+                    } else {
+                        System.out.println("Error al insertar el usuario");
+                        request.setAttribute("error", "No se pudo registrar el usuario. Inténtalo de nuevo.");
+                        request.getRequestDispatcher("/Vistas/Registro.jsp").forward(request, response);
+                    }
                 }
-
                 break;
             case "listarU":
                 request.setAttribute("listarUs", user);
@@ -127,7 +132,7 @@ public class CtrUsuario extends HttpServlet {
                 us.setTelefono(telefono);
                 us.setRol(rol);
                 us.setDireccion(direccion); 
-                contrasenaencriptada = encriptarcontrasena(contrasena);
+                String contrasenaencriptada = encriptarcontrasena(contrasena);
                 us.setContrasena(contrasenaencriptada);
                 
                 if (dao.crear(us) == true) {
