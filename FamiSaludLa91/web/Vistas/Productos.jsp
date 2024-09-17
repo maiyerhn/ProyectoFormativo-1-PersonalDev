@@ -87,7 +87,9 @@
             <div class="input-group mb-3 d-flex justify-content-end " >
                 <div class="input-group-append">
                     <form class="d-flex " action="/FamiSaludLa91/CtrProductos?accion=buscarpr">
-
+                        <input class="ms-0" type="date" name="fechavencimiento" aria-label="Buscar">
+                        <input class="ms-0" type="date" name="fechavencimientoFin" aria-label="Buscar">
+                        <button type="submit" class="btn btn-outline-light bg-success me-2 fs-9" name="accion" value="buscarporfecha"><i class="bi bi-search"> Buscar </i></button>
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item dropdown">
                                 <button class="btn btn-outline-light bg-secondary fs-9 me-2"  type="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</button> 

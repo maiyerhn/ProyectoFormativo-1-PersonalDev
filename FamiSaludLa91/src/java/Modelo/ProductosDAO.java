@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -390,4 +391,70 @@ public class ProductosDAO {
 
         return productos;
     }
+
+   public List<Productos> listardate(String idf, String idf2) {
+    List<Productos> lp = new ArrayList<>();
+    try {
+        Conexcion = new conectar();
+        Connection con = Conexcion.crearconexion();
+        if (con != null) {
+            System.out.println("Se ha establecido una conexcion con la base de datos");
+        }
+        
+        String sql;
+        SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Date fecha1 = null;
+        java.sql.Date fecha2 = null;
+
+        // Convertir las cadenas a fechas SQL
+        if (idf != null && !idf.isEmpty()) {
+            try {
+                java.util.Date fv1 = form.parse(idf);
+                fecha1 = new java.sql.Date(fv1.getTime());
+            } catch (Exception e) {
+                System.out.println("Error al convertir la fecha de inicio: " + e.getMessage());
+            }
+        }
+
+        if (idf2 != null && !idf2.isEmpty()) {
+            try {
+                java.util.Date fv2 = form.parse(idf2);
+                fecha2 = new java.sql.Date(fv2.getTime());
+            } catch (Exception e) {
+                System.out.println("Error al convertir la fecha de fin: " + e.getMessage());
+            }
+        }
+            sql = "SELECT * FROM productos WHERE fechaVencimiento BETWEEN ? AND ?";
+            pstm = con.prepareStatement(sql);
+            pstm.setDate(1, fecha1);
+            pstm.setDate(2, fecha2);
+            rs = pstm.executeQuery();
+            System.out.println("loooooo");
+        while (rs.next()) {
+            Productos p = new Productos();
+            p.setId(rs.getInt("id"));
+            System.out.println(p.getId());
+            p.setNombre(rs.getString("nombre"));
+            System.out.println(p.getNombre());
+            p.setDescripcion(rs.getString("descripcion"));
+            System.out.println(p.getDescripcion());
+            p.setPrecio(rs.getInt("precio"));
+            System.out.println(p.getPrecio());
+            p.setFoto(rs.getString("foto"));
+            System.out.println(p.getFoto());
+            p.setIdCategoria(rs.getInt("idCategoria"));
+            System.out.println(p.getIdCategoria());
+            p.setStock(rs.getInt("stock"));
+            p.setFechaVencimiento(rs.getDate("fechaVencimiento"));
+            System.out.println(p.fechaVencimiento);
+            System.out.println(p.getStock());
+            lp.add(p);
+        }
+
+    } catch (Exception e) {
+        System.out.println("Error al listar los productos: " + e.getMessage());
+    }
+    return lp;
+}
+
 }
