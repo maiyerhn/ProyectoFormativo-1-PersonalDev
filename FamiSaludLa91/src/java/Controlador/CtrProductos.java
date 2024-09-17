@@ -651,6 +651,16 @@ public class CtrProductos extends HttpServlet {
                     request.setAttribute("listarped", pedi);
                     request.getRequestDispatcher("/Vistas/pedidos.jsp").forward(request, response);
                     break;
+                case "VaciarCarrito":
+                     int idUsuario = Integer.parseInt(request.getParameter("id"));
+                     Pedido pedid = pedidodao.obtenerPedido(idUsuario);
+                     pedidodao.eliminarDetalles(pedid.getId());
+                     listacarrito = pedidodao.obtenerDetalle(pedid.getId());
+                     request.setAttribute("contador", listacarrito.size());
+                      request.getRequestDispatcher("CtrProductos?accion=Carrito").forward(request, response);
+                      
+                    break;
+                
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Accion no reconocida");
                     break;
