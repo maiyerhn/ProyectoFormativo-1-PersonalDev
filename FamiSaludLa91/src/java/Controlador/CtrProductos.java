@@ -21,6 +21,7 @@ import Modelo.UsuarioDAO;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -412,7 +413,7 @@ public class CtrProductos extends HttpServlet {
                     stocp = Integer.parseInt(request.getParameter("txtstock"));
                     prove = Integer.parseInt(request.getParameter("proveedores"));
                     fvEdit = request.getParameter("fechaVencimiento");
-                    
+
                     Part filePart = request.getPart("foto");
                     if (filePart != null && filePart.getSize() > 0) {
                         // Nueva imagen proporcionada
@@ -492,6 +493,15 @@ public class CtrProductos extends HttpServlet {
                     request.setAttribute("listar", productos);
                     request.getRequestDispatcher("/Vistas/Productos.jsp").forward(request, response);
                     break;
+                case "buscarporfecha":
+                    String fechaincio = request.getParameter("fechavencimiento");
+                    String fechafin = request.getParameter("fechavencimientoFin");
+
+                    // Obtener los productos filtrados por fecha
+                    List<Productos> productosPorFecha = pdao.listardate(fechaincio, fechafin);
+                    request.setAttribute("listar", productosPorFecha);
+                    request.getRequestDispatcher("/Vistas/Productos.jsp").forward(request, response);
+                    break;
                 case "buscarcat":
                     int idcat = Integer.parseInt(request.getParameter("catid"));
                     productos = pdao.buscarcat(idcat);
@@ -532,7 +542,6 @@ public class CtrProductos extends HttpServlet {
                     //if (contrasena != null && !contrasena.trim().isEmpty()) {
                     //    contrasena = encriptarcontrasena(contrasena);
                     //} else {
-
                     //}
                     System.out.println("ID: " + id);
                     System.out.println("Nombre: " + nombre);

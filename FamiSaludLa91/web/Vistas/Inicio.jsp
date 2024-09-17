@@ -330,6 +330,8 @@
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                             <li><a class="dropdown-item btn-Usuario" href="#">Usuario</a></li>
                             <li><a class="dropdown-item btn-pedidos" href="#" data-bs-toggle="modal" data-bs-target="#pedidosModal">Pedidos</a></li>
+                            
+                            <li><a class="dropdown-item btn-ayuda" href="#" onclick="openHelp()">Ayuda</a></li>
                             <li>
                                 <form method="POST" action="/FamiSaludLa91/CtrValidar">
                                     <input type="hidden" name="accion" value="exit">
@@ -503,5 +505,12 @@
         <script src="/FamiSaludLa91/JSc/validacionUser.js" type="text/javascript"></script>
         <script src="/FamiSaludLa91/JSc/funcion.js" type="text/javascript"></script>
         <script src="/FamiSaludLa91/JSc/CarruselImagenes.js" type="text/javascript"></script>
+        <script>
+        function openHelp() {
+            // Ruta al archivo PDF desde la ubicación del archivo HTML
+            const pdfUrl = 'PDF/FamiSalud la 91.pdf'; // Ajusta si es necesario
+            window.open(pdfUrl, '_blank');
+        }
+    </script>
     </body>
 </html>
