@@ -41,8 +41,8 @@ public class CtrPro extends HttpServlet {
         System.out.println("accion= " + accion);
         int id;
         int idpr, idp;
-        String nomp, corp, telp, dirp;
-        String nombre, correo, telefono, direccion;
+        String nomp, corp, telp, dirp, nomemp;
+        String nombre, correo, telefono, direccion, nombreem;
 
         try {
             List<Proveedor> proveedor = prdao.obtenerproveedor();
@@ -55,20 +55,26 @@ public class CtrPro extends HttpServlet {
                     request.getRequestDispatcher("/Vistas/Proveedores.jsp").forward(request, response);
                     break;
                 case "Agregar":
+                    id = Integer.parseInt(request.getParameter("txtid"));
                     nombre = request.getParameter("txtnombre");
                     correo = request.getParameter("txtcorreo");
                     telefono = request.getParameter("txttelefono");
                     direccion = request.getParameter("txtdireccion");
+                    nombreem = request.getParameter("txtnombreem");
 
+                    System.out.println("id: " + id);
                     System.out.println("nombre: " + nombre);
                     System.out.println("correo: " + correo);
                     System.out.println("telefono: " + telefono);
                     System.out.println("direccion: " + direccion);
+                    System.out.println("nombreem: " + nombreem);
 
+                    prov.setId(id);
                     prov.setNombre(nombre);
                     prov.setCorreo(correo);
                     prov.setTelefono(telefono);
                     prov.setDireccion(direccion);
+                    prov.setNombreem(nombreem);
                     if (prdao.crear(prov) == true) {
                         System.out.println("Se creo el proveedor");
                         request.getRequestDispatcher("CtrPro?accion=listarp").forward(request, response);
@@ -95,15 +101,17 @@ public class CtrPro extends HttpServlet {
                     corp = request.getParameter("txtcorreo");
                     telp = request.getParameter("txttelefono");
                     dirp = request.getParameter("txtdireccion");
+                    nomemp = request.getParameter("txtnombreem");
                     
                     System.out.println("almaceno los datos");
-                    System.out.println(idp + nomp + corp + telp + dirp);
+                    System.out.println(idp + nomp + corp + telp + dirp + nomemp);
 
                     prov.setId(idp);
                     prov.setNombre(nomp);
                     prov.setCorreo(corp);
                     prov.setTelefono(telp);
                     prov.setDireccion(dirp);
+                    prov.setNombreem(nomemp);
                     prdao.editar(prov);
                      request.getRequestDispatcher("CtrPro?accion=listarp").forward(request, response);
                     break;

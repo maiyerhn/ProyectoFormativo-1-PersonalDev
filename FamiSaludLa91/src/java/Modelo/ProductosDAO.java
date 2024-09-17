@@ -4,25 +4,29 @@
  * and open the template in the editor.
  */
 package Modelo;
+
 import Configuracion.conectar;
-    import java.sql.Connection;
+import java.sql.Connection;
 import java.sql.Date;
-    import java.sql.PreparedStatement;
-    import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author Maiyer
  */
 public class ProductosDAO {
+
     conectar Conexcion;
     Connection con;
     PreparedStatement pstm;
-     ResultSet rs;
-    
-    public List<Productos> obtenerProductos(){
+    ResultSet rs;
+
+    public List<Productos> obtenerProductos() {
         List<Productos> productos = new ArrayList<>();
         try {
             conectar conection = new conectar();
@@ -31,10 +35,13 @@ public class ProductosDAO {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
 
             }
-            String consulta = "Select * from productos";
+            LocalDate today = LocalDate.now();
+            Date fechaActual = Date.valueOf(today);
+            String consulta = "SELECT * FROM productos WHERE stock > 0 AND fechaVencimiento >= ?";
             PreparedStatement stm = conexion.prepareStatement(consulta);
+            stm.setDate(1, fechaActual);
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 String nombre = rs.getString("nombre");
                 String descripcion = rs.getString("descripcion");
@@ -44,18 +51,18 @@ public class ProductosDAO {
                 int stock = rs.getInt("stock");
                 int proveedor = rs.getInt("idproveedor");
                 Date fechaVencimiento = rs.getDate("fechaVencimiento");
-                Productos producto = new Productos(id,nombre,descripcion,precio,foto,idCategoria,stock,proveedor,fechaVencimiento);
+                Productos producto = new Productos(id, nombre, descripcion, precio, foto, idCategoria, stock, proveedor, fechaVencimiento);
                 productos.add(producto);
             }
         } catch (Exception ex) {
-            System.out.println("Hubo un Error Al Cargar Los Productos "+ ex);
+            System.out.println("Hubo un Error Al Cargar Los Productos " + ex);
         }
-        
+
         return productos;
     }
-    
-     public boolean crear(Productos pro){
-        try{
+
+    public boolean crear(Productos pro) {
+        try {
             Conexcion = new conectar();
             Connection con = Conexcion.crearconexion();
             if (con != null) {
@@ -81,13 +88,13 @@ public class ProductosDAO {
             System.out.println(pro.getFechaVencimiento());
             pstm.executeUpdate();
             return true;
-        }catch(Exception e){
-             System.out.println("Error al crear los productos" + e);
-             return false;
+        } catch (Exception e) {
+            System.out.println("Error al crear los productos" + e);
+            return false;
         }
     }
-     
-     public Productos listarid(int idp){
+
+    public Productos listarid(int idp) {
         Productos p = new Productos();
         try {
             Conexcion = new conectar();
@@ -121,7 +128,8 @@ public class ProductosDAO {
         }
         return p;
     }
-     public List listarT(){
+
+    public List listarT() {
         List<Productos> productos = new ArrayList();
         try {
             Conexcion = new conectar();
@@ -141,18 +149,18 @@ public class ProductosDAO {
                 pro.setFoto(rs.getString(5));
                 pro.setIdCategoria(rs.getInt(6));
                 pro.setStock(rs.getInt(7));
-                
+
                 productos.add(pro);
             }
 
         } catch (SQLException e) {
             System.out.println("Error al listar los productos " + e);
         }
-       
+
         return productos;
     }
-     
-     public Productos listarT(int idp){
+
+    public Productos listarT(int idp) {
         Productos pro = new Productos();
         try {
             Conexcion = new conectar();
@@ -179,15 +187,15 @@ public class ProductosDAO {
         }
         return pro;
     }
-     
-     public void editar(Productos pro){
-        try{
+
+    public void editar(Productos pro) {
+        try {
             Conexcion = new conectar();
             Connection con = Conexcion.crearconexion();
             if (con != null) {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
             }
-            pstm = con.prepareStatement("update productos set nombre=?, descripcion=?,  precio=?, foto=?, idCategoria=?, stock=?, idproveedor=?, fechaVencimiento=? where id = ?");          
+            pstm = con.prepareStatement("update productos set nombre=?, descripcion=?,  precio=?, foto=?, idCategoria=?, stock=?, idproveedor=?, fechaVencimiento=? where id = ?");
             pstm.setString(1, pro.getNombre());
             pstm.setString(2, pro.getDescripcion());
             pstm.setInt(3, pro.getPrecio());
@@ -195,15 +203,15 @@ public class ProductosDAO {
             pstm.setInt(5, pro.getIdCategoria());
             pstm.setInt(6, pro.getStock());
             pstm.setInt(7, pro.getProveedor());
-            pstm.setDate(8, new java.sql.Date(pro.getFechaVencimiento().getTime())  );
+            pstm.setDate(8, new java.sql.Date(pro.getFechaVencimiento().getTime()));
             pstm.setInt(9, pro.getId());
             pstm.executeUpdate();
-        }catch(Exception e){
-             System.out.println("Error al editar los productosd" + e);
+        } catch (Exception e) {
+            System.out.println("Error al editar los productosd" + e);
         }
     }
-     
-     public int contarProductos() {
+
+    public int contarProductos() {
         int cantidadProductos = 0;
 
         try {
@@ -228,10 +236,10 @@ public class ProductosDAO {
 
         return cantidadProductos;
     }
-     
-     public List buscarP(String nombre){
+
+    public List buscarP(String nombre) {
         List<Productos> producto = new ArrayList();
-        nombre = "%"+nombre+"%";
+        nombre = "%" + nombre + "%";
         System.out.println("Buscando productos con nombre: " + nombre);
         try {
             Conexcion = new conectar();
@@ -239,7 +247,6 @@ public class ProductosDAO {
             if (con != null) {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
 
-            
             }
             pstm = con.prepareStatement("select * from productos where nombre like ?");
             pstm.setString(1, nombre);
@@ -264,8 +271,9 @@ public class ProductosDAO {
         }
         return producto;
     }
-     public List buscarcat(int idcat){
-       List<Productos> producto = new ArrayList();
+
+    public List buscarcat(int idcat) {
+        List<Productos> producto = new ArrayList();
         try {
             Conexcion = new conectar();
             Connection con = Conexcion.crearconexion();
@@ -273,11 +281,14 @@ public class ProductosDAO {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
 
             }
-            pstm = con.prepareStatement("select * from productos where  idCategoria = ?");
+            LocalDate today = LocalDate.now();
+            Date fechaActual = Date.valueOf(today);
+            pstm = con.prepareStatement("select * from productos where  idCategoria = ? and stock > 0 and fechaVencimiento >= ? ");
             pstm.setInt(1, idcat);
+            pstm.setDate(2, fechaActual);
             rs = pstm.executeQuery();
             while (rs.next()) {
-               Productos pro = new Productos();
+                Productos pro = new Productos();
                 pro.setId(rs.getInt("id"));
                 pro.setNombre(rs.getString("nombre"));
                 pro.setDescripcion(rs.getString("descripcion"));
@@ -293,10 +304,10 @@ public class ProductosDAO {
         } catch (Exception e) {
             System.out.println("Error al listar los productos por categoria " + e);
         }
-        return producto;  
+        return producto;
     }
-     
-     public boolean eliminar(String ide){
+
+    public boolean eliminar(String ide) {
         try {
             Conexcion = new conectar();
             Connection con = Conexcion.crearconexion();
@@ -311,12 +322,11 @@ public class ProductosDAO {
         }
         return true;
     }
-     
-     public Productos listarId(int idProducto) {
+
+    public Productos listarId(int idProducto) {
         Productos producto = null;
         conectar Conexcion = new conectar();
         try (
-                
                 Connection con = Conexcion.crearconexion();
                 PreparedStatement pstm = con.prepareStatement("SELECT * FROM productos WHERE id = ?")) {
 
@@ -345,7 +355,8 @@ public class ProductosDAO {
 
         return producto;
     }
-     public List<Productos> obtenerProductosDescuento(){
+
+    public List<Productos> obtenerProductosDescuento() {
         List<Productos> productos = new ArrayList<>();
         try {
             conectar conection = new conectar();
@@ -354,10 +365,13 @@ public class ProductosDAO {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
 
             }
-            String consulta = "SELECT p.* FROM Productos p JOIN Categoria c ON p.idCategoria = c.id WHERE c.ofertas > 0";
+            LocalDate today = LocalDate.now();
+            Date fechaActual = Date.valueOf(today);
+            String consulta = "SELECT p.* FROM Productos p JOIN Categoria c ON p.idCategoria = c.id WHERE c.ofertas > 0 and stock > 0 AND p.fechaVencimiento >= ?";
             PreparedStatement stm = conexion.prepareStatement(consulta);
+            stm.setDate(1, fechaActual);
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 String nombre = rs.getString("nombre");
                 String descripcion = rs.getString("descripcion");
@@ -367,13 +381,13 @@ public class ProductosDAO {
                 int stock = rs.getInt("stock");
                 int proveedor = rs.getInt("idproveedor");
                 Date fechaVencimiento = rs.getDate("fechaVencimiento");
-                Productos producto = new Productos(id,nombre,descripcion,precio,foto,idCategoria,stock,proveedor,fechaVencimiento);
+                Productos producto = new Productos(id, nombre, descripcion, precio, foto, idCategoria, stock, proveedor, fechaVencimiento);
                 productos.add(producto);
             }
         } catch (Exception ex) {
-            System.out.println("Hubo un Error Al Cargar Los Productos "+ ex);
+            System.out.println("Hubo un Error Al Cargar Los Productos " + ex);
         }
-        
+
         return productos;
     }
 }

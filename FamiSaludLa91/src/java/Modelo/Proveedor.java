@@ -12,7 +12,15 @@ package Modelo;
 public class Proveedor {
     
     int id;
-    String nombre,correo,telefono,direccion;
+    String nombre,correo,telefono,direccion, nombreem;
+
+    public String getNombreem() {
+        return nombreem;
+    }
+
+    public void setNombreem(String nombreem) {
+        this.nombreem = nombreem;
+    }
 
     public Proveedor() {
     }
@@ -57,12 +65,13 @@ public class Proveedor {
         this.direccion = direccion;
     }
 
-    public Proveedor(int id, String nombre, String correo, String telefono, String direccion) {
+    public Proveedor(int id, String nombre, String correo, String telefono, String direccion, String nombreem) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.nombreem = nombreem;
     }
     
 }

@@ -35,6 +35,7 @@ public class ProveedorDAO {
                 p.setCorreo(rs.getString(3));
                 p.setTelefono(rs.getString(4));
                 p.setDireccion(rs.getString(5));
+                p.setNombreem(rs.getString(6));
                 proveedor.add(p);
                 
             }
@@ -53,15 +54,19 @@ public class ProveedorDAO {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
 
             }
-            pstm = con.prepareStatement("insert into proveedores (nombre, correo, telefono, direccion) Value(?,?,?,?)");
-            pstm.setString(1, prov.getNombre());
+            pstm = con.prepareStatement("insert into proveedores (id, nombre, correo, telefono, direccion, nombreempresa) Value(?,?,?,?,?,?)");
+            pstm.setInt(1, prov.getId());
+            System.out.println(prov.getId());
+            pstm.setString(2, prov.getNombre());
             System.out.println(prov.getNombre());
-            pstm.setString(2, prov.getCorreo());
+            pstm.setString(3, prov.getCorreo());
             System.out.println(prov.getCorreo());
-            pstm.setString(3, prov.getTelefono());
+            pstm.setString(4, prov.getTelefono());
             System.out.println(prov.getTelefono());
-            pstm.setString(4, prov.getDireccion());
+            pstm.setString(5, prov.getDireccion());
             System.out.println(prov.getDireccion());
+            pstm.setString(6, prov.getNombreem());
+            System.out.println(prov.getNombre());
             pstm.executeUpdate();
             return true;
         }catch(Exception e){
@@ -90,6 +95,7 @@ public class ProveedorDAO {
                 proved.setCorreo(rs.getString(3));
                 proved.setTelefono(rs.getString(4));
                 proved.setDireccion(rs.getString(5));
+                proved.setNombreem(rs.getString(6));
             }
 
         } catch (Exception e) {
@@ -105,12 +111,13 @@ public class ProveedorDAO {
             if (con != null) {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
             }
-            pstm = con.prepareStatement("update proveedores set nombre=?, correo=?,  telefono=?, direccion=? where id = ?");          
+            pstm = con.prepareStatement("update proveedores set nombre=?, correo=?,  telefono=?, direccion=?, nombreempresa=? where id = ?");          
             pstm.setString(1, prov.getNombre());
             pstm.setString(2, prov.getCorreo());
             pstm.setString(3, prov.getTelefono());
             pstm.setString(4, prov.getDireccion());
-            pstm.setInt(5, prov.getId());
+            pstm.setString(5, prov.getNombreem());
+            pstm.setInt(6, prov.getId());
             pstm.executeUpdate();
         }catch(Exception e){
              System.out.println("Error al editar el proveedor" + e);
@@ -127,7 +134,7 @@ public class ProveedorDAO {
                 System.out.println("Se ha establecido una conexcion con la base de datos");
 
             }
-            pstm = con.prepareStatement("select * from proveedores where nombre like ?");
+            pstm = con.prepareStatement("select * from proveedores where nombreempresa like ?");
             pstm.setString(1, nombre);
             rs = pstm.executeQuery();
             while (rs.next()) {
@@ -137,6 +144,7 @@ public class ProveedorDAO {
                 p.setCorreo(rs.getString(3));
                 p.setTelefono(rs.getString(4));
                 p.setDireccion(rs.getString(5));
+                p.setNombreem(rs.getString(6));
                 proveedor.add(p);
             }
 
