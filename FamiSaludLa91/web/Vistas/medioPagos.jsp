@@ -94,7 +94,8 @@
                             <c:if test="${not empty ped}">
                                 <div class="d-flex justify-content-between mb-2">
                                     <span>Subtotal</span>
-                                    <span>${ped.getTotal()}</span>
+                                    <c:set var="total" value="${tolProd}" />
+                                    <span>${total}</span>
                                 </div>
                                 <div class="d-flex justify-content-between mb-2">
                                     <span>Envío</span>
@@ -103,7 +104,7 @@
                                 <hr>
                                 <div class="d-flex justify-content-between font-weight-bold">
                                     <span>Total</span>
-                                    <span>${ped.getTotal()}</span>
+                                    <span>${total}</span>
                                 </div>
                             </c:if>
 

@@ -94,16 +94,17 @@
                             <tr>
                                 <td>${producto.nombre}</td>
                                 <td>${dped.cantidad}</td>
-                                <td>${producto.precio}</td>
                                 <td>${dped.total}</td>
+                                <td>${dped.total * dped.cantidad}</td>
                             </tr>
-                            <c:set var="totalFinal" value="${totalFinal + dped.total}" />
+                            <c:set var="totalFinal" value="${totalFinal + (dped.total * dped.cantidad)}" />
                         </c:forEach>
                     </tbody>
                 </table>
             </div>
             <div class="total d-flex justify-content-between">
                 <p><strong>Total a Pagar:</strong> $ ${totalFinal}</p> 
+                
             </div>
         </div>
 

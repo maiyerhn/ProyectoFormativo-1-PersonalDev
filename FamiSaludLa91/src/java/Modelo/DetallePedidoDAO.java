@@ -118,5 +118,29 @@ public class DetallePedidoDAO {
         }
         return Lped;
     }
-    
+     public int cantidadTol(int idp){
+        int total = 0;
+        try {
+            DetallePedido ped;
+            PreparedStatement pstm = null;
+            ResultSet rs = null;
+            conectar Conexcion  = new conectar();
+            Connection con = Conexcion.crearconexion();
+            if (con != null) {
+                System.out.println("Se ha establecido una conexcion con la base de datos");
+
+            }
+                pstm = con.prepareStatement("SELECT idPedido, SUM(cantidad * total) AS totalP FROM detallepedido WHERE idPedido = ? GROUP BY idPedido");
+            pstm.setInt(1, idp);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                total = rs.getInt("totalP");
+            }
+            System.out.println("Entro A Listar El los PEdidos");
+
+        } catch (Exception e) {
+            System.out.println("Error al listar los Pedidos " + e);
+        }
+        return total;
+    }
 }
