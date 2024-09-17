@@ -131,7 +131,7 @@
                                         <td>
                                             <input class="precio" type="hidden" value="${det.total}" />
                                             <input class="idpro" type="hidden" value="${det.id}" />
-                                            <input class="cantidad" id="cantidad" type="number" value="${det.cantidad}" min="1" />
+                                            <input class="cantidad" id="cantidad" type="number" value="${det.cantidad}" min="1" max="${pro.getStock()}" />
                                             <c:set var="tol" value="${det.cantidad * det.total}" />
                                         </td>
                                         <td>${det.total}</td>

@@ -104,6 +104,7 @@
             </div>
             <div class="total d-flex justify-content-between">
                 <p><strong>Total a Pagar:</strong> $ ${totalFinal}</p> 
+                
             </div>
         </div>
 

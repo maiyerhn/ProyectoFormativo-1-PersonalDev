@@ -574,9 +574,13 @@ public class CtrProductos extends HttpServlet {
                     int userId = Integer.parseInt(request.getParameter("id"));
                     user = usudao.listarT(userId);
                     ped = pedidodao.obtenerPedido(userId);
+                    DetallePedidoDAO dtdao = new DetallePedidoDAO();
+                    
+                    int tol = dtdao.cantidadTol(ped.getId());
                     System.out.println(ped.getTotal());
                     request.setAttribute("user", user);
                     request.setAttribute("ped", ped);
+                    request.setAttribute("tolProd", tol);
                     request.getRequestDispatcher("/Vistas/medioPagos.jsp").forward(request, response);
                     break;
                 case "solicitarPedido":
